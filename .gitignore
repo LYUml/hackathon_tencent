@@ -1,0 +1,56 @@
+# macOS / Windows system files
+.DS_Store
+.AppleDouble
+.LSOverride
+._*
+Thumbs.db
+Desktop.ini
+
+# Local editor and IDE state
+.idea/
+.vscode/
+*.swp
+*.swo
+*.user
+*.userprefs
+
+# Local assistant / tooling state
+.workbuddy/
+
+# Logs, caches, and temporary files
+*.log
+*.tmp
+*.temp
+.cache/
+tmp/
+temp/
+
+# Unity generated folders
+[Ll]ibrary/
+[Tt]emp/
+[Oo]bj/
+[Bb]uild/
+[Bb]uilds/
+[Ll]ogs/
+[Uu]ser[Ss]ettings/
+[Mm]emoryCaptures/
+
+# Unity / C# generated project files
+*.csproj
+*.sln
+*.suo
+*.pidb
+*.booproj
+*.svd
+*.pdb
+*.mdb
+*.opendb
+*.VC.db
+
+# Keep Unity asset metadata trackable if assets are added later.
+!*.meta
+
+# JavaScript dependencies and build output, in case UI tooling is added.
+node_modules/
+dist/
+coverage/
