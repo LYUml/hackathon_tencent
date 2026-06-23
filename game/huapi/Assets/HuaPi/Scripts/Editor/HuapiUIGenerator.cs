@@ -6,6 +6,7 @@ using UnityEditor;
 using UnityEngine.TextCore.LowLevel;
 using HuaPi.UI.Core;
 using HuaPi.UI.Panels;
+using HuaPi.UI.Panels.Exploration;
 #if ENABLE_INPUT_SYSTEM
 using UnityEngine.InputSystem.UI;
 #endif
@@ -79,7 +80,14 @@ namespace HuaPi.UI.Editor
             MainMenuPanel mainMenuPanel = CreateMainMenuPrefab();
             AssignMainMenuPrefab(uiManager, mainMenuPanel);
 
-            UnityEditor.EditorUtility.DisplayDialog("生成完成", "UI 场景结构已生成！请检查 Hierarchy 面板。", "确定");
+            // 创建子模块 Prefab
+            CreateExplorationSubPrefabs();
+
+            // 创建探索系统 Prefab
+            ExplorationPanel explorationPanel = CreateExplorationPanelPrefab();
+            AssignExplorationPrefab(uiManager, explorationPanel);
+
+            UnityEditor.EditorUtility.DisplayDialog("生成完成", "UI 场景结构已生成！请检查 Hierarchy 面板。\n\n新增内容：\n- ExplorationPanel（场景探索）\n- SceneBackgroundView\n- SceneHotspotItem\n- SceneCharacterEntry\n- ObjectiveNoteView\n- ClueToastView", "确定");
         }
 
         private static void GenerateCanvasLayers()
@@ -219,7 +227,7 @@ namespace HuaPi.UI.Editor
 
         private static MainMenuPanel CreateMainMenuPrefab()
         {
-            string prefabPath = "Assets/HuaPi/Prefabs/MainMenuPanel.prefab";
+            string prefabPath = "Assets/HuaPi/Prefabs/Panels/MainMenuPanel.prefab";
             TMP_FontAsset fontAsset = CreateOrLoadHuapiFontAsset();
             GameObject existingPrefab = UnityEditor.AssetDatabase.LoadAssetAtPath<GameObject>(prefabPath);
             if (existingPrefab != null)
@@ -304,6 +312,330 @@ namespace HuaPi.UI.Editor
             UnityEditor.EditorUtility.SetDirty(uiManager);
         }
 
+        #region Exploration System Generation
+
+        /// <summary>
+        /// 创建探索面板主 Prefab（场景探索系统）
+        /// </summary>
+        private static ExplorationPanel CreateExplorationPanelPrefab()
+        {
+            string prefabPath = "Assets/HuaPi/Prefabs/Panels/ExplorationPanel.prefab";
+            GameObject existingPrefab = UnityEditor.AssetDatabase.LoadAssetAtPath<GameObject>(prefabPath);
+            if (existingPrefab != null)
+            {
+                return existingPrefab.GetComponent<ExplorationPanel>();
+            }
+
+            TMP_FontAsset fontAsset = CreateOrLoadHuapiFontAsset();
+
+            // --- Root ---
+            GameObject panel = new GameObject("ExplorationPanel", typeof(RectTransform), typeof(CanvasGroup), typeof(ExplorationPanel));
+            RectTransform panelRect = panel.GetComponent<RectTransform>();
+            Stretch(panelRect);
+
+            var canvasGroup = panel.GetComponent<CanvasGroup>();
+            canvasGroup.alpha = 1f;
+            canvasGroup.blocksRaycasts = false;
+
+            var panelComp = panel.GetComponent<ExplorationPanel>();
+
+            // --- BackgroundView ---
+            GameObject bgViewObj = new GameObject("BackgroundView", typeof(RectTransform), typeof(SceneBackgroundView));
+            bgViewObj.transform.SetParent(panel.transform, false);
+            Stretch(bgViewObj.GetComponent<RectTransform>());
+
+            var bgView = bgViewObj.GetComponent<SceneBackgroundView>();
+
+            // Background Image
+            Image bgImage = CreateImage(bgViewObj.transform, "BackgroundImage", Color.white);
+            bgImage.raycastTarget = false;
+            Stretch(bgImage.rectTransform);
+            bgImage.sprite = null;
+            bgImage.type = Image.Type.Simple;
+
+            // Dark Overlay
+            Image darkOverlay = CreateImage(bgViewObj.transform, "DarkOverlay", new Color(0, 0, 0, 0.35f));
+            darkOverlay.raycastTarget = false;
+            Stretch(darkOverlay.rectTransform);
+
+            // Vignette Overlay
+            Image vignetteOverlay = CreateImage(bgViewObj.transform, "VignetteOverlay", new Color(0, 0, 0, 0.5f));
+            vignetteOverlay.raycastTarget = false;
+            Stretch(vignetteOverlay.rectTransform);
+            // 创建暗角效果（中心透明，边缘黑）
+            // 使用 radial gradient 材质或简单 sprite
+            // 这里简化：使用全屏半透明黑色
+
+            // 绑定 BackgroundView 字段
+            UnityEditor.SerializedObject bgSo = new UnityEditor.SerializedObject(bgView);
+            bgSo.FindProperty("backgroundImage").objectReferenceValue = bgImage;
+            bgSo.FindProperty("darkOverlay").objectReferenceValue = darkOverlay;
+            bgSo.FindProperty("vignetteOverlay").objectReferenceValue = vignetteOverlay;
+            bgSo.ApplyModifiedProperties();
+
+            // --- Hotspot Container ---
+            GameObject hotspotContainer = new GameObject("HotspotContainer", typeof(RectTransform));
+            hotspotContainer.transform.SetParent(panel.transform, false);
+            Stretch(hotspotContainer.GetComponent<RectTransform>());
+
+            // --- Character Container ---
+            GameObject characterContainer = new GameObject("CharacterContainer", typeof(RectTransform));
+            characterContainer.transform.SetParent(panel.transform, false);
+            Stretch(characterContainer.GetComponent<RectTransform>());
+
+            // --- ObjectiveNoteView ---
+            GameObject objectiveObj = new GameObject("ObjectiveNoteView", typeof(RectTransform), typeof(ObjectiveNoteView));
+            objectiveObj.transform.SetParent(panel.transform, false);
+            RectTransform objRect = objectiveObj.GetComponent<RectTransform>();
+            objRect.anchorMin = new Vector2(0, 1);
+            objRect.anchorMax = new Vector2(0, 1);
+            objRect.pivot = new Vector2(0, 1);
+            objRect.anchoredPosition = new Vector2(40, -40);
+            objRect.sizeDelta = new Vector2(500, 160);
+
+            var objectiveView = objectiveObj.GetComponent<ObjectiveNoteView>();
+
+            // Location Text — 顶部固定，不拉伸
+            TMP_Text locationText = CreateText(objectiveObj.transform, "LocationText", "<size=90%>當前地點</size>\n<size=120%>後台化妝間</size>", 24, TextAlignmentOptions.TopLeft);
+            locationText.font = fontAsset;
+            locationText.color = new Color(0.8f, 0.75f, 0.65f, 0.85f);
+            locationText.rectTransform.anchorMin = new Vector2(0, 1);
+            locationText.rectTransform.anchorMax = new Vector2(1, 1);
+            locationText.rectTransform.pivot = new Vector2(0, 1);
+            locationText.rectTransform.anchoredPosition = new Vector2(0, 0);
+            locationText.rectTransform.sizeDelta = new Vector2(0, 60);
+            locationText.textWrappingMode = TextWrappingModes.Normal;
+
+            // Objective Text — 在 LocationText 下方，不重叠
+            TMP_Text objectiveText = CreateText(objectiveObj.transform, "ObjectiveText", "<size=90%>當前目標</size>\n調查鏡台附近的異常，並試著與旦角交談。", 22, TextAlignmentOptions.TopLeft);
+            objectiveText.font = fontAsset;
+            objectiveText.color = new Color(0.8f, 0.75f, 0.65f, 0.85f);
+            objectiveText.rectTransform.anchorMin = new Vector2(0, 1);
+            objectiveText.rectTransform.anchorMax = new Vector2(1, 1);
+            objectiveText.rectTransform.pivot = new Vector2(0, 1);
+            objectiveText.rectTransform.anchoredPosition = new Vector2(0, -60);
+            objectiveText.rectTransform.sizeDelta = new Vector2(0, 80);
+            objectiveText.textWrappingMode = TextWrappingModes.Normal;
+
+            // 绑定 ObjectiveNoteView
+            UnityEditor.SerializedObject objSo = new UnityEditor.SerializedObject(objectiveView);
+            objSo.FindProperty("locationText").objectReferenceValue = locationText;
+            objSo.FindProperty("objectiveText").objectReferenceValue = objectiveText;
+            objSo.ApplyModifiedProperties();
+
+            // --- ClueToastView ---
+            GameObject toastObj = new GameObject("ClueToastView", typeof(RectTransform), typeof(ClueToastView));
+            toastObj.transform.SetParent(panel.transform, false);
+            RectTransform toastRect = toastObj.GetComponent<RectTransform>();
+            toastRect.anchorMin = new Vector2(1, 1);
+            toastRect.anchorMax = new Vector2(1, 1);
+            toastRect.pivot = new Vector2(1, 1);
+            toastRect.anchoredPosition = new Vector2(-40, -40);
+            toastRect.sizeDelta = new Vector2(480, 200);
+
+            var toastView = toastObj.GetComponent<ClueToastView>();
+            var toastCanvasGroup = toastObj.AddComponent<CanvasGroup>();
+            toastCanvasGroup.alpha = 0f;
+            toastCanvasGroup.blocksRaycasts = false;
+
+            // Title Label — 顶部
+            TMP_Text toastTitle = CreateText(toastObj.transform, "TitleLabel", "獲得線索", 28, TextAlignmentOptions.TopLeft);
+            toastTitle.font = fontAsset;
+            toastTitle.color = new Color(0.75f, 0.2f, 0.15f, 1f);
+            toastTitle.rectTransform.anchorMin = new Vector2(0, 1);
+            toastTitle.rectTransform.anchorMax = new Vector2(1, 1);
+            toastTitle.rectTransform.pivot = new Vector2(0, 1);
+            toastTitle.rectTransform.anchoredPosition = new Vector2(0, 0);
+            toastTitle.rectTransform.sizeDelta = new Vector2(0, 40);
+
+            // Clue Name — 在 Title 下方
+            TMP_Text clueName = CreateText(toastObj.transform, "ClueNameLabel", "鏡台下的舊戲票", 24, TextAlignmentOptions.TopLeft);
+            clueName.font = fontAsset;
+            clueName.color = new Color(0.85f, 0.8f, 0.7f, 1f);
+            clueName.rectTransform.anchorMin = new Vector2(0, 1);
+            clueName.rectTransform.anchorMax = new Vector2(1, 1);
+            clueName.rectTransform.pivot = new Vector2(0, 1);
+            clueName.rectTransform.anchoredPosition = new Vector2(0, -40);
+            clueName.rectTransform.sizeDelta = new Vector2(0, 40);
+
+            // Clue Description — 在 ClueName 下方
+            TMP_Text clueDesc = CreateText(toastObj.transform, "ClueDescLabel", "一張被灰塵和胭脂沾污的舊戲票……", 20, TextAlignmentOptions.TopLeft);
+            clueDesc.font = fontAsset;
+            clueDesc.color = new Color(0.7f, 0.7f, 0.65f, 0.9f);
+            clueDesc.rectTransform.anchorMin = new Vector2(0, 1);
+            clueDesc.rectTransform.anchorMax = new Vector2(1, 1);
+            clueDesc.rectTransform.pivot = new Vector2(0, 1);
+            clueDesc.rectTransform.anchoredPosition = new Vector2(0, -80);
+            clueDesc.rectTransform.sizeDelta = new Vector2(0, 80);
+            clueDesc.textWrappingMode = TextWrappingModes.Normal;
+
+            // 绑定 ClueToastView
+            UnityEditor.SerializedObject toastSo = new UnityEditor.SerializedObject(toastView);
+            toastSo.FindProperty("titleLabel").objectReferenceValue = toastTitle;
+            toastSo.FindProperty("clueNameLabel").objectReferenceValue = clueName;
+            toastSo.FindProperty("clueDescLabel").objectReferenceValue = clueDesc;
+            toastSo.ApplyModifiedProperties();
+
+            // 加载子模块 Prefab 引用
+            GameObject hotspotPrefab = UnityEditor.AssetDatabase.LoadAssetAtPath<GameObject>("Assets/HuaPi/Prefabs/Exploration/SceneHotspotItem.prefab");
+            GameObject charPrefab = UnityEditor.AssetDatabase.LoadAssetAtPath<GameObject>("Assets/HuaPi/Prefabs/Exploration/SceneCharacterEntry.prefab");
+
+            // 绑定 ExplorationPanel 私有序列化字段
+            UnityEditor.SerializedObject panelSo = new UnityEditor.SerializedObject(panelComp);
+            panelSo.FindProperty("backgroundView").objectReferenceValue = bgView;
+            panelSo.FindProperty("hotspotContainer").objectReferenceValue = hotspotContainer.transform;
+            panelSo.FindProperty("characterContainer").objectReferenceValue = characterContainer.transform;
+            panelSo.FindProperty("objectiveView").objectReferenceValue = objectiveView;
+            panelSo.FindProperty("clueToastView").objectReferenceValue = toastView;
+            panelSo.FindProperty("hotspotItemPrefab").objectReferenceValue = hotspotPrefab;
+            panelSo.FindProperty("characterEntryPrefab").objectReferenceValue = charPrefab;
+            panelSo.ApplyModifiedProperties();
+
+            // --- Prefab 保存 ---
+            GameObject savedPrefab = PrefabUtility.SaveAsPrefabAsset(panel, prefabPath);
+            UnityEngine.Object.DestroyImmediate(panel);
+            UnityEditor.AssetDatabase.SaveAssets();
+            return savedPrefab.GetComponent<ExplorationPanel>();
+        }
+
+        /// <summary>
+        /// 创建探索子模块 Prefab（热点 + 人物）
+        /// </summary>
+        private static void CreateExplorationSubPrefabs()
+        {
+            TMP_FontAsset fontAsset = CreateOrLoadHuapiFontAsset();
+
+            // --- HotspotItem Prefab ---
+            string hotspotPath = "Assets/HuaPi/Prefabs/Exploration/SceneHotspotItem.prefab";
+            GameObject existingHotspot = UnityEditor.AssetDatabase.LoadAssetAtPath<GameObject>(hotspotPath);
+            if (existingHotspot == null)
+            {
+                GameObject hotspotPrefab = new GameObject("SceneHotspotItem", typeof(RectTransform), typeof(SceneHotspotItem));
+                RectTransform hotspotRect = hotspotPrefab.GetComponent<RectTransform>();
+                hotspotRect.sizeDelta = new Vector2(120, 120);
+
+                var hotspotComp = hotspotPrefab.GetComponent<SceneHotspotItem>();
+
+                // Hotspot Area (透明点击区域)
+                Image areaImage = CreateImage(hotspotPrefab.transform, "HotspotArea", new Color(0, 0, 0, 0.05f));
+                areaImage.raycastTarget = true;
+                Stretch(areaImage.rectTransform);
+                areaImage.type = Image.Type.Simple;
+
+                // Glow Border (Hover 发光)
+                Image glowBorder = CreateImage(hotspotPrefab.transform, "GlowBorder", Color.clear);
+                glowBorder.raycastTarget = false;
+                Stretch(glowBorder.rectTransform);
+                glowBorder.type = Image.Type.Simple;
+
+                // Name Label (Hover 时显示)
+                TMP_Text nameLabel = CreateText(hotspotPrefab.transform, "NameLabel", "镜台", 22, TextAlignmentOptions.Center);
+                nameLabel.font = fontAsset;
+                nameLabel.color = new Color(0.85f, 0.75f, 0.55f, 0f);
+                nameLabel.rectTransform.anchorMin = new Vector2(0.5f, 1);
+                nameLabel.rectTransform.anchorMax = new Vector2(0.5f, 1);
+                nameLabel.rectTransform.pivot = new Vector2(0.5f, 0);
+                nameLabel.rectTransform.anchoredPosition = new Vector2(0, 10);
+                nameLabel.rectTransform.sizeDelta = new Vector2(200, 36);
+
+                // 添加 EventTrigger 用于 Hover/Click
+                var eventTrigger = hotspotPrefab.AddComponent<UnityEngine.EventSystems.EventTrigger>();
+                AddEventTriggerEntry(eventTrigger, UnityEngine.EventSystems.EventTriggerType.PointerEnter, (e) => hotspotComp.OnPointerEnter());
+                AddEventTriggerEntry(eventTrigger, UnityEngine.EventSystems.EventTriggerType.PointerExit, (e) => hotspotComp.OnPointerExit());
+                AddEventTriggerEntry(eventTrigger, UnityEngine.EventSystems.EventTriggerType.PointerClick, (e) => hotspotComp.OnPointerClick());
+
+                // 绑定字段
+                UnityEditor.SerializedObject hsSo = new UnityEditor.SerializedObject(hotspotComp);
+                hsSo.FindProperty("hotspotArea").objectReferenceValue = areaImage;
+                hsSo.FindProperty("glowBorder").objectReferenceValue = glowBorder;
+                hsSo.FindProperty("nameLabel").objectReferenceValue = nameLabel;
+                hsSo.ApplyModifiedProperties();
+
+                PrefabUtility.SaveAsPrefabAsset(hotspotPrefab, hotspotPath);
+                UnityEngine.Object.DestroyImmediate(hotspotPrefab);
+            }
+
+            // --- CharacterEntry Prefab ---
+            string charPath = "Assets/HuaPi/Prefabs/Exploration/SceneCharacterEntry.prefab";
+            GameObject existingChar = UnityEditor.AssetDatabase.LoadAssetAtPath<GameObject>(charPath);
+            if (existingChar == null)
+            {
+                GameObject charPrefab = new GameObject("SceneCharacterEntry", typeof(RectTransform), typeof(SceneCharacterEntry));
+                RectTransform charRect = charPrefab.GetComponent<RectTransform>();
+                charRect.sizeDelta = new Vector2(400, 700);
+
+                var charComp = charPrefab.GetComponent<SceneCharacterEntry>();
+
+                // Portrait Image
+                Image portraitImage = CreateImage(charPrefab.transform, "PortraitImage", Color.white);
+                portraitImage.raycastTarget = true;
+                Stretch(portraitImage.rectTransform);
+                portraitImage.preserveAspect = true;
+
+                // Outline Glow (Hover)
+                Image outlineGlow = CreateImage(charPrefab.transform, "OutlineGlow", Color.clear);
+                outlineGlow.raycastTarget = false;
+                Stretch(outlineGlow.rectTransform);
+                outlineGlow.type = Image.Type.Simple;
+
+                // Shadow Overlay
+                Image shadowOverlay = CreateImage(charPrefab.transform, "ShadowOverlay", new Color(0, 0, 0, 0.15f));
+                shadowOverlay.raycastTarget = false;
+                Stretch(shadowOverlay.rectTransform);
+                var shadowCg = shadowOverlay.gameObject.AddComponent<CanvasGroup>();
+                shadowCg.alpha = 0.15f;
+
+                // Name Label
+                TMP_Text charNameLabel = CreateText(charPrefab.transform, "NameLabel", "旦角", 24, TextAlignmentOptions.Center);
+                charNameLabel.font = fontAsset;
+                charNameLabel.color = new Color(0.85f, 0.75f, 0.55f, 0f);
+                charNameLabel.rectTransform.anchorMin = new Vector2(0.5f, 1);
+                charNameLabel.rectTransform.anchorMax = new Vector2(0.5f, 1);
+                charNameLabel.rectTransform.pivot = new Vector2(0.5f, 0);
+                charNameLabel.rectTransform.anchoredPosition = new Vector2(0, 10);
+                charNameLabel.rectTransform.sizeDelta = new Vector2(300, 40);
+
+                // 添加 EventTrigger
+                var charEventTrigger = charPrefab.AddComponent<UnityEngine.EventSystems.EventTrigger>();
+                AddEventTriggerEntry(charEventTrigger, UnityEngine.EventSystems.EventTriggerType.PointerEnter, (e) => charComp.OnPointerEnter());
+                AddEventTriggerEntry(charEventTrigger, UnityEngine.EventSystems.EventTriggerType.PointerExit, (e) => charComp.OnPointerExit());
+                AddEventTriggerEntry(charEventTrigger, UnityEngine.EventSystems.EventTriggerType.PointerClick, (e) => charComp.OnPointerClick());
+
+                // 绑定字段
+                UnityEditor.SerializedObject charSo = new UnityEditor.SerializedObject(charComp);
+                charSo.FindProperty("portraitImage").objectReferenceValue = portraitImage;
+                charSo.FindProperty("outlineGlow").objectReferenceValue = outlineGlow;
+                charSo.FindProperty("nameLabel").objectReferenceValue = charNameLabel;
+                charSo.FindProperty("shadowOverlay").objectReferenceValue = shadowOverlay.gameObject;
+                charSo.ApplyModifiedProperties();
+
+                PrefabUtility.SaveAsPrefabAsset(charPrefab, charPath);
+                UnityEngine.Object.DestroyImmediate(charPrefab);
+            }
+
+            UnityEditor.AssetDatabase.SaveAssets();
+        }
+
+        private static void AddEventTriggerEntry(UnityEngine.EventSystems.EventTrigger trigger, UnityEngine.EventSystems.EventTriggerType eventType, System.Action<UnityEngine.EventSystems.BaseEventData> action)
+        {
+            var entry = new UnityEngine.EventSystems.EventTrigger.Entry();
+            entry.eventID = eventType;
+            entry.callback.AddListener((e) => action(e));
+            trigger.triggers.Add(entry);
+        }
+
+        private static void AssignExplorationPrefab(UIManager uiManager, ExplorationPanel explorationPanel)
+        {
+            if (uiManager == null || explorationPanel == null) return;
+
+            UnityEditor.SerializedObject so = new UnityEditor.SerializedObject(uiManager);
+            so.FindProperty("explorationPanelPrefab").objectReferenceValue = explorationPanel;
+            so.ApplyModifiedProperties();
+            UnityEditor.EditorUtility.SetDirty(uiManager);
+        }
+
+        #endregion
+
         private static Image CreateImage(Transform parent, string name, Color color)
         {
             GameObject go = new GameObject(name, typeof(RectTransform), typeof(Image));
@@ -322,7 +654,7 @@ namespace HuaPi.UI.Editor
             tmp.text = text;
             tmp.fontSize = fontSize;
             tmp.alignment = alignment;
-            tmp.enableWordWrapping = false;
+            tmp.textWrappingMode = TextWrappingModes.NoWrap;
             tmp.raycastTarget = true;
             return tmp;
         }

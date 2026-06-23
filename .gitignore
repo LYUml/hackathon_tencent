@@ -38,6 +38,7 @@ temp/
 # Unity / C# generated project files
 *.csproj
 *.sln
+*.slnx
 *.suo
 *.pidb
 *.booproj

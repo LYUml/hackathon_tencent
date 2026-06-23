@@ -13,6 +13,7 @@ namespace HuaPi.UI.Core
     public enum UIPanelType
     {
         MainMenu,
+        Exploration,
         Dialogue,
         ClueInventory,
         CharacterArchive,
@@ -40,6 +41,7 @@ namespace HuaPi.UI.Core
 
         [Header("Panel Prefabs")]
         [SerializeField] private PanelBase mainMenuPanelPrefab;
+        [SerializeField] private PanelBase explorationPanelPrefab;
         [SerializeField] private PanelBase dialoguePanelPrefab;
         [SerializeField] private PanelBase cluePanelPrefab;
         [SerializeField] private PanelBase characterArchivePanelPrefab;
@@ -107,6 +109,7 @@ namespace HuaPi.UI.Core
         private void RegisterPrefabs()
         {
             if (mainMenuPanelPrefab != null) _panelPrefabs[UIPanelType.MainMenu] = mainMenuPanelPrefab;
+            if (explorationPanelPrefab != null) _panelPrefabs[UIPanelType.Exploration] = explorationPanelPrefab;
             if (dialoguePanelPrefab != null) _panelPrefabs[UIPanelType.Dialogue] = dialoguePanelPrefab;
             if (cluePanelPrefab != null) _panelPrefabs[UIPanelType.ClueInventory] = cluePanelPrefab;
             if (characterArchivePanelPrefab != null) _panelPrefabs[UIPanelType.CharacterArchive] = characterArchivePanelPrefab;
@@ -216,6 +219,8 @@ namespace HuaPi.UI.Core
             {
                 case UIPanelType.MainMenu:
                     return systemCanvas;
+                case UIPanelType.Exploration:
+                    return worldHUDCanvas;
                 case UIPanelType.Dialogue:
                     return dialogueCanvas;
                 case UIPanelType.ClueInventory:
@@ -235,8 +240,10 @@ namespace HuaPi.UI.Core
 
         private void OnPanelOpened(UIPanelType type)
         {
-            // 暂停场景输入（当非 HUD 面板打开时）
-            if (type != UIPanelType.MainMenu && type != UIPanelType.Pause)
+            // 暂停场景输入（当非 HUD/Exploration 面板打开时）
+            if (type != UIPanelType.Exploration &&
+                type != UIPanelType.MainMenu && 
+                type != UIPanelType.Pause)
             {
                 DisableGameplayInput();
             }

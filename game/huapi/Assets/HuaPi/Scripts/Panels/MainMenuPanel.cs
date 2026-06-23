@@ -4,6 +4,7 @@ using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
 using HuaPi.UI.Core;
+using HuaPi.UI.Data;
 
 namespace HuaPi.UI.Panels
 {
@@ -417,6 +418,20 @@ namespace HuaPi.UI.Panels
         {
             Debug.Log("[MainMenu] Start Game");
             UIManager.Instance?.ClosePanel(UIPanelType.MainMenu);
+            
+            // 加载场景数据并打开探索面板
+            // 方式1：加载自动生成的场景数据（推荐）
+            var sceneData = Resources.Load<ExplorationSceneData>("HuaPi/Data/Scenes/Scene_backstage_dressing");
+            if (sceneData != null)
+            {
+                UIManager.Instance?.OpenPanel(UIPanelType.Exploration, sceneData);
+            }
+            else
+            {
+                // 方式2：如果没有场景数据，使用 Demo 模式
+                Debug.LogWarning("[MainMenu] 未找到场景数据，使用 Demo 模式。请先运行 Tools/HuaPi/Auto Generate Scene Data 生成场景数据。");
+                UIManager.Instance?.OpenPanel(UIPanelType.Exploration);
+            }
         }
 
         private void OnContinueGame()

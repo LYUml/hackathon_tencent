@@ -1,0 +1,37 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7a7dd70e2c25845ee9879b344e230783, type: 3}
+  m_Name: "Scene_\u5267\u793E1\uFF083\u90091"
+  m_EditorClassIdentifier: Assembly-CSharp::HuaPi.UI.Data.ExplorationSceneData
+  sceneId: "\u5267\u793E1\uFF083\u90091"
+  displayName: "\u5267\u793E1\uFF083\u90091"
+  backgroundSprite: {fileID: 5051439321496342090, guid: 33c4074715b724cd086c38d8899496e3, type: 3}
+  objectiveText: "\u63A2\u7D22\u8FD9\u4E2A\u573A\u666F\uFF0C\u5BFB\u627E\u7EBF\u7D22\u5E76\u4E0E\u4EBA\u7269\u4EA4\u8C08\u3002"
+  hotspots:
+  - hotspotId: "hotspot_default_\u5267\u793E1\uFF083\u90091"
+    displayName: "\u53EF\u7591\u4E4B\u5904"
+    anchoredPosition: {x: 1200, y: 500}
+    size: {x: 150, y: 150}
+    linkedClueId: "clue_\u5267\u793E1\uFF083\u90091_default"
+    hoverText: "\u8C03\u67E5\u6B64\u5904"
+    clickFeedbackText: "\u4F60\u53D1\u73B0\u4E86\u4E00\u4E9B\u53EF\u7591\u7684\u75D5\u8FF9..."
+    requiresCondition: 0
+    requiredClueIds: []
+  characters:
+  - characterId: "char_\u4E11_2_0"
+    displayName: "\u4E11\u89D2"
+    portraitSprite: {fileID: 6029989109268048963, guid: b8c441fc2e98349729ec6d93ab007c37, type: 3}
+    anchoredPosition: {x: 280, y: 540}
+    size: {x: 380, y: 680}
+    dialogueId: "dialogue_\u4E11_2_0_\u5267\u793E1\uFF083\u90091"
+    characterState: "\u6B63\u5E38"
+    hoverText: "\u4E11\u89D2"
