@@ -1,0 +1,908 @@
+﻿<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>《画皮》UI 美术模板</title>
+  <style>
+    :root {
+      --black: #0a0808;
+      --deep: #17100e;
+      --paper: #d8cfc0;
+      --paper-dim: #9d8d78;
+      --red: #8b2020;
+      --gold: #c9a96e;
+      --blue: #4a5a6a;
+      --ink: rgba(10, 8, 8, .78);
+      --line: rgba(201, 169, 110, .28);
+    }
+
+    * { box-sizing: border-box; }
+
+    body {
+      margin: 0;
+      color: var(--paper);
+      background:
+        radial-gradient(circle at 30% 0%, rgba(139, 32, 32, .18), transparent 32rem),
+        linear-gradient(180deg, #100b0a, #060505 52%, #0a0808);
+      font-family: "Microsoft YaHei", "Noto Sans SC", Arial, sans-serif;
+      line-height: 1.6;
+    }
+
+    header {
+      padding: 56px 56px 28px;
+      border-bottom: 1px solid rgba(216, 207, 192, .12);
+    }
+
+    h1, h2, h3, p { margin: 0; }
+
+    h1 {
+      color: var(--red);
+      font-size: 52px;
+      letter-spacing: 0;
+      font-weight: 700;
+    }
+
+    h2 {
+      margin: 64px 0 18px;
+      color: var(--gold);
+      font-size: 26px;
+      font-weight: 700;
+    }
+
+    h3 {
+      color: var(--paper);
+      font-size: 18px;
+      font-weight: 700;
+      margin-bottom: 10px;
+    }
+
+    .subtitle {
+      max-width: 980px;
+      margin-top: 12px;
+      color: var(--paper-dim);
+      font-size: 16px;
+    }
+
+    .page {
+      width: min(1360px, calc(100vw - 56px));
+      margin: 0 auto 80px;
+    }
+
+    .grid {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 28px;
+    }
+
+    .full { grid-column: 1 / -1; }
+
+    .note {
+      color: var(--paper-dim);
+      font-size: 14px;
+    }
+
+    .tokens {
+      display: grid;
+      grid-template-columns: repeat(7, 1fr);
+      gap: 12px;
+      margin-top: 18px;
+    }
+
+    .token {
+      min-height: 92px;
+      border: 1px solid rgba(216, 207, 192, .14);
+      background: rgba(255, 255, 255, .025);
+      padding: 12px;
+    }
+
+    .swatch {
+      height: 34px;
+      margin-bottom: 10px;
+      border: 1px solid rgba(255, 255, 255, .12);
+    }
+
+    .mock {
+      position: relative;
+      overflow: hidden;
+      aspect-ratio: 16 / 9;
+      background: #12100e;
+      border: 1px solid rgba(216, 207, 192, .16);
+      box-shadow: 0 18px 40px rgba(0, 0, 0, .35);
+    }
+
+    .mock::before {
+      content: "";
+      position: absolute;
+      inset: 0;
+      background:
+        linear-gradient(90deg, rgba(10, 8, 8, .88), transparent 35%, rgba(10, 8, 8, .6)),
+        radial-gradient(circle at 50% 48%, transparent 0 22%, rgba(0, 0, 0, .45) 58%, rgba(0, 0, 0, .78));
+      pointer-events: none;
+      z-index: 2;
+    }
+
+    .stage-bg {
+      position: absolute;
+      inset: 0;
+      background:
+        linear-gradient(180deg, rgba(60, 12, 12, .48), transparent 34%),
+        url("../pic/背景图/戏曲舞台.png") center / cover;
+      filter: saturate(.72) brightness(.56);
+    }
+
+    .room-bg {
+      position: absolute;
+      inset: 0;
+      background:
+        linear-gradient(180deg, rgba(0, 0, 0, .18), rgba(0, 0, 0, .5)),
+        url("../pic/背景图/排练室.png") center / cover;
+      filter: saturate(.72) brightness(.6);
+    }
+
+    .table-bg {
+      position: absolute;
+      inset: 0;
+      background:
+        linear-gradient(180deg, rgba(0, 0, 0, .28), rgba(0, 0, 0, .7)),
+        url("../pic/背景图/老旧大戏箱堆放角.png") center / cover;
+      filter: saturate(.65) brightness(.56);
+    }
+
+    .observe-bg {
+      position: absolute;
+      inset: 0;
+      background:
+        radial-gradient(circle at 50% 48%, rgba(80, 80, 80, .16), transparent 22rem),
+        url("../pic/背景图/剧社侧台门帘处.png") center / cover;
+      filter: saturate(.45) brightness(.35);
+    }
+
+    .ui {
+      position: absolute;
+      inset: 0;
+      z-index: 3;
+    }
+
+    .title-mark {
+      position: absolute;
+      top: 18%;
+      width: 100%;
+      text-align: center;
+      color: var(--red);
+      font-size: clamp(42px, 8vw, 110px);
+      font-weight: 800;
+      text-shadow: 0 0 28px rgba(139, 32, 32, .45);
+    }
+
+    .menu {
+      position: absolute;
+      top: 48%;
+      left: 50%;
+      transform: translateX(-50%);
+      display: grid;
+      gap: 14px;
+      text-align: center;
+      color: var(--gold);
+      font-size: 24px;
+    }
+
+    .menu span:nth-child(1) {
+      color: #e0c687;
+      font-size: 30px;
+    }
+
+    .menu span:nth-child(3) {
+      color: var(--red);
+    }
+
+    .hud-location {
+      position: absolute;
+      left: 42px;
+      top: 34px;
+      padding: 8px 70px 8px 0;
+      background: linear-gradient(90deg, rgba(10, 8, 8, .65), transparent);
+    }
+
+    .hud-actions {
+      position: absolute;
+      right: 32px;
+      top: 30px;
+      display: flex;
+      gap: 12px;
+    }
+
+    .small-tag {
+      min-width: 68px;
+      padding: 6px 12px;
+      color: var(--gold);
+      border-bottom: 1px solid var(--line);
+      text-align: center;
+    }
+
+    .objective {
+      position: absolute;
+      left: 50%;
+      bottom: 42px;
+      transform: translateX(-50%);
+      width: 58%;
+      padding: 14px 24px;
+      color: var(--paper);
+      text-align: center;
+      background: linear-gradient(90deg, transparent, rgba(10, 8, 8, .78), transparent);
+    }
+
+    .hotspot {
+      position: absolute;
+      width: 126px;
+      padding: 8px;
+      color: var(--gold);
+      border: 1px dashed rgba(201, 169, 110, .55);
+      background: rgba(10, 8, 8, .16);
+      text-align: center;
+    }
+
+    .character {
+      position: absolute;
+      bottom: 8%;
+      left: 9%;
+      width: 22%;
+      max-height: 78%;
+      object-fit: contain;
+      filter: drop-shadow(0 12px 28px rgba(0, 0, 0, .75));
+    }
+
+    .dialogue-bar {
+      position: absolute;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      min-height: 27%;
+      padding: 36px 70px 28px 36%;
+      background: linear-gradient(180deg, transparent, rgba(10, 8, 8, .92));
+    }
+
+    .nameplate {
+      display: inline-block;
+      color: var(--gold);
+      margin-bottom: 8px;
+      border-bottom: 1px solid var(--line);
+    }
+
+    .choices {
+      position: absolute;
+      right: 44px;
+      top: 24%;
+      width: 32%;
+      display: grid;
+      gap: 12px;
+    }
+
+    .paper-slip, .paper-card {
+      color: #2a1712;
+      background:
+        linear-gradient(135deg, rgba(255, 255, 255, .15), transparent 42%),
+        #d8c5a2;
+      box-shadow: 0 12px 20px rgba(0, 0, 0, .35);
+    }
+
+    .paper-slip {
+      padding: 12px 18px;
+      transform: rotate(-1.5deg);
+    }
+
+    .clue-list {
+      position: absolute;
+      left: 8%;
+      top: 17%;
+      width: 34%;
+      height: 62%;
+    }
+
+    .clue-list .paper-card {
+      position: absolute;
+      width: 48%;
+      min-height: 108px;
+      padding: 14px;
+    }
+
+    .clue-detail {
+      position: absolute;
+      right: 9%;
+      top: 14%;
+      width: 38%;
+      min-height: 62%;
+      padding: 28px;
+      color: #271711;
+      background: #d2bd96;
+      transform: rotate(.8deg);
+      box-shadow: 0 20px 36px rgba(0, 0, 0, .48);
+    }
+
+    .evidence-belt {
+      position: absolute;
+      left: 7%;
+      right: 7%;
+      bottom: 7%;
+      display: grid;
+      grid-template-columns: repeat(4, minmax(0, 1fr));
+      gap: 10px;
+    }
+
+    .evidence-strip {
+      min-height: 44px;
+      padding: 8px 12px;
+      color: #291812;
+      background: #d5c09d;
+      border-left: 4px solid rgba(139, 32, 32, .75);
+      box-shadow: 0 8px 18px rgba(0, 0, 0, .38);
+      font-size: 13px;
+    }
+
+    .hearts {
+      position: absolute;
+      right: 36px;
+      top: 34px;
+      display: flex;
+      gap: 8px;
+      color: var(--red);
+      font-size: 20px;
+      letter-spacing: 0;
+      text-shadow: 0 0 12px rgba(139, 32, 32, .45);
+    }
+
+    .archive-photo {
+      position: absolute;
+      left: 10%;
+      top: 15%;
+      width: 28%;
+      height: 68%;
+      padding: 18px;
+      background: #d5c1a0;
+      transform: rotate(-2deg);
+      box-shadow: 0 22px 40px rgba(0, 0, 0, .5);
+    }
+
+    .archive-photo img {
+      width: 100%;
+      height: 100%;
+      object-fit: contain;
+      filter: sepia(.18) contrast(.92);
+    }
+
+    .notebook {
+      position: absolute;
+      right: 9%;
+      top: 13%;
+      width: 44%;
+      min-height: 70%;
+      padding: 30px;
+      color: #291812;
+      background: #d8c7a7;
+      box-shadow: 0 20px 42px rgba(0, 0, 0, .48);
+    }
+
+    .portrait-frame {
+      position: absolute;
+      left: 35%;
+      top: 10%;
+      width: 30%;
+      height: 70%;
+      background: rgba(216, 207, 192, .08);
+      border: 1px solid rgba(201, 169, 110, .22);
+      display: grid;
+      place-items: center;
+      overflow: hidden;
+    }
+
+    .portrait-frame img {
+      width: 92%;
+      height: 92%;
+      object-fit: contain;
+      opacity: .78;
+    }
+
+    .ink-cloud {
+      position: absolute;
+      inset: 12% 18%;
+      background:
+        radial-gradient(circle at 45% 40%, rgba(0, 0, 0, .96), transparent 26%),
+        radial-gradient(circle at 58% 55%, rgba(0, 0, 0, .92), transparent 24%),
+        radial-gradient(circle at 40% 62%, rgba(0, 0, 0, .9), transparent 20%);
+      filter: blur(4px);
+    }
+
+    .clue-slots {
+      position: absolute;
+      right: 7%;
+      top: 18%;
+      width: 23%;
+      display: grid;
+      gap: 14px;
+    }
+
+    .observe-info {
+      position: absolute;
+      left: 7%;
+      top: 20%;
+      width: 22%;
+      color: var(--paper);
+    }
+
+    .pause-menu {
+      position: absolute;
+      inset: 0;
+      display: grid;
+      place-items: center;
+      background: rgba(10, 8, 8, .78);
+    }
+
+    .pause-inner {
+      width: 420px;
+      display: grid;
+      gap: 18px;
+      text-align: center;
+    }
+
+    .slider-row {
+      display: grid;
+      grid-template-columns: 96px 1fr;
+      gap: 14px;
+      align-items: center;
+      color: var(--paper-dim);
+    }
+
+    .slider {
+      height: 2px;
+      background: rgba(216, 207, 192, .28);
+      position: relative;
+    }
+
+    .slider::after {
+      content: "";
+      position: absolute;
+      left: 62%;
+      top: -5px;
+      width: 12px;
+      height: 12px;
+      border-radius: 50%;
+      background: var(--gold);
+    }
+
+    .spec {
+      margin-top: 14px;
+      padding: 16px;
+      border: 1px solid rgba(216, 207, 192, .14);
+      background: rgba(255, 255, 255, .025);
+      color: var(--paper-dim);
+      font-size: 14px;
+    }
+
+    .list {
+      display: grid;
+      gap: 8px;
+      margin-top: 10px;
+      padding-left: 18px;
+    }
+
+    .priority-grid {
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: 18px;
+      margin-top: 18px;
+    }
+
+    .priority-card {
+      min-height: 150px;
+      padding: 18px;
+      border: 1px solid rgba(216, 207, 192, .14);
+      background: linear-gradient(180deg, rgba(255, 255, 255, .035), rgba(255, 255, 255, .015));
+    }
+
+    .priority-card strong {
+      color: var(--gold);
+      display: block;
+      margin-bottom: 8px;
+    }
+
+    .topic-menu {
+      position: absolute;
+      right: 44px;
+      top: 16%;
+      width: 34%;
+      display: grid;
+      gap: 10px;
+    }
+
+    .topic-slip {
+      padding: 10px 14px;
+      color: #2a1712;
+      background: #d8c5a2;
+      border-left: 4px solid rgba(201, 169, 110, .6);
+      box-shadow: 0 10px 18px rgba(0, 0, 0, .32);
+      font-size: 14px;
+    }
+
+    .topic-slip.new {
+      border-left-color: var(--red);
+      box-shadow: 0 0 0 1px rgba(139, 32, 32, .35), 0 10px 18px rgba(0, 0, 0, .32);
+    }
+
+    .topic-slip.done {
+      opacity: .55;
+      filter: grayscale(.35);
+    }
+
+    .topic-slip.locked {
+      color: rgba(42, 23, 18, .45);
+      background: #8f8372;
+    }
+
+    .status-row {
+      position: absolute;
+      left: 36%;
+      bottom: 29%;
+      display: flex;
+      gap: 8px;
+      flex-wrap: wrap;
+    }
+
+    .status-chip {
+      padding: 4px 10px;
+      color: var(--paper);
+      background: rgba(10, 8, 8, .58);
+      border: 1px solid rgba(201, 169, 110, .26);
+      font-size: 12px;
+    }
+
+    .heart-chip {
+      display: inline-block;
+      width: 20px;
+      height: 20px;
+      margin-right: 5px;
+      background: radial-gradient(circle at 44% 36%, #a22a2a, #5a1111 72%, #1a0808);
+      clip-path: polygon(50% 90%, 12% 46%, 20% 18%, 48% 22%, 50% 31%, 54% 22%, 82% 18%, 90% 46%);
+      filter: drop-shadow(0 0 8px rgba(139, 32, 32, .4));
+    }
+
+    .heart-chip.cracked {
+      opacity: .72;
+      background: linear-gradient(110deg, #6d1717 0 46%, #1a0808 47% 52%, #8b2020 53%);
+    }
+
+    .heart-chip.empty {
+      opacity: .25;
+      background: #5a5a5a;
+    }
+
+    @media (max-width: 900px) {
+      header { padding: 34px 24px 20px; }
+      .page { width: min(100vw - 28px, 1360px); }
+      .grid, .tokens, .priority-grid { grid-template-columns: 1fr; }
+      .mock { min-height: 240px; }
+    }
+
+    @media print {
+      body { background: #0a0808; }
+      .page { width: 100%; }
+      .mock { break-inside: avoid; }
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <h1>《画皮》UI 美术模板</h1>
+    <p class="subtitle">给美术看的视觉交付版：每张图表示一个界面的构图方向、素材类型、状态需求和出图重点。基准画布为 1920×1080，风格关键词为旧戏班、暗场、水墨、旧纸、无边界沉浸式 UI。</p>
+  </header>
+
+  <main class="page">
+    <h2>视觉基准</h2>
+    <div class="tokens">
+      <div class="token"><div class="swatch" style="background:#0a0808"></div><strong>极深黑</strong><br><span class="note">暗场、墨雾</span></div>
+      <div class="token"><div class="swatch" style="background:#1a1210"></div><strong>深棕黑</strong><br><span class="note">半透明底</span></div>
+      <div class="token"><div class="swatch" style="background:#d8cfc0"></div><strong>旧纸白</strong><br><span class="note">正文文字</span></div>
+      <div class="token"><div class="swatch" style="background:#8b2020"></div><strong>暗红</strong><br><span class="note">危险、重点</span></div>
+      <div class="token"><div class="swatch" style="background:#c9a96e"></div><strong>暗铜金</strong><br><span class="note">可点、选中</span></div>
+      <div class="token"><div class="swatch" style="background:#4a5a6a"></div><strong>冷灰蓝</strong><br><span class="note">阴冷信息</span></div>
+      <div class="token"><div class="swatch" style="background:#5a5a5a"></div><strong>墨灰</strong><br><span class="note">未解锁</span></div>
+    </div>
+
+    <div class="spec full">
+      总原则：不要现代矩形面板。按钮像文字、旧戏票、纸签、墨迹；弹窗像暗场中浮出的字；线索像桌上散落的旧纸和照片；观皮像站在黑雾中的画像前。
+    </div>
+
+    <h2>Demo UI 优先级</h2>
+    <div class="priority-grid">
+      <section class="priority-card">
+        <strong>第一优先级：核心体验</strong>
+        <ul class="list">
+          <li>对话界面：话题菜单、证据出示、破绽状态。</li>
+          <li>证据条背包：横向旧纸条，推理和观皮共用。</li>
+          <li>五心判定：错误扣心、危险、失败。</li>
+          <li>观皮界面：黑雾画像、证据槽、揭示反馈。</li>
+        </ul>
+      </section>
+      <section class="priority-card">
+        <strong>第二优先级：Demo 必需</strong>
+        <ul class="list">
+          <li>探索 HUD：地点、目标、热点、入口。</li>
+          <li>人物档案简版：嫌疑变化、身份遮罩。</li>
+          <li>Toast：获得线索、目标更新、档案更新。</li>
+        </ul>
+      </section>
+      <section class="priority-card">
+        <strong>第三优先级：最后 Polish</strong>
+        <ul class="list">
+          <li>主菜单完整插画和标题字效。</li>
+          <li>暂停 / 设置。</li>
+          <li>完整人物关系档案。</li>
+        </ul>
+      </section>
+    </div>
+
+    <h2>一、主菜单</h2>
+    <div class="grid">
+      <section>
+        <div class="mock">
+          <div class="stage-bg"></div>
+          <div class="ui">
+            <div class="title-mark">画皮</div>
+            <div class="menu">
+              <span>开始游戏</span>
+              <span>继续游戏</span>
+              <span>设置</span>
+              <span style="color:#7e7064">退出</span>
+            </div>
+            <div class="objective">薛家戏班 · 民国二十年</div>
+          </div>
+        </div>
+        <div class="spec">
+          交付：主菜单背景 1920×1080、标题字效果、4 个菜单文字状态、底部小字。背景需像完整插画，不要“背景图加按钮”的感觉。
+        </div>
+      </section>
+      <section>
+        <h3>状态需求</h3>
+        <ul class="list">
+          <li>默认：暗金文字，低亮度。</li>
+          <li>Hover：文字转暗红，底部有淡墨扩散。</li>
+          <li>选中：文字略亮，轻微扭曲或墨迹渗开。</li>
+          <li>禁用：墨灰，透明度降低。</li>
+        </ul>
+        <h3 style="margin-top:24px">美术注意</h3>
+        <ul class="list">
+          <li>标题可用恐怖戏曲感字体或手写字形。</li>
+          <li>画面中心留足文字安全区。</li>
+          <li>底部黑雾要托住菜单可读性。</li>
+        </ul>
+      </section>
+    </div>
+
+    <h2>二、探索 HUD</h2>
+    <div class="grid">
+      <section>
+        <div class="mock">
+          <div class="room-bg"></div>
+          <div class="ui">
+            <div class="hud-location"><strong>排练室</strong><br><span class="note">寻找遗落的戏票和口供</span></div>
+            <div class="hud-actions"><div class="small-tag">线索</div><div class="small-tag">暂停</div></div>
+            <div class="hotspot" style="left:54%;top:44%">可调查</div>
+            <div class="hotspot" style="left:69%;top:56%;border-color:rgba(139,32,32,.7);color:#cf817a">关键线索</div>
+            <div class="objective">调查陈列柜附近的异常，并试着与旦角交谈。</div>
+          </div>
+        </div>
+        <div class="spec">交付：地点字样、目标提示条、热点三态、角落入口。HUD 要轻，不能挡住场景美术。</div>
+      </section>
+      <section>
+        <h3>需要画的组件</h3>
+        <ul class="list">
+          <li>普通调查点：淡暗金虚线或墨迹圈。</li>
+          <li>已调查点：墨灰、低透明。</li>
+          <li>关键调查点：暗红细线、轻微脉冲。</li>
+          <li>线索/档案入口：旧戏票小角标。</li>
+          <li>目标提示：旧纸条或暗场渐变字幕。</li>
+        </ul>
+      </section>
+    </div>
+
+    <h2>三、对话界面</h2>
+    <div class="grid">
+      <section>
+        <div class="mock">
+          <div class="stage-bg"></div>
+          <div class="ui">
+            <img class="character" src="../pic/人物立绘/旦.png" alt="旦角">
+            <div class="topic-menu">
+              <div class="topic-slip">今晚的《断面》</div>
+              <div class="topic-slip done">陈列柜里的脸谱</div>
+              <div class="topic-slip new">昨晚你在哪里</div>
+              <div class="topic-slip">出示证据</div>
+              <div class="topic-slip locked">封闭后台小屋</div>
+            </div>
+            <div class="status-row">
+              <span class="status-chip">平静</span>
+              <span class="status-chip">警戒</span>
+              <span class="status-chip" style="border-color:rgba(139,32,32,.7);color:#d9aaa0">破绽</span>
+            </div>
+            <div class="dialogue-bar">
+              <div class="nameplate">沈青衣</div>
+              <p>戏没有想不想。锣鼓点响了，人就该站到该站的位置。</p>
+            </div>
+          </div>
+        </div>
+        <div class="spec">交付：对话暗场渐变、人物名牌、话题菜单、证据出示入口、状态标签、继续提示。用于弹丸论破式调查段。</div>
+      </section>
+      <section>
+        <h3>话题状态</h3>
+        <ul class="list">
+          <li>普通话题：旧纸色或暗金文字。</li>
+          <li>已问过：墨灰、低透明。</li>
+          <li>新解锁：暗红边缘或印章标记。</li>
+          <li>不可用：墨雾遮挡。</li>
+          <li>证据出示：点击后弹出横向证据条背包。</li>
+        </ul>
+        <h3 style="margin-top:24px">对话状态</h3>
+        <ul class="list">
+          <li>平静：普通对白。</li>
+          <li>警戒：问到旧案、后门、监控。</li>
+          <li>破绽：出示正确证据后角色说出关键情报。</li>
+          <li>封口：拒绝继续回答，但留下新调查目标。</li>
+        </ul>
+      </section>
+    </div>
+
+    <h2>四、线索面板</h2>
+    <div class="grid">
+      <section>
+        <div class="mock">
+          <div class="table-bg"></div>
+          <div class="ui">
+            <div class="hearts">
+              <span class="heart-chip"></span>
+              <span class="heart-chip"></span>
+              <span class="heart-chip cracked"></span>
+              <span class="heart-chip empty"></span>
+              <span class="heart-chip empty"></span>
+            </div>
+            <div class="clue-list">
+              <div class="paper-card" style="left:0;top:8%;transform:rotate(-4deg)">旧戏票<br><span class="note">道具陈列室</span></div>
+              <div class="paper-card" style="left:44%;top:24%;transform:rotate(3deg)">脸谱盒<br><span class="note">旦角相关</span></div>
+              <div class="paper-card" style="left:14%;top:52%;transform:rotate(2deg);opacity:.62">未解锁</div>
+            </div>
+            <div class="clue-detail">
+              <h3 style="color:#271711">旧戏箱里的旧戏票</h3>
+              <p>来源：道具陈列室</p>
+              <p>一张从旧戏箱夹层里找到的旧戏票，票根边缘有轻微烧痕。</p>
+              <p style="color:#8b2020">关联：旦角</p>
+            </div>
+            <div class="evidence-belt">
+              <div class="evidence-strip">旧戏箱里的旧戏票</div>
+              <div class="evidence-strip">沾灰的脸谱盒</div>
+              <div class="evidence-strip">演出流程表</div>
+              <div class="evidence-strip" style="opacity:.55">阿喜的口供</div>
+            </div>
+          </div>
+        </div>
+        <div class="spec">交付：横向证据条、五心血量、线索卡 5 类、详情纸页、筛选标签、关闭符号。证据条用于推理判定，错误一次扣一颗心。</div>
+      </section>
+      <section>
+        <h3>证据条状态</h3>
+        <ul class="list">
+          <li>默认：旧纸色横条。</li>
+          <li>Hover：暗铜金描边。</li>
+          <li>选中：暗红墨迹高亮。</li>
+          <li>新获得：纸角亮起或盖章。</li>
+          <li>关键证据：暗红印章。</li>
+          <li>可用于当前判定：纸角有红线标记。</li>
+          <li>错误使用：短暂变黑，被墨吞回。</li>
+          <li>正确使用：留下红线标记。</li>
+        </ul>
+        <h3 style="margin-top:24px">五心状态</h3>
+        <ul class="list">
+          <li>5/5 到 0/5 都要有状态。</li>
+          <li>心可以是暗红纸符、脸谱碎片或血墨点。</li>
+          <li>1/5 时画面边缘轻微压暗。</li>
+          <li>0/5 进入“调查失败，被请离后台”。</li>
+        </ul>
+      </section>
+    </div>
+
+    <h2>五、人物档案</h2>
+    <div class="grid">
+      <section>
+        <div class="mock">
+          <div class="table-bg"></div>
+          <div class="ui">
+            <div class="archive-photo"><img src="../pic/人物立绘/老板.png" alt="班主"></div>
+            <div class="notebook">
+              <h3 style="color:#271711">薛万山</h3>
+              <p>身份：现代薛氏剧团班主。</p>
+              <p>可疑点：批准取出民国旧案相关道具。</p>
+              <p>关系：压制沈青衣，管理周岱，警告玩家。</p>
+              <p style="margin-top:20px;color:#8b2020">隐藏身份：未揭示</p>
+            </div>
+          </div>
+        </div>
+        <div class="spec">交付：沈青衣、阿喜、周岱、薛万山、没有脸的人预告档案。需要照片框、档案纸、嫌疑变化、隐藏身份遮罩、档案更新 Toast。</div>
+      </section>
+      <section>
+        <h3>美术重点</h3>
+        <ul class="list">
+          <li>像侦探笔记，不像资料面板。</li>
+          <li>已解锁信息可像手写补上。</li>
+          <li>隐藏身份用墨雾或刮花照片表现。</li>
+        </ul>
+      </section>
+    </div>
+
+    <h2>六、观皮界面</h2>
+    <div class="grid">
+      <section>
+        <div class="mock">
+          <div class="observe-bg"></div>
+          <div class="ui">
+            <div class="observe-info">
+              <h3>沈青衣</h3>
+              <p class="note">观皮目标：揭开第一张皮</p>
+              <p class="note">选择 3 条证据，驱散画像墨雾。</p>
+            </div>
+            <div class="portrait-frame">
+              <img src="../pic/人物立绘/旦2.png" alt="画像">
+              <div class="ink-cloud"></div>
+            </div>
+            <div class="clue-slots">
+              <div class="paper-slip">旧戏票</div>
+              <div class="paper-slip">脸谱盒</div>
+              <div class="paper-slip">演出流程表</div>
+            </div>
+            <div class="objective">观皮</div>
+          </div>
+        </div>
+        <div class="spec">交付：中央画像、墨雾遮罩、3 个证据槽、观皮提交、正确/错误反馈、揭示高光。Demo 正确组合：旧戏票 + 脸谱盒 + 演出流程表。</div>
+      </section>
+      <section>
+        <h3>反馈状态</h3>
+        <ul class="list">
+          <li>选中线索：红墨线连接线索和画像。</li>
+          <li>正确：墨雾从局部散开，露出伤痕/真相。</li>
+          <li>错误：线索被墨吞回，纸张变暗，心 -1。</li>
+          <li>完全揭示：四周压暗，画像局部高亮。</li>
+          <li>心归零：调查失败，被请离后台。</li>
+        </ul>
+      </section>
+    </div>
+
+    <h2>七、暂停与弹窗</h2>
+    <div class="grid">
+      <section>
+        <div class="mock">
+          <div class="room-bg"></div>
+          <div class="ui">
+            <div class="pause-menu">
+              <div class="pause-inner">
+                <h3>暂停</h3>
+                <div class="small-tag" style="margin:auto">继续</div>
+                <div class="slider-row"><span>音量</span><div class="slider"></div></div>
+                <div class="slider-row"><span>文字速度</span><div class="slider"></div></div>
+                <div class="slider-row"><span>亮度</span><div class="slider"></div></div>
+                <div class="small-tag" style="margin:auto;color:#8b2020">返回主菜单</div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="spec">交付：暂停暗场、Slider、确认弹窗、新线索 Toast、目标更新提示。</div>
+      </section>
+      <section>
+        <h3>弹窗方向</h3>
+        <ul class="list">
+          <li>确认：全屏压暗，文字浮现，不要传统白框。</li>
+          <li>新线索：旧纸条从底部滑入。</li>
+          <li>目标更新：一行墨字出现后淡出。</li>
+          <li>错误提示：暗红墨迹一闪，不打断玩家。</li>
+        </ul>
+      </section>
+    </div>
+  </main>
+</body>
+</html>
+
+
