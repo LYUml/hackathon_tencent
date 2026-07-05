@@ -1,0 +1,373 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>《画皮》对话 UI 示意 V2</title>
+  <style>
+    :root {
+      --black: #070504;
+      --paper: #d8c7a7;
+      --paper-dark: #9f8b6c;
+      --gold: #c9a96e;
+      --red: #8b2020;
+      --red-bright: #c34a3f;
+      --ink: rgba(7, 5, 4, .82);
+    }
+
+    * { box-sizing: border-box; }
+
+    body {
+      margin: 0;
+      overflow: hidden;
+      background: #050403;
+      font-family: "Microsoft YaHei", "Noto Sans SC", sans-serif;
+      color: #efe5d4;
+    }
+
+    .screen {
+      position: relative;
+      width: 1920px;
+      height: 1080px;
+      overflow: hidden;
+      background: #090605;
+    }
+
+    .bg {
+      position: absolute;
+      inset: -24px;
+      background:
+        linear-gradient(90deg, rgba(0,0,0,.88), rgba(0,0,0,.18) 34%, rgba(0,0,0,.42) 64%, rgba(0,0,0,.9)),
+        linear-gradient(180deg, rgba(73,15,14,.24), rgba(0,0,0,.2) 42%, rgba(0,0,0,.78)),
+        url("../pic/背景图/戏曲道具与盔头陈列室.png") center / cover no-repeat;
+      filter: saturate(.78) brightness(.62) contrast(1.08);
+      transform: scale(1.02);
+    }
+
+    .vignette {
+      position: absolute;
+      inset: 0;
+      background:
+        radial-gradient(circle at 34% 42%, transparent 0 22%, rgba(0,0,0,.18) 46%, rgba(0,0,0,.76) 100%),
+        linear-gradient(180deg, rgba(0,0,0,.26), transparent 18%, rgba(0,0,0,.66));
+      pointer-events: none;
+    }
+
+    .mist {
+      position: absolute;
+      inset: 0;
+      background:
+        radial-gradient(ellipse at 28% 78%, rgba(139,32,32,.2), transparent 34%),
+        radial-gradient(ellipse at 74% 21%, rgba(201,169,110,.12), transparent 28%),
+        linear-gradient(90deg, rgba(0,0,0,.2), transparent, rgba(0,0,0,.34));
+      mix-blend-mode: screen;
+      opacity: .5;
+    }
+
+    .top-left {
+      position: absolute;
+      top: 42px;
+      left: 52px;
+      width: 520px;
+      padding-left: 18px;
+      border-left: 3px solid rgba(139,32,32,.9);
+      text-shadow: 0 2px 12px #000;
+    }
+
+    .location {
+      color: var(--gold);
+      font-size: 22px;
+      letter-spacing: 0;
+    }
+
+    .objective {
+      margin-top: 8px;
+      color: #dfd3c0;
+      font-size: 28px;
+      font-weight: 700;
+    }
+
+    .top-right {
+      position: absolute;
+      top: 40px;
+      right: 52px;
+      display: flex;
+      align-items: center;
+      gap: 16px;
+      padding: 12px 18px;
+      background: linear-gradient(90deg, transparent, rgba(5,4,3,.7));
+      border-right: 1px solid rgba(201,169,110,.4);
+    }
+
+    .heart {
+      width: 26px;
+      height: 26px;
+      background: radial-gradient(circle at 42% 35%, #d55d4f, #7d1715 68%, #250706);
+      clip-path: polygon(50% 90%, 11% 47%, 16% 22%, 37% 11%, 50% 25%, 63% 11%, 84% 22%, 89% 47%);
+      filter: drop-shadow(0 0 12px rgba(139,32,32,.55));
+    }
+
+    .heart.crack {
+      background: linear-gradient(105deg, #92231f 0 43%, #180504 44% 50%, #c6483e 51%);
+      opacity: .9;
+    }
+
+    .heart.empty {
+      background: #514943;
+      opacity: .34;
+      filter: none;
+    }
+
+    .character {
+      position: absolute;
+      left: 145px;
+      bottom: 250px;
+      width: 430px;
+      height: 690px;
+      object-fit: contain;
+      filter:
+        drop-shadow(0 28px 36px rgba(0,0,0,.88))
+        drop-shadow(0 0 28px rgba(139,32,32,.22));
+    }
+
+    .character-glow {
+      position: absolute;
+      left: 138px;
+      bottom: 248px;
+      width: 430px;
+      height: 690px;
+      background: radial-gradient(ellipse at 50% 48%, rgba(139,32,32,.18), transparent 60%);
+      filter: blur(24px);
+    }
+
+    .topic-panel {
+      position: absolute;
+      right: 78px;
+      top: 170px;
+      width: 500px;
+      display: grid;
+      gap: 14px;
+    }
+
+    .topic-title {
+      margin-bottom: 4px;
+      color: var(--gold);
+      font-size: 24px;
+      text-shadow: 0 2px 12px #000;
+    }
+
+    .topic {
+      position: relative;
+      min-height: 68px;
+      padding: 16px 24px 14px 28px;
+      color: #2d1710;
+      background:
+        linear-gradient(100deg, rgba(255,255,255,.22), transparent 34%),
+        linear-gradient(180deg, #dcc89f, #bda47c);
+      box-shadow: 0 16px 28px rgba(0,0,0,.46);
+      transform: skewX(-2deg);
+    }
+
+    .topic span {
+      display: block;
+      transform: skewX(2deg);
+      font-size: 21px;
+      font-weight: 700;
+    }
+
+    .topic small {
+      display: block;
+      transform: skewX(2deg);
+      margin-top: 2px;
+      color: rgba(45,23,16,.68);
+      font-size: 14px;
+    }
+
+    .topic::before {
+      content: "";
+      position: absolute;
+      left: 0;
+      top: 0;
+      bottom: 0;
+      width: 6px;
+      background: rgba(201,169,110,.75);
+    }
+
+    .topic.current {
+      background:
+        linear-gradient(100deg, rgba(255,255,255,.26), transparent 34%),
+        linear-gradient(180deg, #e6d2aa, #c4ab82);
+      box-shadow: 0 0 0 1px rgba(201,169,110,.36), 0 18px 34px rgba(0,0,0,.52);
+    }
+
+    .topic.current::before { background: var(--red); }
+
+    .topic.done {
+      opacity: .62;
+      filter: grayscale(.25);
+    }
+
+    .topic.locked {
+      color: rgba(45,23,16,.42);
+      background: linear-gradient(180deg, rgba(154,139,114,.8), rgba(92,80,68,.86));
+    }
+
+    .evidence-drawer {
+      position: absolute;
+      right: 84px;
+      bottom: 238px;
+      display: flex;
+      gap: 10px;
+      align-items: center;
+    }
+
+    .evidence-label {
+      color: var(--gold);
+      font-size: 16px;
+      text-shadow: 0 2px 10px #000;
+    }
+
+    .strip {
+      width: 185px;
+      padding: 10px 14px;
+      color: #2a1711;
+      background: #d6c19d;
+      border-left: 4px solid rgba(139,32,32,.82);
+      box-shadow: 0 12px 22px rgba(0,0,0,.48);
+      font-size: 16px;
+    }
+
+    .dialogue {
+      position: absolute;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      min-height: 250px;
+      padding: 34px 82px 52px 620px;
+      background:
+        linear-gradient(180deg, transparent, rgba(0,0,0,.56) 10%, rgba(6,4,3,.94) 50%),
+        linear-gradient(90deg, rgba(0,0,0,.82), rgba(0,0,0,.54), rgba(0,0,0,.86));
+      border-top: 1px solid rgba(201,169,110,.22);
+      box-shadow: 0 -24px 80px rgba(0,0,0,.75);
+    }
+
+    .name {
+      position: absolute;
+      left: 610px;
+      top: -34px;
+      min-width: 180px;
+      padding: 12px 24px;
+      color: var(--gold);
+      background: rgba(6,4,3,.88);
+      border: 1px solid rgba(201,169,110,.3);
+      box-shadow: 0 12px 26px rgba(0,0,0,.55);
+      font-size: 22px;
+      font-weight: 700;
+    }
+
+    .state-tags {
+      display: flex;
+      gap: 10px;
+      margin-bottom: 16px;
+    }
+
+    .tag {
+      padding: 5px 14px;
+      color: #d9c8ad;
+      border: 1px solid rgba(201,169,110,.28);
+      background: rgba(255,255,255,.035);
+      font-size: 15px;
+    }
+
+    .tag.active {
+      color: #f0d6c4;
+      border-color: rgba(139,32,32,.9);
+      background: rgba(139,32,32,.22);
+    }
+
+    .line {
+      max-width: 1050px;
+      font-size: 32px;
+      line-height: 1.55;
+      letter-spacing: 0;
+      text-shadow: 0 2px 14px rgba(0,0,0,.9);
+    }
+
+    .keyword {
+      color: #f0c28d;
+      text-shadow: 0 0 18px rgba(139,32,32,.38);
+    }
+
+    .next {
+      position: absolute;
+      right: 72px;
+      bottom: 48px;
+      color: var(--gold);
+      font-size: 24px;
+      opacity: .9;
+    }
+
+    .ink-line {
+      position: absolute;
+      left: 620px;
+      right: 82px;
+      bottom: 28px;
+      height: 1px;
+      background: linear-gradient(90deg, transparent, rgba(201,169,110,.42), transparent);
+    }
+  </style>
+</head>
+<body>
+  <div class="screen">
+    <div class="bg"></div>
+    <div class="mist"></div>
+    <div class="vignette"></div>
+
+    <div class="top-left">
+      <div class="location">戏曲道具与盔头陈列室</div>
+      <div class="objective">当前目标：追问沈青衣的昨夜行踪</div>
+    </div>
+
+    <div class="top-right" aria-label="五心血量">
+      <div class="heart"></div>
+      <div class="heart"></div>
+      <div class="heart"></div>
+      <div class="heart crack"></div>
+      <div class="heart empty"></div>
+    </div>
+
+    <div class="character-glow"></div>
+    <img class="character" src="../pic/人物立绘/旦2.png" alt="沈青衣">
+
+    <div class="topic-panel">
+      <div class="topic-title">话题</div>
+      <div class="topic done"><span>今晚的《断面》</span><small>已询问</small></div>
+      <div class="topic done"><span>陈列柜里的脸谱</span><small>已询问</small></div>
+      <div class="topic current"><span>昨晚你在哪里</span><small>新解锁 · 可追问</small></div>
+      <div class="topic"><span>出示证据</span><small>打开证据条背包</small></div>
+      <div class="topic locked"><span>封闭后台小屋</span><small>需要更多线索</small></div>
+    </div>
+
+    <div class="evidence-drawer">
+      <div class="evidence-label">可出示</div>
+      <div class="strip">旧戏票</div>
+      <div class="strip">脸谱盒</div>
+      <div class="strip">门闩划痕</div>
+    </div>
+
+    <div class="dialogue">
+      <div class="name">沈青衣</div>
+      <div class="state-tags">
+        <div class="tag">平静</div>
+        <div class="tag active">警戒</div>
+        <div class="tag">破绽</div>
+      </div>
+      <div class="line">
+        戏没有想不想。<span class="keyword">锣鼓点</span>响了，人就该站到该站的位置。
+      </div>
+      <div class="next">〉</div>
+      <div class="ink-line"></div>
+    </div>
+  </div>
+</body>
+</html>

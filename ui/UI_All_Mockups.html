@@ -1,0 +1,555 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>《画皮》全 UI 示意图</title>
+  <style>
+    :root {
+      --black: #070504;
+      --paper: #d8c7a7;
+      --paper2: #ead8b7;
+      --paper-dark: #9f8b6c;
+      --gold: #c9a96e;
+      --red: #8b2020;
+      --red2: #c34a3f;
+      --ink: rgba(7, 5, 4, .86);
+      --line: rgba(201, 169, 110, .28);
+      --white: #f1e8d8;
+    }
+
+    * { box-sizing: border-box; }
+
+    html, body {
+      margin: 0;
+      background: #050403;
+      color: var(--white);
+      font-family: "Microsoft YaHei", "Noto Sans SC", sans-serif;
+    }
+
+    .screen {
+      position: relative;
+      width: 1920px;
+      height: 1080px;
+      overflow: hidden;
+      background: #080504;
+    }
+
+    .bg {
+      position: absolute;
+      inset: -28px;
+      background-position: center;
+      background-size: cover;
+      background-repeat: no-repeat;
+      filter: saturate(.78) brightness(.58) contrast(1.08);
+      transform: scale(1.025);
+    }
+
+    .bg.props { background-image: url("../pic/背景图/戏曲道具与盔头陈列室.png"); }
+    .bg.rehearsal { background-image: url("../pic/背景图/排练室.png"); }
+    .bg.stage { background-image: url("../pic/背景图/戏曲舞台.png"); }
+    .bg.box { background-image: url("../pic/背景图/老旧大戏箱堆放角.png"); }
+    .bg.backstage { background-image: url("../pic/背景图/舞台与幕后.png"); }
+    .bg.curtain { background-image: url("../pic/背景图/剧社侧台门帘处.png"); }
+
+    .shade {
+      position: absolute;
+      inset: 0;
+      background:
+        radial-gradient(circle at 32% 42%, transparent 0 22%, rgba(0,0,0,.22) 46%, rgba(0,0,0,.82) 100%),
+        linear-gradient(90deg, rgba(0,0,0,.88), rgba(0,0,0,.22) 34%, rgba(0,0,0,.5) 65%, rgba(0,0,0,.92)),
+        linear-gradient(180deg, rgba(79,14,13,.2), transparent 35%, rgba(0,0,0,.76));
+    }
+
+    .mist {
+      position: absolute;
+      inset: 0;
+      background:
+        radial-gradient(ellipse at 20% 82%, rgba(139,32,32,.22), transparent 32%),
+        radial-gradient(ellipse at 76% 18%, rgba(201,169,110,.12), transparent 26%);
+      opacity: .7;
+      pointer-events: none;
+    }
+
+    .top-left {
+      position: absolute;
+      top: 42px;
+      left: 52px;
+      width: 650px;
+      padding-left: 18px;
+      border-left: 3px solid rgba(139,32,32,.95);
+      text-shadow: 0 2px 12px #000;
+      z-index: 5;
+    }
+
+    .location {
+      color: var(--gold);
+      font-size: 22px;
+    }
+
+    .objective {
+      margin-top: 8px;
+      color: #f1e8d8;
+      font-size: 30px;
+      font-weight: 800;
+    }
+
+    .top-actions {
+      position: absolute;
+      top: 38px;
+      right: 52px;
+      display: flex;
+      gap: 16px;
+      z-index: 5;
+    }
+
+    .icon-btn {
+      min-width: 78px;
+      height: 42px;
+      display: grid;
+      place-items: center;
+      color: var(--gold);
+      background: linear-gradient(90deg, transparent, rgba(5,4,3,.76), transparent);
+      border-bottom: 1px solid rgba(201,169,110,.38);
+      font-size: 17px;
+    }
+
+    .hearts {
+      display: flex;
+      align-items: center;
+      gap: 14px;
+      padding: 11px 16px;
+      background: linear-gradient(90deg, transparent, rgba(5,4,3,.7));
+      border-right: 1px solid rgba(201,169,110,.4);
+    }
+
+    .heart {
+      width: 26px;
+      height: 26px;
+      background: radial-gradient(circle at 42% 35%, #d55d4f, #7d1715 68%, #250706);
+      clip-path: polygon(50% 90%, 11% 47%, 16% 22%, 37% 11%, 50% 25%, 63% 11%, 84% 22%, 89% 47%);
+      filter: drop-shadow(0 0 12px rgba(139,32,32,.55));
+    }
+    .heart.crack { background: linear-gradient(105deg, #92231f 0 43%, #180504 44% 50%, #c6483e 51%); }
+    .heart.empty { background: #514943; opacity: .34; filter: none; }
+
+    .char {
+      position: absolute;
+      object-fit: contain;
+      filter: drop-shadow(0 28px 36px rgba(0,0,0,.9)) drop-shadow(0 0 28px rgba(139,32,32,.22));
+      z-index: 3;
+    }
+
+    .dialogue {
+      position: absolute;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      min-height: 250px;
+      padding: 34px 82px 52px 620px;
+      background:
+        linear-gradient(180deg, transparent, rgba(0,0,0,.58) 10%, rgba(6,4,3,.94) 52%),
+        linear-gradient(90deg, rgba(0,0,0,.84), rgba(0,0,0,.54), rgba(0,0,0,.88));
+      border-top: 1px solid rgba(201,169,110,.22);
+      box-shadow: 0 -24px 80px rgba(0,0,0,.75);
+      z-index: 8;
+    }
+
+    .name {
+      position: absolute;
+      left: 610px;
+      top: -34px;
+      min-width: 180px;
+      padding: 12px 24px;
+      color: var(--gold);
+      background: rgba(6,4,3,.88);
+      border: 1px solid rgba(201,169,110,.3);
+      box-shadow: 0 12px 26px rgba(0,0,0,.55);
+      font-size: 22px;
+      font-weight: 700;
+    }
+
+    .tags { display: flex; gap: 10px; margin-bottom: 16px; }
+    .tag {
+      padding: 5px 14px;
+      color: #d9c8ad;
+      border: 1px solid rgba(201,169,110,.28);
+      background: rgba(255,255,255,.035);
+      font-size: 15px;
+    }
+    .tag.active { color: #f0d6c4; border-color: rgba(139,32,32,.9); background: rgba(139,32,32,.22); }
+
+    .line {
+      max-width: 1050px;
+      font-size: 32px;
+      line-height: 1.55;
+      text-shadow: 0 2px 14px rgba(0,0,0,.9);
+    }
+    .keyword { color: #f0c28d; text-shadow: 0 0 18px rgba(139,32,32,.38); }
+    .next { position: absolute; right: 72px; bottom: 48px; color: var(--gold); font-size: 24px; }
+
+    .topic-panel {
+      position: absolute;
+      right: 78px;
+      top: 170px;
+      width: 500px;
+      display: grid;
+      gap: 14px;
+      z-index: 6;
+    }
+    .panel-title { color: var(--gold); font-size: 24px; text-shadow: 0 2px 12px #000; }
+
+    .topic, .paper, .strip, .slot, .save-card {
+      color: #2d1710;
+      background:
+        linear-gradient(100deg, rgba(255,255,255,.22), transparent 34%),
+        linear-gradient(180deg, #dcc89f, #bda47c);
+      box-shadow: 0 16px 28px rgba(0,0,0,.46);
+    }
+
+    .topic {
+      position: relative;
+      min-height: 68px;
+      padding: 16px 24px 14px 28px;
+      transform: skewX(-2deg);
+    }
+    .topic span, .topic small { display: block; transform: skewX(2deg); }
+    .topic span { font-size: 21px; font-weight: 800; }
+    .topic small { margin-top: 2px; color: rgba(45,23,16,.68); font-size: 14px; }
+    .topic::before { content:""; position:absolute; left:0; top:0; bottom:0; width:6px; background: rgba(201,169,110,.75); }
+    .topic.current::before { background: var(--red); }
+    .topic.done { opacity:.62; filter: grayscale(.25); }
+    .topic.locked { background: linear-gradient(180deg, rgba(154,139,114,.8), rgba(92,80,68,.86)); opacity: .7; }
+
+    .evidence-row {
+      position: absolute;
+      left: 72px;
+      right: 72px;
+      bottom: 44px;
+      display: grid;
+      grid-template-columns: 180px repeat(4, 1fr) 150px;
+      gap: 14px;
+      align-items: center;
+      z-index: 7;
+    }
+    .evidence-label { color: var(--gold); font-size: 20px; text-align: right; text-shadow: 0 2px 10px #000; }
+    .strip {
+      min-height: 58px;
+      padding: 12px 16px;
+      border-left: 5px solid rgba(139,32,32,.82);
+      font-size: 18px;
+      font-weight: 700;
+    }
+    .strip small { display:block; margin-top: 2px; font-size: 13px; color: rgba(45,23,16,.65); font-weight: 400; }
+    .strip.selected { outline: 2px solid rgba(139,32,32,.95); box-shadow: 0 0 20px rgba(139,32,32,.35), 0 14px 24px rgba(0,0,0,.44); }
+    .strip.wrong { filter: brightness(.42); color: #120806; }
+    .submit {
+      display: grid;
+      place-items: center;
+      min-height: 58px;
+      color: var(--paper2);
+      background: rgba(139,32,32,.72);
+      border: 1px solid rgba(201,169,110,.34);
+      box-shadow: 0 14px 24px rgba(0,0,0,.44);
+      font-size: 20px;
+      font-weight: 800;
+    }
+
+    .hotspot {
+      position: absolute;
+      display: grid;
+      place-items: center;
+      width: 148px;
+      height: 52px;
+      color: var(--gold);
+      border: 1px dashed rgba(201,169,110,.72);
+      background: rgba(5,4,3,.26);
+      box-shadow: 0 0 18px rgba(201,169,110,.12);
+      text-shadow: 0 2px 10px #000;
+      z-index: 4;
+    }
+    .hotspot.key { color: #efb9ac; border-color: rgba(139,32,32,.95); }
+    .hotspot.done { color: rgba(216,199,167,.52); border-color: rgba(216,199,167,.24); }
+
+    .toast {
+      position: absolute;
+      left: 50%;
+      transform: translateX(-50%);
+      bottom: 270px;
+      min-width: 560px;
+      padding: 18px 30px;
+      color: #2d1710;
+      background: linear-gradient(90deg, transparent, var(--paper), var(--paper), transparent);
+      text-align: center;
+      font-size: 24px;
+      font-weight: 800;
+      z-index: 9;
+      box-shadow: 0 18px 35px rgba(0,0,0,.42);
+    }
+
+    .center-card {
+      position: absolute;
+      left: 50%;
+      top: 50%;
+      transform: translate(-50%, -50%);
+      z-index: 8;
+      text-align: center;
+      color: var(--paper2);
+    }
+    .title-big { color: var(--red2); font-size: 116px; font-weight: 900; text-shadow: 0 0 36px rgba(139,32,32,.55); }
+    .subtitle { margin-top: 18px; color: var(--paper2); font-size: 28px; }
+
+    .archive {
+      position: absolute;
+      inset: 120px 110px 110px;
+      z-index: 6;
+      display: grid;
+      grid-template-columns: 410px 1fr;
+      gap: 36px;
+    }
+    .photo {
+      padding: 22px;
+      background: var(--paper);
+      transform: rotate(-2deg);
+      box-shadow: 0 26px 48px rgba(0,0,0,.58);
+    }
+    .photo img { width: 100%; height: 100%; object-fit: contain; filter: sepia(.12) contrast(.95); }
+    .notebook {
+      padding: 42px;
+      color: #2d1710;
+      background: linear-gradient(180deg, #e1cfad, #cdb58d);
+      box-shadow: 0 26px 48px rgba(0,0,0,.58);
+    }
+    .notebook h2 { margin: 0 0 18px; font-size: 42px; color: #32170f; }
+    .note-line { margin: 15px 0; font-size: 23px; line-height: 1.55; border-bottom: 1px solid rgba(45,23,16,.16); }
+    .stamp { display: inline-block; margin-left: 12px; padding: 4px 10px; color: var(--red); border: 2px solid var(--red); transform: rotate(-4deg); font-weight: 900; }
+
+    .clue-detail {
+      position: absolute;
+      left: 140px;
+      right: 140px;
+      top: 118px;
+      bottom: 118px;
+      z-index: 6;
+      display: grid;
+      grid-template-columns: 1.1fr .9fr;
+      gap: 34px;
+    }
+    .paper-large {
+      padding: 44px;
+      color: #2d1710;
+      background: linear-gradient(180deg, #e3d1ad, #cbb28a);
+      box-shadow: 0 26px 48px rgba(0,0,0,.58);
+    }
+    .paper-large h2 { margin: 0 0 26px; font-size: 42px; color: #32170f; }
+    .photo-stack { position: relative; }
+    .photo-mini {
+      position: absolute;
+      width: 390px;
+      min-height: 250px;
+      padding: 22px;
+      color: #2d1710;
+      background: #d8c7a7;
+      box-shadow: 0 24px 40px rgba(0,0,0,.5);
+    }
+
+    .observe-frame {
+      position: absolute;
+      left: 50%;
+      top: 110px;
+      transform: translateX(-50%);
+      width: 610px;
+      height: 660px;
+      z-index: 5;
+      display: grid;
+      place-items: center;
+      border: 1px solid rgba(201,169,110,.26);
+      background: rgba(0,0,0,.28);
+      box-shadow: 0 28px 80px rgba(0,0,0,.72);
+      overflow: hidden;
+    }
+    .observe-frame img { width: 92%; height: 92%; object-fit: contain; opacity: .86; }
+    .ink-cloud {
+      position: absolute;
+      inset: 10% 14%;
+      background:
+        radial-gradient(circle at 40% 36%, rgba(0,0,0,.98), transparent 28%),
+        radial-gradient(circle at 58% 52%, rgba(0,0,0,.94), transparent 26%),
+        radial-gradient(circle at 45% 67%, rgba(0,0,0,.9), transparent 24%);
+      filter: blur(7px);
+    }
+    .slots {
+      position: absolute;
+      left: 110px;
+      top: 250px;
+      z-index: 6;
+      display: grid;
+      gap: 18px;
+      width: 350px;
+    }
+    .slot { min-height: 76px; padding: 18px 24px; font-size: 22px; font-weight: 800; border-left: 5px solid rgba(139,32,32,.85); }
+    .observe-btn {
+      position: absolute;
+      right: 138px;
+      bottom: 190px;
+      z-index: 6;
+      width: 260px;
+      height: 78px;
+      display: grid;
+      place-items: center;
+      color: var(--paper2);
+      background: rgba(139,32,32,.78);
+      border: 1px solid rgba(201,169,110,.4);
+      font-size: 30px;
+      font-weight: 900;
+      box-shadow: 0 20px 38px rgba(0,0,0,.5);
+    }
+
+    .pause-panel {
+      position: absolute;
+      inset: 0;
+      z-index: 8;
+      display: grid;
+      place-items: center;
+      background: rgba(0,0,0,.74);
+    }
+    .pause-inner {
+      width: 560px;
+      display: grid;
+      gap: 22px;
+      text-align: center;
+    }
+    .pause-title { color: var(--gold); font-size: 48px; margin-bottom: 20px; }
+    .menu-text { color: var(--paper2); font-size: 28px; padding: 12px; border-bottom: 1px solid rgba(201,169,110,.26); }
+    .slider-row { display: grid; grid-template-columns: 130px 1fr; gap: 18px; align-items: center; color: var(--paper); font-size: 20px; }
+    .slider { height: 3px; background: rgba(216,199,167,.28); position: relative; }
+    .slider::after { content:""; position:absolute; left:62%; top:-8px; width:18px; height:18px; border-radius:50%; background: var(--gold); }
+
+    .save-grid {
+      position: absolute;
+      left: 120px;
+      right: 120px;
+      top: 190px;
+      z-index: 6;
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 26px;
+    }
+    .save-card { min-height: 250px; padding: 24px; border-left: 6px solid rgba(139,32,32,.8); }
+    .save-card h3 { margin: 0 0 14px; font-size: 30px; color: #32170f; }
+    .save-card p { margin: 8px 0; font-size: 20px; color: #3a231a; }
+
+    .fail-text { font-size: 54px; color: var(--paper2); text-shadow: 0 0 24px rgba(139,32,32,.5); }
+    .fail-sub { margin-top: 24px; font-size: 26px; color: #d9c8ad; }
+  </style>
+</head>
+<body>
+  <section class="screen" id="explore">
+    <div class="bg props"></div><div class="shade"></div><div class="mist"></div>
+    <div class="top-left"><div class="location">戏曲道具与盔头陈列室</div><div class="objective">当前目标：调查陈列柜附近的异常</div></div>
+    <div class="top-actions"><div class="icon-btn">线索</div><div class="icon-btn">档案</div><div class="icon-btn">暂停</div></div>
+    <img class="char" src="../pic/人物立绘/旦2.png" style="left:120px;bottom:120px;width:390px;height:720px" alt="">
+    <div class="hotspot key" style="left:990px;top:490px">关键线索</div>
+    <div class="hotspot" style="left:720px;top:350px">可调查</div>
+    <div class="hotspot done" style="left:1310px;top:610px">已调查</div>
+    <div class="hotspot" style="left:240px;top:330px">可对话</div>
+    <div class="toast">目标更新：检查沾灰的脸谱盒</div>
+  </section>
+
+  <section class="screen" id="dialogue">
+    <div class="bg props"></div><div class="shade"></div><div class="mist"></div>
+    <div class="top-left"><div class="location">戏曲道具与盔头陈列室</div><div class="objective">当前目标：追问沈青衣的昨夜行踪</div></div>
+    <div class="top-actions"><div class="hearts"><div class="heart"></div><div class="heart"></div><div class="heart"></div><div class="heart crack"></div><div class="heart empty"></div></div></div>
+    <img class="char" src="../pic/人物立绘/旦2.png" style="left:145px;bottom:250px;width:430px;height:690px" alt="">
+    <div class="topic-panel">
+      <div class="panel-title">话题</div>
+      <div class="topic done"><span>今晚的《断面》</span><small>已询问</small></div>
+      <div class="topic done"><span>陈列柜里的脸谱</span><small>已询问</small></div>
+      <div class="topic current"><span>昨晚你在哪里</span><small>新解锁 · 可追问</small></div>
+      <div class="topic"><span>出示证据</span><small>打开证据条背包</small></div>
+      <div class="topic locked"><span>封闭后台小屋</span><small>需要更多线索</small></div>
+    </div>
+    <div class="evidence-row" style="left:1200px;right:80px;bottom:235px;grid-template-columns:90px repeat(3,1fr);">
+      <div class="evidence-label">可出示</div><div class="strip">旧戏票</div><div class="strip">脸谱盒</div><div class="strip">门闩划痕</div>
+    </div>
+    <div class="dialogue">
+      <div class="name">沈青衣</div>
+      <div class="tags"><div class="tag">平静</div><div class="tag active">警戒</div><div class="tag">破绽</div></div>
+      <div class="line">戏没有想不想。<span class="keyword">锣鼓点</span>响了，人就该站到该站的位置。</div>
+      <div class="next">〉</div>
+    </div>
+  </section>
+
+  <section class="screen" id="judgement">
+    <div class="bg rehearsal"></div><div class="shade"></div><div class="mist"></div>
+    <div class="top-left"><div class="location">排练室</div><div class="objective">选择能证明“今晚不是正常复排”的证据</div></div>
+    <div class="top-actions"><div class="hearts"><div class="heart"></div><div class="heart"></div><div class="heart"></div><div class="heart"></div><div class="heart"></div></div></div>
+    <div class="center-card" style="top:37%"><div class="subtitle">推理判定</div><div class="fail-text" style="font-size:42px;color:#f1e8d8">历史重演是人为复刻</div></div>
+    <div class="evidence-row">
+      <div class="evidence-label">证据条</div>
+      <div class="strip selected">演出流程表<small>旧案流程一致</small></div>
+      <div class="strip selected">被改动的排练表<small>昨晚临时替换</small></div>
+      <div class="strip selected">道具库出借记录<small>旧案道具被取出</small></div>
+      <div class="strip">监控缺失片段<small>管理员权限删除</small></div>
+      <div class="submit">提交</div>
+    </div>
+  </section>
+
+  <section class="screen" id="observe">
+    <div class="bg curtain"></div><div class="shade"></div><div class="mist"></div>
+    <div class="top-left"><div class="location">观皮</div><div class="objective">用 3 条证据揭开沈青衣的第一张皮</div></div>
+    <div class="top-actions"><div class="hearts"><div class="heart"></div><div class="heart"></div><div class="heart"></div><div class="heart"></div><div class="heart"></div></div></div>
+    <div class="slots"><div class="slot">旧戏票</div><div class="slot">脸谱盒</div><div class="slot">演出流程表</div></div>
+    <div class="observe-frame"><img src="../pic/人物立绘/旦2.png" alt=""><div class="ink-cloud"></div></div>
+    <div class="observe-btn">观皮</div>
+  </section>
+
+  <section class="screen" id="heart_fail">
+    <div class="bg backstage"></div><div class="shade"></div><div class="mist"></div>
+    <div class="top-actions"><div class="hearts"><div class="heart empty"></div><div class="heart empty"></div><div class="heart empty"></div><div class="heart empty"></div><div class="heart empty"></div></div></div>
+    <div class="center-card"><div class="title-big" style="font-size:72px">调查失败</div><div class="fail-sub">班主发现你的身份异常，你被请离后台。</div><div class="submit" style="margin:40px auto 0;width:260px">从当天重试</div></div>
+  </section>
+
+  <section class="screen" id="archive">
+    <div class="bg box"></div><div class="shade"></div><div class="mist"></div>
+    <div class="top-left"><div class="location">人物档案</div><div class="objective">薛万山 · 嫌疑上升</div></div>
+    <div class="archive"><div class="photo"><img src="../pic/人物立绘/老板2.png" alt=""></div><div class="notebook"><h2>薛万山 <span class="stamp">嫌疑上升</span></h2><div class="note-line">身份：现代薛氏剧团班主。</div><div class="note-line">可疑点：批准取出民国旧案相关道具。</div><div class="note-line">关系：压制沈青衣，管理周岱，警告玩家。</div><div class="note-line">隐藏身份：未揭示，被墨雾遮住。</div></div></div>
+  </section>
+
+  <section class="screen" id="clue_detail">
+    <div class="bg box"></div><div class="shade"></div><div class="mist"></div>
+    <div class="top-left"><div class="location">线索详情</div><div class="objective">旧戏箱里的旧戏票</div></div>
+    <div class="clue-detail"><div class="paper-large"><h2>旧戏箱里的旧戏票</h2><div class="note-line">来源：戏曲道具与盔头陈列室</div><div class="note-line">关键词：青衣勿忘 / 烧焦票根 / 《断面》</div><div class="note-line">描述：票根被烧过一角，背面写着“青衣勿忘”。</div><div class="note-line">推理用途：指向沈青衣与民国旧案有关，但不能单独证明她是凶手。</div></div><div class="photo-stack"><div class="photo-mini" style="left:30px;top:30px;transform:rotate(-4deg)"><h2 style="margin:0">票根照片</h2><p>边缘烧痕明显。</p></div><div class="photo-mini" style="left:190px;top:250px;transform:rotate(3deg)"><h2 style="margin:0">背面字迹</h2><p style="color:#8b2020;font-size:32px">青衣勿忘</p></div></div></div>
+  </section>
+
+  <section class="screen" id="toast">
+    <div class="bg props"></div><div class="shade"></div><div class="mist"></div>
+    <div class="top-left"><div class="location">反馈组件</div><div class="objective">Toast / 目标更新 / 档案更新</div></div>
+    <div class="toast" style="bottom:720px">获得线索：沾灰的脸谱盒</div>
+    <div class="toast" style="bottom:560px">新话题解锁：昨晚你在哪里</div>
+    <div class="toast" style="bottom:400px">人物档案更新：沈青衣 · 警戒</div>
+    <div class="toast" style="bottom:240px;color:#ead8b7;background:linear-gradient(90deg,transparent,rgba(139,32,32,.86),rgba(139,32,32,.86),transparent)">心 -1：这个证据还不足以支持推理</div>
+  </section>
+
+  <section class="screen" id="main_menu">
+    <div class="bg stage"></div><div class="shade"></div><div class="mist"></div>
+    <div class="center-card" style="top:34%"><div class="title-big">画皮</div><div class="subtitle">现实，是历史的重演</div></div>
+    <div class="center-card" style="top:64%;display:grid;gap:18px"><div class="menu-text" style="color:#f0d6a0">开始游戏</div><div class="menu-text">继续游戏</div><div class="menu-text">设置</div><div class="menu-text" style="color:#8f8270">退出</div></div>
+  </section>
+
+  <section class="screen" id="pause">
+    <div class="bg rehearsal"></div><div class="shade"></div><div class="pause-panel"><div class="pause-inner"><div class="pause-title">暂停</div><div class="menu-text">继续</div><div class="slider-row"><span>音量</span><div class="slider"></div></div><div class="slider-row"><span>文字速度</span><div class="slider"></div></div><div class="slider-row"><span>亮度</span><div class="slider"></div></div><div class="menu-text" style="color:#c56b5d">返回主菜单</div></div></div>
+  </section>
+
+  <section class="screen" id="chapter">
+    <div class="bg backstage"></div><div class="shade"></div><div class="mist"></div>
+    <div class="center-card"><div class="subtitle">第一章</div><div class="title-big" style="font-size:86px">第一张皮</div><div class="subtitle">戏曲道具与盔头陈列室</div></div>
+  </section>
+
+  <section class="screen" id="save_load">
+    <div class="bg box"></div><div class="shade"></div><div class="mist"></div>
+    <div class="top-left"><div class="location">存档 / 读档</div><div class="objective">选择一个档案槽</div></div>
+    <div class="save-grid"><div class="save-card"><h3>档案 01</h3><p>第一章：第一张皮</p><p>地点：道具陈列室</p><p>心数：4 / 5</p></div><div class="save-card"><h3>档案 02</h3><p>空档案</p><p>点击后创建新存档</p></div><div class="save-card"><h3>档案 03</h3><p>第一章：观皮前</p><p>地点：排练室</p><p>心数：5 / 5</p></div></div>
+  </section>
+</body>
+</html>
