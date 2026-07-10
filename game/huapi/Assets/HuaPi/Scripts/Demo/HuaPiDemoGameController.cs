@@ -965,7 +965,7 @@ namespace HuaPi.Demo
             for (int i = 0; i < 5; i++)
             {
                 var heart = Image($"Heart{i}", i < _hearts ? Red : new Color(0.28f, 0.25f, 0.23f, 0.45f), new Vector2(700 + i * 42, 475), new Vector2(28, 28), _root);
-                heart.type = Image.Type.Simple;
+                heart.type = UnityEngine.UI.Image.Type.Simple;
             }
         }
 
