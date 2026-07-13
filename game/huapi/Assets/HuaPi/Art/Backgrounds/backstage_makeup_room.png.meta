@@ -1,10 +1,10 @@
 fileFormatVersion: 2
-guid: d712ad3818af94c5998b2f7e0ff81c3b
+guid: 8983dee4ed61b44c48135cf4df1632e9
 TextureImporter:
   internalIDToNameTable:
   - first:
-      213: -1256599144642154528
-    second: "\u5267\u573A\u540E\u53F0\u5316\u5986\u95F4:\u4F11\u606F_0"
+      213: 7411235821298954650
+    second: backstage_makeup_room_0
   externalObjects: {}
   serializedVersion: 13
   mipmaps:
@@ -100,7 +100,7 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: "\u5267\u573A\u540E\u53F0\u5316\u5986\u95F4:\u4F11\u606F_0"
+      name: backstage_makeup_room_0
       rect:
         serializedVersion: 2
         x: 0
@@ -115,8 +115,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: 0ef6b865cb9af8ee0800000000000000
-      internalID: -1256599144642154528
+      spriteID: a91bc2b86bff9d660800000000000000
+      internalID: 7411235821298954650
       vertices: []
       indices: 
       edges: []
@@ -135,7 +135,7 @@ TextureImporter:
     spriteCustomMetadata:
       entries: []
     nameFileIdTable:
-      "\u5267\u573A\u540E\u53F0\u5316\u5986\u95F4:\u4F11\u606F_0": -1256599144642154528
+      backstage_makeup_room_0: 7411235821298954650
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 

@@ -166,7 +166,7 @@ ExplorationPanel (CanvasGroup + ExplorationPanel.cs)
 **Demo 数据**：
 
 探索面板默认启用 `useDemoData`，会加载"后台化妆间"Demo：
-- 背景：`pic/背景图/剧场后台化妆间:休息室.png`
+- 背景：`Assets/HuaPi/Art/Backgrounds/backstage_makeup_room.png`
 - 人物：`pic/人物立绘/旦.png`
 - 热点：镜台（点击获得线索"镜台下的旧戏票"）
 

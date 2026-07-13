@@ -4,7 +4,7 @@ TextureImporter:
   internalIDToNameTable:
   - first:
       213: 2012370739352268666
-    second: "\u5267\u573A\u540E\u53F0\u5316\u5986\u95F4:\u4F11\u606F\u5BA4 2_0"
+    second: backstage_makeup_room_alt_0
   externalObjects: {}
   serializedVersion: 13
   mipmaps:
@@ -100,7 +100,7 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: "\u5267\u573A\u540E\u53F0\u5316\u5986\u95F4:\u4F11\u606F\u5BA4 2_0"
+      name: backstage_makeup_room_alt_0
       rect:
         serializedVersion: 2
         x: 0
@@ -135,7 +135,7 @@ TextureImporter:
     spriteCustomMetadata:
       entries: []
     nameFileIdTable:
-      "\u5267\u573A\u540E\u53F0\u5316\u5986\u95F4:\u4F11\u606F\u5BA4 2_0": 2012370739352268666
+      backstage_makeup_room_alt_0: 2012370739352268666
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 
