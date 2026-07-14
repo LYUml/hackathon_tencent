@@ -1,0 +1,689 @@
+fileFormatVersion: 2
+guid: 5ec7854e01fc8fc44a58afa6f52070a7
+TextureImporter:
+  internalIDToNameTable:
+  - first:
+      213: -5825936532193243798
+    second: 01home_LOGO_0
+  - first:
+      213: 5285753186966062903
+    second: 01home_LOGO_1
+  - first:
+      213: 7411341831135274908
+    second: 01home_LOGO_2
+  - first:
+      213: -804598964028217535
+    second: 01home_LOGO_3
+  - first:
+      213: 7026673693495870287
+    second: 01home_LOGO_4
+  - first:
+      213: 2222390102233388159
+    second: 01home_LOGO_5
+  - first:
+      213: -1930222158329059009
+    second: 01home_LOGO_6
+  - first:
+      213: 9208201336617231487
+    second: 01home_LOGO_7
+  - first:
+      213: -5313085296980889771
+    second: 01home_LOGO_8
+  - first:
+      213: 1311924943376722437
+    second: 01home_LOGO_9
+  - first:
+      213: 8458477257066918951
+    second: 01home_LOGO_10
+  - first:
+      213: -5755835207256051790
+    second: 01home_LOGO_11
+  - first:
+      213: 2328492029195048910
+    second: 01home_LOGO_12
+  - first:
+      213: -8552564202338267309
+    second: 01home_LOGO_13
+  - first:
+      213: 5117264022156663320
+    second: 01home_LOGO_14
+  - first:
+      213: 4747260039859825317
+    second: 01home_LOGO_15
+  - first:
+      213: -8056656874476333852
+    second: 01home_LOGO_16
+  - first:
+      213: -2294243052059528472
+    second: 01home_LOGO_17
+  - first:
+      213: 5456356875083334021
+    second: 01home_LOGO_18
+  - first:
+      213: -4700035355462825389
+    second: 01home_LOGO_19
+  - first:
+      213: -4749613690825994787
+    second: 01home_LOGO_20
+  - first:
+      213: 3700586247158714654
+    second: 01home_LOGO_21
+  externalObjects: {}
+  serializedVersion: 13
+  mipmaps:
+    mipMapMode: 0
+    enableMipMap: 0
+    sRGBTexture: 1
+    linearTexture: 0
+    fadeOut: 0
+    borderMipMap: 0
+    mipMapsPreserveCoverage: 0
+    alphaTestReferenceValue: 0.5
+    mipMapFadeDistanceStart: 1
+    mipMapFadeDistanceEnd: 3
+  bumpmap:
+    convertToNormalMap: 0
+    externalNormalMap: 0
+    heightScale: 0.25
+    normalMapFilter: 0
+    flipGreenChannel: 0
+  isReadable: 0
+  streamingMipmaps: 0
+  streamingMipmapsPriority: 0
+  vTOnly: 0
+  ignoreMipmapLimit: 0
+  grayScaleToAlpha: 0
+  generateCubemap: 6
+  cubemapConvolution: 0
+  seamlessCubemap: 0
+  textureFormat: 1
+  maxTextureSize: 2048
+  textureSettings:
+    serializedVersion: 2
+    filterMode: 1
+    aniso: 1
+    mipBias: 0
+    wrapU: 1
+    wrapV: 1
+    wrapW: 1
+  nPOTScale: 0
+  lightmap: 0
+  compressionQuality: 50
+  spriteMode: 2
+  spriteExtrude: 1
+  spriteMeshType: 1
+  alignment: 0
+  spritePivot: {x: 0.5, y: 0.5}
+  spritePixelsToUnits: 100
+  spriteBorder: {x: 0, y: 0, z: 0, w: 0}
+  spriteGenerateFallbackPhysicsShape: 1
+  alphaUsage: 1
+  alphaIsTransparency: 1
+  spriteTessellationDetail: -1
+  textureType: 8
+  textureShape: 1
+  singleChannelComponent: 0
+  flipbookRows: 1
+  flipbookColumns: 1
+  maxTextureSizeSet: 0
+  compressionQualitySet: 0
+  textureFormatSet: 0
+  ignorePngGamma: 0
+  applyGammaDecoding: 0
+  swizzle: 50462976
+  cookieLightType: 0
+  platformSettings:
+  - serializedVersion: 4
+    buildTarget: DefaultTexturePlatform
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 4
+    buildTarget: Standalone
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  spriteSheet:
+    serializedVersion: 2
+    sprites:
+    - serializedVersion: 2
+      name: 01home_LOGO_0
+      rect:
+        serializedVersion: 2
+        x: 20
+        y: 479
+        width: 240
+        height: 38
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: a6d86a2579d162fa0800000000000000
+      internalID: -5825936532193243798
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: 01home_LOGO_1
+      rect:
+        serializedVersion: 2
+        x: 331
+        y: 94
+        width: 247
+        height: 441
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 7374087b484ca5940800000000000000
+      internalID: 5285753186966062903
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: 01home_LOGO_2
+      rect:
+        serializedVersion: 2
+        x: 580
+        y: 482
+        width: 31
+        height: 31
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: c97afc1e0206ad660800000000000000
+      internalID: 7411341831135274908
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: 01home_LOGO_3
+      rect:
+        serializedVersion: 2
+        x: 31
+        y: 111
+        width: 58
+        height: 338
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 1476372518d75d4f0800000000000000
+      internalID: -804598964028217535
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: 01home_LOGO_4
+      rect:
+        serializedVersion: 2
+        x: 91
+        y: 236
+        width: 119
+        height: 236
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: f43476dce72c38160800000000000000
+      internalID: 7026673693495870287
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: 01home_LOGO_5
+      rect:
+        serializedVersion: 2
+        x: 216
+        y: 84
+        width: 59
+        height: 365
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: f7417f3f50487de10800000000000000
+      internalID: 2222390102233388159
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: 01home_LOGO_6
+      rect:
+        serializedVersion: 2
+        x: 580
+        y: 442
+        width: 26
+        height: 32
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: f39653b7c297635e0800000000000000
+      internalID: -1930222158329059009
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: 01home_LOGO_7
+      rect:
+        serializedVersion: 2
+        x: 577
+        y: 402
+        width: 32
+        height: 33
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: f74e859145a1acf70800000000000000
+      internalID: 9208201336617231487
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: 01home_LOGO_8
+      rect:
+        serializedVersion: 2
+        x: 577
+        y: 362
+        width: 34
+        height: 33
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 55f6a1482112446b0800000000000000
+      internalID: -5313085296980889771
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: 01home_LOGO_9
+      rect:
+        serializedVersion: 2
+        x: 576
+        y: 322
+        width: 33
+        height: 31
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 50aa1fdf8c4e43210800000000000000
+      internalID: 1311924943376722437
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: 01home_LOGO_10
+      rect:
+        serializedVersion: 2
+        x: 583
+        y: 348
+        width: 8
+        height: 7
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 724b138104c826570800000000000000
+      internalID: 8458477257066918951
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: 01home_LOGO_11
+      rect:
+        serializedVersion: 2
+        x: 577
+        y: 288
+        width: 33
+        height: 29
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 2bfe0ddef5a2f10b0800000000000000
+      internalID: -5755835207256051790
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: 01home_LOGO_12
+      rect:
+        serializedVersion: 2
+        x: 578
+        y: 284
+        width: 29
+        height: 6
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: ec7df76e927705020800000000000000
+      internalID: 2328492029195048910
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: 01home_LOGO_13
+      rect:
+        serializedVersion: 2
+        x: 575
+        y: 244
+        width: 37
+        height: 34
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 35fc7e0eb203f4980800000000000000
+      internalID: -8552564202338267309
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: 01home_LOGO_14
+      rect:
+        serializedVersion: 2
+        x: 82
+        y: 206
+        width: 136
+        height: 26
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 81ad886048c240740800000000000000
+      internalID: 5117264022156663320
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: 01home_LOGO_15
+      rect:
+        serializedVersion: 2
+        x: 40
+        y: 19
+        width: 46
+        height: 56
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 5aa604caad7a1e140800000000000000
+      internalID: 4747260039859825317
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: 01home_LOGO_16
+      rect:
+        serializedVersion: 2
+        x: 78
+        y: 19
+        width: 78
+        height: 56
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 4e411a73241013090800000000000000
+      internalID: -8056656874476333852
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: 01home_LOGO_17
+      rect:
+        serializedVersion: 2
+        x: 155
+        y: 19
+        width: 160
+        height: 56
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 8e2759d79163920e0800000000000000
+      internalID: -2294243052059528472
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: 01home_LOGO_18
+      rect:
+        serializedVersion: 2
+        x: 312
+        y: 19
+        width: 60
+        height: 55
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 5814a1b3bafd8bb40800000000000000
+      internalID: 5456356875083334021
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: 01home_LOGO_19
+      rect:
+        serializedVersion: 2
+        x: 383
+        y: 19
+        width: 39
+        height: 56
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 35a8cddfebe16ceb0800000000000000
+      internalID: -4700035355462825389
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: 01home_LOGO_20
+      rect:
+        serializedVersion: 2
+        x: 422
+        y: 19
+        width: 76
+        height: 55
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: ddd0cf1438bf51eb0800000000000000
+      internalID: -4749613690825994787
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: 01home_LOGO_21
+      rect:
+        serializedVersion: 2
+        x: 498
+        y: 19
+        width: 60
+        height: 55
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: e115792d59f1b5330800000000000000
+      internalID: 3700586247158714654
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    outline: []
+    customData: 
+    physicsShape: []
+    bones: []
+    spriteID: 
+    internalID: 0
+    vertices: []
+    indices: 
+    edges: []
+    weights: []
+    secondaryTextures: []
+    spriteCustomMetadata:
+      entries: []
+    nameFileIdTable:
+      01home_LOGO_0: -5825936532193243798
+      01home_LOGO_1: 5285753186966062903
+      01home_LOGO_10: 8458477257066918951
+      01home_LOGO_11: -5755835207256051790
+      01home_LOGO_12: 2328492029195048910
+      01home_LOGO_13: -8552564202338267309
+      01home_LOGO_14: 5117264022156663320
+      01home_LOGO_15: 4747260039859825317
+      01home_LOGO_16: -8056656874476333852
+      01home_LOGO_17: -2294243052059528472
+      01home_LOGO_18: 5456356875083334021
+      01home_LOGO_19: -4700035355462825389
+      01home_LOGO_2: 7411341831135274908
+      01home_LOGO_20: -4749613690825994787
+      01home_LOGO_21: 3700586247158714654
+      01home_LOGO_3: -804598964028217535
+      01home_LOGO_4: 7026673693495870287
+      01home_LOGO_5: 2222390102233388159
+      01home_LOGO_6: -1930222158329059009
+      01home_LOGO_7: 9208201336617231487
+      01home_LOGO_8: -5313085296980889771
+      01home_LOGO_9: 1311924943376722437
+  mipmapLimitGroupName: 
+  pSDRemoveMatte: 0
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
