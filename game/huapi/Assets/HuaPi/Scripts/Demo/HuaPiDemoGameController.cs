@@ -2,6 +2,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using TMPro;
+using HuaPi.Core;
 using UnityEngine;
 using UnityEngine.EventSystems;
 using UnityEngine.UI;
@@ -120,6 +121,7 @@ namespace HuaPi.Demo
         private void Awake()
         {
             EnsureEventSystem();
+            HuaPiAudioManager.EnsureInstance();
             SeedData();
             BuildCanvas();
         }
@@ -269,6 +271,7 @@ namespace HuaPi.Demo
         private void ShowMainMenu()
         {
             _mode = ScreenMode.MainMenu;
+            HuaPiAudioManager.Instance.PlayBgm(HuaPiAudioManager.BgmMainTheme);
             Clear();
             AddBackground("Assets/HuaPi/Art/Backgrounds/戏曲舞台.png");
             AddShade(0.78f);
@@ -292,6 +295,7 @@ namespace HuaPi.Demo
         private void ShowChapterTitle()
         {
             _mode = ScreenMode.ChapterTitle;
+            HuaPiAudioManager.Instance.PlaySfx(HuaPiAudioManager.SfxSceneTransition);
             Clear();
             AddBackground("Assets/HuaPi/Art/Backgrounds/舞台与幕后.png");
             AddShade(0.82f);
@@ -304,6 +308,7 @@ namespace HuaPi.Demo
         private void ShowExploreProps()
         {
             _mode = ScreenMode.ExploreProps;
+            HuaPiAudioManager.Instance.PlayBgm(HuaPiAudioManager.BgmDayInvestigation);
             _lastExploreMode = _mode;
             _objective = "调查陈列柜附近的异常";
             Clear();
@@ -330,6 +335,7 @@ namespace HuaPi.Demo
         private void ShowExploreRehearsal()
         {
             _mode = ScreenMode.ExploreRehearsal;
+            HuaPiAudioManager.Instance.PlayBgm(HuaPiAudioManager.BgmDayInvestigation);
             _lastExploreMode = _mode;
             _objective = "调查排练室，确认复排是否被人为改动";
             Clear();
@@ -358,6 +364,7 @@ namespace HuaPi.Demo
         private void ShowDayTwoTitle()
         {
             _mode = ScreenMode.DayTwoTitle;
+            HuaPiAudioManager.Instance.PlayBgm(HuaPiAudioManager.BgmReveal);
             Clear();
             AddBackground("Assets/HuaPi/Art/Backgrounds/剧社侧台门帘处.png");
             AddShade(0.82f);
@@ -370,6 +377,7 @@ namespace HuaPi.Demo
         private void ShowExploreLockedRoom()
         {
             _mode = ScreenMode.ExploreLockedRoom;
+            HuaPiAudioManager.Instance.PlayBgm(HuaPiAudioManager.BgmDayInvestigation);
             _lastExploreMode = _mode;
             _objective = "调查封闭小屋，确认旧案如何被现代复刻";
             Clear();
@@ -396,6 +404,7 @@ namespace HuaPi.Demo
         private void ShowExploreAudience()
         {
             _mode = ScreenMode.ExploreAudience;
+            HuaPiAudioManager.Instance.PlayBgm(HuaPiAudioManager.BgmDayInvestigation);
             _lastExploreMode = _mode;
             _objective = "调查雅座，找出真正操纵重演的人";
             Clear();
@@ -490,6 +499,11 @@ namespace HuaPi.Demo
             _activeCharacterId = characterId;
             CharacterInfo character = _characters[characterId];
             _mode = ScreenMode.Dialogue;
+            HuaPiAudioManager.Instance.PlayBgm(HuaPiAudioManager.BgmDialogueTension);
+            if (characterId == "boss")
+            {
+                HuaPiAudioManager.Instance.PlaySfx(HuaPiAudioManager.SfxBossEntrance);
+            }
             Clear();
             string bg = BackgroundForExploreMode(_lastExploreMode);
             AddBackground(bg);
@@ -713,6 +727,7 @@ namespace HuaPi.Demo
         private void ShowJudgement()
         {
             _mode = ScreenMode.Judgement;
+            HuaPiAudioManager.Instance.PlayBgm(HuaPiAudioManager.BgmJudgement);
             Clear();
             AddBackground("Assets/HuaPi/Art/Backgrounds/排练室.png");
             AddShade(0.76f);
@@ -759,6 +774,7 @@ namespace HuaPi.Demo
             Text(clue.Keyword, 14, new Color(0.20f, 0.10f, 0.06f, 0.65f), TextAlignmentOptions.Left, new Vector2(20, -17), new Vector2(350, 24), rect);
             go.GetComponent<Button>().onClick.AddListener(() =>
             {
+                HuaPiAudioManager.Instance.PlaySfx(HuaPiAudioManager.SfxEvidenceSelect, 0.8f);
                 if (selected.Contains(clue.Id))
                 {
                     selected.Remove(clue.Id);
@@ -775,6 +791,7 @@ namespace HuaPi.Demo
         private void ShowObserveSkin()
         {
             _mode = ScreenMode.ObserveSkin;
+            HuaPiAudioManager.Instance.PlayBgm(HuaPiAudioManager.BgmObserveSkin);
             Clear();
             AddBackground("Assets/HuaPi/Art/Backgrounds/剧社侧台门帘处.png");
             AddShade(0.74f);
@@ -797,6 +814,7 @@ namespace HuaPi.Demo
                 {
                     _characters["qingyi"].Revealed = true;
                     _clues["old_ticket"].Used = _clues["mask_box"].Used = _clues["show_flow"].Used = true;
+                    HuaPiAudioManager.Instance.PlaySfx(HuaPiAudioManager.SfxObserveSuccess);
                     ShowDayTwoTitle();
                 }
                 else
@@ -811,6 +829,7 @@ namespace HuaPi.Demo
         private void ShowFinalTrial()
         {
             _mode = ScreenMode.FinalTrial;
+            HuaPiAudioManager.Instance.PlayBgm(HuaPiAudioManager.BgmJudgement);
             Clear();
             AddBackground("Assets/HuaPi/Art/Backgrounds/戏曲舞台.png");
             AddShade(0.80f);
@@ -840,6 +859,7 @@ namespace HuaPi.Demo
                 if (correct)
                 {
                     _characters["faceless"].Revealed = true;
+                    HuaPiAudioManager.Instance.PlaySfx(HuaPiAudioManager.SfxObserveSuccess);
                     ShowEnding();
                 }
                 else
@@ -854,6 +874,7 @@ namespace HuaPi.Demo
         private void ShowEnding()
         {
             _mode = ScreenMode.Ending;
+            HuaPiAudioManager.Instance.PlayBgm(HuaPiAudioManager.BgmReveal);
             Clear();
             AddBackground("Assets/HuaPi/Art/Backgrounds/舞台与幕后.png");
             AddShade(0.82f);
@@ -871,6 +892,8 @@ namespace HuaPi.Demo
         private void ShowFailure()
         {
             _mode = ScreenMode.Failure;
+            HuaPiAudioManager.Instance.PlaySfx(HuaPiAudioManager.SfxBossEntrance);
+            HuaPiAudioManager.Instance.StopBgm(0.8f);
             Clear();
             AddBackground("Assets/HuaPi/Art/Backgrounds/舞台与幕后.png");
             AddShade(0.88f);
@@ -946,6 +969,7 @@ namespace HuaPi.Demo
         {
             if (!_clues.TryGetValue(id, out Clue clue)) return;
             clue.Acquired = true;
+            HuaPiAudioManager.Instance.PlaySfx(HuaPiAudioManager.SfxClueAcquire);
             if (redrawToast) Toast(message);
         }
 
@@ -957,6 +981,7 @@ namespace HuaPi.Demo
         private void LoseHeart(string message)
         {
             _hearts = Mathf.Max(0, _hearts - 1);
+            HuaPiAudioManager.Instance.PlaySfx(HuaPiAudioManager.SfxHeartLoss);
             Toast($"心 -1：{message}");
         }
 
