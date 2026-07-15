@@ -34,6 +34,12 @@ namespace TXGame
             rb = GetComponent<Rigidbody2D>();
             if (animator == null) animator = GetComponent<Animator>();
             if (spriteRenderer == null) spriteRenderer = GetComponent<SpriteRenderer>();
+
+            if (interactableLayer.value == 0)
+            {
+                interactableLayer = LayerMask.GetMask("Default");
+                Debug.LogWarning("[PlayerController] Interactable layer was empty; defaulting to Default layer.");
+            }
         }
 
         private void FixedUpdate()

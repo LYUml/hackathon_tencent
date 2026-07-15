@@ -1,0 +1,34 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 69b7a37b90a5ab646a72aa4e859cefba, type: 3}
+  m_Name: Dialogue_boss_01
+  m_EditorClassIdentifier: Assembly-CSharp::TXGame.DialogueData
+  dialogueID: boss_01
+  speakerID: "\u73ED\u4E3B\u8001\u7237"
+  speakerName: "\u73ED\u4E3B\u8001\u7237"
+  conditions:
+  - type: 7
+    parameter: 
+    threshold: 0
+  lines:
+  - speakerName: "\u73ED\u4E3B\u8001\u7237"
+    speakerPortrait: {fileID: 0}
+    text: "\u5E74\u8F7B\u4EBA\uFF0C\u8FD9\u4E48\u665A\u4E86\u8FD8\u5728\u56DB\u5904\u8D70\u52A8\uFF1F"
+    autoAdvanceDelay: 0
+  hasChoices: 1
+  choices:
+  - choiceText: "\u73ED\u4E3B\uFF0C\u6211\u60F3\u95EE\u60A8\u51E0\u4E2A\u95EE\u9898\u3002"
+    nextDialogueID: 
+    choiceResults:
+    - type: 3
+      parameter: boss_01_asked
+  results: []

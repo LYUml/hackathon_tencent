@@ -10,9 +10,9 @@ namespace TXGame
     /// </summary>
     public class HuapiDataGenerator : EditorWindow
     {
-        private const string CHARACTER_DATA_PATH = "Assets/Data/Characters";
-        private const string CLUE_DATA_PATH = "Assets/Data/Clues";
-        private const string DIALOGUE_DATA_PATH = "Assets/Data/Dialogues";
+        private const string CHARACTER_DATA_PATH = "Assets/Resources/Characters";
+        private const string CLUE_DATA_PATH = "Assets/Resources/Clues";
+        private const string DIALOGUE_DATA_PATH = "Assets/Resources/Dialogues";
         private const string REVEAL_DATA_PATH = "Assets/Data/Reveals";
         private const string HUAPI_CHARACTER_PATH = "Assets/Data/HuapiCharacters";
         private const string HUAPI_CLUE_PATH = "Assets/Data/HuapiClues";

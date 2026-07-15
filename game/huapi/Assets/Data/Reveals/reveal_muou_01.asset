@@ -1,0 +1,27 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6c62eab12e490714391cb0e029fb473c, type: 3}
+  m_Name: reveal_muou_01
+  m_EditorClassIdentifier: Assembly-CSharp::TXGame.ObserveSkinRevealData
+  nodeId: reveal_muou_01
+  relatedCharacterId: muou
+  requiredClueId: clue_05
+  revealArea:
+    serializedVersion: 2
+    x: 0.1
+    y: 0.1
+    width: 0.35
+    height: 0.4
+  revealedText: "\u6728\u5076\u7684\u7A7A\u6D1E\u773C\u775B\u540E\u9762\u662F\u58A8\u4F36\u771F\u6B63\u7684\u773C\u795E\u2014\u2014\u5341\u5E74\u524D\u706B\u707E\u552F\u4E00\u7684\u5E78\u5B58\u8005\u3002"
+  triggersNewObjective: 0
+  newObjectiveId: 
+  fogFadeDuration: 0.9700223

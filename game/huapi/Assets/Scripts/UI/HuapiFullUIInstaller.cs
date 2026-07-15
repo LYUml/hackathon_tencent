@@ -40,6 +40,7 @@ namespace TXGame
             SaveLoad,
             Pause,
             DayTransition,
+            GameOver,
             Ending
         }
 
@@ -88,6 +89,7 @@ namespace TXGame
             public bool SecondDayOnly;
             public bool Puzzle;
             public string PuzzleKind;
+            public string PuzzleHint;
             public bool Examined;
         }
 
@@ -121,10 +123,20 @@ namespace TXGame
             public bool Occupied;
         }
 
+        private sealed class DialogueTopic
+        {
+            public string Id;
+            public string Label;
+            public string Question;
+            public string Response;
+            public bool SecondDayOnly;
+        }
+
         private readonly List<GameObject> spawned = new List<GameObject>();
         private readonly Dictionary<string, Clue> clues = new Dictionary<string, Clue>();
         private readonly Dictionary<string, Character> characters = new Dictionary<string, Character>();
         private readonly Dictionary<string, SceneNode> sceneNodes = new Dictionary<string, SceneNode>();
+        private readonly HashSet<string> askedDialogueTopics = new HashSet<string>();
         private readonly List<SceneActor> sceneActors = new List<SceneActor>();
         private Canvas hudCanvas;
         private Canvas dialogueCanvas;
@@ -154,6 +166,7 @@ namespace TXGame
         private bool dayOneTrialComplete;
         private bool dayTwoNightStarted;
         private bool demoCompleted;
+        private const string PropsRoomBackground = "Assets/Art/Sprites/Backgrounds/bg_props_room_panorama.png";
         private string gameplayBackgroundPath = "Assets/Art/Sprites/Generated/generated_theater_exterior.png";
         private View currentView = View.MainMenu;
         private AudioSource uiAudioSource;
@@ -223,8 +236,8 @@ namespace TXGame
             }
 
             if (Keyboard.current.f1Key.wasPressedThisFrame) TransitionTo(ShowGuide);
-            if (Keyboard.current.cKey.wasPressedThisFrame) TransitionTo(ShowClues);
-            if (Keyboard.current.mKey.wasPressedThisFrame) TransitionTo(ShowSceneMap);
+            if (Keyboard.current.cKey.wasPressedThisFrame) ToggleClues();
+            if (Keyboard.current.mKey.wasPressedThisFrame) ToggleSceneMap();
             if (Keyboard.current.xKey.wasPressedThisFrame) TransitionTo(ShowArchive);
             if (Keyboard.current.vKey.wasPressedThisFrame && HasClue("ticket")) TransitionTo(() => ShowPhaseTransition("擦雾", "FOG WIPE", "用证据擦开人物表层的雾。", "开始擦雾", ShowObserve));
             if (Keyboard.current.tKey.wasPressedThisFrame && CanOpenTrial()) TransitionTo(OpenCurrentTrial);
@@ -284,6 +297,9 @@ namespace TXGame
                     Size = new Vector2(560, 150),
                     OverlayPosition = new Vector2(-255, -410),
                     OverlaySize = new Vector2(580, 160),
+                    Puzzle = true,
+                    PuzzleKind = "body",
+                    PuzzleHint = "先看面具朝向，再看拖痕终点，最后对照台口方向。",
                     Description = "钟铁面的面具歪在侧台门帘前，身体被抬走后只留下暗色拖痕。痕迹从帘后向台口延伸，不像自己摔倒。"
                 },
                 new InvestigationHotspot
@@ -296,6 +312,7 @@ namespace TXGame
                     Size = new Vector2(86, 86),
                     Puzzle = true,
                     PuzzleKind = "latch",
+                    PuzzleHint = "门外能做到的顺序是先穿线，再压住门闩，最后回抽伪装反扣。",
                     Description = "门闩表面干净，缝隙里却有新木屑。像是有人在门外完成了一个“屋内反锁”的假象。"
                 },
                 new InvestigationHotspot
@@ -308,6 +325,7 @@ namespace TXGame
                     Size = new Vector2(94, 94),
                     Puzzle = true,
                     PuzzleKind = "face",
+                    PuzzleHint = "旧戏单上的行当顺序能决定脸谱颜色，白脸不在台前。",
                     Description = "烧焦脸谱被摆在盒子最上层，旁边的香灰还带一点温。旧案遗物不该有今天的温度。"
                 },
                 new InvestigationHotspot
@@ -320,6 +338,7 @@ namespace TXGame
                     Size = new Vector2(96, 86),
                     Puzzle = true,
                     PuzzleKind = "gong",
+                    PuzzleHint = "短声遮开门，长声遮倒地，停拍遮脚步；公告板写着重复的短声。",
                     Description = "公告板上的锣点被铅笔改过。提前三拍，刚好能让一切杂音淹在练声和锣鼓里。"
                 },
                 new InvestigationHotspot
@@ -330,6 +349,9 @@ namespace TXGame
                     SceneId = "props",
                     Position = new Vector2(-640, 220),
                     Size = new Vector2(90, 90),
+                    Puzzle = true,
+                    PuzzleKind = "medicine",
+                    PuzzleHint = "药瓶、喝水处、白色粉末三者能对应上，先确认瓶底残留。",
                     Description = "药瓶标签写着润喉，瓶底却粘着白色粉末。钟铁面刚才说嗓子干，喝过这里的水。"
                 },
                 new InvestigationHotspot
@@ -342,6 +364,7 @@ namespace TXGame
                     Size = new Vector2(100, 72),
                     Puzzle = true,
                     PuzzleKind = "wire",
+                    PuzzleHint = "线从上轨经过侧轮，绕到雅座铜环，最后才牵动门闩。",
                     Description = "细线从滑轨后面垂下，末端被剪断。线的方向通向二楼雅座，不像临时失误。"
                 },
                 new InvestigationHotspot
@@ -353,6 +376,9 @@ namespace TXGame
                     Position = new Vector2(-170, -20),
                     Size = new Vector2(360, 480),
                     SecondDayOnly = true,
+                    Puzzle = true,
+                    PuzzleKind = "curtain",
+                    PuzzleHint = "第二天新出现的线头，要和第一天看到的磨痕、珠花位置对上。",
                     Description = "门帘内侧有细小磨痕，像是反复被线拉过。第一天只能确认方向，第二天夜里这里会出现新的线头。"
                 },
                 new InvestigationHotspot
@@ -363,6 +389,9 @@ namespace TXGame
                     ClueId = "flow",
                     Position = new Vector2(180, 115),
                     Size = new Vector2(420, 240),
+                    Puzzle = true,
+                    PuzzleKind = "schedule",
+                    PuzzleHint = "旧案记录、今日流程、夜场改锣点是同一条时间线。",
                     Description = "公告板上写着今日夜场流程。登台顺序和旧案记录高度一致，像是有人故意照着旧案排。"
                 },
                 new InvestigationHotspot
@@ -376,6 +405,7 @@ namespace TXGame
                     SecondDayOnly = true,
                     Puzzle = true,
                     PuzzleKind = "gong",
+                    PuzzleHint = "夜场锣位对应后台声音，顺着短、长、停、短复原。",
                     Description = "锣槌放得很端正。第一天只能确认这里能盖住后台声音；第二天夜场开锣后，锣点会再次变化。"
                 },
                 new InvestigationHotspot
@@ -386,6 +416,9 @@ namespace TXGame
                     ClueId = "thread",
                     Position = new Vector2(210, -120),
                     Size = new Vector2(240, 220),
+                    Puzzle = true,
+                    PuzzleKind = "ring",
+                    PuzzleHint = "铜环不是装饰，它把滑轨上的细线转向门闩。",
                     Description = "雅座扶手下有一个不起眼的铜环，方向正对舞台滑轨。它不像装饰，更像牵线转向点。"
                 },
                 new InvestigationHotspot
@@ -399,6 +432,7 @@ namespace TXGame
                     SecondDayOnly = true,
                     Puzzle = true,
                     PuzzleKind = "case",
+                    PuzzleHint = "封条方向不是随机的，旧戏箱上的方位要按东、南、西、北复原。",
                     Description = "封条新旧混在一起，有一张浆糊还没干透。第一天缺少钥匙，第二天才能开箱检查。"
                 }
             };
@@ -411,7 +445,7 @@ namespace TXGame
             {
                 Id = "props",
                 Name = "道具陈列室",
-                BackgroundPath = "Assets/Art/Sprites/Generated/generated_props_crime_scene.png",
+                BackgroundPath = PropsRoomBackground,
                 Description = "第一案现场。盔头、脸谱盒、药瓶和门闩都在这里。",
                 Front = "stage",
                 Back = "storage",
@@ -481,8 +515,8 @@ namespace TXGame
                 Name = "沈青衣",
                 PortraitPath = "Assets/Art/Sprites/Characters/旦2.png",
                 SceneId = "stage",
-                Position = new Vector2(-650, -240),
-                Size = new Vector2(230, 430)
+                Position = new Vector2(-640, -210),
+                Size = new Vector2(300, 560)
             });
             sceneActors.Add(new SceneActor
             {
@@ -490,8 +524,8 @@ namespace TXGame
                 Name = "阿喜",
                 PortraitPath = "Assets/Art/Sprites/Characters/丑2.png",
                 SceneId = "side",
-                Position = new Vector2(-690, -240),
-                Size = new Vector2(230, 430)
+                Position = new Vector2(-660, -210),
+                Size = new Vector2(300, 560)
             });
             sceneActors.Add(new SceneActor
             {
@@ -499,8 +533,8 @@ namespace TXGame
                 Name = "薛万山",
                 PortraitPath = "Assets/Art/Sprites/Characters/老板2.png",
                 SceneId = "rehearsal",
-                Position = new Vector2(-690, -235),
-                Size = new Vector2(240, 440)
+                Position = new Vector2(-655, -205),
+                Size = new Vector2(315, 575)
             });
         }
 
@@ -607,28 +641,34 @@ namespace TXGame
             Time.timeScale = 0f;
             RectTransform root = BeginLayer(systemCanvas, "MainMenuLayer");
             FullscreenImage("MenuBackground2026", UIHome + "01home_bg.jpg", new Color(0.06f, 0.035f, 0.028f, 1f), root);
-            ImagePanel("MenuLogo2026", UIHome + "01home_LOGO.png", new Color(0, 0, 0, 0), new Vector2(0, 110), new Vector2(430, 375), root);
-            ImageButton("Play", UIHomeIcons + "game UI01_play_icon_0.png", new Vector2(0, -110), new Vector2(265, 108), () => TransitionTo(() => ShowSaveLoad(false)));
-            ImageButton("Settings", UIHomeIcons + "game UI01_settings_icon_0.png", new Vector2(0, -208), new Vector2(265, 108), () =>
+            FullscreenPanel("MenuReadableShade", new Color(0, 0, 0, 0.38f), root);
+            Panel("MenuTextPanel", new Color(0.015f, 0.012f, 0.010f, 0.78f), new Vector2(0, -18), new Vector2(760, 760), root);
+            Panel("MenuTopLine", Gold, new Vector2(0, 250), new Vector2(560, 3), root);
+            Text("画皮", 78, Gold, TextAlignmentOptions.Center, new Vector2(0, 145), new Vector2(560, 110), root);
+            Text("民国戏园本格推理 Demo", 24, White, TextAlignmentOptions.Center, new Vector2(0, 76), new Vector2(560, 42), root);
+            Text("调查、对话、机关解密与两日案件体验", 19, Muted, TextAlignmentOptions.Center, new Vector2(0, 34), new Vector2(620, 34), root);
+
+            Button("开始游戏", new Vector2(0, -58), new Vector2(320, 58), () => TransitionTo(() => ShowSaveLoad(false)), Dark, White);
+            Button("设置", new Vector2(0, -134), new Vector2(320, 58), () =>
             {
                 pauseOpenedFromMainMenu = true;
                 TransitionTo(ShowPauseMenu);
-            });
-            ImageButton("Tutorial", UIHomeIcons + "game UI01_tutorial_icon_0.png", new Vector2(0, -306), new Vector2(265, 108), () =>
+            }, Dark, White);
+            Button("操作指南", new Vector2(0, -210), new Vector2(320, 58), () =>
             {
                 guideOpenedFromMainMenu = true;
                 Time.timeScale = 1f;
                 TransitionTo(ShowGuide);
-            });
-            ImageButton("Credits", UIHomeIcons + "game UI01_credits_icon_0.png", new Vector2(0, -404), new Vector2(265, 108), () => TransitionTo(ShowCredits));
-            ImageButton("Quit", UIHomeIcons + "game UI01_quit_icon_0.png", new Vector2(0, -502), new Vector2(265, 108), () =>
+            }, Dark, White);
+            Button("制作人员", new Vector2(0, -286), new Vector2(320, 58), () => TransitionTo(ShowCredits), Dark, White);
+            Button("退出游戏", new Vector2(0, -362), new Vector2(320, 58), () =>
             {
 #if UNITY_EDITOR
                 UnityEditor.EditorApplication.isPlaying = false;
 #else
                 Application.Quit();
 #endif
-            });
+            }, Dark, White);
         }
 
         private void ShowIntro(int index)
@@ -708,7 +748,8 @@ namespace TXGame
 
         private void FinishMonologue()
         {
-            gameplayBackgroundPath = "Assets/Art/Sprites/Generated/generated_backstage_corridor.png";
+            currentSceneId = "props";
+            gameplayBackgroundPath = CurrentScene().BackgroundPath;
             Time.timeScale = 1f;
             ShowCrimeScene();
             Toast("第一天白天：后台案发现场开放");
@@ -792,13 +833,13 @@ namespace TXGame
             currentView = View.Hud;
             RectTransform root = BeginLayer(hudCanvas, "HuapiHUD", false);
             SceneBackgroundImage("GameplayBackground", gameplayBackgroundPath, new Color(0.05f, 0.05f, 0.07f, 1f), root);
-            FullscreenPanel("GameplaySceneShade", new Color(0, 0, 0, 0.06f), root);
+            FullscreenPanel("GameplaySceneShade", new Color(0, 0, 0, 0.02f), root);
             Panel("TopShade", new Color(0, 0, 0, 0.42f), new Vector2(0, 495), new Vector2(1920, 90), root);
             Text("第一天 · 白天探索 · 薛氏剧团", 26, Gold, TextAlignmentOptions.Left, new Vector2(-860, 500), new Vector2(650, 44), root);
             Text("目标：先调查剧团外景、后台和排练区，夜晚演出会在关键线索后推进", 24, White, TextAlignmentOptions.Left, new Vector2(-860, 462), new Vector2(1100, 38), root);
             HeartBar(root, new Vector2(720, 500));
             Button("指南 F1", new Vector2(770, 452), new Vector2(110, 42), () => TransitionTo(ShowGuide));
-            Button("线索 C", new Vector2(895, 452), new Vector2(110, 42), () => TransitionTo(ShowClues));
+            Button("线索 C", new Vector2(895, 452), new Vector2(110, 42), ToggleClues);
             Button("地图 M", new Vector2(1020, 452), new Vector2(110, 42), () => TransitionTo(ShowSceneMap));
             Button("暂停 Esc", new Vector2(1160, 452), new Vector2(130, 42), TogglePause);
         }
@@ -810,14 +851,14 @@ namespace TXGame
             gameplayBackgroundPath = scene.BackgroundPath;
             RectTransform root = BeginLayer(hudCanvas, "CrimeSceneLayer", false);
             SceneBackgroundImage("CrimeSceneBackground", gameplayBackgroundPath, new Color(0.05f, 0.045f, 0.04f, 1f), root);
-            FullscreenPanel("CrimeSceneShade", new Color(0, 0, 0, 0.08f), root);
+            FullscreenPanel("CrimeSceneShade", new Color(0, 0, 0, 0.03f), root);
 
             Panel("TopShade", new Color(0, 0, 0, 0.62f), new Vector2(0, 486), new Vector2(1920, 122), root);
             Text(PhaseTitle() + " / " + scene.Name, 24, Gold, TextAlignmentOptions.Center, new Vector2(-515, 514), new Vector2(720, 36), root);
             Text(scene.Description, 17, White, TextAlignmentOptions.Center, new Vector2(-515, 456), new Vector2(820, 34), root);
             HeartBar(root, new Vector2(520, 505));
             Button("指南 F1", new Vector2(720, 458), new Vector2(110, 38), () => TransitionTo(ShowGuide));
-            Button("线索 C", new Vector2(845, 458), new Vector2(110, 38), () => TransitionTo(ShowClues));
+            Button("线索 C", new Vector2(845, 458), new Vector2(110, 38), ToggleClues);
             Button("地图 M", new Vector2(970, 458), new Vector2(110, 38), () => TransitionTo(ShowSceneMap));
             Button("暂停 Esc", new Vector2(1110, 458), new Vector2(130, 38), TogglePause);
 
@@ -831,24 +872,28 @@ namespace TXGame
 
             DrawSceneActors();
 
-            if (evidenceBoardVisible)
+            bool showEvidenceBoard = evidenceBoardVisible;
+            if (showEvidenceBoard)
             {
-                Panel("EvidenceBoard", new Color(0.02f, 0.016f, 0.014f, 0.88f), new Vector2(645, -40), new Vector2(440, 640), root);
-                Text("证据条", 32, Gold, TextAlignmentOptions.Center, new Vector2(645, 245), new Vector2(340, 50), root);
+                Panel("EvidenceBoard", new Color(0.02f, 0.016f, 0.014f, 0.88f), new Vector2(-720, -155), new Vector2(390, 440), root);
+                Text("已获线索", 30, Gold, TextAlignmentOptions.Center, new Vector2(-720, 25), new Vector2(300, 44), root);
                 int shown = 0;
                 foreach (Clue clue in clues.Values)
                 {
                     if (!clue.Acquired) continue;
-                    EvidenceStrip(root, clue, new Vector2(645, 175 - shown * 74), () => ShowClueDetail(root, clue));
+                    EvidenceStrip(root, clue, new Vector2(-720, -35 - shown * 68), () => ShowClueDetail(root, clue), new Vector2(320, 56));
                     shown++;
-                    if (shown >= 7) break;
+                    if (shown >= 5) break;
                 }
                 if (shown == 0)
-                    Text("尚未记录证据\n点击现场异常点开始调查", 24, Muted, TextAlignmentOptions.Center, new Vector2(645, 70), new Vector2(340, 120), root);
+                    Text("尚未记录证据\n点击现场异常点开始调查", 22, Muted, TextAlignmentOptions.Center, new Vector2(-720, -95), new Vector2(300, 110), root);
+                else if (AcquiredEvidenceCount() > shown)
+                    Text("按 C 查看全部线索", 18, Muted, TextAlignmentOptions.Center, new Vector2(-720, -310), new Vector2(300, 30), root);
             }
 
             Panel("SearchHint", new Color(0.025f, 0.018f, 0.015f, 0.72f), new Vector2(-515, -474), new Vector2(520, 48), root);
             Text(sceneHotspotCount > 0 ? SearchHintText() : scene.Name + "：此处可自由查看，关键线索会在第二天变化。", 17, White, TextAlignmentOptions.Center, new Vector2(-515, -474), new Vector2(480, 32), root);
+            DrawInvestigationHint(root);
 
             DrawSceneNavigation(root, scene);
 
@@ -869,6 +914,28 @@ namespace TXGame
             ShowCrimeScene();
         }
 
+        private void ToggleSceneMap()
+        {
+            if (currentView == View.SceneMap)
+            {
+                TransitionTo(ShowCrimeScene);
+                return;
+            }
+
+            TransitionTo(ShowSceneMap);
+        }
+
+        private void ToggleClues()
+        {
+            if (currentView == View.Clues)
+            {
+                TransitionTo(ShowCrimeScene);
+                return;
+            }
+
+            TransitionTo(ShowClues);
+        }
+
         private void HotspotMarker(InvestigationHotspot hotspot)
         {
             Vector2 size = hotspot.Size == Vector2.zero ? new Vector2(86, 86) : hotspot.Size;
@@ -879,6 +946,12 @@ namespace TXGame
                 Image overlay = ImagePanel("HotspotOverlay_" + hotspot.Id, hotspot.OverlayPath, new Color(0, 0, 0, 0), overlayPos, overlaySize, currentLayer);
                 overlay.raycastTarget = false;
                 overlay.color = hotspot.Examined ? new Color(1f, 1f, 1f, 0.68f) : Color.white;
+            }
+
+            if (!hotspot.Examined && !IsLockedForCurrentPhase(hotspot))
+            {
+                Panel("HotspotHintDot", new Color(Gold.r, Gold.g, Gold.b, 0.82f), hotspot.Position, new Vector2(18, 18), currentLayer).raycastTarget = false;
+                Text("?", 18, PaperText, TextAlignmentOptions.Center, hotspot.Position + new Vector2(0, 1), new Vector2(28, 24), currentLayer);
             }
 
             Image hoverPanel = Panel("HotspotHover", new Color(0.025f, 0.018f, 0.015f, 0.88f), hotspot.Position + new Vector2(0, size.y * 0.5f + 30), new Vector2(220, 46), currentLayer);
@@ -893,8 +966,10 @@ namespace TXGame
             rect.anchoredPosition = ClampToSafeArea(hotspot.Position, size);
             rect.sizeDelta = size;
             Image image = go.GetComponent<Image>();
-            image.color = new Color(1f, 1f, 1f, 0.01f);
+            image.color = new Color(1f, 1f, 1f, 0f);
+            image.raycastTarget = true;
             Button button = go.GetComponent<Button>();
+            button.transition = Selectable.Transition.None;
             button.onClick.AddListener(() => ShowHotspotDetail(hotspot));
             EventTrigger trigger = go.GetComponent<EventTrigger>();
             AddHoverEvent(trigger, EventTriggerType.PointerEnter, () => hoverPanel.gameObject.SetActive(true));
@@ -940,6 +1015,45 @@ namespace TXGame
             if (count < target)
                 return $"搜索进度：{count}/{target}。继续换房间调查，按 M 查看地图。";
             return currentDay == 1 ? "第一天关键证据已记录完毕，可询问目击者或整理推理。M 查看地图。" : "第二天关键证据已记录完毕，可以整理夜晚推理。M 查看地图。";
+        }
+
+        private void DrawInvestigationHint(RectTransform root)
+        {
+            string hint = NextInvestigationHint();
+            Panel("NextHintPanel", new Color(0.05f, 0.025f, 0.015f, 0.78f), new Vector2(0, -420), new Vector2(760, 46), root);
+            Text(hint, 18, Gold, TextAlignmentOptions.Center, new Vector2(0, -420), new Vector2(720, 30), root);
+        }
+
+        private string NextInvestigationHint()
+        {
+            if (CanOpenTrial())
+                return currentDay == 2 && !isNightPhase ? "提示：第二天白天线索已齐，点击「进入夜晚」推进。" : "提示：当前阶段线索已齐，点击「整理推理」推进。";
+
+            InvestigationHotspot current = FindNextMissingHotspot(currentSceneId);
+            if (current != null)
+                return $"提示：本房间还可调查「{current.Name}」。";
+
+            InvestigationHotspot next = FindNextMissingHotspot(null);
+            if (next == null)
+                return "提示：暂无可调查目标，按 C 查看线索，或按 M 查看地图。";
+
+            string sceneName = sceneNodes.TryGetValue(next.SceneId ?? "props", out SceneNode scene) ? scene.Name : "其他房间";
+            return $"提示：下一条线索在「{sceneName}」的「{next.Name}」。按 M 查看地图。";
+        }
+
+        private InvestigationHotspot FindNextMissingHotspot(string sceneId)
+        {
+            if (crimeSceneHotspots == null) return null;
+            foreach (InvestigationHotspot hotspot in crimeSceneHotspots)
+            {
+                if (!IsCurrentPhaseHotspot(hotspot)) continue;
+                if (IsLockedForCurrentPhase(hotspot)) continue;
+                if (sceneId != null && !string.Equals(hotspot.SceneId ?? "props", sceneId, StringComparison.OrdinalIgnoreCase)) continue;
+                if (string.IsNullOrEmpty(hotspot.ClueId)) continue;
+                if (clues.TryGetValue(hotspot.ClueId, out Clue clue) && clue.Acquired) continue;
+                return hotspot;
+            }
+            return null;
         }
 
         private string PhaseTitle()
@@ -1014,6 +1128,8 @@ namespace TXGame
             FullscreenPanel("MapShade", new Color(0, 0, 0, 0.38f), root);
             ImagePanel("MapFrame2026", UIWindow + "widnow.frame02.png", new Color(0, 0, 0, 0), new Vector2(0, 5), new Vector2(1321, 614), root);
             Text("场景地图 / 当前：" + CurrentScene().Name, 30, Gold, TextAlignmentOptions.Center, new Vector2(0, 320), new Vector2(820, 44), root);
+            Text("再次按 M 返回游戏界面", 22, White, TextAlignmentOptions.Center, new Vector2(0, -318), new Vector2(620, 36), root);
+            DrawMapMechanismHints(root);
             ImageButton("MapBack", UIWindow + "back.btn.png", new Vector2(0, -390), new Vector2(201, 65), () => TransitionTo(ShowCrimeScene));
         }
 
@@ -1027,6 +1143,80 @@ namespace TXGame
                 ? new Vector2(Mathf.Abs(delta.x), 5f)
                 : new Vector2(5f, Mathf.Abs(delta.y));
             Panel("MapLine", new Color(0.20f, 0.10f, 0.06f, 0.38f), midpoint, size, root);
+        }
+
+        private void DrawMapMechanismHints(RectTransform root)
+        {
+            foreach (SceneNode scene in sceneNodes.Values)
+            {
+                int pending = PendingPuzzleCount(scene.Id);
+                bool current = string.Equals(scene.Id, currentSceneId, StringComparison.OrdinalIgnoreCase);
+                Color nodeColor = pending > 0 ? new Color(0.36f, 0.12f, 0.06f, 0.86f) : new Color(0.05f, 0.035f, 0.025f, 0.74f);
+                Vector2 nodeSize = current ? new Vector2(132, 54) : new Vector2(112, 46);
+                Panel("MapHintNode_" + scene.Id, nodeColor, scene.MapPosition, nodeSize, root);
+                Text(scene.Name, current ? 18 : 16, current ? Gold : White, TextAlignmentOptions.Center, scene.MapPosition + new Vector2(0, 6), new Vector2(nodeSize.x - 12, 24), root);
+                if (pending > 0)
+                {
+                    Panel("MapHintBadge_" + scene.Id, Red, scene.MapPosition + new Vector2(nodeSize.x * 0.43f, nodeSize.y * 0.32f), new Vector2(32, 28), root);
+                    Text(pending.ToString(), 17, White, TextAlignmentOptions.Center, scene.MapPosition + new Vector2(nodeSize.x * 0.43f, nodeSize.y * 0.32f), new Vector2(28, 22), root);
+                }
+            }
+
+            Panel("MapMechanismHintPanel", new Color(0.02f, 0.012f, 0.01f, 0.82f), new Vector2(555, 20), new Vector2(470, 450), root);
+            Text("机关提示", 30, Gold, TextAlignmentOptions.Center, new Vector2(555, 200), new Vector2(390, 44), root);
+            Text("按地图节点数字去找，先解当前阶段未完成的机关。", 18, Muted, TextAlignmentOptions.Center, new Vector2(555, 162), new Vector2(410, 34), root);
+
+            int row = 0;
+            foreach (SceneNode scene in sceneNodes.Values)
+            {
+                InvestigationHotspot hotspot = FirstPendingPuzzle(scene.Id);
+                if (hotspot == null) continue;
+
+                string line = scene.Name + "：" + hotspot.Name;
+                string hint = string.IsNullOrEmpty(hotspot.PuzzleHint) ? "观察房间里的异常位置。" : hotspot.PuzzleHint;
+                float y = 112 - row * 76;
+                Panel("MapPuzzleRow_" + scene.Id, new Color(0.12f, 0.065f, 0.035f, 0.78f), new Vector2(555, y), new Vector2(400, 62), root);
+                Text(line, 19, Gold, TextAlignmentOptions.Left, new Vector2(555, y + 12), new Vector2(360, 24), root);
+                Text(hint, 15, White, TextAlignmentOptions.Left, new Vector2(555, y - 13), new Vector2(360, 24), root);
+                row++;
+                if (row >= 5) break;
+            }
+
+            if (row == 0)
+                Text("当前阶段机关已清空，可以回到现场整理推理。", 20, White, TextAlignmentOptions.Center, new Vector2(555, 45), new Vector2(380, 80), root);
+        }
+
+        private int PendingPuzzleCount(string sceneId)
+        {
+            int count = 0;
+            if (crimeSceneHotspots == null) return count;
+            foreach (InvestigationHotspot hotspot in crimeSceneHotspots)
+            {
+                if (!IsPendingPuzzle(hotspot)) continue;
+                if (string.Equals(hotspot.SceneId ?? "props", sceneId, StringComparison.OrdinalIgnoreCase))
+                    count++;
+            }
+            return count;
+        }
+
+        private InvestigationHotspot FirstPendingPuzzle(string sceneId)
+        {
+            if (crimeSceneHotspots == null) return null;
+            foreach (InvestigationHotspot hotspot in crimeSceneHotspots)
+            {
+                if (!IsPendingPuzzle(hotspot)) continue;
+                if (string.Equals(hotspot.SceneId ?? "props", sceneId, StringComparison.OrdinalIgnoreCase))
+                    return hotspot;
+            }
+            return null;
+        }
+
+        private bool IsPendingPuzzle(InvestigationHotspot hotspot)
+        {
+            if (hotspot == null || !hotspot.Puzzle) return false;
+            if (!IsCurrentPhaseHotspot(hotspot) || IsLockedForCurrentPhase(hotspot)) return false;
+            if (string.IsNullOrEmpty(hotspot.ClueId)) return !hotspot.Examined;
+            return !clues.TryGetValue(hotspot.ClueId, out Clue clue) || !clue.Acquired;
         }
 
         private string CrimeScenePrompt()
@@ -1138,14 +1328,29 @@ namespace TXGame
         {
             switch (hotspot.PuzzleKind)
             {
+                case "body":
+                    ShowDragMechanismPuzzle(hotspot, "倒地痕迹复原", "把现场痕迹放回正确关系，确认钟铁面不是自然摔倒。", new[] { "面具", "拖痕", "台口" }, new[] { "台口", "面具", "拖痕" });
+                    break;
                 case "latch":
                     ShowDragMechanismPuzzle(hotspot, "门闩反扣", "把机关部件拖到门板槽位，复原门外反扣。", new[] { "穿线", "压闩", "回抽" }, new[] { "回抽", "穿线", "压闩" });
+                    break;
+                case "medicine":
+                    ShowDragMechanismPuzzle(hotspot, "药瓶残留比对", "把药瓶、入口和残留痕迹对应起来，确认嗓药被动过手脚。", new[] { "药瓶", "水杯", "粉末" }, new[] { "粉末", "药瓶", "水杯" });
+                    break;
+                case "schedule":
+                    ShowDragMechanismPuzzle(hotspot, "流程表复盘", "把公告板上的三段时间线排到对应位置，找出被照抄的旧案流程。", new[] { "旧案", "今日", "夜场" }, new[] { "夜场", "旧案", "今日" });
                     break;
                 case "gong":
                     ShowDragMechanismPuzzle(hotspot, "锣点复原", "把锣点牌拖进谱格：短声遮门，长声遮倒地，停拍遮脚步。", new[] { "短锣", "长锣", "停拍", "短锣" }, new[] { "停拍", "短锣", "短锣", "长锣" });
                     break;
                 case "wire":
                     ShowDragMechanismPuzzle(hotspot, "滑轨牵线", "把线轴拖回滑轨路径，复原从侧台到雅座的牵引。", new[] { "上轨", "侧轮", "铜环", "门闩" }, new[] { "门闩", "上轨", "铜环", "侧轮" });
+                    break;
+                case "ring":
+                    ShowDragMechanismPuzzle(hotspot, "雅座铜环转向", "把牵线经过的节点放回路径，确认雅座铜环的转向用途。", new[] { "铜环", "细线", "滑轨", "门闩" }, new[] { "细线", "门闩", "铜环", "滑轨" });
+                    break;
+                case "curtain":
+                    ShowDragMechanismPuzzle(hotspot, "门帘线头复核", "把第二天出现的新痕迹和第一天观察到的位置对上。", new[] { "磨痕", "线头", "珠花" }, new[] { "珠花", "磨痕", "线头" });
                     break;
                 case "case":
                     ShowDragMechanismPuzzle(hotspot, "木偶箱封印", "把定情木偶的四枚封印拖回方位，打开旧戏箱。", new[] { "东", "南", "西", "北" }, new[] { "西", "北", "东", "南" });
@@ -1193,6 +1398,9 @@ namespace TXGame
             Text(title, 46, Gold, TextAlignmentOptions.Center, new Vector2(0, 250), new Vector2(900, 64), root);
             Text(prompt, 22, White, TextAlignmentOptions.Center, new Vector2(0, 196), new Vector2(980, 48), root);
             Text("拖动下方部件到上方对应槽位。放错会弹回，全部放对后记录证据。", 20, Muted, TextAlignmentOptions.Center, new Vector2(0, -242), new Vector2(980, 38), root);
+
+            if (!string.IsNullOrEmpty(hotspot.PuzzleHint))
+                Text("提示：" + hotspot.PuzzleHint, 18, Gold, TextAlignmentOptions.Center, new Vector2(0, -278), new Vector2(1040, 34), root);
 
             DrawMechanismDiagram(root, hotspot.PuzzleKind);
 
@@ -1243,6 +1451,45 @@ namespace TXGame
                 Panel("PulleyA", new Color(0.45f, 0.35f, 0.18f, 0.9f), new Vector2(-260, 106), new Vector2(70, 70), root);
                 Panel("PulleyB", new Color(0.45f, 0.35f, 0.18f, 0.9f), new Vector2(260, 106), new Vector2(70, 70), root);
                 Text("滑轨 / 侧轮 / 铜环 / 门闩", 18, Muted, TextAlignmentOptions.Center, new Vector2(0, -25), new Vector2(620, 34), root);
+            }
+            else if (kind == "body")
+            {
+                Panel("BodyTrace", new Color(0.10f, 0.045f, 0.035f, 0.76f), new Vector2(0, 78), new Vector2(760, 230), root);
+                Panel("BodyTraceLine", Red, new Vector2(-50, 92), new Vector2(520, 10), root);
+                Panel("BodyMaskMark", Gold, new Vector2(-270, 126), new Vector2(90, 48), root);
+                Panel("BodyStageMark", new Color(0.35f, 0.25f, 0.14f, 0.9f), new Vector2(270, 48), new Vector2(120, 72), root);
+                Text("面具 / 拖痕 / 台口", 18, Muted, TextAlignmentOptions.Center, new Vector2(0, -25), new Vector2(620, 34), root);
+            }
+            else if (kind == "medicine")
+            {
+                Panel("MedicineDesk", new Color(0.10f, 0.055f, 0.035f, 0.76f), new Vector2(0, 70), new Vector2(720, 200), root);
+                Panel("MedicineBottle", Gold, new Vector2(-210, 112), new Vector2(64, 120), root);
+                Panel("MedicineCup", new Color(0.7f, 0.65f, 0.52f, 0.9f), new Vector2(0, 92), new Vector2(92, 78), root);
+                Panel("MedicinePowder", White, new Vector2(210, 62), new Vector2(120, 22), root);
+                Text("药瓶 / 水杯 / 粉末", 18, Muted, TextAlignmentOptions.Center, new Vector2(0, -25), new Vector2(620, 34), root);
+            }
+            else if (kind == "schedule")
+            {
+                Panel("ScheduleBoard", new Color(0.10f, 0.06f, 0.035f, 0.76f), new Vector2(0, 78), new Vector2(760, 230), root);
+                for (int i = 0; i < 3; i++)
+                    Panel("ScheduleLine", Gold, new Vector2(0, 138 - i * 58), new Vector2(560, 4), root);
+                Text("旧案 / 今日 / 夜场", 18, Muted, TextAlignmentOptions.Center, new Vector2(0, -25), new Vector2(620, 34), root);
+            }
+            else if (kind == "ring")
+            {
+                Panel("RingPath", new Color(0.08f, 0.045f, 0.03f, 0.78f), new Vector2(0, 78), new Vector2(760, 230), root);
+                Panel("RingRail", Gold, new Vector2(-150, 135), new Vector2(300, 7), root);
+                Panel("RingMark", new Color(0.6f, 0.46f, 0.2f, 0.95f), new Vector2(80, 82), new Vector2(92, 92), root);
+                Panel("RingDoor", Red, new Vector2(260, 52), new Vector2(120, 18), root);
+                Text("铜环 / 细线 / 滑轨 / 门闩", 18, Muted, TextAlignmentOptions.Center, new Vector2(0, -25), new Vector2(620, 34), root);
+            }
+            else if (kind == "curtain")
+            {
+                Panel("CurtainPanel", new Color(0.09f, 0.04f, 0.035f, 0.76f), new Vector2(0, 78), new Vector2(760, 230), root);
+                Panel("CurtainLeft", Red, new Vector2(-120, 86), new Vector2(8, 180), root);
+                Panel("CurtainRight", Red, new Vector2(120, 86), new Vector2(8, 180), root);
+                Panel("CurtainThread", Gold, new Vector2(0, 122), new Vector2(380, 6), root);
+                Text("磨痕 / 线头 / 珠花", 18, Muted, TextAlignmentOptions.Center, new Vector2(0, -25), new Vector2(620, 34), root);
             }
             else
             {
@@ -1478,7 +1725,7 @@ namespace TXGame
             ImagePanel("CreditsFrame2026", UIWindow + "widnow.frame02.png", new Color(0, 0, 0, 0), Vector2.zero, new Vector2(1321, 614), root);
             Text("制作人员", 52, Gold, TextAlignmentOptions.Center, new Vector2(0, 265), new Vector2(760, 78), root);
             Text("三人团队", 24, Muted, TextAlignmentOptions.Center, new Vector2(0, 210), new Vector2(500, 40), root);
-            Text("孔陌羚\n吕明樑\nCodex AI 辅助", 34, White, TextAlignmentOptions.Center, new Vector2(0, 40), new Vector2(800, 210), root);
+            Text("孔陌羚\n吕明樑\n曾堉琳", 34, White, TextAlignmentOptions.Center, new Vector2(0, 40), new Vector2(800, 210), root);
             Text("薛氏戏园 · 本格推理 Demo", 22, Muted, TextAlignmentOptions.Center, new Vector2(0, -160), new Vector2(760, 40), root);
             ImageButton("CreditsBack", UIWindow + "back.btn.png", new Vector2(0, -340), new Vector2(201, 65), () => TransitionTo(ShowMainMenu));
         }
@@ -1489,6 +1736,37 @@ namespace TXGame
         }
 
         private void ShowDialogue(string actorId)
+        {
+            currentView = View.Dialogue;
+            dialogueBeat++;
+            RectTransform root = BeginDialogueLayer(actorId, out SceneActor actor);
+
+            ImagePanel("DialogueTopicFrame2026", UIWindow + "widnow.frame01.png", new Color(0, 0, 0, 0), new Vector2(700, -300), new Vector2(380, 390), root);
+            Text(actor.Name, 28, Gold, TextAlignmentOptions.Center, new Vector2(-520, -362), new Vector2(300, 42), root);
+            UnityEngine.UI.Text openingText = Text(DialogueOpening(actor.Id), 27, White, TextAlignmentOptions.TopLeft, new Vector2(-5, -447), new Vector2(1080, 112), root);
+            ConfigureDialogueText(openingText, 23);
+
+            Text("盘问话题", 24, Gold, TextAlignmentOptions.Center, new Vector2(700, -165), new Vector2(280, 38), root);
+            DialogueTopic[] topics = DialogueTopics(actor.Id);
+            int shown = 0;
+            foreach (DialogueTopic topic in topics)
+            {
+                if (topic.SecondDayOnly && currentDay < 2) continue;
+                bool asked = askedDialogueTopics.Contains(DialogueTopicKey(actor.Id, topic.Id));
+                string label = asked ? "已问：" + topic.Label : topic.Label;
+                DialogueTopic captured = topic;
+                Button(label, new Vector2(700, -225 - shown * 58), new Vector2(285, 46), () => ShowDialogueResponse(actor.Id, captured.Id), asked ? Dark : Red, White);
+                shown++;
+                if (shown >= 4) break;
+            }
+
+            if (shown == 0)
+                Text("暂时没有可问的话题。", 20, Muted, TextAlignmentOptions.Center, new Vector2(700, -282), new Vector2(260, 80), root);
+
+            ImageButton("DialogueBack", UIWindow + "back.btn.png", new Vector2(700, -438), new Vector2(150, 49), () => TransitionTo(ShowCrimeScene));
+        }
+
+        private void ShowEvidenceDialogueLegacy(string actorId)
         {
             currentView = View.Dialogue;
             dialogueBeat++;
@@ -1512,10 +1790,138 @@ namespace TXGame
             Text(actor.Name, 28, Gold, TextAlignmentOptions.Center, new Vector2(-520, -362), new Vector2(300, 42), root);
             Text(DialogueLine(actor.Id), 22, White, TextAlignmentOptions.Top, new Vector2(-20, -447), new Vector2(1000, 110), root);
 
-            Text("出示证据", 22, Gold, TextAlignmentOptions.Center, new Vector2(760, -252), new Vector2(220, 38), root);
-            Button("旧戏票", new Vector2(760, -315), new Vector2(170, 46), () => Toast("出示：旧戏票"));
-            Button("脸谱盒", new Vector2(760, -375), new Vector2(170, 46), () => Toast("出示：烧焦脸谱"));
+            Text("旧对话已停用", 22, Gold, TextAlignmentOptions.Center, new Vector2(760, -252), new Vector2(220, 38), root);
+            Button("返回盘问", new Vector2(760, -315), new Vector2(170, 46), () => ShowDialogue(actor.Id));
+            Button("继续调查", new Vector2(760, -375), new Vector2(170, 46), () => TransitionTo(ShowCrimeScene));
             ImageButton("DialogueBack", UIWindow + "back.btn.png", new Vector2(760, -438), new Vector2(150, 49), () => TransitionTo(ShowCrimeScene));
+        }
+
+        private RectTransform BeginDialogueLayer(string actorId, out SceneActor actor)
+        {
+            RectTransform root = BeginLayer(dialogueCanvas, "DialogueLayer", false);
+            SceneNode scene = CurrentScene();
+            SceneBackgroundImage("DialogueBackground", scene.BackgroundPath, new Color(0.05f, 0.045f, 0.04f, 1f), root);
+            FullscreenPanel("DialogueShade", new Color(0, 0, 0, 0.24f), root);
+
+            actor = FindSceneActor(actorId) ?? new SceneActor
+            {
+                Id = "qingyi",
+                Name = "沈青衣",
+                PortraitPath = "Assets/Art/Sprites/Characters/旦2.png",
+                Position = new Vector2(-420, -80),
+                Size = new Vector2(300, 560)
+            };
+
+            ImagePanel("DialogueActor_" + actor.Id, actor.PortraitPath, new Color(0, 0, 0, 0.01f), new Vector2(-610, -100), new Vector2(300, 555), root);
+            ImagePanel("DialogueBox2026", UIWindow + "dialoguebox.png", new Color(0, 0, 0, 0), new Vector2(0, -446), new Vector2(1920, 188), root);
+            return root;
+        }
+
+        private void ShowDialogueResponse(string actorId, string topicId)
+        {
+            currentView = View.Dialogue;
+            dialogueBeat++;
+            RectTransform root = BeginDialogueLayer(actorId, out SceneActor actor);
+            DialogueTopic topic = FindDialogueTopic(actor.Id, topicId);
+            if (topic == null)
+            {
+                ShowDialogue(actor.Id);
+                return;
+            }
+
+            askedDialogueTopics.Add(DialogueTopicKey(actor.Id, topic.Id));
+            ImagePanel("DialogueAnswerFrame2026", UIWindow + "widnow.frame01.png", new Color(0, 0, 0, 0), new Vector2(660, 20), new Vector2(500, 300), root);
+            Text(actor.Name, 28, Gold, TextAlignmentOptions.Center, new Vector2(-520, -362), new Vector2(300, 42), root);
+            UnityEngine.UI.Text questionText = Text("你：" + topic.Question, 24, Muted, TextAlignmentOptions.TopLeft, new Vector2(-5, -379), new Vector2(1160, 38), root);
+            ConfigureDialogueText(questionText, 22);
+            UnityEngine.UI.Text answerText = Text(actor.Name + "：" + topic.Response, 30, White, TextAlignmentOptions.TopLeft, new Vector2(-5, -460), new Vector2(1160, 90), root);
+            ConfigureDialogueText(answerText, 24);
+
+            Text("盘问结论", 26, Gold, TextAlignmentOptions.Center, new Vector2(660, 108), new Vector2(360, 40), root);
+            UnityEngine.UI.Text takeawayText = Text(DialogueTakeaway(actor.Id, topic.Id), 22, White, TextAlignmentOptions.TopLeft, new Vector2(660, 25), new Vector2(390, 100), root);
+            ConfigureDialogueText(takeawayText, 19);
+            Button("继续盘问", new Vector2(585, -92), new Vector2(170, 50), () => ShowDialogue(actor.Id), Red, White);
+            ImageButton("DialogueAnswerBack", UIWindow + "back.btn.png", new Vector2(760, -92), new Vector2(140, 46), () => TransitionTo(ShowCrimeScene));
+        }
+
+        private string DialogueTopicKey(string actorId, string topicId)
+        {
+            return actorId + ":" + topicId;
+        }
+
+        private DialogueTopic FindDialogueTopic(string actorId, string topicId)
+        {
+            foreach (DialogueTopic topic in DialogueTopics(actorId))
+            {
+                if (topic.Id == topicId) return topic;
+            }
+            return null;
+        }
+
+        private string DialogueOpening(string actorId)
+        {
+            if (actorId == "axi")
+                return "阿喜搓着袖口，眼神总往门帘和雅座之间飘。他不是不想说，是怕自己说错一句就被推出去顶罪。";
+            if (actorId == "boss")
+                return "薛万山站得很稳，说话像在管一场还没散的戏。他要的是戏班不停演，也要旧案永远别翻到台面上。";
+            if (actorId == "faceless")
+                return "何颂生的声音像从木偶箱里透出来。他不急着辩解，只一遍遍把旧案和今夜摆到同一张桌上。";
+            return "沈青衣把水袖拢得很紧。她知道的比她愿意承认的多，但她每句话都绕开了那个已经失踪很久的名字。";
+        }
+
+        private DialogueTopic[] DialogueTopics(string actorId)
+        {
+            if (actorId == "axi")
+            {
+                return new[]
+                {
+                    new DialogueTopic { Id = "where", Label = "案发时你在哪", Question = "锣响前后，你到底站在哪里？", Response = "我在侧台门帘边搬箱子。先听见短短一声锣，像是排练里混进去的；再过一会儿才有人喊钟爷倒了。我要是真动手，早该跑，不会还站在门帘边发抖。" },
+                    new DialogueTopic { Id = "water", Label = "茶水和药瓶", Question = "钟铁面的水和药瓶，你碰过没有？", Response = "杯子我端过，可端过去时杯子已经摆在桌上，药瓶也开过封。我只是被骂倒水慢，没胆子往嗓药里加东西。真要下药，得知道他什么时候一定会喝水。" },
+                    new DialogueTopic { Id = "wire", Label = "细线去向", Question = "你说见过细线，它原本在哪里？", Response = "那根线原来吊景用，后来一直缠在雅座栏杆底下。今天它不在栏杆上，方向却还朝着滑轨。要从外头做门闩机关，得懂这条线怎么绕。" },
+                    new DialogueTopic { Id = "night", Label = "夜里谁支开你", Question = "第二天夜里，是谁让你离开侧台？", Response = "班主叫我去前厅盯客人，说别让怪谈传出去。可我走开没多久，门帘那边就又响了。有人知道我怕事，也知道怎么把我从该站的位置挪开。", SecondDayOnly = true }
+                };
+            }
+
+            if (actorId == "boss")
+            {
+                return new[]
+                {
+                    new DialogueTopic { Id = "show", Label = "为何坚持开演", Question = "出了人命，你为什么还坚持夜场照演？", Response = "戏班靠一口气活着。今天停演，明天就是闹鬼，后天所有人都散。我请你来，是要一个能对外说的答案，不是让旧案把新戏吞了。" },
+                    new DialogueTopic { Id = "gong", Label = "谁能改锣点", Question = "锣点被改，谁有资格碰公告板？", Response = "公告板人人能看，但不是人人敢改。能改三拍又不让鼓师立刻怀疑的人，必须懂场面，也懂谁会在锣响时回头。" },
+                    new DialogueTopic { Id = "keys", Label = "钥匙和封箱", Question = "后台钥匙和旧戏箱是谁管？", Response = "钥匙在账房登记，旧戏箱封条也是我让人贴的。可封条新旧混在一起，这说明有人借着我的规矩藏东西，也想把责任推到管规矩的人身上。" },
+                    new DialogueTopic { Id = "oldcase", Label = "旧案名字", Question = "陈伶宜这个名字，你到底知道多少？", Response = "这个名字不该在戏班里再被提起。民国旧案死了人，也毁了一个班子。我知道它危险，所以我压着；但压着旧案，不等于我能让死人按我的意思回来。", SecondDayOnly = true }
+                };
+            }
+
+            if (actorId == "faceless")
+            {
+                return new[]
+                {
+                    new DialogueTopic { Id = "ash", Label = "香灰为何是新的", Question = "脸谱盒里的香灰为什么还新？", Response = "因为有人要把旧物做成刚从火里取出的样子。旧案不会自己发热，旧物也不会自己摆成证词。你看到的不是鬼，是有人替鬼布景。" },
+                    new DialogueTopic { Id = "ticket", Label = "旧戏票背面", Question = "旧戏票背面的字是谁写的？", Response = "不是写给观众看的，是写给后来查案的人看的。那晚有人把一个名字从戏单里抹掉；现在又有人想把它写回来，让每个人都以为旧案亲自回了头。" },
+                    new DialogueTopic { Id = "puppet", Label = "定情木偶", Question = "你为什么一直提那对木偶？", Response = "木偶不会说谎，它只记得谁把线系在它身上。定情木偶本该是活人的念想，后来却成了旧案的锁。箱子开了，谁在借旧情装神弄鬼就藏不住。" },
+                    new DialogueTopic { Id = "truth", Label = "谁在幕后", Question = "你觉得真正的幕后人是谁？", Response = "不是最会哭的人，也不是最会逃的人。幕后人要同时知道旧案、锣点、钥匙和人心。他站在看不见的地方，让每个人都以为自己只是被旧戏推了一把。", SecondDayOnly = true }
+                };
+            }
+
+            return new[]
+            {
+                new DialogueTopic { Id = "ticket", Label = "旧戏票", Question = "旧戏票上的名字，为什么让你这么害怕？", Response = "因为那不是传闻，是戏班里被人硬生生擦掉的一页。陈伶宜不是怪谈，她曾经站在台上，也曾经有人不许她再站上去。" },
+                new DialogueTopic { Id = "mask", Label = "脸谱盒", Question = "烧焦脸谱为什么会在今天出现？", Response = "它不是自己回来的。有人把旧案的火灰摆到今天的桌上，是想让所有人先信鬼，再忘了去问活人能做什么。" },
+                new DialogueTopic { Id = "latch", Label = "反锁机关", Question = "门闩从外面反扣，你以前见过这种手法吗？", Response = "旧戏班有过类似的把戏，用来让后台小屋看起来没人进出。知道这个办法的人不多，知道它和旧案有关的人更少。" },
+                new DialogueTopic { Id = "confess", Label = "你隐瞒了什么", Question = "你一直绕开旧案，是在护谁？", Response = "我不是护凶手。我护的是一个已经没有机会替自己说话的人。可如果今夜有人借她的名字害人，我不会再替任何活人沉默。", SecondDayOnly = true }
+            };
+        }
+
+        private string DialogueTakeaway(string actorId, string topicId)
+        {
+            if (actorId == "axi")
+                return "阿喜的说法把自己放在侧台门帘旁：他能听见锣点和门帘动静，但缺少设计整套机关的胆量和位置。";
+            if (actorId == "boss")
+                return "薛万山承认自己控制演出、钥匙和规矩，但他的辩解重点是：有人正在利用这些规矩嫁祸给管事的人。";
+            if (actorId == "faceless")
+                return "何颂生把旧案解释成一套被重新布置的舞台效果：香灰、戏票和木偶都是人为摆出的旧案回声。";
+            return "沈青衣承认旧案不是传闻。她隐瞒的不是机关手法本身，而是陈伶宜这个名字与当年戏班的关系。";
         }
 
         private SceneActor FindSceneActor(string actorId)
@@ -1582,7 +1988,7 @@ namespace TXGame
             FullscreenPanel("ClueBlackBackground", Color.black, root);
             ImagePanel("ClueFrame2026", UIWindow + "widnow.frame02.png", new Color(0, 0, 0, 0), new Vector2(0, 10), new Vector2(1321, 614), root);
             Text("线索背包", 52, Gold, TextAlignmentOptions.Center, new Vector2(0, 300), new Vector2(760, 80), root);
-            Text("条状证据，可用于对话出示、擦雾和推理判定。", 22, Muted, TextAlignmentOptions.Center, new Vector2(0, 245), new Vector2(1000, 44), root);
+            Text("条状证据用于擦雾和推理判定；对话已改为纯盘问选项。再次按 C 返回游戏界面。", 22, Muted, TextAlignmentOptions.Center, new Vector2(0, 245), new Vector2(1000, 44), root);
             int index = 0;
             foreach (Clue clue in clues.Values)
             {
@@ -1593,7 +1999,7 @@ namespace TXGame
             }
             if (index == 0)
                 Text("尚未取得证据。\n回到案发现场，点击异常位置记录证据。", 30, White, TextAlignmentOptions.Center, Vector2.zero, new Vector2(760, 140), root);
-            Button("地图 M", new Vector2(470, -405), new Vector2(220, 56), () => TransitionTo(ShowSceneMap));
+            Button("地图 M", new Vector2(470, -405), new Vector2(220, 56), ToggleSceneMap);
             ImageButton("ClueBack", UIWindow + "back.btn.png", new Vector2(720, -405), new Vector2(201, 65), () => TransitionTo(ShowCrimeScene));
         }
 
@@ -1634,22 +2040,49 @@ namespace TXGame
             RectTransform root = BeginLayer(revealCanvas, "ObserveLayer");
             Title("擦雾", "选择证据擦开人物表层迷雾，选错扣心。", root);
             Character c = characters["qingyi"];
-            Panel("Portrait", new Color(0.04f, 0.03f, 0.03f, 0.96f), new Vector2(-420, -40), new Vector2(440, 620), root);
-            Text(c.Name, 42, Gold, TextAlignmentOptions.Center, new Vector2(-420, 210), new Vector2(360, 60), root);
-            Text("黑雾画像占位\n美术替换 Image.sprite", 24, Muted, TextAlignmentOptions.Center, new Vector2(-420, -40), new Vector2(320, 180), root);
-            Panel("Fog", new Color(0, 0, 0, 1f - c.Reveal), new Vector2(-420, -40), new Vector2(360, 500), root);
+            ImagePanel("ObservePortraitFrame", UIWindow + "widnow.frame02.png", new Color(0.04f, 0.03f, 0.03f, 0.96f), new Vector2(-430, -40), new Vector2(520, 650), root);
+            Image portrait = ImagePanel("ObservePortrait", "Assets/Art/Sprites/Characters/旦2.png", new Color(0.02f, 0.016f, 0.014f, 1f), new Vector2(-430, -70), new Vector2(360, 560), root);
+            portrait.raycastTarget = false;
+            Text(c.Name, 42, Gold, TextAlignmentOptions.Center, new Vector2(-430, 260), new Vector2(360, 60), root);
+            float fogAmount = Mathf.Clamp01(1f - c.Reveal);
+            Text("剩余迷雾：" + Mathf.RoundToInt(fogAmount * 100f) + "%", 22, Muted, TextAlignmentOptions.Center, new Vector2(-430, -354), new Vector2(360, 36), root);
+            DrawFogVeil(root, new Vector2(-430, -70), new Vector2(360, 560), fogAmount);
+            Panel("EvidenceDock", new Color(0.025f, 0.018f, 0.015f, 0.84f), new Vector2(330, 40), new Vector2(620, 410), root);
+            Text("可用于擦雾的证据", 32, Gold, TextAlignmentOptions.Center, new Vector2(330, 205), new Vector2(500, 48), root);
             int i = 0;
-            foreach (string id in new[] { "ticket", "mask", "flow", "record" })
+            foreach (string id in new[] { "ticket", "ash", "flow", "bodymark", "medicine", "gong", "latch", "wire" })
             {
-                if (!clues[id].Acquired) continue;
-                EvidenceStrip(root, clues[id], new Vector2(240, 160 - i * 88), () => Toast("证据已放入擦雾槽"));
+                if (!clues.TryGetValue(id, out Clue clue) || !clue.Acquired) continue;
+                EvidenceStrip(root, clue, new Vector2(330, 130 - i * 72), () => Toast("证据已放入擦雾槽"), new Vector2(480, 58));
                 i++;
+                if (i >= 4) break;
             }
             if (i == 0)
-                Text("当前还没有可用于擦雾的证据。\n先回到案发现场完成侦察。", 26, Muted, TextAlignmentOptions.Center, new Vector2(360, 40), new Vector2(560, 120), root);
-            Button("擦雾判定", new Vector2(380, -270), new Vector2(260, 66), () => { clues["ticket"].Used = true; c.Reveal = Mathf.Clamp01(c.Reveal + 0.2f); Toast("擦雾成功：第一张皮开始脱落"); TransitionTo(ShowObserve); });
-            Button("错误示例 -1心", new Vector2(670, -270), new Vector2(260, 66), () => LoseHeart("证据组合错误"));
-            Button("返回白天", new Vector2(720, -430), new Vector2(220, 56), () => TransitionTo(ReturnFromFogToDay));
+                Text("当前还没有可用于擦雾的证据。\n先回到案发现场完成侦察。", 26, Muted, TextAlignmentOptions.Center, new Vector2(330, 60), new Vector2(520, 120), root);
+            Button("擦雾判定", new Vector2(250, -245), new Vector2(260, 66), () => { if (clues.TryGetValue("ticket", out Clue ticket)) ticket.Used = true; c.Reveal = Mathf.Clamp01(c.Reveal + 0.2f); Toast("擦雾成功：第一张皮开始脱落"); TransitionTo(ShowObserve); });
+            Button("错误示例 -1心", new Vector2(540, -245), new Vector2(260, 66), () => LoseHeart("证据组合错误"));
+            Button("返回白天", new Vector2(690, -405), new Vector2(220, 56), () => TransitionTo(ReturnFromFogToDay));
+        }
+
+        private void DrawFogVeil(RectTransform root, Vector2 center, Vector2 size, float amount)
+        {
+            float clamped = Mathf.Clamp01(amount);
+            if (clamped <= 0.03f) return;
+
+            Panel("FogBase", new Color(0.58f, 0.60f, 0.62f, 0.34f * clamped), center, size, root).raycastTarget = false;
+            Panel("FogEdgeTop", new Color(0.82f, 0.84f, 0.82f, 0.22f * clamped), center + new Vector2(0, size.y * 0.30f), new Vector2(size.x * 0.92f, 86), root).raycastTarget = false;
+            Panel("FogEdgeBottom", new Color(0.70f, 0.72f, 0.72f, 0.18f * clamped), center + new Vector2(0, -size.y * 0.28f), new Vector2(size.x * 0.86f, 76), root).raycastTarget = false;
+
+            for (int i = 0; i < 6; i++)
+            {
+                float y = Mathf.Lerp(-size.y * 0.36f, size.y * 0.34f, i / 5f);
+                float x = ((i % 2) == 0 ? -32f : 28f);
+                float alpha = (0.18f + i * 0.018f) * clamped;
+                Vector2 bandSize = new Vector2(size.x * (0.72f + i * 0.045f), 34f + i * 7f);
+                Panel("FogBand_" + i, new Color(0.88f, 0.88f, 0.82f, alpha), center + new Vector2(x, y), bandSize, root).raycastTarget = false;
+            }
+
+            Panel("FogInkEdge", new Color(0.02f, 0.018f, 0.016f, 0.28f * clamped), center, new Vector2(size.x, size.y), root).raycastTarget = false;
         }
 
         private void OpenCurrentTrial()
@@ -1846,44 +2279,49 @@ namespace TXGame
             currentView = View.SaveLoad;
             Time.timeScale = 0f;
             RectTransform root = BeginLayer(systemCanvas, "SaveLoadLayer", false);
-            FullscreenImage("SaveBackground2026", UIHome + "01home1.jpg", Color.black, root);
-            FullscreenPanel("SaveShade", new Color(0, 0, 0, 0.58f), root);
-            ImagePanel("SaveFrame2026", UIWindow + "widnow.frame02.png", new Color(0, 0, 0, 0), new Vector2(0, 10), new Vector2(1321, 614), root);
-            Text(fromPause ? "存档 / 读档" : "选择存档", 48, Gold, TextAlignmentOptions.Center, new Vector2(0, 292), new Vector2(760, 78), root);
-            Text(fromPause ? "三个固定槽位：01、02、03。" : "选择一个槽位开始。空槽会创建新存档，已有槽可以继续读取。", 22, Muted, TextAlignmentOptions.Center, new Vector2(0, 235), new Vector2(1000, 44), root);
+            FullscreenImage("SaveBackground2026", UIHome + "01home_bg.jpg", Color.black, root);
+            FullscreenPanel("SaveShade", new Color(0.015f, 0.012f, 0.01f, 0.9f), root);
+            Panel("SaveWindow", new Color(0.045f, 0.035f, 0.03f, 0.98f), Vector2.zero, new Vector2(1640, 930), root);
+            Panel("SaveTopLine", Gold, new Vector2(0, 385), new Vector2(1510, 3), root);
+            Text(fromPause ? "存档 / 读档" : "选择存档", 48, Gold, TextAlignmentOptions.Center, new Vector2(0, 330), new Vector2(760, 68), root);
+            Text(fromPause ? "选择槽位保存当前进度，已有存档也可以读取。" : "选择槽位进入游戏。空槽新建游戏，已有存档可以继续。", 22, Muted, TextAlignmentOptions.Center, new Vector2(0, 280), new Vector2(1100, 42), root);
 
             for (int i = 0; i < SaveManager.SlotIds.Length; i++)
             {
                 string slotId = SaveManager.SlotIds[i];
-                Vector2 pos = new Vector2(-520 + i * 520, 25);
-                ImagePanel("SaveSlot_" + slotId, UIWindow + "save slot1.png", new Color(0, 0, 0, 0), pos, new Vector2(260, 430), root);
-                Text("槽位 " + slotId, 34, Gold, TextAlignmentOptions.Center, pos + new Vector2(0, 126), new Vector2(220, 50), root);
-                Text(SaveManager.GetSlotSummary(slotId), 20, White, TextAlignmentOptions.Center, pos + new Vector2(0, -10), new Vector2(210, 180), root);
+                bool exists = SaveManager.Exists(slotId);
+                Vector2 pos = new Vector2(-500 + i * 500, 0);
+                Panel("SaveSlot_" + slotId, new Color(0.075f, 0.06f, 0.05f, 1f), pos, new Vector2(410, 430), root);
+                Panel("SaveSlotLine_" + slotId, Gold, pos + new Vector2(0, 150), new Vector2(340, 3), root);
+                Text("槽位 " + slotId, 32, Gold, TextAlignmentOptions.Center, pos + new Vector2(0, 180), new Vector2(340, 52), root);
+                Text(exists ? SaveManager.GetSlotSummary(slotId) : "空槽位\n可以创建新游戏", 20, exists ? White : Muted, TextAlignmentOptions.Center, pos + new Vector2(0, 25), new Vector2(340, 190), root);
 
                 if (fromPause)
                 {
-                    ImageButton("Save" + slotId, UIWindow + "save.game.btn.png", pos + new Vector2(-70, -190), new Vector2(150, 55), () => SaveToSlot(slotId));
-                    ImageButton("Load" + slotId, UIWindow + "go.btn.png", pos + new Vector2(95, -190), new Vector2(150, 49), () => TransitionTo(() => LoadFromSlot(slotId)));
+                    Vector2 savePosition = pos + new Vector2(exists ? -95 : 0, -155);
+                    Button("保存", savePosition, new Vector2(160, 58), () => SaveToSlot(slotId), Dark, White);
+                    if (exists)
+                        Button("读取", pos + new Vector2(95, -155), new Vector2(160, 58), () => TransitionTo(() => LoadFromSlot(slotId)), Dark, White);
                 }
                 else
                 {
-                    if (SaveManager.Exists(slotId))
+                    if (exists)
                     {
-                        ImageButton("Load" + slotId, UIWindow + "go.btn.png", pos + new Vector2(-70, -190), new Vector2(150, 49), () => TransitionTo(() => LoadFromSlot(slotId)));
-                        ImageButton("Restart" + slotId, UIWindow + "save.game.btn.png", pos + new Vector2(95, -190), new Vector2(150, 55), () => TransitionTo(() => StartNewGameInSlot(slotId)));
+                        Button("继续游戏", pos + new Vector2(-95, -155), new Vector2(170, 58), () => TransitionTo(() => LoadFromSlot(slotId)), Dark, White);
+                        Button("重新开始", pos + new Vector2(95, -155), new Vector2(170, 58), () => TransitionTo(() => StartNewGameInSlot(slotId)), Dark, White);
                     }
                     else
                     {
-                        ImageButton("New" + slotId, UIWindow + "go.btn.png", pos + new Vector2(0, -190), new Vector2(150, 49), () => TransitionTo(() => StartNewGameInSlot(slotId)));
+                        Button("新建游戏", pos + new Vector2(0, -155), new Vector2(190, 58), () => TransitionTo(() => StartNewGameInSlot(slotId)), Dark, White);
                     }
                 }
             }
 
-            ImageButton("SaveBack", UIWindow + "back.btn.png", new Vector2(0, -405), new Vector2(201, 65), () =>
+            Button(fromPause ? "返回暂停菜单" : "返回主菜单", new Vector2(0, -405), new Vector2(260, 60), () =>
             {
                 if (fromPause) TogglePause();
                 else TransitionTo(ShowMainMenu);
-            });
+            }, Dark, White);
         }
 
         private void SaveToSlot(string slotId)
@@ -1897,6 +2335,8 @@ namespace TXGame
         private void StartNewGameInSlot(string slotId)
         {
             ResetGameState();
+            currentSceneId = "props";
+            gameplayBackgroundPath = CurrentScene().BackgroundPath;
             SaveData data = CreateSaveData(slotId);
             data.displayTitle = "画皮 " + slotId;
             data.uiViewName = View.Intro.ToString();
@@ -1923,9 +2363,10 @@ namespace TXGame
             gongPuzzleStep = 0;
             wirePuzzleStep = 0;
             casePuzzleStep = 0;
+            askedDialogueTopics.Clear();
             evidenceBoardVisible = false;
             currentSceneId = "props";
-            gameplayBackgroundPath = "Assets/Art/Sprites/Generated/generated_theater_exterior.png";
+            gameplayBackgroundPath = PropsRoomBackground;
             foreach (Clue clue in clues.Values)
             {
                 clue.Acquired = false;
@@ -1994,6 +2435,8 @@ namespace TXGame
                 ? "Assets/Art/Sprites/Generated/generated_backstage_corridor.png"
                 : data.gameplayBackgroundPath;
             currentSceneId = SceneIdFromBackground(gameplayBackgroundPath);
+            if (sceneNodes.TryGetValue(currentSceneId, out SceneNode normalizedScene))
+                gameplayBackgroundPath = normalizedScene.BackgroundPath;
             foreach (Clue clue in clues.Values)
                 clue.Acquired = false;
             if (data.collectedClueIDs != null)
@@ -2017,6 +2460,16 @@ namespace TXGame
 
         private string SceneIdFromBackground(string backgroundPath)
         {
+            if (!string.IsNullOrEmpty(backgroundPath))
+            {
+                string normalized = backgroundPath.Replace('\\', '/').ToLowerInvariant();
+                if (normalized.Contains("generated_props_crime_scene")
+                    || normalized.Contains("bg_props_room_panorama")
+                    || normalized.Contains("props")
+                    || normalized.Contains("道具")
+                    || normalized.Contains("盔头"))
+                    return "props";
+            }
             foreach (SceneNode scene in sceneNodes.Values)
             {
                 if (string.Equals(scene.BackgroundPath, backgroundPath, StringComparison.OrdinalIgnoreCase))
@@ -2027,9 +2480,35 @@ namespace TXGame
 
         private void LoseHeart(string reason)
         {
+            if (hearts <= 0 || currentView == View.GameOver) return;
+
             hearts = Mathf.Max(0, hearts - 1);
+            if (hearts <= 0)
+            {
+                ShowGameOver(reason);
+                return;
+            }
+
             Toast($"心 -1：{reason}");
-            if (hearts <= 0) Toast("调查失败：请从暂停菜单重开场景。");
+        }
+
+        private void ShowGameOver(string reason)
+        {
+            currentView = View.GameOver;
+            Time.timeScale = 0f;
+            RectTransform root = BeginLayer(systemCanvas, "GameOverLayer");
+            SceneBackgroundImage("GameOverBackground", CurrentScene().BackgroundPath, new Color(0.04f, 0.032f, 0.028f, 1f), root);
+            FullscreenPanel("GameOverShade", new Color(0, 0, 0, 0.76f), root);
+            HeartBar(root, new Vector2(0, 250));
+            Text("调查失败", 76, Red, TextAlignmentOptions.Center, new Vector2(0, 130), new Vector2(900, 110), root);
+            Text($"最后失误：{reason}\n心力耗尽，线索链条断裂。请重新开始调查。", 28, White, TextAlignmentOptions.Center, new Vector2(0, 0), new Vector2(980, 130), root);
+            Button("重新开始", new Vector2(-150, -210), new Vector2(240, 62), () => TransitionTo(() =>
+            {
+                Time.timeScale = 1f;
+                ResetGameState();
+                ShowCrimeScene();
+            }), Red, White);
+            Button("回到标题", new Vector2(150, -210), new Vector2(240, 62), () => TransitionTo(ShowMainMenu), Dark, White);
         }
 
         private void Toast(string message)
@@ -2050,8 +2529,13 @@ namespace TXGame
 
         private void EvidenceStrip(RectTransform parent, Clue clue, Vector2 pos, Action onClick)
         {
-            Button(clue.Name, pos, new Vector2(520, 66), onClick, Paper, PaperText);
-            Text(clue.Tag, 17, new Color(0.20f, 0.10f, 0.06f, 0.72f), TextAlignmentOptions.Left, pos + new Vector2(-210, -18), new Vector2(420, 24), parent);
+            EvidenceStrip(parent, clue, pos, onClick, new Vector2(520, 66));
+        }
+
+        private void EvidenceStrip(RectTransform parent, Clue clue, Vector2 pos, Action onClick, Vector2 size)
+        {
+            Button(clue.Name, pos, size, onClick, Paper, PaperText);
+            Text(clue.Tag, 17, new Color(0.20f, 0.10f, 0.06f, 0.72f), TextAlignmentOptions.Left, pos + new Vector2(-size.x * 0.40f, -size.y * 0.28f), new Vector2(size.x * 0.78f, 24), parent);
         }
 
         private void SetupAudio()
@@ -2189,7 +2673,7 @@ namespace TXGame
                 AspectRatioFitter fitter = image.gameObject.GetComponent<AspectRatioFitter>() ?? image.gameObject.AddComponent<AspectRatioFitter>();
                 fitter.aspectMode = AspectRatioFitter.AspectMode.FitInParent;
                 fitter.aspectRatio = sprite.rect.width / sprite.rect.height;
-                image.rectTransform.localScale = Vector3.one;
+                image.rectTransform.localScale = Vector3.one * 0.94f;
             }
             return image;
         }
@@ -2284,6 +2768,15 @@ namespace TXGame
             EventTrigger.Entry entry = new EventTrigger.Entry { eventID = type };
             entry.callback.AddListener(data => action?.Invoke((PointerEventData)data));
             trigger.triggers.Add(entry);
+        }
+
+        private static void ConfigureDialogueText(UnityEngine.UI.Text text, int minimumFontSize)
+        {
+            text.alignment = TextAnchor.UpperLeft;
+            text.resizeTextForBestFit = true;
+            text.resizeTextMinSize = Mathf.Min(minimumFontSize, text.fontSize);
+            text.resizeTextMaxSize = text.fontSize;
+            text.lineSpacing = 1.15f;
         }
 
         private UnityEngine.UI.Text Text(string content, float size, Color color, TextAlignmentOptions alignment, Vector2 pos, Vector2 rectSize, Transform parent)
@@ -2405,7 +2898,18 @@ namespace TXGame
         {
             if (string.IsNullOrEmpty(assetPath)) return null;
 #if UNITY_EDITOR
+            Texture2D texture = AssetDatabase.LoadAssetAtPath<Texture2D>(assetPath);
             Sprite sprite = AssetDatabase.LoadAssetAtPath<Sprite>(assetPath);
+            if (texture != null)
+            {
+                bool spriteUsesWholeTexture = sprite != null
+                    && Mathf.Abs(sprite.rect.width - texture.width) < 1f
+                    && Mathf.Abs(sprite.rect.height - texture.height) < 1f;
+                if (!spriteUsesWholeTexture)
+                    return Sprite.Create(texture, new Rect(0f, 0f, texture.width, texture.height), new Vector2(0.5f, 0.5f), 100f);
+                return sprite;
+            }
+
             if (sprite != null) return sprite;
 
             foreach (UnityEngine.Object asset in AssetDatabase.LoadAllAssetsAtPath(assetPath))
@@ -2413,10 +2917,6 @@ namespace TXGame
                 if (asset is Sprite childSprite)
                     return childSprite;
             }
-
-            Texture2D texture = AssetDatabase.LoadAssetAtPath<Texture2D>(assetPath);
-            if (texture != null)
-                return Sprite.Create(texture, new Rect(0f, 0f, texture.width, texture.height), new Vector2(0.5f, 0.5f), 100f);
 
             string absolutePath = Path.GetFullPath(assetPath);
             if (File.Exists(absolutePath))

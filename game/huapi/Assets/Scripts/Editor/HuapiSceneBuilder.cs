@@ -19,9 +19,9 @@ namespace TXGame
         private const string PREFAB_PLAYER_PATH = "Assets/Prefabs/Player.prefab";
         private const string PREFAB_NPC_PATH = "Assets/Prefabs/NPCs";
         private const string PREFAB_INVEST_PATH = "Assets/Prefabs/InvestigationPoints";
-        private const string DATA_CHAR_PATH = "Assets/Data/Characters";
-        private const string DATA_DIALOGUE_PATH = "Assets/Data/Dialogues";
-        private const string DATA_CLUE_PATH = "Assets/Data/Clues";
+        private const string DATA_CHAR_PATH = "Assets/Resources/Characters";
+        private const string DATA_DIALOGUE_PATH = "Assets/Resources/Dialogues";
+        private const string DATA_CLUE_PATH = "Assets/Resources/Clues";
         private const string SPRITE_CHAR_BASE = "Assets/Art/Sprites/Characters/";
         private const string SPRITE_BG_BASE = "Assets/Art/Sprites/Backgrounds/";
 
@@ -182,7 +182,10 @@ namespace TXGame
             col.radius = 0.3f;
 
             // PlayerController
-            player.AddComponent<PlayerController>();
+            PlayerController controller = player.AddComponent<PlayerController>();
+            SerializedObject controllerSO = new SerializedObject(controller);
+            controllerSO.FindProperty("interactableLayer").intValue = 1 << LayerMask.NameToLayer("Default");
+            controllerSO.ApplyModifiedProperties();
 
             // PlayerInput (绑定 InputActionAsset)
             UnityEngine.InputSystem.PlayerInput pi = player.AddComponent<UnityEngine.InputSystem.PlayerInput>();
@@ -243,7 +246,7 @@ namespace TXGame
                 so.ApplyModifiedProperties();
 
                 // 自动绑定默认对话
-                string dialoguePath = $"{DATA_DIALOGUE_PATH}/{id}_intro.asset";
+                string dialoguePath = $"{DATA_DIALOGUE_PATH}/Dialogue_{id}_01.asset";
                 DialogueData dialogue = AssetDatabase.LoadAssetAtPath<DialogueData>(dialoguePath);
                 if (dialogue != null)
                 {

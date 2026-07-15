@@ -53,7 +53,7 @@ namespace TXGame
 #if UNITY_EDITOR
             if (allClues == null || allClues.Length == 0)
             {
-                string[] guids = AssetDatabase.FindAssets("t:ClueData", new[] { "Assets/Data/Clues" });
+                string[] guids = AssetDatabase.FindAssets("t:ClueData", new[] { "Assets/Resources/Clues" });
                 List<ClueData> editorClues = new List<ClueData>();
                 foreach (string guid in guids)
                 {

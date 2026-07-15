@@ -1,0 +1,27 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6c62eab12e490714391cb0e029fb473c, type: 3}
+  m_Name: reveal_boss_02
+  m_EditorClassIdentifier: Assembly-CSharp::TXGame.ObserveSkinRevealData
+  nodeId: reveal_boss_02
+  relatedCharacterId: boss
+  requiredClueId: clue_13
+  revealArea:
+    serializedVersion: 2
+    x: 0.55
+    y: 0.1
+    width: 0.35
+    height: 0.4
+  revealedText: "\u73ED\u4E3B\u8001\u7237\u5F7B\u5E95\u5D29\u6E83\u2014\u2014\u5F53\u5E74\u6B20\u4E0B\u7684\u4EBA\u60C5\u662F\u66FF\u4EBA\u9876\u7F6A\u3002\u771F\u6B63\u7684\u7EB5\u706B\u8005\u8FD8\u900D\u9065\u6CD5\u5916\uFF0C\u73B0\u5728\u53C8\u56DE\u6765\u8981\u631F\u4ED6\u4E86\u3002"
+  triggersNewObjective: 1
+  newObjectiveId: objective_boss_complete
+  fogFadeDuration: 0.90189147

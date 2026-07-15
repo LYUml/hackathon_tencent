@@ -1,0 +1,23 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f1b60b6569e9fa0489e8000db538fca5, type: 3}
+  m_Name: clue_10
+  m_EditorClassIdentifier: Assembly-CSharp::TXGame.HuapiClueData
+  clueId: clue_10
+  clueName: "\u706B\u6CB9\u75D5\u8FF9"
+  description: "\u5728\u620F\u53F0\u540E\u65B9\u53D1\u73B0\u4E86\u5C11\u91CF\u706B\u6CB9\u7684\u75D5\u8FF9\uFF0C\u7ECF\u786E\u8BA4\u4E0D\u662F\u620F\u73ED\u65E5\u5E38\u4F7F\u7528\u7684\u706F\u6CB9\u3002\u6709\u4EBA\u6545\u610F\u51C6\u5907\u4E86\u7EB5\u706B\u5DE5\u5177\u3002"
+  sourceLocation: "\u620F\u73ED"
+  sourceCharacter: jing
+  relatedCharacterId: jing
+  isAcquired: 0
+  isUsedInGuanPi: 0
+  clueIcon: {fileID: 0}
