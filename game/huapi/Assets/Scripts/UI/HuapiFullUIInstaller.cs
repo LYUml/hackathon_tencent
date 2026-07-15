@@ -3254,6 +3254,10 @@ namespace TXGame
             Sprite resourceSprite = Resources.Load<Sprite>(resourcesPath);
             if (resourceSprite != null) return resourceSprite;
 
+            Sprite[] childSprites = Resources.LoadAll<Sprite>(resourcesPath);
+            if (childSprites != null && childSprites.Length > 0)
+                return childSprites[0];
+
             Texture2D resourceTexture = Resources.Load<Texture2D>(resourcesPath);
             if (resourceTexture != null)
                 return Sprite.Create(resourceTexture, new Rect(0f, 0f, resourceTexture.width, resourceTexture.height), new Vector2(0.5f, 0.5f), 100f);
