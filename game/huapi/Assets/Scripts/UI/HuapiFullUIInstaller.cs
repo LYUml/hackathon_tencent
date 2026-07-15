@@ -226,8 +226,8 @@ namespace TXGame
             if (Keyboard.current.cKey.wasPressedThisFrame) TransitionTo(ShowClues);
             if (Keyboard.current.mKey.wasPressedThisFrame) TransitionTo(ShowSceneMap);
             if (Keyboard.current.xKey.wasPressedThisFrame) TransitionTo(ShowArchive);
-            if (Keyboard.current.vKey.wasPressedThisFrame) TransitionTo(() => ShowPhaseTransition("擦雾", "FOG WIPE", "用证据擦开人物表层的雾。", "开始擦雾", ShowObserve));
-            if (Keyboard.current.tKey.wasPressedThisFrame) TransitionTo(OpenCurrentTrial);
+            if (Keyboard.current.vKey.wasPressedThisFrame && HasClue("ticket")) TransitionTo(() => ShowPhaseTransition("擦雾", "FOG WIPE", "用证据擦开人物表层的雾。", "开始擦雾", ShowObserve));
+            if (Keyboard.current.tKey.wasPressedThisFrame && CanOpenTrial()) TransitionTo(OpenCurrentTrial);
             if (Keyboard.current.escapeKey.wasPressedThisFrame) TogglePause();
         }
 
@@ -480,8 +480,8 @@ namespace TXGame
                 Id = "qingyi",
                 Name = "沈青衣",
                 PortraitPath = "Assets/Art/Sprites/Characters/旦2.png",
-                SceneId = "props",
-                Position = new Vector2(-690, -235),
+                SceneId = "stage",
+                Position = new Vector2(-650, -240),
                 Size = new Vector2(230, 430)
             });
             sceneActors.Add(new SceneActor
@@ -797,12 +797,10 @@ namespace TXGame
             Text("第一天 · 白天探索 · 薛氏剧团", 26, Gold, TextAlignmentOptions.Left, new Vector2(-860, 500), new Vector2(650, 44), root);
             Text("目标：先调查剧团外景、后台和排练区，夜晚演出会在关键线索后推进", 24, White, TextAlignmentOptions.Left, new Vector2(-860, 462), new Vector2(1100, 38), root);
             HeartBar(root, new Vector2(720, 500));
-            Button("操作指南 F1", new Vector2(720, 452), new Vector2(160, 42), () => TransitionTo(ShowGuide));
-            Button("线索 C", new Vector2(890, 452), new Vector2(120, 42), () => TransitionTo(ShowClues));
-            Button("档案 X", new Vector2(1020, 452), new Vector2(120, 42), () => TransitionTo(ShowArchive));
-            Button("擦雾 V", new Vector2(1150, 452), new Vector2(120, 42), () => TransitionTo(() => ShowPhaseTransition("擦雾", "FOG WIPE", "用证据擦开人物表层的雾。", "开始擦雾", ShowObserve)));
-            Button("判定 T", new Vector2(1280, 452), new Vector2(120, 42), () => TransitionTo(OpenCurrentTrial));
-            Button("暂停 Esc", new Vector2(1420, 452), new Vector2(140, 42), TogglePause);
+            Button("指南 F1", new Vector2(770, 452), new Vector2(110, 42), () => TransitionTo(ShowGuide));
+            Button("线索 C", new Vector2(895, 452), new Vector2(110, 42), () => TransitionTo(ShowClues));
+            Button("地图 M", new Vector2(1020, 452), new Vector2(110, 42), () => TransitionTo(ShowSceneMap));
+            Button("暂停 Esc", new Vector2(1160, 452), new Vector2(130, 42), TogglePause);
         }
 
         private void ShowCrimeScene()
@@ -818,12 +816,10 @@ namespace TXGame
             Text(PhaseTitle() + " / " + scene.Name, 24, Gold, TextAlignmentOptions.Center, new Vector2(-515, 514), new Vector2(720, 36), root);
             Text(scene.Description, 17, White, TextAlignmentOptions.Center, new Vector2(-515, 456), new Vector2(820, 34), root);
             HeartBar(root, new Vector2(520, 505));
-            Button("指南 F1", new Vector2(650, 458), new Vector2(110, 38), () => TransitionTo(ShowGuide));
-            Button("线索 C", new Vector2(775, 458), new Vector2(110, 38), () => TransitionTo(ShowClues));
-            Button("档案 X", new Vector2(900, 458), new Vector2(110, 38), () => TransitionTo(ShowArchive));
-            Button("地图 M", new Vector2(1025, 458), new Vector2(110, 38), () => TransitionTo(ShowSceneMap));
-            Button(evidenceBoardVisible ? "收起证据" : "展开证据", new Vector2(1165, 458), new Vector2(130, 38), ToggleEvidenceBoard);
-            Button("暂停 Esc", new Vector2(1315, 458), new Vector2(130, 38), TogglePause);
+            Button("指南 F1", new Vector2(720, 458), new Vector2(110, 38), () => TransitionTo(ShowGuide));
+            Button("线索 C", new Vector2(845, 458), new Vector2(110, 38), () => TransitionTo(ShowClues));
+            Button("地图 M", new Vector2(970, 458), new Vector2(110, 38), () => TransitionTo(ShowSceneMap));
+            Button("暂停 Esc", new Vector2(1110, 458), new Vector2(130, 38), TogglePause);
 
             int sceneHotspotCount = 0;
             foreach (InvestigationHotspot hotspot in crimeSceneHotspots)
@@ -982,10 +978,15 @@ namespace TXGame
         {
             Panel("MovePad", new Color(0.02f, 0.015f, 0.012f, 0.72f), new Vector2(640, -385), new Vector2(310, 210), root);
             Text("方向", 18, Muted, TextAlignmentOptions.Center, new Vector2(640, -300), new Vector2(160, 30), root);
-            Button("↑\n前", new Vector2(640, -335), new Vector2(90, 58), () => MoveScene(scene.Front, "前"));
-            Button("←\n左", new Vector2(585, -400), new Vector2(90, 58), () => MoveScene(scene.Left, "左"));
-            Button("↓\n后", new Vector2(640, -465), new Vector2(90, 58), () => MoveScene(scene.Back, "后"));
-            Button("→\n右", new Vector2(695, -400), new Vector2(90, 58), () => MoveScene(scene.Right, "右"));
+            if (CanMove(scene.Front)) Button("↑\n前", new Vector2(640, -335), new Vector2(90, 58), () => MoveScene(scene.Front, "前"));
+            if (CanMove(scene.Left)) Button("←\n左", new Vector2(585, -400), new Vector2(90, 58), () => MoveScene(scene.Left, "左"));
+            if (CanMove(scene.Back)) Button("↓\n后", new Vector2(640, -465), new Vector2(90, 58), () => MoveScene(scene.Back, "后"));
+            if (CanMove(scene.Right)) Button("→\n右", new Vector2(695, -400), new Vector2(90, 58), () => MoveScene(scene.Right, "右"));
+        }
+
+        private bool CanMove(string targetId)
+        {
+            return !string.IsNullOrEmpty(targetId) && sceneNodes.ContainsKey(targetId);
         }
 
         private void MoveScene(string targetId, string direction)
@@ -1473,11 +1474,13 @@ namespace TXGame
         {
             currentView = View.Guide;
             RectTransform root = BeginLayer(systemCanvas, "CreditsLayer", false);
-            FullscreenImage("CreditsBackground2026", UICredits + "04credits.jpg", Color.black, root);
-            ImagePanel("CreditsFrame2026", UICredits + "04credits_widnow.frame.png", new Color(0, 0, 0, 0), Vector2.zero, new Vector2(1500, 844), root);
-            Text("制作人员", 54, Gold, TextAlignmentOptions.Center, new Vector2(0, 270), new Vector2(760, 82), root);
-            Text("策划 / 程序 / 美术 / 剧情\n大梁游戏 · 薛氏戏园 Demo\n\n感谢试玩", 32, White, TextAlignmentOptions.Center, new Vector2(0, 35), new Vector2(980, 300), root);
-            ImageButton("CreditsBack", UICredits + "04credits.icons/04credits_close.back.icon.png", new Vector2(690, 330), new Vector2(90, 90), () => TransitionTo(ShowMainMenu));
+            FullscreenPanel("CreditsBlackBackground", Color.black, root);
+            ImagePanel("CreditsFrame2026", UIWindow + "widnow.frame02.png", new Color(0, 0, 0, 0), Vector2.zero, new Vector2(1321, 614), root);
+            Text("制作人员", 52, Gold, TextAlignmentOptions.Center, new Vector2(0, 265), new Vector2(760, 78), root);
+            Text("三人团队", 24, Muted, TextAlignmentOptions.Center, new Vector2(0, 210), new Vector2(500, 40), root);
+            Text("孔陌羚\n吕明樑\nCodex AI 辅助", 34, White, TextAlignmentOptions.Center, new Vector2(0, 40), new Vector2(800, 210), root);
+            Text("薛氏戏园 · 本格推理 Demo", 22, Muted, TextAlignmentOptions.Center, new Vector2(0, -160), new Vector2(760, 40), root);
+            ImageButton("CreditsBack", UIWindow + "back.btn.png", new Vector2(0, -340), new Vector2(201, 65), () => TransitionTo(ShowMainMenu));
         }
 
         private void ShowDialogue()
@@ -2180,10 +2183,10 @@ namespace TXGame
             {
                 image.sprite = sprite;
                 image.type = Image.Type.Simple;
-                image.preserveAspect = true;
+                image.preserveAspect = false;
                 image.color = Color.white;
                 AspectRatioFitter fitter = image.gameObject.GetComponent<AspectRatioFitter>() ?? image.gameObject.AddComponent<AspectRatioFitter>();
-                fitter.aspectMode = AspectRatioFitter.AspectMode.FitInParent;
+                fitter.aspectMode = AspectRatioFitter.AspectMode.EnvelopeParent;
                 fitter.aspectRatio = sprite.rect.width / sprite.rect.height;
                 image.rectTransform.localScale = Vector3.one;
             }
