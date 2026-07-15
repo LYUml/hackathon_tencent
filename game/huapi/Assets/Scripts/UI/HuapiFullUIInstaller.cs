@@ -191,8 +191,8 @@ namespace TXGame
         private static readonly Color Clear = new Color(1f, 1f, 1f, 0f);
         private static readonly Color StoryBackdrop = new Color(0.015f, 0.012f, 0.010f, 0.78f);
         private static readonly Color StoryShade = new Color(0f, 0f, 0f, 0.30f);
-        private static readonly Color Ink = new Color(0.015f, 0.012f, 0.010f, 0.86f);
-        private static readonly Color Dark = new Color(0.09f, 0.055f, 0.040f, 0.92f);
+        private static readonly Color Ink = Clear;
+        private static readonly Color Dark = Clear;
         private static readonly Color Paper = Hex(0xD8C7A7);
         private static readonly Color PaperText = Hex(0x2D1710);
         private static readonly Color Gold = Hex(0xC9A96E);
@@ -704,26 +704,6 @@ namespace TXGame
             EnsureBgmPlaying();
             RectTransform root = BeginLayer(systemCanvas, "MainMenuLayer");
             FullscreenDesignImage("MainMenuDesign2026", UIHome + "01home1.jpg", new Color(0.06f, 0.035f, 0.028f, 1f), root);
-
-            if (!RuntimeImageAssetsAvailable)
-            {
-                Text("画皮", 72, Gold, TextAlignmentOptions.Center, new Vector2(0, 180), new Vector2(720, 96), root);
-                Text("腾讯游戏创作赛 WebGL 版", 26, Muted, TextAlignmentOptions.Center, new Vector2(0, 110), new Vector2(780, 42), root);
-                Button("开始游戏", new Vector2(-360, -260), new Vector2(260, 70), () => TransitionTo(() => ShowSaveLoad(false)), Red, White);
-                Button("设置", new Vector2(-90, -260), new Vector2(220, 70), () =>
-                {
-                    pauseOpenedFromMainMenu = true;
-                    TransitionTo(ShowPauseMenu);
-                }, Dark, White);
-                Button("玩法说明", new Vector2(150, -260), new Vector2(220, 70), () =>
-                {
-                    guideOpenedFromMainMenu = true;
-                    Time.timeScale = 1f;
-                    TransitionTo(ShowGuide);
-                }, Dark, White);
-                Button("制作名单", new Vector2(390, -260), new Vector2(220, 70), () => TransitionTo(ShowCredits), Dark, White);
-                return;
-            }
 
             TransparentButton("MenuPlay", new Vector2(-715, -382), new Vector2(300, 140), () => TransitionTo(() => ShowSaveLoad(false)));
             TransparentButton("MenuSettings", new Vector2(-360, -382), new Vector2(300, 140), () =>
@@ -2402,27 +2382,13 @@ namespace TXGame
             Time.timeScale = 0f;
             RectTransform root = BeginLayer(systemCanvas, "SaveLoadLayer", false);
             FullscreenDesignImage("SaveLoadDesign2026", UIHome + "01home5.jpg", Clear, root);
-            if (!RuntimeImageAssetsAvailable)
-            {
-                Text(fromPause ? "保存进度" : "选择存档", 48, Gold, TextAlignmentOptions.Center, new Vector2(0, 210), new Vector2(720, 72), root);
-                Text(fromPause ? "点击一个槽位覆盖保存" : "点击空槽开始新游戏", 24, Muted, TextAlignmentOptions.Center, new Vector2(0, 155), new Vector2(900, 42), root);
-            }
 
             for (int i = 0; i < SaveManager.SlotIds.Length; i++)
             {
                 string slotId = SaveManager.SlotIds[i];
                 bool exists = SaveManager.Exists(slotId);
                 Vector2 pos = new Vector2(-370 + i * 250, 8);
-                if (!RuntimeImageAssetsAvailable)
-                {
-                    Button(exists ? "存档 " + slotId : "新游戏 " + slotId, pos + new Vector2(0, 35), new Vector2(180, 110), () =>
-                    {
-                        if (fromPause) SaveToSlot(slotId);
-                        else if (exists) TransitionTo(() => LoadFromSlot(slotId));
-                        else TransitionTo(() => StartNewGameInSlot(slotId));
-                    }, exists ? Gold : Red, exists ? PaperText : White);
-                }
-                else if (exists)
+                if (exists)
                     Text(SaveManager.GetSlotShortSummary(slotId), 18, White, TextAlignmentOptions.Center, pos + new Vector2(0, -178), new Vector2(170, 72), root);
                 TransparentButton("SaveSlot_" + slotId, pos + new Vector2(0, 35), new Vector2(170, 170), () =>
                 {
@@ -2432,12 +2398,6 @@ namespace TXGame
                 });
             }
 
-            if (!RuntimeImageAssetsAvailable)
-                Button("返回", new Vector2(0, -260), new Vector2(220, 62), () =>
-                {
-                    if (fromPause) TransitionTo(ShowPauseMenu);
-                    else TransitionTo(ShowMainMenu);
-                }, Dark, White);
             TransparentButton("SaveBack", new Vector2(-835, -485), new Vector2(210, 90), () =>
             {
                 if (fromPause) TransitionTo(ShowPauseMenu);
@@ -3288,21 +3248,30 @@ namespace TXGame
                     return Sprite.Create(diskTexture, new Rect(0f, 0f, diskTexture.width, diskTexture.height), new Vector2(0.5f, 0.5f), 100f);
             }
 #else
-            return null;
+            string resourcesPath = ToResourcesSpritePath(assetPath);
+            if (string.IsNullOrEmpty(resourcesPath)) return null;
+
+            Sprite resourceSprite = Resources.Load<Sprite>(resourcesPath);
+            if (resourceSprite != null) return resourceSprite;
+
+            Texture2D resourceTexture = Resources.Load<Texture2D>(resourcesPath);
+            if (resourceTexture != null)
+                return Sprite.Create(resourceTexture, new Rect(0f, 0f, resourceTexture.width, resourceTexture.height), new Vector2(0.5f, 0.5f), 100f);
 #endif
             return null;
         }
 
-        private static bool RuntimeImageAssetsAvailable
+        private static string ToResourcesSpritePath(string assetPath)
         {
-            get
-            {
-#if UNITY_EDITOR
-                return true;
-#else
-                return false;
-#endif
-            }
+            const string prefix = "Assets/Art/Sprites/";
+            if (string.IsNullOrEmpty(assetPath) || !assetPath.StartsWith(prefix, StringComparison.Ordinal))
+                return null;
+
+            string path = "Art/Sprites/" + assetPath.Substring(prefix.Length);
+            int extensionIndex = path.LastIndexOf('.');
+            if (extensionIndex >= 0)
+                path = path.Substring(0, extensionIndex);
+            return path;
         }
 
         private static TextAnchor ToCenteredLegacyAlignment(TextAlignmentOptions alignment)
