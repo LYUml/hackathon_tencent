@@ -1,0 +1,23 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f1b60b6569e9fa0489e8000db538fca5, type: 3}
+  m_Name: clue_03
+  m_EditorClassIdentifier: Assembly-CSharp::TXGame.HuapiClueData
+  clueId: clue_03
+  clueName: "\u534A\u591C\u811A\u6B65\u58F0"
+  description: "\u591A\u4F4D\u620F\u73ED\u6210\u5458\u63D0\u5230\uFF0C\u6BCF\u665A\u6DF1\u591C\u90FD\u80FD\u542C\u5230\u8D70\u5ECA\u91CC\u6709\u8F7B\u5FAE\u7684\u811A\u6B65\u58F0\uFF0C\u4F46\u6253\u5F00\u95E8\u5374\u7A7A\u65E0\u4E00\u4EBA\u3002"
+  sourceLocation: "\u5BF9\u8BDD\u4E2D"
+  sourceCharacter: chou
+  relatedCharacterId: chou
+  isAcquired: 0
+  isUsedInGuanPi: 0
+  clueIcon: {fileID: 0}

@@ -1,0 +1,27 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6c62eab12e490714391cb0e029fb473c, type: 3}
+  m_Name: reveal_jing_02
+  m_EditorClassIdentifier: Assembly-CSharp::TXGame.ObserveSkinRevealData
+  nodeId: reveal_jing_02
+  relatedCharacterId: jing
+  requiredClueId: clue_10
+  revealArea:
+    serializedVersion: 2
+    x: 0.5
+    y: 0.1
+    width: 0.4
+    height: 0.45
+  revealedText: "\u4ED6\u770B\u5230\u4E86\u706B\u6CB9\u662F\u8C01\u51C6\u5907\u7684\u3002\u90A3\u5929\u665A\u4E0A\u4ED6\u6551\u7684\u4EBA\uFF0C\u5C31\u662F\u90A3\u4E2A\u7EB5\u706B\u8005\u2014\u2014\u4ED6\u7684\u4EB2\u5144\u5F1F\u3002"
+  triggersNewObjective: 1
+  newObjectiveId: objective_jing_complete
+  fogFadeDuration: 0.8756519

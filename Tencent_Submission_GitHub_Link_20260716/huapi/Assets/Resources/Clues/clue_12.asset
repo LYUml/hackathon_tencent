@@ -1,0 +1,24 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 302fd3aeee5060b49bdd77a055befc63, type: 3}
+  m_Name: clue_12
+  m_EditorClassIdentifier: Assembly-CSharp::TXGame.ClueData
+  clueID: clue_12
+  clueName: "\u5173\u952E\u8BC1\u4EBA"
+  description: "\u620F\u73ED\u95E8\u53E3\u5356\u9984\u9968\u7684\u8001\u738B\u8BF4\uFF0C\u706B\u707E\u5F53\u665A\u4ED6\u770B\u5230\u4E00\u4E2A\u9ED1\u5F71\u4ECE\u540E\u53F0\u7FFB\u5899\u800C\u51FA\u3002\u4F46\u7B2C\u4E8C\u5929\u5B98\u5E9C\u5374\u8BF4\u300C\u6CA1\u6709\u5916\u4EBA\u8FDB\u5165\u7684\u8FF9\u8C61\u300D\u3002"
+  category: 1
+  source: 1
+  relatedCharacterID: sheng
+  prerequisiteClueIDs: []
+  revealProgress: 0.2
+  revealAreaCenter: {x: 0.38000003, y: 0.3}
+  revealAreaRadius: 0.16000001

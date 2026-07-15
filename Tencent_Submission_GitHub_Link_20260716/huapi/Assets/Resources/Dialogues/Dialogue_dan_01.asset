@@ -1,0 +1,34 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 69b7a37b90a5ab646a72aa4e859cefba, type: 3}
+  m_Name: Dialogue_dan_01
+  m_EditorClassIdentifier: Assembly-CSharp::TXGame.DialogueData
+  dialogueID: dan_01
+  speakerID: "\u6885\u82E5\u4E91"
+  speakerName: "\u6885\u82E5\u4E91"
+  conditions:
+  - type: 7
+    parameter: 
+    threshold: 0
+  lines:
+  - speakerName: "\u6885\u82E5\u4E91"
+    speakerPortrait: {fileID: 0}
+    text: "\uFF08\u8F7B\u8F7B\u6574\u7406\u7740\u620F\u670D\uFF09\u4F60\u4E5F\u662F\u6765\u95EE\u6211\u5173\u4E8E\u59D0\u59D0\u7684\u4E8B\u5417\uFF1F"
+    autoAdvanceDelay: 0
+  hasChoices: 1
+  choices:
+  - choiceText: "\u6211\u60F3\u77E5\u9053\u771F\u76F8\u3002"
+    nextDialogueID: 
+    choiceResults:
+    - type: 3
+      parameter: dan_01_asked
+  results: []

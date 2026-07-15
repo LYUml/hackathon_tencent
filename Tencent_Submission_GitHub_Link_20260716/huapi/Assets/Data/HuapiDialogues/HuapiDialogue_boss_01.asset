@@ -1,0 +1,33 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f6261145b0ec79e4883b49d235b24746, type: 3}
+  m_Name: HuapiDialogue_boss_01
+  m_EditorClassIdentifier: Assembly-CSharp::TXGame.HuapiDialogueData
+  nodeId: 11
+  lines:
+  - speakerId: "\u73ED\u4E3B\u8001\u7237"
+    text: "\u5E74\u8F7B\u4EBA\uFF0C\u8FD9\u4E48\u665A\u4E86\u8FD8\u5728\u56DB\u5904\u8D70\u52A8\uFF1F"
+    clueIdsToGrant: []
+    highlightedKeywords: []
+  - speakerId: player
+    text: "\u73ED\u4E3B\uFF0C\u6211\u60F3\u95EE\u60A8\u51E0\u4E2A\u95EE\u9898\u3002"
+    clueIdsToGrant: []
+    highlightedKeywords: []
+  - speakerId: "\u73ED\u4E3B\u8001\u7237"
+    text: "\uFF08\u634B\u4E86\u634B\u80E1\u987B\uFF09\u95EE\u5427\uFF0C\u4F46\u6709\u4E9B\u95EE\u9898\u6211\u53EF\u80FD\u65E0\u6CD5\u56DE\u7B54\u3002"
+    clueIdsToGrant: []
+    highlightedKeywords: []
+  options:
+  - optionText: "\u73ED\u4E3B\uFF0C\u6211\u60F3\u95EE\u60A8\u51E0\u4E2A\u95EE\u9898\u3002"
+    nextNodeId: -1
+    requiredClueIds: []
+    clueIdsToConsume: []

@@ -1,0 +1,34 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 69b7a37b90a5ab646a72aa4e859cefba, type: 3}
+  m_Name: Dialogue_jing_01
+  m_EditorClassIdentifier: Assembly-CSharp::TXGame.DialogueData
+  dialogueID: jing_01
+  speakerID: "\u949F\u94C1\u9762"
+  speakerName: "\u949F\u94C1\u9762"
+  conditions:
+  - type: 7
+    parameter: 
+    threshold: 0
+  lines:
+  - speakerName: "\u949F\u94C1\u9762"
+    speakerPortrait: {fileID: 0}
+    text: "\uFF08\u9ED8\u9ED8\u64E6\u62ED\u624B\u4E2D\u7684\u5200\uFF09\u4EC0\u4E48\u4E8B\uFF1F"
+    autoAdvanceDelay: 0
+  hasChoices: 1
+  choices:
+  - choiceText: "\u8FD9\u628A\u5200\u2026\u2026\u4E0D\u662F\u9053\u5177\u5427\uFF1F"
+    nextDialogueID: 
+    choiceResults:
+    - type: 3
+      parameter: jing_01_asked
+  results: []

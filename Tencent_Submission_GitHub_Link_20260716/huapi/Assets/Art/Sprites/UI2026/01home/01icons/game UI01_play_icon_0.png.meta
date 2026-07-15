@@ -1,0 +1,507 @@
+fileFormatVersion: 2
+guid: 41ea4f8922ab1634c9e46e84845906b0
+TextureImporter:
+  internalIDToNameTable:
+  - first:
+      213: -1503872513399387142
+    second: game UI01_play_icon_0_0
+  - first:
+      213: 3911276076923241251
+    second: game UI01_play_icon_0_1
+  - first:
+      213: -2749172299988852816
+    second: game UI01_play_icon_0_2
+  - first:
+      213: 7955726928833528927
+    second: game UI01_play_icon_0_3
+  - first:
+      213: -5655344139965640844
+    second: game UI01_play_icon_0_4
+  - first:
+      213: 2320369763999400105
+    second: game UI01_play_icon_0_5
+  - first:
+      213: 6855149756951034534
+    second: game UI01_play_icon_0_6
+  - first:
+      213: 3966742933955230607
+    second: game UI01_play_icon_0_7
+  - first:
+      213: -7755955752753325201
+    second: game UI01_play_icon_0_8
+  - first:
+      213: -4083472367495857921
+    second: game UI01_play_icon_0_9
+  - first:
+      213: -3014453803764282565
+    second: game UI01_play_icon_0_10
+  - first:
+      213: -3234786631957474621
+    second: game UI01_play_icon_0_11
+  - first:
+      213: -1539861212984075189
+    second: game UI01_play_icon_0_12
+  - first:
+      213: -8858005312022560164
+    second: game UI01_play_icon_0_13
+  - first:
+      213: -5866042690835482283
+    second: game UI01_play_icon_0_14
+  externalObjects: {}
+  serializedVersion: 13
+  mipmaps:
+    mipMapMode: 0
+    enableMipMap: 0
+    sRGBTexture: 1
+    linearTexture: 0
+    fadeOut: 0
+    borderMipMap: 0
+    mipMapsPreserveCoverage: 0
+    alphaTestReferenceValue: 0.5
+    mipMapFadeDistanceStart: 1
+    mipMapFadeDistanceEnd: 3
+  bumpmap:
+    convertToNormalMap: 0
+    externalNormalMap: 0
+    heightScale: 0.25
+    normalMapFilter: 0
+    flipGreenChannel: 0
+  isReadable: 0
+  streamingMipmaps: 0
+  streamingMipmapsPriority: 0
+  vTOnly: 0
+  ignoreMipmapLimit: 0
+  grayScaleToAlpha: 0
+  generateCubemap: 6
+  cubemapConvolution: 0
+  seamlessCubemap: 0
+  textureFormat: 1
+  maxTextureSize: 4096
+  textureSettings:
+    serializedVersion: 2
+    filterMode: 1
+    aniso: 1
+    mipBias: 0
+    wrapU: 1
+    wrapV: 1
+    wrapW: 1
+  nPOTScale: 0
+  lightmap: 0
+  compressionQuality: 50
+  spriteMode: 1
+  spriteExtrude: 1
+  spriteMeshType: 1
+  alignment: 0
+  spritePivot: {x: 0.5, y: 0.5}
+  spritePixelsToUnits: 100
+  spriteBorder: {x: 0, y: 0, z: 0, w: 0}
+  spriteGenerateFallbackPhysicsShape: 1
+  alphaUsage: 1
+  alphaIsTransparency: 1
+  spriteTessellationDetail: -1
+  textureType: 8
+  textureShape: 1
+  singleChannelComponent: 0
+  flipbookRows: 1
+  flipbookColumns: 1
+  maxTextureSizeSet: 0
+  compressionQualitySet: 0
+  textureFormatSet: 0
+  ignorePngGamma: 0
+  applyGammaDecoding: 0
+  swizzle: 50462976
+  cookieLightType: 0
+  platformSettings:
+  - serializedVersion: 4
+    buildTarget: DefaultTexturePlatform
+    maxTextureSize: 4096
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 4
+    buildTarget: Standalone
+    maxTextureSize: 4096
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 1
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  spriteSheet:
+    serializedVersion: 2
+    sprites:
+    - serializedVersion: 2
+      name: game UI01_play_icon_0_0
+      rect:
+        serializedVersion: 2
+        x: 84
+        y: 77
+        width: 16
+        height: 39
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: afb0b5bbaeb212be0800000000000000
+      internalID: -1503872513399387142
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: game UI01_play_icon_0_1
+      rect:
+        serializedVersion: 2
+        x: 103
+        y: 75
+        width: 17
+        height: 43
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 3234e7f7ed4a74630800000000000000
+      internalID: 3911276076923241251
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: game UI01_play_icon_0_2
+      rect:
+        serializedVersion: 2
+        x: 132
+        y: 79
+        width: 23
+        height: 38
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 0bf12d0eb5af8d9d0800000000000000
+      internalID: -2749172299988852816
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: game UI01_play_icon_0_3
+      rect:
+        serializedVersion: 2
+        x: 153
+        y: 94
+        width: 23
+        height: 23
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: f54c1239d7b686e60800000000000000
+      internalID: 7955726928833528927
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: game UI01_play_icon_0_4
+      rect:
+        serializedVersion: 2
+        x: 185
+        y: 75
+        width: 43
+        height: 40
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 47fc2cec77e2481b0800000000000000
+      internalID: -5655344139965640844
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: game UI01_play_icon_0_5
+      rect:
+        serializedVersion: 2
+        x: 194
+        y: 109
+        width: 9
+        height: 8
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 9a0cdbaa10c933020800000000000000
+      internalID: 2320369763999400105
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: game UI01_play_icon_0_6
+      rect:
+        serializedVersion: 2
+        x: 239
+        y: 83
+        width: 43
+        height: 37
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 6aafb214262622f50800000000000000
+      internalID: 6855149756951034534
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: game UI01_play_icon_0_7
+      rect:
+        serializedVersion: 2
+        x: 89
+        y: 78
+        width: 25
+        height: 24
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: f8b31b58ea3bc0730800000000000000
+      internalID: 3966742933955230607
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: game UI01_play_icon_0_8
+      rect:
+        serializedVersion: 2
+        x: 153
+        y: 78
+        width: 21
+        height: 17
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: f6b9d7fe55f4d5490800000000000000
+      internalID: -7755955752753325201
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: game UI01_play_icon_0_9
+      rect:
+        serializedVersion: 2
+        x: 241
+        y: 77
+        width: 37
+        height: 7
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: ff8394554879457c0800000000000000
+      internalID: -4083472367495857921
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: game UI01_play_icon_0_10
+      rect:
+        serializedVersion: 2
+        x: 84
+        y: 62
+        width: 182
+        height: 11
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: b3b0eca9c328a26d0800000000000000
+      internalID: -3014453803764282565
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: game UI01_play_icon_0_11
+      rect:
+        serializedVersion: 2
+        x: 87
+        y: 33
+        width: 24
+        height: 28
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 3c21ef562babb13d0800000000000000
+      internalID: -3234786631957474621
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: game UI01_play_icon_0_12
+      rect:
+        serializedVersion: 2
+        x: 114
+        y: 33
+        width: 27
+        height: 28
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: b4c9ea4a26051aae0800000000000000
+      internalID: -1539861212984075189
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: game UI01_play_icon_0_13
+      rect:
+        serializedVersion: 2
+        x: 140
+        y: 33
+        width: 31
+        height: 28
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: c524f56b91b021580800000000000000
+      internalID: -8858005312022560164
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: game UI01_play_icon_0_14
+      rect:
+        serializedVersion: 2
+        x: 170
+        y: 33
+        width: 28
+        height: 28
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 55979779041a79ea0800000000000000
+      internalID: -5866042690835482283
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    outline: []
+    customData: 
+    physicsShape: []
+    bones: []
+    spriteID: 5e97eb03825dee720800000000000000
+    internalID: 0
+    vertices: []
+    indices: 
+    edges: []
+    weights: []
+    secondaryTextures: []
+    spriteCustomMetadata:
+      entries: []
+    nameFileIdTable:
+      game UI01_play_icon_0_0: -1503872513399387142
+      game UI01_play_icon_0_1: 3911276076923241251
+      game UI01_play_icon_0_10: -3014453803764282565
+      game UI01_play_icon_0_11: -3234786631957474621
+      game UI01_play_icon_0_12: -1539861212984075189
+      game UI01_play_icon_0_13: -8858005312022560164
+      game UI01_play_icon_0_14: -5866042690835482283
+      game UI01_play_icon_0_2: -2749172299988852816
+      game UI01_play_icon_0_3: 7955726928833528927
+      game UI01_play_icon_0_4: -5655344139965640844
+      game UI01_play_icon_0_5: 2320369763999400105
+      game UI01_play_icon_0_6: 6855149756951034534
+      game UI01_play_icon_0_7: 3966742933955230607
+      game UI01_play_icon_0_8: -7755955752753325201
+      game UI01_play_icon_0_9: -4083472367495857921
+  mipmapLimitGroupName: 
+  pSDRemoveMatte: 0
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
