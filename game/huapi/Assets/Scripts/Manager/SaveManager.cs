@@ -50,6 +50,15 @@ namespace TXGame
             return $"槽位 {slotId}\n{phase}\n心数 {data.hearts}/5\n{time}";
         }
 
+        public static string GetSlotShortSummary(string slotId)
+        {
+            if (!TryLoad(slotId, out SaveData data))
+                return string.Empty;
+
+            string phase = string.IsNullOrEmpty(data.phaseName) ? "未知阶段" : data.phaseName;
+            return $"{phase}\n心力 {data.hearts}/5";
+        }
+
         public static void Delete(string slotId)
         {
             if (!IsValidSlot(slotId)) return;

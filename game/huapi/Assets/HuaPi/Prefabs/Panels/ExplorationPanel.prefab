@@ -143,7 +143,7 @@ MonoBehaviour:
   m_text: "<size=90%>\u5F53\u524D\u76EE\u6807</size>\n\u8C03\u67E5\u955C\u53F0\u9644\u8FD1\u7684\u5F02\u5E38\uFF0C\u5E76\u8BD5\u7740\u4E0E\u65E6\u89D2\u4EA4\u8C08\u3002"
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: b8ba2b86e83004eba94314d17b5168de, type: 2}
-  m_sharedMaterial: {fileID: 1295390146167301837, guid: b8ba2b86e83004eba94314d17b5168de, type: 2}
+  m_sharedMaterial: {fileID: 0}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []
@@ -421,6 +421,7 @@ MonoBehaviour:
   clueToastView: {fileID: 4603739495296425017}
   hotspotItemPrefab: {fileID: 6750029964760023596, guid: a09840e1245ee47a6ab277810587da95, type: 3}
   characterEntryPrefab: {fileID: 5965793501357457131, guid: 8223cd535ebd842faa94562e07c612f6, type: 3}
+  fontAsset: {fileID: 0}
   useDemoData: 1
   demoSceneData: {fileID: 11400000, guid: d6a847c0737c7434eb7a5c22f0c96b35, type: 2}
   demoBackgroundSprite: {fileID: 0}
@@ -494,7 +495,7 @@ MonoBehaviour:
   m_text: "\u955C\u53F0\u4E0B\u7684\u65E7\u620F\u7968"
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: b8ba2b86e83004eba94314d17b5168de, type: 2}
-  m_sharedMaterial: {fileID: 1295390146167301837, guid: b8ba2b86e83004eba94314d17b5168de, type: 2}
+  m_sharedMaterial: {fileID: 0}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []
@@ -621,7 +622,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: UnityEngine.UI::UnityEngine.UI.Image
   m_Material: {fileID: 0}
-  m_Color: {r: 0, g: 0, b: 0, a: 0.5}
+  m_Color: {r: 1, g: 1, b: 1, a: 0}
   m_RaycastTarget: 0
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 1
@@ -741,7 +742,7 @@ MonoBehaviour:
   m_text: "<size=90%>\u5F53\u524D\u5730\u70B9</size>\n<size=120%>\u540E\u53F0\u5316\u5986\u95F4</size>"
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: b8ba2b86e83004eba94314d17b5168de, type: 2}
-  m_sharedMaterial: {fileID: 1295390146167301837, guid: b8ba2b86e83004eba94314d17b5168de, type: 2}
+  m_sharedMaterial: {fileID: 0}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []
@@ -913,7 +914,7 @@ MonoBehaviour:
   m_text: "\u4E00\u5F20\u88AB\u7070\u5C18\u548C\u80ED\u8102\u6CBE\u6C61\u7684\u65E7\u620F\u7968\u2026\u2026"
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: b8ba2b86e83004eba94314d17b5168de, type: 2}
-  m_sharedMaterial: {fileID: 1295390146167301837, guid: b8ba2b86e83004eba94314d17b5168de, type: 2}
+  m_sharedMaterial: {fileID: 0}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []
@@ -1040,7 +1041,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: UnityEngine.UI::UnityEngine.UI.Image
   m_Material: {fileID: 0}
-  m_Color: {r: 0, g: 0, b: 0, a: 0.35}
+  m_Color: {r: 1, g: 1, b: 1, a: 0}
   m_RaycastTarget: 0
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 1
@@ -1181,7 +1182,7 @@ MonoBehaviour:
   m_text: "\u83B7\u5F97\u7EBF\u7D22"
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: b8ba2b86e83004eba94314d17b5168de, type: 2}
-  m_sharedMaterial: {fileID: 1295390146167301837, guid: b8ba2b86e83004eba94314d17b5168de, type: 2}
+  m_sharedMaterial: {fileID: 0}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []

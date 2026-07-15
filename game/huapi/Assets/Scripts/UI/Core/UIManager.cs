@@ -85,6 +85,9 @@ namespace TXGame
 
         public PanelBase OpenPanel(UIPanelType type, object data = null)
         {
+            if (HuapiFullUIInstaller.IsInstalled)
+                return null;
+
             if (_activePanels.ContainsKey(type))
             {
                 _activePanels[type].Refresh(data);

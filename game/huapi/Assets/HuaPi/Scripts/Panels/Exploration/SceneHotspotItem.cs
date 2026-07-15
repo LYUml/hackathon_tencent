@@ -22,7 +22,7 @@ namespace HuaPi.UI.Panels.Exploration
         [SerializeField] private TextMeshProUGUI nameLabel; // 物件名称（Hover 时显示）
 
         [Header("Hover Settings")]
-        [SerializeField] private Color idleColor = new Color(0, 0, 0, 0.05f);
+        [SerializeField] private Color idleColor = Color.clear;
         [SerializeField] private Color hoverColor = new Color(0.85f, 0.75f, 0.55f, 0.25f);
         [SerializeField] private Color hoverBorderColor = new Color(0.85f, 0.75f, 0.55f, 0.6f);
         [SerializeField] private float hoverFadeSpeed = 8f;
@@ -113,7 +113,7 @@ namespace HuaPi.UI.Panels.Exploration
         {
             isDiscovered = true;
             // 已调查后，idle 状态更淡，hover 状态更弱
-            idleColor = new Color(0, 0, 0, 0.02f);
+            idleColor = Color.clear;
             hoverColor = new Color(0.85f, 0.75f, 0.55f, 0.15f);
         }
 

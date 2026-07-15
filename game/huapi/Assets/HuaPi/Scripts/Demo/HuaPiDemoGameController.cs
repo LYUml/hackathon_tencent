@@ -111,6 +111,10 @@ namespace HuaPi.Demo
         [RuntimeInitializeOnLoadMethod(RuntimeInitializeLoadType.AfterSceneLoad)]
         private static void Bootstrap()
         {
+            if (TXGame.HuapiFullUIInstaller.IsInstalled ||
+                FindAnyObjectByType<TXGame.HuapiFullUIInstaller>() != null)
+                return;
+
             if (FindAnyObjectByType<HuaPiDemoGameController>() != null) return;
 
             var go = new GameObject("HuaPi Demo Game Controller");
@@ -120,6 +124,13 @@ namespace HuaPi.Demo
 
         private void Awake()
         {
+            if (TXGame.HuapiFullUIInstaller.IsInstalled ||
+                FindAnyObjectByType<TXGame.HuapiFullUIInstaller>() != null)
+            {
+                Destroy(gameObject);
+                return;
+            }
+
             EnsureEventSystem();
             HuaPiAudioManager.EnsureInstance();
             SeedData();
@@ -128,6 +139,10 @@ namespace HuaPi.Demo
 
         private void Start()
         {
+            if (TXGame.HuapiFullUIInstaller.IsInstalled ||
+                FindAnyObjectByType<TXGame.HuapiFullUIInstaller>() != null)
+                return;
+
             ShowMainMenu();
         }
 

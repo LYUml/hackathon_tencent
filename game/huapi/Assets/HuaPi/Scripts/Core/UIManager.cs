@@ -77,6 +77,10 @@ namespace HuaPi.UI.Core
 
         private void Start()
         {
+            if (TXGame.HuapiFullUIInstaller.IsInstalled ||
+                FindAnyObjectByType<TXGame.HuapiFullUIInstaller>() != null)
+                return;
+
             if (openMainMenuOnStart && _panelPrefabs.ContainsKey(UIPanelType.MainMenu))
             {
                 OpenPanel(UIPanelType.MainMenu);
@@ -85,6 +89,11 @@ namespace HuaPi.UI.Core
 
         private void Update()
         {
+            if (TXGame.HuapiFullUIInstaller.IsInstalled)
+            {
+                return;
+            }
+
             if (IsEscapePressed())
             {
                 OnEscapePressed();
@@ -122,6 +131,9 @@ namespace HuaPi.UI.Core
         /// </summary>
         public PanelBase OpenPanel(UIPanelType type, object data = null)
         {
+            if (TXGame.HuapiFullUIInstaller.IsInstalled)
+                return null;
+
             if (_activePanels.ContainsKey(type))
             {
                 _activePanels[type].Refresh(data);

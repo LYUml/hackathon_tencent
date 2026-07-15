@@ -7,6 +7,7 @@ using UnityEngine;
 using UnityEngine.EventSystems;
 using UnityEngine.InputSystem;
 using UnityEngine.InputSystem.UI;
+using UnityEngine.TextCore.LowLevel;
 using UnityEngine.UI;
 #if UNITY_EDITOR
 using UnityEditor;
@@ -32,6 +33,7 @@ namespace TXGame
             CrimeScene,
             SceneMap,
             Guide,
+            Credits,
             Dialogue,
             Clues,
             Archive,
@@ -175,10 +177,22 @@ namespace TXGame
         private AudioClip hintClip;
         private bool pauseOpenedFromMainMenu;
         private bool guideOpenedFromMainMenu;
+        private float musicVolume = 0.26f;
+        private float sfxVolume = 0.48f;
+        private float textSpeed = 0.5f;
         private static Font runtimeFont;
+        private static TMP_FontAsset runtimeTmpFont;
+        private float nextTmpFontRefreshTime;
+        private const int DefaultChineseFontSize = 32;
+        private const int DefaultEnglishFontSize = 26;
+        private const int StoryBodyFontSize = 32;
+        private const int StoryBodyMinimumFontSize = 30;
 
-        private static readonly Color Ink = Hex(0x070504, 0.92f);
-        private static readonly Color Dark = Hex(0x15100D, 0.94f);
+        private static readonly Color Clear = new Color(1f, 1f, 1f, 0f);
+        private static readonly Color StoryBackdrop = new Color(0.015f, 0.012f, 0.010f, 0.78f);
+        private static readonly Color StoryShade = new Color(0f, 0f, 0f, 0.30f);
+        private static readonly Color Ink = Clear;
+        private static readonly Color Dark = Clear;
         private static readonly Color Paper = Hex(0xD8C7A7);
         private static readonly Color PaperText = Hex(0x2D1710);
         private static readonly Color Gold = Hex(0xC9A96E);
@@ -204,13 +218,31 @@ namespace TXGame
         private void Awake()
         {
             IsInstalled = true;
+            SuppressLegacyRuntimeUi();
             ConfigureFullscreenTestMode();
             EnsureEventSystem();
             HideLegacySceneBackground();
             SeedData();
             ResolveCanvases();
+            ApplyRuntimeFontToAllTmpTexts();
             SetupAudio();
             ShowMainMenu();
+        }
+
+        private void SuppressLegacyRuntimeUi()
+        {
+            MonoBehaviour[] behaviours = FindObjectsOfType<MonoBehaviour>(true);
+            foreach (MonoBehaviour behaviour in behaviours)
+            {
+                if (behaviour == null || behaviour == this) continue;
+                Type type = behaviour.GetType();
+                string fullName = type.FullName;
+                if (fullName == "HuaPi.Demo.HuaPiDemoGameController" ||
+                    fullName == "HuaPi.UI.Core.UIManager")
+                {
+                    behaviour.enabled = false;
+                }
+            }
         }
 
         private void OnDestroy()
@@ -225,6 +257,21 @@ namespace TXGame
             if (isTransitioning) return;
 
             if (currentView == View.MainMenu || currentView == View.Intro) return;
+
+            if (Keyboard.current.escapeKey.wasPressedThisFrame)
+            {
+                if (currentView == View.Guide)
+                {
+                    CloseGuide();
+                    return;
+                }
+
+                if (currentView == View.Credits)
+                {
+                    TransitionTo(ShowMainMenu);
+                    return;
+                }
+            }
 
             if (currentView == View.CrimeScene)
             {
@@ -242,6 +289,13 @@ namespace TXGame
             if (Keyboard.current.vKey.wasPressedThisFrame && HasClue("ticket")) TransitionTo(() => ShowPhaseTransition("擦雾", "FOG WIPE", "用证据擦开人物表层的雾。", "开始擦雾", ShowObserve));
             if (Keyboard.current.tKey.wasPressedThisFrame && CanOpenTrial()) TransitionTo(OpenCurrentTrial);
             if (Keyboard.current.escapeKey.wasPressedThisFrame) TogglePause();
+        }
+
+        private void LateUpdate()
+        {
+            if (Time.unscaledTime < nextTmpFontRefreshTime) return;
+            nextTmpFontRefreshTime = Time.unscaledTime + 0.25f;
+            ApplyRuntimeFontToAllTmpTexts();
         }
 
         private void SeedData()
@@ -621,17 +675,23 @@ namespace TXGame
             GameObject go = existing != null ? existing.gameObject : new GameObject(name, typeof(RectTransform));
             go.transform.SetParent(transform, false);
 
-            Canvas canvas = go.GetComponent<Canvas>() ?? go.AddComponent<Canvas>();
+            Canvas canvas = go.GetComponent<Canvas>();
+            if (canvas == null)
+                canvas = go.AddComponent<Canvas>();
             canvas.renderMode = RenderMode.ScreenSpaceOverlay;
             canvas.sortingOrder = sortOrder;
 
-            CanvasScaler scaler = go.GetComponent<CanvasScaler>() ?? go.AddComponent<CanvasScaler>();
+            CanvasScaler scaler = go.GetComponent<CanvasScaler>();
+            if (scaler == null)
+                scaler = go.AddComponent<CanvasScaler>();
             scaler.uiScaleMode = CanvasScaler.ScaleMode.ScaleWithScreenSize;
             scaler.referenceResolution = new Vector2(1920, 1080);
             scaler.screenMatchMode = CanvasScaler.ScreenMatchMode.MatchWidthOrHeight;
             scaler.matchWidthOrHeight = 0.5f;
 
-            if (go.GetComponent<GraphicRaycaster>() == null) go.AddComponent<GraphicRaycaster>();
+            GraphicRaycaster raycaster = go.GetComponent<GraphicRaycaster>();
+            if (raycaster == null)
+                go.AddComponent<GraphicRaycaster>();
             return canvas;
         }
 
@@ -640,35 +700,29 @@ namespace TXGame
             currentView = View.MainMenu;
             Time.timeScale = 0f;
             RectTransform root = BeginLayer(systemCanvas, "MainMenuLayer");
-            FullscreenImage("MenuBackground2026", UIHome + "01home_bg.jpg", new Color(0.06f, 0.035f, 0.028f, 1f), root);
-            FullscreenPanel("MenuReadableShade", new Color(0, 0, 0, 0.38f), root);
-            Panel("MenuTextPanel", new Color(0.015f, 0.012f, 0.010f, 0.78f), new Vector2(0, -18), new Vector2(760, 760), root);
-            Panel("MenuTopLine", Gold, new Vector2(0, 250), new Vector2(560, 3), root);
-            Text("画皮", 78, Gold, TextAlignmentOptions.Center, new Vector2(0, 145), new Vector2(560, 110), root);
-            Text("民国戏园本格推理 Demo", 24, White, TextAlignmentOptions.Center, new Vector2(0, 76), new Vector2(560, 42), root);
-            Text("调查、对话、机关解密与两日案件体验", 19, Muted, TextAlignmentOptions.Center, new Vector2(0, 34), new Vector2(620, 34), root);
+            FullscreenDesignImage("MainMenuDesign2026", UIHome + "01home1.jpg", new Color(0.06f, 0.035f, 0.028f, 1f), root);
 
-            Button("开始游戏", new Vector2(0, -58), new Vector2(320, 58), () => TransitionTo(() => ShowSaveLoad(false)), Dark, White);
-            Button("设置", new Vector2(0, -134), new Vector2(320, 58), () =>
+            TransparentButton("MenuPlay", new Vector2(-715, -382), new Vector2(300, 140), () => TransitionTo(() => ShowSaveLoad(false)));
+            TransparentButton("MenuSettings", new Vector2(-360, -382), new Vector2(300, 140), () =>
             {
                 pauseOpenedFromMainMenu = true;
                 TransitionTo(ShowPauseMenu);
-            }, Dark, White);
-            Button("操作指南", new Vector2(0, -210), new Vector2(320, 58), () =>
+            });
+            TransparentButton("MenuTutorial", new Vector2(0, -382), new Vector2(300, 140), () =>
             {
                 guideOpenedFromMainMenu = true;
                 Time.timeScale = 1f;
                 TransitionTo(ShowGuide);
-            }, Dark, White);
-            Button("制作人员", new Vector2(0, -286), new Vector2(320, 58), () => TransitionTo(ShowCredits), Dark, White);
-            Button("退出游戏", new Vector2(0, -362), new Vector2(320, 58), () =>
+            });
+            TransparentButton("MenuCredits", new Vector2(355, -382), new Vector2(300, 140), () => TransitionTo(ShowCredits));
+            TransparentButton("MenuQuit", new Vector2(715, -382), new Vector2(300, 140), () =>
             {
 #if UNITY_EDITOR
                 UnityEditor.EditorApplication.isPlaying = false;
 #else
                 Application.Quit();
 #endif
-            }, Dark, White);
+            });
         }
 
         private void ShowIntro(int index)
@@ -687,19 +741,20 @@ namespace TXGame
             RectTransform root = BeginLayer(systemCanvas, "IntroLayer");
 
             FullscreenImage("IntroBackground", slide.BackgroundPath, new Color(0.05f, 0.035f, 0.03f, 1f), root);
-            FullscreenPanel("IntroVignette", new Color(0, 0, 0, 0.58f), root);
-            Panel("IntroTextPanel", new Color(0.025f, 0.018f, 0.014f, 0.88f), new Vector2(0, -54), new Vector2(1260, 620), root);
+            FullscreenPanel("IntroVignette", StoryShade, root);
+            Panel("IntroTextPanel", StoryBackdrop, new Vector2(0, -54), new Vector2(1260, 620), root);
             Panel("IntroGoldLine", Gold, new Vector2(0, 270), new Vector2(1260, 4), root);
 
             Text(slide.Caption, 22, Gold, TextAlignmentOptions.Center, new Vector2(0, 224), new Vector2(1080, 34), root);
             Text(slide.Title, 34, White, TextAlignmentOptions.Center, new Vector2(0, 150), new Vector2(1080, 60), root);
-            Text(slide.Body, 22, White, TextAlignmentOptions.Top, new Vector2(0, -128), new Vector2(1080, 280), root);
+            UnityEngine.UI.Text introBodyText = Text(slide.Body, StoryBodyFontSize, White, TextAlignmentOptions.Top, new Vector2(0, -128), new Vector2(1180, 330), root);
+            ConfigureStoryBodyText(introBodyText);
 
             if (!string.IsNullOrEmpty(slide.PortraitPath))
             {
-                Image portrait = ImagePanel("IntroPortrait", slide.PortraitPath, new Color(0.04f, 0.03f, 0.026f, 0.85f), new Vector2(675, -120), new Vector2(230, 430), root);
+                Image portrait = ImagePanel("IntroPortrait", slide.PortraitPath, Clear, new Vector2(675, -120), new Vector2(230, 430), root);
                 portrait.preserveAspect = true;
-                Panel("PortraitBase", new Color(0, 0, 0, 0.45f), new Vector2(675, -345), new Vector2(260, 18), root);
+                Panel("PortraitBase", Clear, new Vector2(675, -345), new Vector2(260, 18), root);
             }
 
             Button(introIndex >= introSlides.Length - 1 ? "进入调查" : "继续", new Vector2(80, -395), new Vector2(220, 58), () =>
@@ -731,13 +786,14 @@ namespace TXGame
             RectTransform root = BeginLayer(systemCanvas, "MonologueLayer");
 
             FullscreenImage("MonologueBackground", slide.BackgroundPath, new Color(0.05f, 0.04f, 0.035f, 1f), root);
-            FullscreenPanel("MonologueShade", new Color(0, 0, 0, 0.38f), root);
-            Panel("MonologueBox", new Color(0.015f, 0.012f, 0.01f, 0.92f), new Vector2(0, -260), new Vector2(1420, 460), root);
-            Panel("MonologueLine", Gold, new Vector2(0, -36), new Vector2(1420, 4), root);
+            FullscreenPanel("MonologueShade", StoryShade, root);
+            Panel("MonologueBox", StoryBackdrop, new Vector2(0, -240), new Vector2(1420, 520), root);
+            Panel("MonologueLine", Gold, new Vector2(0, 0), new Vector2(1420, 4), root);
 
-            Text(slide.Caption, 22, Gold, TextAlignmentOptions.Center, new Vector2(0, -78), new Vector2(980, 34), root);
-            Text(slide.Title, 34, White, TextAlignmentOptions.Center, new Vector2(0, -138), new Vector2(980, 60), root);
-            Text(slide.Body, 22, White, TextAlignmentOptions.Top, new Vector2(0, -320), new Vector2(1240, 190), root);
+            Text(slide.Caption, 24, Gold, TextAlignmentOptions.Center, new Vector2(0, -48), new Vector2(980, 38), root);
+            Text(slide.Title, 38, White, TextAlignmentOptions.Center, new Vector2(0, -112), new Vector2(980, 64), root);
+            UnityEngine.UI.Text monologueBodyText = Text(slide.Body, StoryBodyFontSize, White, TextAlignmentOptions.Top, new Vector2(0, -310), new Vector2(1280, 260), root);
+            ConfigureStoryBodyText(monologueBodyText);
             Button(monologueIndex >= monologueSlides.Length - 1 ? "进入后台" : "继续", new Vector2(80, -465), new Vector2(220, 58), () =>
             {
                 if (monologueIndex >= monologueSlides.Length - 1) TransitionTo(FinishMonologue);
@@ -808,7 +864,7 @@ namespace TXGame
             return fadeOverlay;
         }
 
-        private void Clear()
+        private void ClearSpawnedUi()
         {
             foreach (GameObject go in spawned)
             {
@@ -819,7 +875,7 @@ namespace TXGame
 
         private RectTransform BeginLayer(Canvas canvas, string name, bool dim = true)
         {
-            Clear();
+            ClearSpawnedUi();
             GameObject layer = Track(new GameObject(name, typeof(RectTransform)));
             layer.transform.SetParent(canvas.transform, false);
             currentLayer = layer.GetComponent<RectTransform>();
@@ -833,8 +889,8 @@ namespace TXGame
             currentView = View.Hud;
             RectTransform root = BeginLayer(hudCanvas, "HuapiHUD", false);
             SceneBackgroundImage("GameplayBackground", gameplayBackgroundPath, new Color(0.05f, 0.05f, 0.07f, 1f), root);
-            FullscreenPanel("GameplaySceneShade", new Color(0, 0, 0, 0.02f), root);
-            Panel("TopShade", new Color(0, 0, 0, 0.42f), new Vector2(0, 495), new Vector2(1920, 90), root);
+            FullscreenPanel("GameplaySceneShade", Clear, root);
+            Panel("TopShade", Clear, new Vector2(0, 495), new Vector2(1920, 90), root);
             Text("第一天 · 白天探索 · 薛氏剧团", 26, Gold, TextAlignmentOptions.Left, new Vector2(-860, 500), new Vector2(650, 44), root);
             Text("目标：先调查剧团外景、后台和排练区，夜晚演出会在关键线索后推进", 24, White, TextAlignmentOptions.Left, new Vector2(-860, 462), new Vector2(1100, 38), root);
             HeartBar(root, new Vector2(720, 500));
@@ -851,9 +907,9 @@ namespace TXGame
             gameplayBackgroundPath = scene.BackgroundPath;
             RectTransform root = BeginLayer(hudCanvas, "CrimeSceneLayer", false);
             SceneBackgroundImage("CrimeSceneBackground", gameplayBackgroundPath, new Color(0.05f, 0.045f, 0.04f, 1f), root);
-            FullscreenPanel("CrimeSceneShade", new Color(0, 0, 0, 0.03f), root);
+            FullscreenPanel("CrimeSceneShade", Clear, root);
 
-            Panel("TopShade", new Color(0, 0, 0, 0.62f), new Vector2(0, 486), new Vector2(1920, 122), root);
+            Panel("TopShade", Clear, new Vector2(0, 486), new Vector2(1920, 122), root);
             Text(PhaseTitle() + " / " + scene.Name, 24, Gold, TextAlignmentOptions.Center, new Vector2(-515, 514), new Vector2(720, 36), root);
             Text(scene.Description, 17, White, TextAlignmentOptions.Center, new Vector2(-515, 456), new Vector2(820, 34), root);
             HeartBar(root, new Vector2(520, 505));
@@ -875,7 +931,7 @@ namespace TXGame
             bool showEvidenceBoard = evidenceBoardVisible;
             if (showEvidenceBoard)
             {
-                Panel("EvidenceBoard", new Color(0.02f, 0.016f, 0.014f, 0.88f), new Vector2(-720, -155), new Vector2(390, 440), root);
+                Panel("EvidenceBoard", Clear, new Vector2(-720, -155), new Vector2(390, 440), root);
                 Text("已获线索", 30, Gold, TextAlignmentOptions.Center, new Vector2(-720, 25), new Vector2(300, 44), root);
                 int shown = 0;
                 foreach (Clue clue in clues.Values)
@@ -891,7 +947,7 @@ namespace TXGame
                     Text("按 C 查看全部线索", 18, Muted, TextAlignmentOptions.Center, new Vector2(-720, -310), new Vector2(300, 30), root);
             }
 
-            Panel("SearchHint", new Color(0.025f, 0.018f, 0.015f, 0.72f), new Vector2(-515, -474), new Vector2(520, 48), root);
+            Panel("SearchHint", Clear, new Vector2(-515, -474), new Vector2(520, 48), root);
             Text(sceneHotspotCount > 0 ? SearchHintText() : scene.Name + "：此处可自由查看，关键线索会在第二天变化。", 17, White, TextAlignmentOptions.Center, new Vector2(-515, -474), new Vector2(480, 32), root);
             DrawInvestigationHint(root);
 
@@ -954,7 +1010,7 @@ namespace TXGame
                 Text("?", 18, PaperText, TextAlignmentOptions.Center, hotspot.Position + new Vector2(0, 1), new Vector2(28, 24), currentLayer);
             }
 
-            Image hoverPanel = Panel("HotspotHover", new Color(0.025f, 0.018f, 0.015f, 0.88f), hotspot.Position + new Vector2(0, size.y * 0.5f + 30), new Vector2(220, 46), currentLayer);
+            Image hoverPanel = Panel("HotspotHover", Clear, hotspot.Position + new Vector2(0, size.y * 0.5f + 30), new Vector2(220, 46), currentLayer);
             string hoverText = IsLockedForCurrentPhase(hotspot) ? "第二天再查：" + hotspot.Name : (hotspot.Examined ? "已调查：" + hotspot.Name : "可调查：" + hotspot.Name);
             Text(hoverText, 18, hotspot.Examined ? Muted : Gold, TextAlignmentOptions.Center, Vector2.zero, new Vector2(200, 32), hoverPanel.rectTransform);
             hoverPanel.gameObject.SetActive(false);
@@ -982,11 +1038,11 @@ namespace TXGame
             {
                 if (actor.SceneId != currentSceneId) continue;
 
-                Image shadow = Panel("ActorShadow", new Color(0, 0, 0, 0.30f), actor.Position + new Vector2(0, -actor.Size.y * 0.48f + 10), new Vector2(actor.Size.x * 0.70f, 22), currentLayer);
+                Image shadow = Panel("ActorShadow", Clear, actor.Position + new Vector2(0, -actor.Size.y * 0.48f + 10), new Vector2(actor.Size.x * 0.70f, 22), currentLayer);
                 shadow.raycastTarget = false;
-                Image actorImage = ImagePanel("Actor_" + actor.Id, actor.PortraitPath, new Color(0, 0, 0, 0.01f), actor.Position, actor.Size, currentLayer);
+                Image actorImage = ImagePanel("Actor_" + actor.Id, actor.PortraitPath, Clear, actor.Position, actor.Size, currentLayer);
                 actorImage.raycastTarget = false;
-                Image hoverPanel = Panel("ActorHover", new Color(0.025f, 0.018f, 0.015f, 0.90f), actor.Position + new Vector2(0, -actor.Size.y * 0.48f - 26), new Vector2(190, 42), currentLayer);
+                Image hoverPanel = Panel("ActorHover", Clear, actor.Position + new Vector2(0, -actor.Size.y * 0.48f - 26), new Vector2(190, 42), currentLayer);
                 Text("交谈：" + actor.Name, 18, Gold, TextAlignmentOptions.Center, Vector2.zero, new Vector2(170, 30), hoverPanel.rectTransform);
                 hoverPanel.gameObject.SetActive(false);
 
@@ -1020,7 +1076,7 @@ namespace TXGame
         private void DrawInvestigationHint(RectTransform root)
         {
             string hint = NextInvestigationHint();
-            Panel("NextHintPanel", new Color(0.05f, 0.025f, 0.015f, 0.78f), new Vector2(0, -420), new Vector2(760, 46), root);
+            Panel("NextHintPanel", Clear, new Vector2(0, -420), new Vector2(760, 46), root);
             Text(hint, 18, Gold, TextAlignmentOptions.Center, new Vector2(0, -420), new Vector2(720, 30), root);
         }
 
@@ -1090,7 +1146,7 @@ namespace TXGame
 
         private void DrawSceneNavigation(RectTransform root, SceneNode scene)
         {
-            Panel("MovePad", new Color(0.02f, 0.015f, 0.012f, 0.72f), new Vector2(640, -385), new Vector2(310, 210), root);
+            Panel("MovePad", Clear, new Vector2(640, -385), new Vector2(310, 210), root);
             Text("方向", 18, Muted, TextAlignmentOptions.Center, new Vector2(640, -300), new Vector2(160, 30), root);
             if (CanMove(scene.Front)) Button("↑\n前", new Vector2(640, -335), new Vector2(90, 58), () => MoveScene(scene.Front, "前"));
             if (CanMove(scene.Left)) Button("←\n左", new Vector2(585, -400), new Vector2(90, 58), () => MoveScene(scene.Left, "左"));
@@ -1125,7 +1181,7 @@ namespace TXGame
             currentView = View.SceneMap;
             RectTransform root = BeginLayer(systemCanvas, "SceneMapLayer");
             FullscreenImage("GeneratedSceneMap", "Assets/Art/Sprites/Generated/generated_overall_scene_map.png", new Color(0.05f, 0.04f, 0.035f, 1f), root);
-            FullscreenPanel("MapShade", new Color(0, 0, 0, 0.38f), root);
+            FullscreenPanel("MapShade", Clear, root);
             ImagePanel("MapFrame2026", UIWindow + "widnow.frame02.png", new Color(0, 0, 0, 0), new Vector2(0, 5), new Vector2(1321, 614), root);
             Text("场景地图 / 当前：" + CurrentScene().Name, 30, Gold, TextAlignmentOptions.Center, new Vector2(0, 320), new Vector2(820, 44), root);
             Text("再次按 M 返回游戏界面", 22, White, TextAlignmentOptions.Center, new Vector2(0, -318), new Vector2(620, 36), root);
@@ -1151,7 +1207,7 @@ namespace TXGame
             {
                 int pending = PendingPuzzleCount(scene.Id);
                 bool current = string.Equals(scene.Id, currentSceneId, StringComparison.OrdinalIgnoreCase);
-                Color nodeColor = pending > 0 ? new Color(0.36f, 0.12f, 0.06f, 0.86f) : new Color(0.05f, 0.035f, 0.025f, 0.74f);
+                Color nodeColor = pending > 0 ? new Color(0.36f, 0.12f, 0.06f, 0.86f) : Clear;
                 Vector2 nodeSize = current ? new Vector2(132, 54) : new Vector2(112, 46);
                 Panel("MapHintNode_" + scene.Id, nodeColor, scene.MapPosition, nodeSize, root);
                 Text(scene.Name, current ? 18 : 16, current ? Gold : White, TextAlignmentOptions.Center, scene.MapPosition + new Vector2(0, 6), new Vector2(nodeSize.x - 12, 24), root);
@@ -1162,7 +1218,7 @@ namespace TXGame
                 }
             }
 
-            Panel("MapMechanismHintPanel", new Color(0.02f, 0.012f, 0.01f, 0.82f), new Vector2(555, 20), new Vector2(470, 450), root);
+            Panel("MapMechanismHintPanel", Clear, new Vector2(555, 20), new Vector2(470, 450), root);
             Text("机关提示", 30, Gold, TextAlignmentOptions.Center, new Vector2(555, 200), new Vector2(390, 44), root);
             Text("按地图节点数字去找，先解当前阶段未完成的机关。", 18, Muted, TextAlignmentOptions.Center, new Vector2(555, 162), new Vector2(410, 34), root);
 
@@ -1175,7 +1231,7 @@ namespace TXGame
                 string line = scene.Name + "：" + hotspot.Name;
                 string hint = string.IsNullOrEmpty(hotspot.PuzzleHint) ? "观察房间里的异常位置。" : hotspot.PuzzleHint;
                 float y = 112 - row * 76;
-                Panel("MapPuzzleRow_" + scene.Id, new Color(0.12f, 0.065f, 0.035f, 0.78f), new Vector2(555, y), new Vector2(400, 62), root);
+                Panel("MapPuzzleRow_" + scene.Id, Clear, new Vector2(555, y), new Vector2(400, 62), root);
                 Text(line, 19, Gold, TextAlignmentOptions.Left, new Vector2(555, y + 12), new Vector2(360, 24), root);
                 Text(hint, 15, White, TextAlignmentOptions.Left, new Vector2(555, y - 13), new Vector2(360, 24), root);
                 row++;
@@ -1281,7 +1337,7 @@ namespace TXGame
                 return;
             }
 
-            Panel("HotspotBlocker", new Color(0, 0, 0, 0.52f), Vector2.zero, new Vector2(1920, 1080), currentLayer);
+            Panel("HotspotBlocker", Clear, Vector2.zero, new Vector2(1920, 1080), currentLayer);
             Panel("HotspotPaper", Paper, new Vector2(0, -20), new Vector2(960, 430), currentLayer);
             Text(hotspot.Name, 42, PaperText, TextAlignmentOptions.Center, new Vector2(0, 115), new Vector2(780, 60), currentLayer);
             Text(hotspot.Description, 28, PaperText, TextAlignmentOptions.TopLeft, new Vector2(0, -20), new Vector2(800, 150), currentLayer);
@@ -1307,8 +1363,8 @@ namespace TXGame
             currentView = View.CrimeScene;
             RectTransform root = BeginLayer(popupCanvas, "FacePuzzleLayer", false);
             SceneBackgroundImage("PuzzleBackground", CurrentScene().BackgroundPath, new Color(0.05f, 0.045f, 0.04f, 1f), root);
-            FullscreenPanel("PuzzleShade", new Color(0, 0, 0, 0.48f), root);
-            Panel("PuzzleBoard", new Color(0.025f, 0.018f, 0.015f, 0.94f), new Vector2(0, -25), new Vector2(1180, 680), root);
+            FullscreenPanel("PuzzleShade", Clear, root);
+            Panel("PuzzleBoard", Clear, new Vector2(0, -25), new Vector2(1180, 680), root);
             Text("脸谱五色", 42, Gold, TextAlignmentOptions.Center, new Vector2(0, 230), new Vector2(720, 58), root);
             Text("按旧戏单的行当顺序摆回脸谱。提示：白脸不在台前。", 24, White, TextAlignmentOptions.Center, new Vector2(0, 176), new Vector2(900, 42), root);
             Text("当前顺序：" + FacePuzzleProgress(), 24, Muted, TextAlignmentOptions.Center, new Vector2(0, 116), new Vector2(860, 44), root);
@@ -1366,8 +1422,8 @@ namespace TXGame
             currentView = View.CrimeScene;
             RectTransform root = BeginLayer(popupCanvas, "MechanismPuzzleLayer", false);
             SceneBackgroundImage("MechanismBackground", CurrentScene().BackgroundPath, new Color(0.05f, 0.045f, 0.04f, 1f), root);
-            FullscreenPanel("MechanismShade", new Color(0, 0, 0, 0.52f), root);
-            Panel("MechanismBoard", new Color(0.025f, 0.018f, 0.015f, 0.95f), new Vector2(0, -15), new Vector2(1240, 690), root);
+            FullscreenPanel("MechanismShade", Clear, root);
+            Panel("MechanismBoard", Clear, new Vector2(0, -15), new Vector2(1240, 690), root);
             Panel("MechanismLine", Gold, new Vector2(0, 292), new Vector2(1040, 4), root);
 
             Text(title, 44, Gold, TextAlignmentOptions.Center, new Vector2(0, 230), new Vector2(900, 62), root);
@@ -1392,8 +1448,8 @@ namespace TXGame
             currentView = View.CrimeScene;
             RectTransform root = BeginLayer(popupCanvas, "DragMechanismPuzzleLayer", false);
             SceneBackgroundImage("DragMechanismBackground", CurrentScene().BackgroundPath, new Color(0.05f, 0.045f, 0.04f, 1f), root);
-            FullscreenPanel("DragMechanismShade", new Color(0, 0, 0, 0.58f), root);
-            ImagePanel("DragMechanismFrame", UIWindow + "widnow.frame02.png", new Color(0.025f, 0.018f, 0.015f, 0.95f), Vector2.zero, new Vector2(1321, 614), root);
+            FullscreenPanel("DragMechanismShade", Clear, root);
+            ImagePanel("DragMechanismFrame", UIWindow + "widnow.frame02.png", Clear, Vector2.zero, new Vector2(1321, 614), root);
 
             Text(title, 46, Gold, TextAlignmentOptions.Center, new Vector2(0, 250), new Vector2(900, 64), root);
             Text(prompt, 22, White, TextAlignmentOptions.Center, new Vector2(0, 196), new Vector2(980, 48), root);
@@ -1412,7 +1468,7 @@ namespace TXGame
                 string target = targets[i];
                 Vector2 slotPos = new Vector2(startX + i * 185f, 72);
                 slotPositions.Add(new DragSlot { Label = target, Position = slotPos });
-                Panel("DropSlot_" + target, new Color(0.08f, 0.045f, 0.025f, 0.82f), slotPos, new Vector2(142, 88), root);
+                Panel("DropSlot_" + target, Clear, slotPos, new Vector2(142, 88), root);
                 Panel("DropSlotLine_" + target, Gold, slotPos + new Vector2(0, -48), new Vector2(142, 4), root);
                 Text((i + 1).ToString(), 26, Gold, TextAlignmentOptions.Center, slotPos + new Vector2(0, 4), new Vector2(80, 40), root);
             }
@@ -1431,15 +1487,15 @@ namespace TXGame
         {
             if (kind == "latch")
             {
-                Panel("DoorDiagram", new Color(0.12f, 0.07f, 0.04f, 0.72f), new Vector2(0, 78), new Vector2(760, 230), root);
-                Panel("DoorGap", new Color(0.02f, 0.012f, 0.01f, 0.9f), new Vector2(0, 78), new Vector2(6, 230), root);
+                Panel("DoorDiagram", Clear, new Vector2(0, 78), new Vector2(760, 230), root);
+                Panel("DoorGap", Clear, new Vector2(0, 78), new Vector2(6, 230), root);
                 Panel("DoorLatch", Gold, new Vector2(-205, 118), new Vector2(170, 12), root);
                 Panel("DoorLatch2", Gold, new Vector2(205, 36), new Vector2(170, 12), root);
                 Text("门板 / 门闩 / 细线孔", 18, Muted, TextAlignmentOptions.Center, new Vector2(0, -25), new Vector2(520, 34), root);
             }
             else if (kind == "gong")
             {
-                Panel("GongScore", new Color(0.09f, 0.05f, 0.025f, 0.72f), new Vector2(0, 78), new Vector2(760, 230), root);
+                Panel("GongScore", Clear, new Vector2(0, 78), new Vector2(760, 230), root);
                 for (int i = 0; i < 5; i++)
                     Panel("ScoreLine", Gold, new Vector2(0, 15 + i * 34), new Vector2(660, 3), root);
                 Text("锣鼓谱格", 18, Muted, TextAlignmentOptions.Center, new Vector2(0, -25), new Vector2(520, 34), root);
@@ -1454,7 +1510,7 @@ namespace TXGame
             }
             else if (kind == "body")
             {
-                Panel("BodyTrace", new Color(0.10f, 0.045f, 0.035f, 0.76f), new Vector2(0, 78), new Vector2(760, 230), root);
+                Panel("BodyTrace", Clear, new Vector2(0, 78), new Vector2(760, 230), root);
                 Panel("BodyTraceLine", Red, new Vector2(-50, 92), new Vector2(520, 10), root);
                 Panel("BodyMaskMark", Gold, new Vector2(-270, 126), new Vector2(90, 48), root);
                 Panel("BodyStageMark", new Color(0.35f, 0.25f, 0.14f, 0.9f), new Vector2(270, 48), new Vector2(120, 72), root);
@@ -1462,7 +1518,7 @@ namespace TXGame
             }
             else if (kind == "medicine")
             {
-                Panel("MedicineDesk", new Color(0.10f, 0.055f, 0.035f, 0.76f), new Vector2(0, 70), new Vector2(720, 200), root);
+                Panel("MedicineDesk", Clear, new Vector2(0, 70), new Vector2(720, 200), root);
                 Panel("MedicineBottle", Gold, new Vector2(-210, 112), new Vector2(64, 120), root);
                 Panel("MedicineCup", new Color(0.7f, 0.65f, 0.52f, 0.9f), new Vector2(0, 92), new Vector2(92, 78), root);
                 Panel("MedicinePowder", White, new Vector2(210, 62), new Vector2(120, 22), root);
@@ -1470,14 +1526,14 @@ namespace TXGame
             }
             else if (kind == "schedule")
             {
-                Panel("ScheduleBoard", new Color(0.10f, 0.06f, 0.035f, 0.76f), new Vector2(0, 78), new Vector2(760, 230), root);
+                Panel("ScheduleBoard", Clear, new Vector2(0, 78), new Vector2(760, 230), root);
                 for (int i = 0; i < 3; i++)
                     Panel("ScheduleLine", Gold, new Vector2(0, 138 - i * 58), new Vector2(560, 4), root);
                 Text("旧案 / 今日 / 夜场", 18, Muted, TextAlignmentOptions.Center, new Vector2(0, -25), new Vector2(620, 34), root);
             }
             else if (kind == "ring")
             {
-                Panel("RingPath", new Color(0.08f, 0.045f, 0.03f, 0.78f), new Vector2(0, 78), new Vector2(760, 230), root);
+                Panel("RingPath", Clear, new Vector2(0, 78), new Vector2(760, 230), root);
                 Panel("RingRail", Gold, new Vector2(-150, 135), new Vector2(300, 7), root);
                 Panel("RingMark", new Color(0.6f, 0.46f, 0.2f, 0.95f), new Vector2(80, 82), new Vector2(92, 92), root);
                 Panel("RingDoor", Red, new Vector2(260, 52), new Vector2(120, 18), root);
@@ -1485,7 +1541,7 @@ namespace TXGame
             }
             else if (kind == "curtain")
             {
-                Panel("CurtainPanel", new Color(0.09f, 0.04f, 0.035f, 0.76f), new Vector2(0, 78), new Vector2(760, 230), root);
+                Panel("CurtainPanel", Clear, new Vector2(0, 78), new Vector2(760, 230), root);
                 Panel("CurtainLeft", Red, new Vector2(-120, 86), new Vector2(8, 180), root);
                 Panel("CurtainRight", Red, new Vector2(120, 86), new Vector2(8, 180), root);
                 Panel("CurtainThread", Gold, new Vector2(0, 122), new Vector2(380, 6), root);
@@ -1493,7 +1549,7 @@ namespace TXGame
             }
             else
             {
-                Panel("PuppetCase", new Color(0.12f, 0.07f, 0.04f, 0.78f), new Vector2(0, 92), new Vector2(620, 210), root);
+                Panel("PuppetCase", Clear, new Vector2(0, 92), new Vector2(620, 210), root);
                 Panel("PuppetCaseSeal", Red, new Vector2(0, 92), new Vector2(520, 18), root);
                 Panel("PuppetLeft", Gold, new Vector2(-110, 128), new Vector2(70, 120), root);
                 Panel("PuppetRight", Gold, new Vector2(110, 128), new Vector2(70, 120), root);
@@ -1689,45 +1745,51 @@ namespace TXGame
         {
             currentView = View.Guide;
             RectTransform root = BeginLayer(systemCanvas, "GuideLayer", false);
-            FullscreenImage("TutorialBackground2026", UISettings + "02settings_bg.jpg", Color.black, root);
-            FullscreenPanel("TutorialShade", new Color(0, 0, 0, 0.52f), root);
-            ImagePanel("TutorialFrame2026", UITutorial + "03tutorial_widnow.frame.png", new Color(0, 0, 0, 0), Vector2.zero, new Vector2(1450, 748), root);
-            Text("操作指南", 52, Gold, TextAlignmentOptions.Center, new Vector2(0, 300), new Vector2(760, 80), root);
+            FullscreenDesignImage("TutorialBackground2026", UISettings + "02settings_bg.jpg", Clear, root);
+            ImagePanel("TutorialBoard2026", UITutorial + "03tutorial_widnow.frame.png", new Color(0, 0, 0, 0), Vector2.zero, new Vector2(1746, 900), root);
             string[] rows =
             {
                 "WASD / 方向键：移动侦探",
-                "E / 交互键：调查场景热点或人物",
-                "C：打开条状证据背包",
+                "E：调查场景热点 / 与人物对话",
+                "C：打开线索背包",
                 "X：打开人物档案",
-                "V：进入擦雾界面",
+                "V：进入观察画皮",
                 "T：进入推理判定",
-                "Esc：暂停 / 返回",
-                "错误判定：扣一颗心，五颗心归零失败"
+                "Esc：暂停 / 返回"
             };
             for (int i = 0; i < rows.Length; i++)
-                Text(rows[i], 30, White, TextAlignmentOptions.Left, new Vector2(-500, 205 - i * 54), new Vector2(1000, 44), root);
-            ImageButton("GuideBack", UIWindow + "back.btn.png", new Vector2(0, -345), new Vector2(201, 65), () =>
+                Text(rows[i], 32, White, TextAlignmentOptions.Left, new Vector2(0, 180 - i * 62), new Vector2(900, 48), root);
+
+            TransparentButton("GuideClose", new Vector2(830, 455), new Vector2(120, 120), CloseGuide);
+        }
+
+        private void CloseGuide()
+        {
+            if (guideOpenedFromMainMenu)
             {
-                if (guideOpenedFromMainMenu)
-                {
-                    guideOpenedFromMainMenu = false;
-                    TransitionTo(ShowMainMenu);
-                }
-                else TransitionTo(ShowCrimeScene);
-            });
+                guideOpenedFromMainMenu = false;
+                TransitionTo(ShowMainMenu);
+            }
+            else TransitionTo(ShowCrimeScene);
         }
 
         private void ShowCredits()
         {
-            currentView = View.Guide;
+            currentView = View.Credits;
             RectTransform root = BeginLayer(systemCanvas, "CreditsLayer", false);
-            FullscreenPanel("CreditsBlackBackground", Color.black, root);
-            ImagePanel("CreditsFrame2026", UIWindow + "widnow.frame02.png", new Color(0, 0, 0, 0), Vector2.zero, new Vector2(1321, 614), root);
-            Text("制作人员", 52, Gold, TextAlignmentOptions.Center, new Vector2(0, 265), new Vector2(760, 78), root);
-            Text("三人团队", 24, Muted, TextAlignmentOptions.Center, new Vector2(0, 210), new Vector2(500, 40), root);
-            Text("孔陌羚\n吕明樑\n曾堉琳", 34, White, TextAlignmentOptions.Center, new Vector2(0, 40), new Vector2(800, 210), root);
-            Text("薛氏戏园 · 本格推理 Demo", 22, Muted, TextAlignmentOptions.Center, new Vector2(0, -160), new Vector2(760, 40), root);
-            ImageButton("CreditsBack", UIWindow + "back.btn.png", new Vector2(0, -340), new Vector2(201, 65), () => TransitionTo(ShowMainMenu));
+            FullscreenDesignImage("CreditsDesign2026", UICredits + "04credits.jpg", Clear, root);
+            Vector2 creditNameSize = new Vector2(420, 34);
+            Vector2 creditEnglishSize = new Vector2(420, 28);
+            float creditNameX = -145f;
+            string[] chineseNames = { "孔陌羚", "吕明樑", "曾堉琳", "孔陌羚", "吕明樑" };
+            string[] englishNames = { "Moling Kong", "Mingliang Lyu", "Yulin Zeng", "Moling Kong", "Mingliang Lyu" };
+            float[] creditLineY = { 150f, 38f, -69f, -172f, -280f };
+            for (int i = 0; i < creditLineY.Length; i++)
+            {
+                Text(chineseNames[i], 26, White, TextAlignmentOptions.Center, new Vector2(creditNameX, creditLineY[i] + 24f), creditNameSize, root);
+                Text(englishNames[i], 18, Muted, TextAlignmentOptions.Center, new Vector2(creditNameX, creditLineY[i] - 28f), creditEnglishSize, root);
+            }
+            TransparentButton("CreditsClose", new Vector2(830, 455), new Vector2(120, 120), () => TransitionTo(ShowMainMenu));
         }
 
         private void ShowDialogue()
@@ -1773,7 +1835,7 @@ namespace TXGame
             RectTransform root = BeginLayer(dialogueCanvas, "DialogueLayer", false);
             SceneNode scene = CurrentScene();
             SceneBackgroundImage("DialogueBackground", scene.BackgroundPath, new Color(0.05f, 0.045f, 0.04f, 1f), root);
-            FullscreenPanel("DialogueShade", new Color(0, 0, 0, 0.24f), root);
+            FullscreenPanel("DialogueShade", Clear, root);
 
             SceneActor actor = FindSceneActor(actorId) ?? new SceneActor
             {
@@ -1784,7 +1846,7 @@ namespace TXGame
                 Size = new Vector2(300, 560)
             };
 
-            ImagePanel("DialogueActor_" + actor.Id, actor.PortraitPath, new Color(0, 0, 0, 0.01f), new Vector2(-610, -100), new Vector2(300, 555), root);
+            ImagePanel("DialogueActor_" + actor.Id, actor.PortraitPath, Clear, new Vector2(-610, -100), new Vector2(300, 555), root);
             ImagePanel("DialogueBox2026", UIWindow + "dialoguebox.png", new Color(0, 0, 0, 0), new Vector2(0, -446), new Vector2(1920, 188), root);
             ImagePanel("EvidenceTalkFrame2026", UIWindow + "widnow.frame01.png", new Color(0, 0, 0, 0), new Vector2(760, -345), new Vector2(285, 276), root);
             Text(actor.Name, 28, Gold, TextAlignmentOptions.Center, new Vector2(-520, -362), new Vector2(300, 42), root);
@@ -1801,7 +1863,7 @@ namespace TXGame
             RectTransform root = BeginLayer(dialogueCanvas, "DialogueLayer", false);
             SceneNode scene = CurrentScene();
             SceneBackgroundImage("DialogueBackground", scene.BackgroundPath, new Color(0.05f, 0.045f, 0.04f, 1f), root);
-            FullscreenPanel("DialogueShade", new Color(0, 0, 0, 0.24f), root);
+            FullscreenPanel("DialogueShade", Clear, root);
 
             actor = FindSceneActor(actorId) ?? new SceneActor
             {
@@ -1812,7 +1874,7 @@ namespace TXGame
                 Size = new Vector2(300, 560)
             };
 
-            ImagePanel("DialogueActor_" + actor.Id, actor.PortraitPath, new Color(0, 0, 0, 0.01f), new Vector2(-610, -100), new Vector2(300, 555), root);
+            ImagePanel("DialogueActor_" + actor.Id, actor.PortraitPath, Clear, new Vector2(-610, -100), new Vector2(300, 555), root);
             ImagePanel("DialogueBox2026", UIWindow + "dialoguebox.png", new Color(0, 0, 0, 0), new Vector2(0, -446), new Vector2(1920, 188), root);
             return root;
         }
@@ -1985,7 +2047,7 @@ namespace TXGame
         {
             currentView = View.Clues;
             RectTransform root = BeginLayer(normalCanvas, "ClueLayer", false);
-            FullscreenPanel("ClueBlackBackground", Color.black, root);
+            FullscreenPanel("ClueBlackBackground", Clear, root);
             ImagePanel("ClueFrame2026", UIWindow + "widnow.frame02.png", new Color(0, 0, 0, 0), new Vector2(0, 10), new Vector2(1321, 614), root);
             Text("线索背包", 52, Gold, TextAlignmentOptions.Center, new Vector2(0, 300), new Vector2(760, 80), root);
             Text("条状证据用于擦雾和推理判定；对话已改为纯盘问选项。再次按 C 返回游戏界面。", 22, Muted, TextAlignmentOptions.Center, new Vector2(0, 245), new Vector2(1000, 44), root);
@@ -2014,7 +2076,7 @@ namespace TXGame
         {
             currentView = View.Archive;
             RectTransform root = BeginLayer(normalCanvas, "ArchiveLayer", false);
-            FullscreenPanel("ArchiveBlackBackground", Color.black, root);
+            FullscreenPanel("ArchiveBlackBackground", Clear, root);
             ImagePanel("ArchiveFrame2026", UIWindow + "widnow.frame02.png", new Color(0, 0, 0, 0), new Vector2(0, 5), new Vector2(1321, 614), root);
             Text("人物档案", 46, Gold, TextAlignmentOptions.Center, new Vector2(0, 368), new Vector2(760, 64), root);
             Text("口供、旧案关系和当前嫌疑程度。", 21, Muted, TextAlignmentOptions.Center, new Vector2(0, 320), new Vector2(900, 36), root);
@@ -2023,7 +2085,7 @@ namespace TXGame
             foreach (Character c in characters.Values)
             {
                 Vector2 pos = new Vector2(-350 + (index % 2) * 700, 150 - (index / 2) * 245);
-                Panel("ArchiveCard", new Color(0.075f, 0.055f, 0.045f, 0.96f), pos, new Vector2(620, 205), root);
+                Panel("ArchiveCard", Clear, pos, new Vector2(620, 205), root);
                 Panel("ArchiveCardLine", Gold, pos + new Vector2(0, 82), new Vector2(560, 3), root);
                 Text(c.Name, 29, Gold, TextAlignmentOptions.Left, pos + new Vector2(-245, 52), new Vector2(260, 42), root);
                 Text(c.Role, 18, Muted, TextAlignmentOptions.Right, pos + new Vector2(175, 52), new Vector2(300, 34), root);
@@ -2040,14 +2102,14 @@ namespace TXGame
             RectTransform root = BeginLayer(revealCanvas, "ObserveLayer");
             Title("擦雾", "选择证据擦开人物表层迷雾，选错扣心。", root);
             Character c = characters["qingyi"];
-            ImagePanel("ObservePortraitFrame", UIWindow + "widnow.frame02.png", new Color(0.04f, 0.03f, 0.03f, 0.96f), new Vector2(-430, -40), new Vector2(520, 650), root);
-            Image portrait = ImagePanel("ObservePortrait", "Assets/Art/Sprites/Characters/旦2.png", new Color(0.02f, 0.016f, 0.014f, 1f), new Vector2(-430, -70), new Vector2(360, 560), root);
+            ImagePanel("ObservePortraitFrame", UIWindow + "widnow.frame02.png", Clear, new Vector2(-430, -40), new Vector2(520, 650), root);
+            Image portrait = ImagePanel("ObservePortrait", "Assets/Art/Sprites/Characters/旦2.png", Clear, new Vector2(-430, -70), new Vector2(360, 560), root);
             portrait.raycastTarget = false;
             Text(c.Name, 42, Gold, TextAlignmentOptions.Center, new Vector2(-430, 260), new Vector2(360, 60), root);
             float fogAmount = Mathf.Clamp01(1f - c.Reveal);
             Text("剩余迷雾：" + Mathf.RoundToInt(fogAmount * 100f) + "%", 22, Muted, TextAlignmentOptions.Center, new Vector2(-430, -354), new Vector2(360, 36), root);
             DrawFogVeil(root, new Vector2(-430, -70), new Vector2(360, 560), fogAmount);
-            Panel("EvidenceDock", new Color(0.025f, 0.018f, 0.015f, 0.84f), new Vector2(330, 40), new Vector2(620, 410), root);
+            Panel("EvidenceDock", Clear, new Vector2(330, 40), new Vector2(620, 410), root);
             Text("可用于擦雾的证据", 32, Gold, TextAlignmentOptions.Center, new Vector2(330, 205), new Vector2(500, 48), root);
             int i = 0;
             foreach (string id in new[] { "ticket", "ash", "flow", "bodymark", "medicine", "gong", "latch", "wire" })
@@ -2082,7 +2144,7 @@ namespace TXGame
                 Panel("FogBand_" + i, new Color(0.88f, 0.88f, 0.82f, alpha), center + new Vector2(x, y), bandSize, root).raycastTarget = false;
             }
 
-            Panel("FogInkEdge", new Color(0.02f, 0.018f, 0.016f, 0.28f * clamped), center, new Vector2(size.x, size.y), root).raycastTarget = false;
+            Panel("FogInkEdge", Clear, center, new Vector2(size.x, size.y), root).raycastTarget = false;
         }
 
         private void OpenCurrentTrial()
@@ -2198,17 +2260,18 @@ namespace TXGame
             Time.timeScale = 0f;
             RectTransform root = BeginLayer(systemCanvas, "DayTransitionLayer");
             SceneBackgroundImage("TransitionBackground", CurrentScene().BackgroundPath, new Color(0.04f, 0.032f, 0.028f, 1f), root);
-            FullscreenPanel("TransitionShade", new Color(0, 0, 0, 0.74f), root);
+            FullscreenPanel("TransitionShade", StoryShade, root);
 
             Panel("PhaseSlashTop", Red, new Vector2(-620, 170), new Vector2(980, 34), root);
             Panel("PhaseSlashMid", Gold, new Vector2(0, 46), new Vector2(1540, 6), root);
             Panel("PhaseSlashBottom", Red, new Vector2(620, -176), new Vector2(980, 34), root);
-            Panel("PhaseBox", new Color(0.018f, 0.012f, 0.010f, 0.94f), Vector2.zero, new Vector2(1180, 430), root);
+            Panel("PhaseBox", StoryBackdrop, Vector2.zero, new Vector2(1180, 430), root);
             Panel("PhaseBoxLine", Gold, new Vector2(0, 160), new Vector2(1040, 5), root);
 
             Text(englishTitle, 30, Red, TextAlignmentOptions.Center, new Vector2(0, 112), new Vector2(840, 44), root);
             Text(title, 64, Gold, TextAlignmentOptions.Center, new Vector2(0, 48), new Vector2(940, 86), root);
-            Text(body, 25, White, TextAlignmentOptions.Center, new Vector2(0, -72), new Vector2(930, 128), root);
+            UnityEngine.UI.Text phaseBodyText = Text(body, StoryBodyFontSize, White, TextAlignmentOptions.Center, new Vector2(0, -72), new Vector2(1040, 160), root);
+            ConfigureStoryBodyText(phaseBodyText);
             Text("PHASE SHIFT", 18, Muted, TextAlignmentOptions.Center, new Vector2(0, -150), new Vector2(520, 30), root);
             Button(buttonLabel, new Vector2(0, -224), new Vector2(290, 62), () => TransitionTo(() =>
             {
@@ -2224,7 +2287,7 @@ namespace TXGame
             Time.timeScale = 0f;
             RectTransform root = BeginLayer(systemCanvas, "EndingLayer");
             SceneBackgroundImage("EndingBackground", "Assets/Art/Sprites/Backgrounds/戏曲舞台.png", new Color(0.04f, 0.032f, 0.028f, 1f), root);
-            FullscreenPanel("EndingShade", new Color(0, 0, 0, 0.72f), root);
+            FullscreenPanel("EndingShade", Clear, root);
             Text("未完待续", 76, Gold, TextAlignmentOptions.Center, new Vector2(0, 90), new Vector2(900, 110), root);
             Text("第二天夜晚，旧案重演的机关已经露出形状。\n但真正能调动戏班、旧箱、锣点和更夫的人，还没有站到台前。", 28, White, TextAlignmentOptions.Center, new Vector2(0, -45), new Vector2(980, 130), root);
             Button("回到标题", new Vector2(-150, -220), new Vector2(240, 62), () => TransitionTo(ShowMainMenu), Dark, White);
@@ -2264,14 +2327,31 @@ namespace TXGame
             currentView = View.Pause;
             Time.timeScale = 0f;
             RectTransform root = BeginLayer(systemCanvas, "PauseLayer", false);
-            FullscreenImage("SettingsBackground2026", UISettings + "02settings_bg.jpg", Color.black, root);
-            ImagePanel("SettingsFrame2026", UISettings + "02settings_widnow.frame1.png", new Color(0, 0, 0, 0), Vector2.zero, new Vector2(1460, 820), root);
-            Text("设置 / 暂停", 54, Gold, TextAlignmentOptions.Center, new Vector2(0, 280), new Vector2(760, 82), root);
-            Button("回到游戏", new Vector2(0, 110), new Vector2(320, 60), TogglePause);
-            Button("存档 / 读档", new Vector2(0, 25), new Vector2(320, 60), () => TransitionTo(() => ShowSaveLoad(true)));
-            Button("返回标题", new Vector2(0, -60), new Vector2(320, 60), () => TransitionTo(ShowMainMenu));
-            Button("退出游戏", new Vector2(0, -145), new Vector2(320, 60), () => TransitionTo(ShowMainMenu));
-            ImageButton("PauseClose", UISettings + "02settings.icons/02settings_close.back_icon.png", new Vector2(600, 310), new Vector2(86, 86), TogglePause);
+            if (pauseOpenedFromMainMenu)
+            {
+                FullscreenDesignImage("SettingsBackground2026", UISettings + "02settings_bg.jpg", Clear, root);
+                ImagePanel("SettingsFrame2026", UISettings + "02settings_widnow.frame2.png", Clear, Vector2.zero, new Vector2(1920, 1080), root);
+                SettingsSlider("MusicVolumeSlider", new Vector2(50, 143), musicVolume, value => SetMusicVolume(value));
+                SettingsSlider("SfxVolumeSlider", new Vector2(50, 32), sfxVolume, value => SetSfxVolume(value));
+                SettingsSlider("TextSpeedSlider", new Vector2(50, -78), textSpeed, value => textSpeed = value);
+                TransparentButton("SettingsClose", new Vector2(830, 455), new Vector2(120, 120), TogglePause);
+                TransparentButton("SettingsFullscreenToggle", new Vector2(15, -160), new Vector2(220, 80), () => Screen.fullScreen = !Screen.fullScreen);
+                return;
+            }
+
+            FullscreenDesignImage("PauseDesign2026", UIHome + "01home4.jpg", Clear, root);
+            TransparentButton("PauseClose", new Vector2(520, 190), new Vector2(110, 110), TogglePause);
+            TransparentButton("PauseResume", new Vector2(0, 115), new Vector2(360, 58), TogglePause);
+            TransparentButton("PauseMainMenu", new Vector2(0, 55), new Vector2(360, 58), () => TransitionTo(ShowMainMenu));
+            TransparentButton("PauseSaveLoad", new Vector2(0, -5), new Vector2(360, 58), () => TransitionTo(() => ShowSaveLoad(true)));
+            TransparentButton("PauseQuitGame", new Vector2(0, -65), new Vector2(360, 58), () =>
+            {
+#if UNITY_EDITOR
+                UnityEditor.EditorApplication.isPlaying = false;
+#else
+                Application.Quit();
+#endif
+            });
         }
 
         private void ShowSaveLoad(bool fromPause)
@@ -2279,49 +2359,28 @@ namespace TXGame
             currentView = View.SaveLoad;
             Time.timeScale = 0f;
             RectTransform root = BeginLayer(systemCanvas, "SaveLoadLayer", false);
-            FullscreenImage("SaveBackground2026", UIHome + "01home_bg.jpg", Color.black, root);
-            FullscreenPanel("SaveShade", new Color(0.015f, 0.012f, 0.01f, 0.9f), root);
-            Panel("SaveWindow", new Color(0.045f, 0.035f, 0.03f, 0.98f), Vector2.zero, new Vector2(1640, 930), root);
-            Panel("SaveTopLine", Gold, new Vector2(0, 385), new Vector2(1510, 3), root);
-            Text(fromPause ? "存档 / 读档" : "选择存档", 48, Gold, TextAlignmentOptions.Center, new Vector2(0, 330), new Vector2(760, 68), root);
-            Text(fromPause ? "选择槽位保存当前进度，已有存档也可以读取。" : "选择槽位进入游戏。空槽新建游戏，已有存档可以继续。", 22, Muted, TextAlignmentOptions.Center, new Vector2(0, 280), new Vector2(1100, 42), root);
+            FullscreenDesignImage("SaveLoadDesign2026", UIHome + "01home5.jpg", Clear, root);
 
             for (int i = 0; i < SaveManager.SlotIds.Length; i++)
             {
                 string slotId = SaveManager.SlotIds[i];
                 bool exists = SaveManager.Exists(slotId);
-                Vector2 pos = new Vector2(-500 + i * 500, 0);
-                Panel("SaveSlot_" + slotId, new Color(0.075f, 0.06f, 0.05f, 1f), pos, new Vector2(410, 430), root);
-                Panel("SaveSlotLine_" + slotId, Gold, pos + new Vector2(0, 150), new Vector2(340, 3), root);
-                Text("槽位 " + slotId, 32, Gold, TextAlignmentOptions.Center, pos + new Vector2(0, 180), new Vector2(340, 52), root);
-                Text(exists ? SaveManager.GetSlotSummary(slotId) : "空槽位\n可以创建新游戏", 20, exists ? White : Muted, TextAlignmentOptions.Center, pos + new Vector2(0, 25), new Vector2(340, 190), root);
-
-                if (fromPause)
+                Vector2 pos = new Vector2(-370 + i * 250, 8);
+                if (exists)
+                    Text(SaveManager.GetSlotShortSummary(slotId), 18, White, TextAlignmentOptions.Center, pos + new Vector2(0, -178), new Vector2(170, 72), root);
+                TransparentButton("SaveSlot_" + slotId, pos + new Vector2(0, 35), new Vector2(170, 170), () =>
                 {
-                    Vector2 savePosition = pos + new Vector2(exists ? -95 : 0, -155);
-                    Button("保存", savePosition, new Vector2(160, 58), () => SaveToSlot(slotId), Dark, White);
-                    if (exists)
-                        Button("读取", pos + new Vector2(95, -155), new Vector2(160, 58), () => TransitionTo(() => LoadFromSlot(slotId)), Dark, White);
-                }
-                else
-                {
-                    if (exists)
-                    {
-                        Button("继续游戏", pos + new Vector2(-95, -155), new Vector2(170, 58), () => TransitionTo(() => LoadFromSlot(slotId)), Dark, White);
-                        Button("重新开始", pos + new Vector2(95, -155), new Vector2(170, 58), () => TransitionTo(() => StartNewGameInSlot(slotId)), Dark, White);
-                    }
-                    else
-                    {
-                        Button("新建游戏", pos + new Vector2(0, -155), new Vector2(190, 58), () => TransitionTo(() => StartNewGameInSlot(slotId)), Dark, White);
-                    }
-                }
+                    if (fromPause) SaveToSlot(slotId);
+                    else if (exists) TransitionTo(() => LoadFromSlot(slotId));
+                    else TransitionTo(() => StartNewGameInSlot(slotId));
+                });
             }
 
-            Button(fromPause ? "返回暂停菜单" : "返回主菜单", new Vector2(0, -405), new Vector2(260, 60), () =>
+            TransparentButton("SaveBack", new Vector2(-835, -485), new Vector2(210, 90), () =>
             {
-                if (fromPause) TogglePause();
+                if (fromPause) TransitionTo(ShowPauseMenu);
                 else TransitionTo(ShowMainMenu);
-            }, Dark, White);
+            });
         }
 
         private void SaveToSlot(string slotId)
@@ -2498,7 +2557,7 @@ namespace TXGame
             Time.timeScale = 0f;
             RectTransform root = BeginLayer(systemCanvas, "GameOverLayer");
             SceneBackgroundImage("GameOverBackground", CurrentScene().BackgroundPath, new Color(0.04f, 0.032f, 0.028f, 1f), root);
-            FullscreenPanel("GameOverShade", new Color(0, 0, 0, 0.76f), root);
+            FullscreenPanel("GameOverShade", Clear, root);
             HeartBar(root, new Vector2(0, 250));
             Text("调查失败", 76, Red, TextAlignmentOptions.Center, new Vector2(0, 130), new Vector2(900, 110), root);
             Text($"最后失误：{reason}\n心力耗尽，线索链条断裂。请重新开始调查。", 28, White, TextAlignmentOptions.Center, new Vector2(0, 0), new Vector2(980, 130), root);
@@ -2515,7 +2574,7 @@ namespace TXGame
         {
             PlayHintSound();
             RectTransform root = currentLayer != null ? currentLayer : BeginLayer(popupCanvas, "ToastLayer", false);
-            Image toast = Panel("Toast", Paper, new Vector2(0, -366), new Vector2(780, 48), root);
+            Image toast = Panel("Toast", Paper, new Vector2(0, -510), new Vector2(780, 48), root);
             Text(message, 21, PaperText, TextAlignmentOptions.Center, Vector2.zero, new Vector2(730, 38), toast.rectTransform);
             Destroy(toast.gameObject, 1.7f);
         }
@@ -2546,7 +2605,7 @@ namespace TXGame
             uiAudioSource.playOnAwake = false;
             uiAudioSource.loop = false;
             uiAudioSource.spatialBlend = 0f;
-            uiAudioSource.volume = 0.48f;
+            uiAudioSource.volume = sfxVolume;
             clickClip = CreateToneClip("Huapi_Click", 0.055f, 420f, 230f, 0.16f);
             hintClip = CreateHintClip();
 
@@ -2554,7 +2613,7 @@ namespace TXGame
             bgmAudioSource.playOnAwake = false;
             bgmAudioSource.loop = true;
             bgmAudioSource.spatialBlend = 0f;
-            bgmAudioSource.volume = 0.26f;
+            bgmAudioSource.volume = musicVolume;
             AudioClip bgm = Resources.Load<AudioClip>("Audio/BGM/Midnight in the Empty Theatre");
             if (bgm != null)
             {
@@ -2577,6 +2636,30 @@ namespace TXGame
         {
             if (uiAudioSource != null && hintClip != null)
                 uiAudioSource.PlayOneShot(hintClip, 0.30f);
+        }
+
+        private void AdjustMusicVolume(float delta)
+        {
+            SetMusicVolume(musicVolume + delta);
+        }
+
+        private void AdjustSfxVolume(float delta)
+        {
+            SetSfxVolume(sfxVolume + delta);
+        }
+
+        private void SetMusicVolume(float value)
+        {
+            musicVolume = Mathf.Clamp01(value);
+            if (bgmAudioSource != null)
+                bgmAudioSource.volume = musicVolume;
+        }
+
+        private void SetSfxVolume(float value)
+        {
+            sfxVolume = Mathf.Clamp01(value);
+            if (uiAudioSource != null)
+                uiAudioSource.volume = sfxVolume;
         }
 
         private static AudioClip CreateToneClip(string name, float duration, float startHz, float endHz, float volume)
@@ -2622,7 +2705,7 @@ namespace TXGame
             for (int i = 0; i < 5; i++)
             {
                 Vector2 heartPos = pos + new Vector2(i * 34, 0);
-                Panel("HeartBack", new Color(0.025f, 0.018f, 0.015f, 0.72f), heartPos, new Vector2(30, 30), parent);
+                Panel("HeartBack", Clear, heartPos, new Vector2(30, 30), parent);
                 Text("♥", 26, i < hearts ? Red : new Color(0.45f, 0.38f, 0.34f, 0.72f), TextAlignmentOptions.Center, heartPos + new Vector2(0, -1), new Vector2(34, 34), parent);
             }
         }
@@ -2655,6 +2738,20 @@ namespace TXGame
                 fitter.aspectMode = AspectRatioFitter.AspectMode.EnvelopeParent;
                 fitter.aspectRatio = sprite.rect.width / sprite.rect.height;
                 image.rectTransform.localScale = Vector3.one * 1.03f;
+            }
+            return image;
+        }
+
+        private Image FullscreenDesignImage(string name, string assetPath, Color fallback, Transform parent)
+        {
+            Image image = FullscreenPanel(name, fallback, parent);
+            Sprite sprite = LoadSprite(assetPath);
+            if (sprite != null)
+            {
+                image.sprite = sprite;
+                image.type = Image.Type.Simple;
+                image.preserveAspect = false;
+                image.color = Color.white;
             }
             return image;
         }
@@ -2726,6 +2823,84 @@ namespace TXGame
             return button;
         }
 
+        private Button TransparentButton(string name, Vector2 pos, Vector2 size, Action onClick)
+        {
+            GameObject go = Track(new GameObject("TransparentButton_" + name, typeof(RectTransform), typeof(Image), typeof(Button)));
+            go.transform.SetParent(currentLayer, false);
+            RectTransform rect = go.GetComponent<RectTransform>();
+            rect.anchorMin = rect.anchorMax = new Vector2(0.5f, 0.5f);
+            rect.anchoredPosition = ClampToSafeArea(pos, size);
+            rect.sizeDelta = size;
+            Image image = go.GetComponent<Image>();
+            image.color = new Color(1f, 1f, 1f, 0f);
+            image.raycastTarget = true;
+            Button button = go.GetComponent<Button>();
+            button.onClick.AddListener(() =>
+            {
+                PlayClickSound();
+                onClick?.Invoke();
+            });
+            return button;
+        }
+
+        private Slider SettingsSlider(string name, Vector2 pos, float value, Action<float> onChanged)
+        {
+            GameObject go = Track(new GameObject(name, typeof(RectTransform), typeof(Slider)));
+            go.transform.SetParent(currentLayer, false);
+            RectTransform rect = go.GetComponent<RectTransform>();
+            rect.anchorMin = rect.anchorMax = new Vector2(0.5f, 0.5f);
+            rect.anchoredPosition = ClampToSafeArea(pos, new Vector2(500, 56));
+            rect.sizeDelta = new Vector2(500, 56);
+
+            Image track = SettingsSliderImage("Track", go.transform, new Color(White.r, White.g, White.b, 0.42f));
+            RectTransform trackRect = track.rectTransform;
+            trackRect.anchorMin = trackRect.anchorMax = new Vector2(0.5f, 0.5f);
+            trackRect.anchoredPosition = Vector2.zero;
+            trackRect.sizeDelta = new Vector2(450, 5);
+
+            GameObject fillArea = new GameObject("Fill Area", typeof(RectTransform));
+            fillArea.transform.SetParent(go.transform, false);
+            RectTransform fillAreaRect = fillArea.GetComponent<RectTransform>();
+            fillAreaRect.anchorMin = fillAreaRect.anchorMax = new Vector2(0.5f, 0.5f);
+            fillAreaRect.anchoredPosition = Vector2.zero;
+            fillAreaRect.sizeDelta = new Vector2(450, 7);
+
+            Image fill = SettingsSliderImage("Fill", fillArea.transform, new Color(Gold.r, Gold.g, Gold.b, 0.92f));
+            RectTransform fillRect = fill.rectTransform;
+            fillRect.anchorMin = new Vector2(0f, 0.5f);
+            fillRect.anchorMax = new Vector2(1f, 0.5f);
+            fillRect.pivot = new Vector2(0.5f, 0.5f);
+            fillRect.anchoredPosition = Vector2.zero;
+            fillRect.sizeDelta = new Vector2(0, 7);
+
+            Image handle = SettingsSliderImage("Handle", go.transform, Clear);
+            RectTransform handleRect = handle.rectTransform;
+            handleRect.anchorMin = handleRect.anchorMax = new Vector2(0.5f, 0.5f);
+            handleRect.anchoredPosition = Vector2.zero;
+            handleRect.sizeDelta = new Vector2(44, 44);
+
+            Slider slider = go.GetComponent<Slider>();
+            slider.minValue = 0f;
+            slider.maxValue = 1f;
+            slider.wholeNumbers = false;
+            slider.direction = Slider.Direction.LeftToRight;
+            slider.fillRect = fillRect;
+            slider.handleRect = handleRect;
+            slider.targetGraphic = handle;
+            slider.value = Mathf.Clamp01(value);
+            slider.onValueChanged.AddListener(v => onChanged?.Invoke(v));
+            return slider;
+        }
+
+        private Image SettingsSliderImage(string name, Transform parent, Color color)
+        {
+            GameObject go = Track(new GameObject(name, typeof(RectTransform), typeof(Image)));
+            go.transform.SetParent(parent, false);
+            Image image = go.GetComponent<Image>();
+            image.color = color;
+            return image;
+        }
+
         private Button ImageButton(string name, string spritePath, Vector2 pos, Vector2 size, Action onClick)
         {
             GameObject go = Track(new GameObject("ImageButton_" + name, typeof(RectTransform), typeof(Image), typeof(Button)));
@@ -2779,6 +2954,15 @@ namespace TXGame
             text.lineSpacing = 1.15f;
         }
 
+        private static void ConfigureStoryBodyText(UnityEngine.UI.Text text)
+        {
+            text.alignment = TextAnchor.UpperCenter;
+            text.resizeTextForBestFit = true;
+            text.resizeTextMinSize = Mathf.Min(StoryBodyMinimumFontSize, text.fontSize);
+            text.resizeTextMaxSize = StoryBodyFontSize;
+            text.lineSpacing = 1.25f;
+        }
+
         private UnityEngine.UI.Text Text(string content, float size, Color color, TextAlignmentOptions alignment, Vector2 pos, Vector2 rectSize, Transform parent)
         {
             if (!string.IsNullOrEmpty(content) && (content.Contains("涓ゆ棩") || content.Contains("试玩")))
@@ -2794,10 +2978,11 @@ namespace TXGame
             UnityEngine.UI.Text text = go.GetComponent<UnityEngine.UI.Text>();
             text.text = content;
             text.font = GetRuntimeFont();
-            text.fontSize = Mathf.RoundToInt(size);
+            int resolvedFontSize = ResolveRuntimeFontSize(content, size, rectSize);
+            text.fontSize = resolvedFontSize;
             text.resizeTextForBestFit = true;
-            text.resizeTextMinSize = Mathf.Clamp(Mathf.RoundToInt(size * 0.50f), 12, Mathf.RoundToInt(size));
-            text.resizeTextMaxSize = Mathf.RoundToInt(size);
+            text.resizeTextMinSize = Mathf.Clamp(Mathf.RoundToInt(resolvedFontSize * 0.50f), 12, resolvedFontSize);
+            text.resizeTextMaxSize = resolvedFontSize;
             text.color = color;
             text.alignment = ToCenteredLegacyAlignment(alignment);
             text.lineSpacing = 1.05f;
@@ -2889,9 +3074,94 @@ namespace TXGame
         private static Font GetRuntimeFont()
         {
             if (runtimeFont != null) return runtimeFont;
-            runtimeFont = Resources.GetBuiltinResource<Font>("LegacyRuntime.ttf");
+            runtimeFont = Resources.Load<Font>("Fonts/simkai");
+            if (runtimeFont == null)
+                runtimeFont = Font.CreateDynamicFontFromOSFont(new[] { "KaiTi", "SimKai", "楷体", "华文楷体" }, 32);
+            if (runtimeFont == null) runtimeFont = Resources.GetBuiltinResource<Font>("LegacyRuntime.ttf");
             if (runtimeFont == null) runtimeFont = Resources.GetBuiltinResource<Font>("Arial.ttf");
             return runtimeFont;
+        }
+
+        private static TMP_FontAsset GetRuntimeTmpFont()
+        {
+            if (runtimeTmpFont != null) return runtimeTmpFont;
+
+            Font sourceFont = GetRuntimeFont();
+            if (sourceFont == null) return null;
+
+            runtimeTmpFont = TMP_FontAsset.CreateFontAsset(
+                sourceFont,
+                90,
+                9,
+                GlyphRenderMode.SDFAA,
+                4096,
+                4096,
+                AtlasPopulationMode.Dynamic,
+                true);
+
+            runtimeTmpFont.name = "Runtime KaiTi TMP";
+            return runtimeTmpFont;
+        }
+
+        private static void ApplyRuntimeFontToAllTmpTexts()
+        {
+            TMP_FontAsset tmpFont = GetRuntimeTmpFont();
+            if (tmpFont == null) return;
+
+            TMP_Text[] texts = FindObjectsOfType<TMP_Text>(true);
+            foreach (TMP_Text text in texts)
+            {
+                if (text == null) continue;
+                if (text.font != tmpFont)
+                    text.font = tmpFont;
+                text.fontSharedMaterial = tmpFont.material;
+                tmpFont.TryAddCharacters(text.text, out _);
+                text.havePropertiesChanged = true;
+                text.SetAllDirty();
+            }
+        }
+
+        private static int ResolveRuntimeFontSize(string content, float requestedSize, Vector2 rectSize)
+        {
+            int requested = Mathf.RoundToInt(requestedSize);
+            if (requested >= 36) return requested;
+            if (requested < 17) return requested;
+            if (string.IsNullOrWhiteSpace(content)) return requested;
+
+            bool roomyTextBlock = rectSize.y >= 58f || content.Contains("\n");
+            bool ordinaryTextSize = requested >= 20 && requested <= 30;
+            if (!roomyTextBlock && !ordinaryTextSize) return requested;
+
+            if (ContainsCjk(content)) return DefaultChineseFontSize;
+            if (IsMostlyLatin(content)) return DefaultEnglishFontSize;
+            return requested;
+        }
+
+        private static bool ContainsCjk(string content)
+        {
+            foreach (char c in content)
+            {
+                if ((c >= '\u3400' && c <= '\u4dbf') ||
+                    (c >= '\u4e00' && c <= '\u9fff') ||
+                    (c >= '\uf900' && c <= '\ufaff'))
+                    return true;
+            }
+
+            return false;
+        }
+
+        private static bool IsMostlyLatin(string content)
+        {
+            int latin = 0;
+            int letters = 0;
+            foreach (char c in content)
+            {
+                if (!char.IsLetter(c)) continue;
+                letters++;
+                if ((c >= 'A' && c <= 'Z') || (c >= 'a' && c <= 'z')) latin++;
+            }
+
+            return letters > 0 && latin >= Mathf.CeilToInt(letters * 0.65f);
         }
 
         private static Sprite LoadSprite(string assetPath)

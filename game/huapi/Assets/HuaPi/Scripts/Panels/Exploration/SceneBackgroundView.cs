@@ -18,8 +18,8 @@ namespace HuaPi.UI.Panels.Exploration
 
         [Header("Dark Settings")]
         [SerializeField] [Range(0f, 1f)] private float darkAmount = 0.35f;
-        [SerializeField] private Color darkColor = new Color(0, 0, 0, 0.35f);
-        [SerializeField] private Color vignetteColor = new Color(0, 0, 0, 0.5f);
+        [SerializeField] private Color darkColor = Color.clear;
+        [SerializeField] private Color vignetteColor = Color.clear;
 
         [Header("Animation")]
         [SerializeField] private float fadeInDuration = 0.8f;

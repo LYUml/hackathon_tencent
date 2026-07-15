@@ -354,12 +354,12 @@ namespace HuaPi.UI.Editor
             bgImage.type = Image.Type.Simple;
 
             // Dark Overlay
-            Image darkOverlay = CreateImage(bgViewObj.transform, "DarkOverlay", new Color(0, 0, 0, 0.35f));
+            Image darkOverlay = CreateImage(bgViewObj.transform, "DarkOverlay", Color.clear);
             darkOverlay.raycastTarget = false;
             Stretch(darkOverlay.rectTransform);
 
             // Vignette Overlay
-            Image vignetteOverlay = CreateImage(bgViewObj.transform, "VignetteOverlay", new Color(0, 0, 0, 0.5f));
+            Image vignetteOverlay = CreateImage(bgViewObj.transform, "VignetteOverlay", Color.clear);
             vignetteOverlay.raycastTarget = false;
             Stretch(vignetteOverlay.rectTransform);
             // 创建暗角效果（中心透明，边缘黑）
@@ -517,7 +517,7 @@ namespace HuaPi.UI.Editor
                 var hotspotComp = hotspotPrefab.GetComponent<SceneHotspotItem>();
 
                 // Hotspot Area (透明点击区域)
-                Image areaImage = CreateImage(hotspotPrefab.transform, "HotspotArea", new Color(0, 0, 0, 0.05f));
+                Image areaImage = CreateImage(hotspotPrefab.transform, "HotspotArea", Color.clear);
                 areaImage.raycastTarget = true;
                 Stretch(areaImage.rectTransform);
                 areaImage.type = Image.Type.Simple;
@@ -579,7 +579,7 @@ namespace HuaPi.UI.Editor
                 outlineGlow.type = Image.Type.Simple;
 
                 // Shadow Overlay
-                Image shadowOverlay = CreateImage(charPrefab.transform, "ShadowOverlay", new Color(0, 0, 0, 0.15f));
+                Image shadowOverlay = CreateImage(charPrefab.transform, "ShadowOverlay", Color.clear);
                 shadowOverlay.raycastTarget = false;
                 Stretch(shadowOverlay.rectTransform);
                 var shadowCg = shadowOverlay.gameObject.AddComponent<CanvasGroup>();
