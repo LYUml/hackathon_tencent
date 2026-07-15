@@ -64,9 +64,25 @@ jobs:
         run: |
           INDEX="build/WebGL/WebGL/index.html"
           test -f "$INDEX"
-          perl -0pi -e 's#<canvas id="unity-canvas" width=960 height=600 tabindex="-1"></canvas>#<canvas id="unity-canvas" width=1920 height=1080 tabindex="-1"></canvas>#' "$INDEX"
-          perl -0pi -e 's#</head>#<style>html,body{margin:0;width:100%;height:100%;overflow:hidden;background:#000;}#unity-container{position:fixed;inset:0;width:100vw;height:100vh;background:#000;}#unity-canvas{width:100vw!important;height:100vh!important;display:block;background:#000;}#unity-footer{display:none!important;}#unity-loading-bar{position:absolute;left:50%;top:50%;transform:translate(-50%,-50%);}</style></head>#' "$INDEX"
-          perl -0pi -e 's#canvas\.style\.width = "960px";\s*canvas\.style\.height = "600px";#canvas.style.width = "100vw";\n        canvas.style.height = "100vh";#s' "$INDEX"
+          chmod u+w "$INDEX"
+          node <<'NODE'
+          const fs = require('fs');
+          const index = 'build/WebGL/WebGL/index.html';
+          let html = fs.readFileSync(index, 'utf8');
+          html = html.replace(
+            /<canvas id="unity-canvas" width=\d+ height=\d+ tabindex="-1"><\/canvas>/,
+            '<canvas id="unity-canvas" width=1920 height=1080 tabindex="-1"></canvas>'
+          );
+          const style = '/* codex-fullscreen-shell */html,body{margin:0;width:100%;height:100%;overflow:hidden;background:#000;}#unity-container{position:fixed;inset:0;width:100vw;height:100vh;background:#000;}#unity-canvas{width:100vw!important;height:100vh!important;display:block;background:#000;}#unity-footer{display:none!important;}#unity-loading-bar{position:absolute;left:50%;top:50%;transform:translate(-50%,-50%);}';
+          if (!html.includes('codex-fullscreen-shell')) {
+            html = html.replace('</head>', `<style>${style}</style></head>`);
+          }
+          html = html.replace(
+            /canvas\.style\.width = "960px";\s*canvas\.style\.height = "600px";/s,
+            'canvas.style.width = "100vw";\n        canvas.style.height = "100vh";'
+          );
+          fs.writeFileSync(index, html);
+          NODE
 
       - name: Configure GitHub Pages
         uses: actions/configure-pages@v5
