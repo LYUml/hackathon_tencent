@@ -2177,7 +2177,8 @@ namespace TXGame
 
         private Image SceneBackgroundImage(string name, string assetPath, Color fallback, Transform parent)
         {
-            Image image = FullscreenPanel(name, fallback, parent);
+            FullscreenPanel(name + "_Matte", fallback, parent);
+            Image image = FullscreenPanel(name, new Color(0, 0, 0, 0), parent);
             Sprite sprite = LoadSprite(assetPath);
             if (sprite != null)
             {
@@ -2186,7 +2187,7 @@ namespace TXGame
                 image.preserveAspect = false;
                 image.color = Color.white;
                 AspectRatioFitter fitter = image.gameObject.GetComponent<AspectRatioFitter>() ?? image.gameObject.AddComponent<AspectRatioFitter>();
-                fitter.aspectMode = AspectRatioFitter.AspectMode.EnvelopeParent;
+                fitter.aspectMode = AspectRatioFitter.AspectMode.FitInParent;
                 fitter.aspectRatio = sprite.rect.width / sprite.rect.height;
                 image.rectTransform.localScale = Vector3.one;
             }
