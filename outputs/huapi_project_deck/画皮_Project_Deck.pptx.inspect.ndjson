@@ -1,0 +1,184 @@
+{"kind":"deck","id":"pr/uqpl3r","name":"Deck"}
+{"kind":"layout","layoutId":"55258653-367f-4328-b177-5e134b12a2c1","name":"Master","type":"master"}
+{"kind":"layout","layoutId":"db4b8d6d-aa4c-4c8c-9687-88767fcaed91","name":"Title Slide","type":"title"}
+{"kind":"slide","id":"sl/uj6yaf","slide":1,"title":"腾讯云黑客松 Project Deck","textShapes":4}
+{"kind":"shape","id":"sh/q14ji9o3","slide":1,"bbox":[0,0,1280,720]}
+{"kind":"shape","id":"sh/r2d0bepo","slide":1,"bbox":[0,0,515,720]}
+{"kind":"textbox","id":"sh/4zm1gz6d","slide":1,"text":"腾讯云黑客松 Project Deck","textPreview":"腾讯云黑客松 Project Deck","textChars":19,"textLines":1,"bbox":[72,66,360,34]}
+{"kind":"textbox","id":"sh/p0vi947i","slide":1,"text":"画皮","textPreview":"画皮","textChars":2,"textLines":1,"bbox":[72,168,360,104]}
+{"kind":"textbox","id":"sh/2x4jepo7","slide":1,"text":"现实是历史的重演","textPreview":"现实是历史的重演","textChars":8,"textLines":1,"bbox":[78,270,390,42]}
+{"kind":"shape","id":"sh/3yd07ups","slide":1,"bbox":[78,330,160,4]}
+{"kind":"textbox","id":"sh/ovq1sj6h","slide":1,"text":"中国戏曲 × 民俗悬疑 × 叙事解谜\n白天收集线索，夜晚揭开画皮","textPreview":"中国戏曲 × 民俗悬疑 × 叙事解谜 | 白天收集线索，夜晚揭开画皮","textChars":32,"textLines":2,"bbox":[78,368,360,110]}
+{"kind":"image","id":"im/kj6p8v29","slide":1,"name":"","alt":"generated_cover_redesign.png","bbox":[0,0,1280,720]}
+{"kind":"notes","id":"nt/uj6yaf","slide":1,"text":""}
+{"kind":"slide","id":"sl/ufspwn","slide":2,"title":"腾讯云黑客松作品介绍","textShapes":9}
+{"kind":"shape","id":"sh/l8jy50nq","slide":2,"bbox":[0,0,1280,720]}
+{"kind":"shape","id":"sh/y5sfulof","slide":2,"bbox":[0,0,1280,12]}
+{"kind":"textbox","id":"sh/z61g3q50","slide":2,"text":"腾讯云黑客松作品介绍","textPreview":"腾讯云黑客松作品介绍","textChars":10,"textLines":1,"bbox":[72,44,360,24]}
+{"kind":"shape","id":"sh/x4je1gnu","slide":2,"bbox":[0,0,1280,720]}
+{"kind":"textbox","id":"sh/ah8fqlo3","slide":2,"text":"一句话概念","textPreview":"一句话概念","textChars":5,"textLines":1,"bbox":[72,84,560,104]}
+{"kind":"shape","id":"sh/bihwz65o","slide":2,"bbox":[76,178,116,4]}
+{"kind":"textbox","id":"sh/ofqxob6d","slide":2,"text":"在一个所有人都戴着脸谱生活的戏班中，玩家扮演年轻侦探，白天调查失踪旧案，夜晚通过“观皮”揭开角色面具下的真实身份。","textPreview":"在一个所有人都戴着脸谱生活的戏班中，玩家扮演年轻侦探，白天调查失踪旧案，夜晚通过“观皮”揭开角色面具下的真实身份。","textChars":57,"textLines":1,"bbox":[76,224,566,154]}
+{"kind":"shape","id":"sh/pgzexgny","slide":2,"bbox":[82,424,228,140]}
+{"kind":"shape","id":"sh/98n6t47y","slide":2,"bbox":[82,424,8,140]}
+{"kind":"textbox","id":"sh/87epkzqd","slide":2,"text":"核心类型","textPreview":"核心类型","textChars":4,"textLines":1,"bbox":[106,442,180,36]}
+{"kind":"textbox","id":"sh/n65oreps","slide":2,"text":"叙事解谜\n调查推理\n视觉小说","textPreview":"叙事解谜 | 调查推理 | 视觉小说","textChars":14,"textLines":3,"bbox":[106,488,180,58]}
+{"kind":"shape","id":"sh/m5c7i987","slide":2,"bbox":[334,424,250,140]}
+{"kind":"shape","id":"sh/l436p47m","slide":2,"bbox":[334,424,8,140]}
+{"kind":"textbox","id":"sh/0jupgzq1","slide":2,"text":"目标玩家","textPreview":"目标玩家","textChars":4,"textLines":1,"bbox":[358,442,202,36]}
+{"kind":"textbox","id":"sh/zilonupw","slide":2,"text":"民俗、悬疑、破案\n与轻恐怖题材受众","textPreview":"民俗、悬疑、破案 | 与轻恐怖题材受众","textChars":17,"textLines":2,"bbox":[358,488,202,58]}
+{"kind":"shape","id":"sh/yhc7ep8b","slide":2,"bbox":[608,424,250,140]}
+{"kind":"shape","id":"sh/dg36lk7q","slide":2,"bbox":[608,424,8,140]}
+{"kind":"textbox","id":"sh/cfupcfq5","slide":2,"text":"体验承诺","textPreview":"体验承诺","textChars":4,"textLines":1,"bbox":[632,442,202,36]}
+{"kind":"textbox","id":"sh/4jep8zy1","slide":2,"text":"不靠战斗推进\n靠观察、对话与证据判断","textPreview":"不靠战斗推进 | 靠观察、对话与证据判断","textChars":18,"textLines":2,"bbox":[632,488,202,58]}
+{"kind":"image","id":"im/dgfyhwzq","slide":2,"name":"","alt":"戏曲道具与盔头陈列室.png","bbox":[684,0,596,720]}
+{"kind":"notes","id":"nt/ufspwn","slide":2,"text":""}
+{"kind":"slide","id":"sl/3icb6f","slide":3,"title":"故事背景","textShapes":9}
+{"kind":"shape","id":"sh/lkjid87i","slide":3,"bbox":[0,0,1280,720]}
+{"kind":"shape","id":"sh/yhszit87","slide":3,"bbox":[0,0,1280,12]}
+{"kind":"textbox","id":"sh/zi10byps","slide":3,"text":"故事背景","textPreview":"故事背景","textChars":4,"textLines":1,"bbox":[72,44,360,24]}
+{"kind":"shape","id":"sh/dgzy9o7m","slide":3,"bbox":[0,0,1280,720]}
+{"kind":"textbox","id":"sh/qt8ze98v","slide":3,"text":"旧戏重演，把民国旧案搬回舞台","textPreview":"旧戏重演，把民国旧案搬回舞台","textChars":14,"textLines":1,"bbox":[72,74,820,104]}
+{"kind":"shape","id":"sh/behg7epg","slide":3,"bbox":[76,168,190,4]}
+{"kind":"shape","id":"sh/orqhcjq5","slide":3,"bbox":[76,230,338,240]}
+{"kind":"shape","id":"sh/pszy547q","slide":3,"bbox":[76,230,8,240]}
+{"kind":"textbox","id":"sh/dsrmd4jm","slide":3,"text":"民国火灾旧案","textPreview":"民国火灾旧案","textChars":6,"textLines":1,"bbox":[100,248,290,36]}
+{"kind":"textbox","id":"sh/srilkz21","slide":3,"text":"古镇戏班曾发生离奇大火，多人身亡，两人下落不明。案件被埋进戏班传闻，只留下残缺证据。","textPreview":"古镇戏班曾发生离奇大火，多人身亡，两人下落不明。案件被埋进戏班传闻，只留下残缺证据。","textChars":42,"textLines":1,"bbox":[100,294,290,158]}
+{"kind":"shape","id":"sh/rq94bu1w","slide":3,"bbox":[470,230,338,240]}
+{"kind":"shape","id":"sh/qp03ipkb","slide":3,"bbox":[470,230,8,240]}
+{"kind":"textbox","id":"sh/5orm9kjq","slide":3,"text":"匿名委托","textPreview":"匿名委托","textChars":4,"textLines":1,"bbox":[494,248,290,36]}
+{"kind":"textbox","id":"sh/4nylgf25","slide":3,"text":"玩家作为私人侦探收到邮件与高额赏金，伪装成戏班学徒进入内部调查。","textPreview":"玩家作为私人侦探收到邮件与高额赏金，伪装成戏班学徒进入内部调查。","textChars":32,"textLines":1,"bbox":[494,294,290,158]}
+{"kind":"shape","id":"sh/3mpk7u1k","slide":3,"bbox":[864,230,338,240]}
+{"kind":"shape","id":"sh/i1g3epkz","slide":3,"bbox":[864,230,8,240]}
+{"kind":"textbox","id":"sh/h0725kje","slide":3,"text":"现实复刻历史","textPreview":"现实复刻历史","textChars":6,"textLines":1,"bbox":[888,248,290,36]}
+{"kind":"textbox","id":"sh/gzylcf29","slide":3,"text":"多年后同一剧院、同一出戏再次排练。案发现场像旧案重演，但细节指向人为安排。","textPreview":"多年后同一剧院、同一出戏再次排练。案发现场像旧案重演，但细节指向人为安排。","textChars":37,"textLines":1,"bbox":[888,294,290,158]}
+{"kind":"textbox","id":"sh/832lsfap","slide":3,"text":"Deck 的叙事重点：评委看到的不只是题材包装，而是一套能支撑玩法的悬疑结构。","textPreview":"Deck 的叙事重点：评委看到的不只是题材包装，而是一套能支撑玩法的悬疑结构。","textChars":39,"textLines":1,"bbox":[92,586,1040,38]}
+{"kind":"image","id":"im/pwja1s72","slide":3,"name":"","alt":"generated_theater_exterior.png","bbox":[0,0,1280,720]}
+{"kind":"notes","id":"nt/3icb6f","slide":3,"text":""}
+{"kind":"slide","id":"sl/dbuuh8","slide":4,"title":"核心玩法","textShapes":9}
+{"kind":"shape","id":"sh/ehov65gn","slide":4,"bbox":[0,0,1280,720]}
+{"kind":"shape","id":"sh/1kzeh0fe","slide":4,"bbox":[0,0,1280,12]}
+{"kind":"textbox","id":"sh/0jqd8vyt","slide":4,"text":"核心玩法","textPreview":"核心玩法","textChars":4,"textLines":1,"bbox":[72,44,360,24]}
+{"kind":"shape","id":"sh/2l8va5wz","slide":4,"bbox":[0,0,1280,720]}
+{"kind":"textbox","id":"sh/p8zelkfa","slide":4,"text":"昼夜双循环让线索与真相互相推进","textPreview":"昼夜双循环让线索与真相互相推进","textChars":15,"textLines":1,"bbox":[72,76,780,104]}
+{"kind":"shape","id":"sh/o7qdcfep","slide":4,"bbox":[78,168,170,4]}
+{"kind":"shape","id":"sh/3qdc7qx0","slide":4,"bbox":[88,248,280,250]}
+{"kind":"shape","id":"sh/ip4vylgf","slide":4,"bbox":[88,248,8,250]}
+{"kind":"textbox","id":"sh/kzutwzml","slide":4,"text":"白天：调查","textPreview":"白天：调查","textChars":5,"textLines":1,"bbox":[112,266,232,36]}
+{"kind":"textbox","id":"sh/503u54n6","slide":4,"text":"探索场景\n点击人物与器物\n对话盘问\n收集证据","textPreview":"探索场景 | 点击人物与器物 | 对话盘问 | 收集证据","textChars":22,"textLines":4,"bbox":[112,312,232,168]}
+{"kind":"shape","id":"sh/ixsbup4f","slide":4,"bbox":[500,248,280,250]}
+{"kind":"shape","id":"sh/jylc3u50","slide":4,"bbox":[500,248,8,250]}
+{"kind":"textbox","id":"sh/s3ud0jmx","slide":4,"text":"夜晚：观皮","textPreview":"夜晚：观皮","textChars":5,"textLines":1,"bbox":[524,266,232,36]}
+{"kind":"textbox","id":"sh/t43u9on2","slide":4,"text":"整理线索\n擦开黑雾\n补全角色档案\n逼近真实身份","textPreview":"整理线索 | 擦开黑雾 | 补全角色档案 | 逼近真实身份","textChars":23,"textLines":4,"bbox":[524,312,232,168]}
+{"kind":"shape","id":"sh/61cvy94r","slide":4,"bbox":[912,248,280,250]}
+{"kind":"shape","id":"sh/72lc7e5c","slide":4,"bbox":[912,248,8,250]}
+{"kind":"textbox","id":"sh/87atofmd","slide":4,"text":"判定：推理","textPreview":"判定：推理","textChars":5,"textLines":1,"bbox":[936,266,232,36]}
+{"kind":"textbox","id":"sh/98juxkny","slide":4,"text":"组合证据\n排除伪线索\n证明旧案不是诅咒\n而是人为复刻","textPreview":"组合证据 | 排除伪线索 | 证明旧案不是诅咒 | 而是人为复刻","textChars":26,"textLines":4,"bbox":[936,312,232,168]}
+{"kind":"textbox","id":"sh/p4ba1gfm","slide":4,"text":"探索 → 证据 → 观皮 → 新方向 → 再探索","textPreview":"探索 → 证据 → 观皮 → 新方向 → 再探索","textChars":24,"textLines":1,"bbox":[298,580,720,44]}
+{"kind":"image","id":"im/mxszipsj","slide":4,"name":"","alt":"舞台与幕后.png","bbox":[0,0,1280,720]}
+{"kind":"notes","id":"nt/dbuuh8","slide":4,"text":""}
+{"kind":"slide","id":"sl/kf6h46","slide":5,"title":"独特卖点","textShapes":9}
+{"kind":"shape","id":"sh/tkbm9gjq","slide":5,"bbox":[0,0,1280,720]}
+{"kind":"shape","id":"sh/6hk3ylkf","slide":5,"bbox":[0,0,1280,12]}
+{"kind":"textbox","id":"sh/7it47q10","slide":5,"text":"独特卖点","textPreview":"独特卖点","textChars":4,"textLines":1,"bbox":[72,44,360,24]}
+{"kind":"shape","id":"sh/5grm5g3u","slide":5,"bbox":[0,0,1280,720]}
+{"kind":"textbox","id":"sh/id03u1k3","slide":5,"text":"卖点不是“恐怖”，而是看穿身份的过程","textPreview":"卖点不是“恐怖”，而是看穿身份的过程","textChars":18,"textLines":1,"bbox":[72,74,810,104]}
+{"kind":"shape","id":"sh/je9436lo","slide":5,"bbox":[76,166,180,4]}
+{"kind":"shape","id":"sh/wrilsb2d","slide":5,"bbox":[88,222,310,230]}
+{"kind":"shape","id":"sh/xcrm1w3i","slide":5,"bbox":[88,222,8,230]}
+{"kind":"textbox","id":"sh/hsfulgvy","slide":5,"text":"画皮系统","textPreview":"画皮系统","textChars":4,"textLines":1,"bbox":[112,240,262,36]}
+{"kind":"textbox","id":"sh/gr6tcbed","slide":5,"text":"每个角色有被黑雾遮挡的隐藏档案。相关证据越完整，真实面貌越清晰。","textPreview":"每个角色有被黑雾遮挡的隐藏档案。相关证据越完整，真实面貌越清晰。","textChars":32,"textLines":1,"bbox":[112,286,262,148]}
+{"kind":"shape","id":"sh/vqxcjqds","slide":5,"bbox":[486,222,310,230]}
+{"kind":"shape","id":"sh/upobalw7","slide":5,"bbox":[486,222,8,230]}
+{"kind":"textbox","id":"sh/tofuhgvm","slide":5,"text":"戏曲文化作为机制","textPreview":"戏曲文化作为机制","textChars":8,"textLines":1,"bbox":[510,240,262,36]}
+{"kind":"textbox","id":"sh/8n6t8be1","slide":5,"text":"脸谱、行当、后台规矩和戏台空间都进入谜题，不只是视觉装饰。","textPreview":"脸谱、行当、后台规矩和戏台空间都进入谜题，不只是视觉装饰。","textChars":29,"textLines":1,"bbox":[510,286,262,148]}
+{"kind":"shape","id":"sh/72dcf6xw","slide":5,"bbox":[884,222,310,230]}
+{"kind":"shape","id":"sh/614b61wb","slide":5,"bbox":[884,222,8,230]}
+{"kind":"textbox","id":"sh/l0vudwfq","slide":5,"text":"非战斗推理体验","textPreview":"非战斗推理体验","textChars":7,"textLines":1,"bbox":[908,240,262,36]}
+{"kind":"textbox","id":"sh/kzmt4re5","slide":5,"text":"玩家胜利来自观察、对话、拖拽机关与证据判断，适合短 Demo 展示。","textPreview":"玩家胜利来自观察、对话、拖拽机关与证据判断，适合短 Demo 展示。","textChars":34,"textLines":1,"bbox":[908,286,262,148]}
+{"kind":"textbox","id":"sh/c3qtkbm1","slide":5,"text":"一句展示语：识人知面不知心，揭面之前先揭证据。","textPreview":"一句展示语：识人知面不知心，揭面之前先揭证据。","textChars":23,"textLines":1,"bbox":[120,570,920,42]}
+{"kind":"image","id":"im/xwbu9szy","slide":5,"name":"","alt":"戏曲舞台.png","bbox":[0,0,1280,720]}
+{"kind":"notes","id":"nt/kf6h46","slide":5,"text":""}
+{"kind":"slide","id":"sl/p7lsq3","slide":6,"title":"角色与美术","textShapes":9}
+{"kind":"shape","id":"sh/a9w7yhwr","slide":6,"bbox":[0,0,1280,720]}
+{"kind":"shape","id":"sh/xc769wvi","slide":6,"bbox":[0,0,1280,12]}
+{"kind":"textbox","id":"sh/wbyp0rex","slide":6,"text":"角色与美术","textPreview":"角色与美术","textChars":5,"textLines":1,"bbox":[72,44,360,24]}
+{"kind":"textbox","id":"sh/jepobmd8","slide":6,"text":"角色以戏曲行当建立第一印象，再被“画皮”推翻","textPreview":"角色以戏曲行当建立第一印象，再被“画皮”推翻","textChars":22,"textLines":1,"bbox":[72,76,1000,104]}
+{"kind":"shape","id":"sh/idg721w3","slide":6,"bbox":[78,158,190,4]}
+{"kind":"shape","id":"sh/5g7qdwve","slide":6,"bbox":[62,205,180,366]}
+{"kind":"textbox","id":"sh/7ip8f6dk","slide":6,"text":"旦","textPreview":"旦","textChars":1,"textLines":1,"bbox":[62,532,180,34]}
+{"kind":"shape","id":"sh/6hg761wz","slide":6,"bbox":[265,205,180,366]}
+{"kind":"textbox","id":"sh/x43ql03u","slide":6,"text":"净","textPreview":"净","textChars":1,"textLines":1,"bbox":[265,532,180,34]}
+{"kind":"shape","id":"sh/a1c7q543","slide":6,"bbox":[468,205,180,366]}
+{"kind":"textbox","id":"sh/k7epwf25","slide":6,"text":"丑","textPreview":"丑","textChars":1,"textLines":1,"bbox":[468,532,180,34]}
+{"kind":"shape","id":"sh/lsnqpk3q","slide":6,"bbox":[671,205,180,366]}
+{"kind":"textbox","id":"sh/z658nalk","slide":6,"text":"生","textPreview":"生","textChars":1,"textLines":1,"bbox":[671,532,180,34]}
+{"kind":"shape","id":"sh/8vep0z2h","slide":6,"bbox":[874,205,180,366]}
+{"kind":"textbox","id":"sh/hs36dkv6","slide":6,"text":"班主","textPreview":"班主","textChars":2,"textLines":1,"bbox":[874,532,180,34]}
+{"kind":"shape","id":"sh/grup4ful","slide":6,"bbox":[1077,205,180,366]}
+{"kind":"textbox","id":"sh/ups72pcf","slide":6,"text":"木偶","textPreview":"木偶","textChars":2,"textLines":1,"bbox":[1077,532,180,34]}
+{"kind":"textbox","id":"sh/5g3qh4v2","slide":6,"text":"暗红、黑、金与纸质证据构成统一视觉；脸谱提供身份标签，也制造叙事误导。","textPreview":"暗红、黑、金与纸质证据构成统一视觉；脸谱提供身份标签，也制造叙事误导。","textChars":35,"textLines":1,"bbox":[88,624,960,38]}
+{"kind":"image","id":"im/pcr2h8b2","slide":6,"name":"","alt":"旦.png","bbox":[74,222,156,300]}
+{"kind":"image","id":"im/balsvu1k","slide":6,"name":"","alt":"净.png","bbox":[277,222,156,300]}
+{"kind":"image","id":"im/cbut4zi5","slide":6,"name":"","alt":"丑.png","bbox":[480,222,156,300]}
+{"kind":"image","id":"im/l0nu1oj2","slide":6,"name":"","alt":"生.png","bbox":[683,222,156,300]}
+{"kind":"image","id":"im/ehsbu507","slide":6,"name":"","alt":"老板.png","bbox":[886,222,156,300]}
+{"kind":"image","id":"im/4b25kr6x","slide":6,"name":"","alt":"木偶.png","bbox":[1089,222,156,300]}
+{"kind":"notes","id":"nt/p7lsq3","slide":6,"text":""}
+{"kind":"slide","id":"sl/xcdl46","slide":7,"title":"场景与谜题","textShapes":9}
+{"kind":"shape","id":"sh/b6l0baxk","slide":7,"bbox":[0,0,1280,720]}
+{"kind":"shape","id":"sh/c7u1kfyp","slide":7,"bbox":[0,0,1280,12]}
+{"kind":"textbox","id":"sh/d832dkfa","slide":7,"text":"场景与谜题","textPreview":"场景与谜题","textChars":5,"textLines":1,"bbox":[72,44,360,24]}
+{"kind":"textbox","id":"sh/2hsjelgn","slide":7,"text":"可探索空间围绕“案发现场 - 舞台 - 后台”展开","textPreview":"可探索空间围绕“案发现场 - 舞台 - 后台”展开","textChars":25,"textLines":1,"bbox":[72,76,960,104]}
+{"kind":"shape","id":"sh/3i107qx8","slide":7,"bbox":[78,158,200,4]}
+{"kind":"shape","id":"sh/pk3i90fe","slide":7,"bbox":[70,215,350,198]}
+{"kind":"textbox","id":"sh/edsjalgr","slide":7,"text":"道具与盔头陈列室","textPreview":"道具与盔头陈列室","textChars":8,"textLines":1,"bbox":[70,440,350,32]}
+{"kind":"textbox","id":"sh/fe103qxc","slide":7,"text":"案发现场调查、脸谱盒、药瓶与证据发现","textPreview":"案发现场调查、脸谱盒、药瓶与证据发现","textChars":18,"textLines":1,"bbox":[88,486,314,78]}
+{"kind":"shape","id":"sh/2pc7i14z","slide":7,"bbox":[500,215,350,198]}
+{"kind":"textbox","id":"sh/ps3qdw3q","slide":7,"text":"戏曲舞台","textPreview":"戏曲舞台","textChars":4,"textLines":1,"bbox":[500,440,350,32]}
+{"kind":"textbox","id":"sh/orupkrm5","slide":7,"text":"锣鼓节奏、帷幕视觉与旧戏重演线索","textPreview":"锣鼓节奏、帷幕视觉与旧戏重演线索","textChars":16,"textLines":1,"bbox":[518,486,314,78]}
+{"kind":"shape","id":"sh/qtc7m14v","slide":7,"bbox":[930,215,350,198]}
+{"kind":"textbox","id":"sh/dwnqhg3m","slide":7,"text":"排练室","textPreview":"排练室","textChars":3,"textLines":1,"bbox":[930,440,350,32]}
+{"kind":"textbox","id":"sh/cvupobm1","slide":7,"text":"人物盘问、座位表、茶杯与时间线","textPreview":"人物盘问、座位表、茶杯与时间线","textChars":15,"textLines":1,"bbox":[948,486,314,78]}
+{"kind":"textbox","id":"sh/ry1o32lc","slide":7,"text":"谜题原型：门闩反扣、锣点复原、滑轨牵线、木偶箱封印。错误拖放扣心，正确拖放锁定部件。","textPreview":"谜题原型：门闩反扣、锣点复原、滑轨牵线、木偶箱封印。错误拖放扣心，正确拖放锁定部件。","textChars":42,"textLines":1,"bbox":[100,620,1060,36]}
+{"kind":"image","id":"im/d4ri1ofy","slide":7,"name":"","alt":"戏曲道具与盔头陈列室.png","bbox":[70,215,350,198]}
+{"kind":"image","id":"im/0zmhc76d","slide":7,"name":"","alt":"戏曲舞台.png","bbox":[500,215,350,198]}
+{"kind":"image","id":"im/sv2x8n61","slide":7,"name":"","alt":"排练室.png","bbox":[930,215,350,198]}
+{"kind":"notes","id":"nt/xcdl46","slide":7,"text":""}
+{"kind":"slide","id":"sl/mvq0fe","slide":8,"title":"Demo 完成度","textShapes":7}
+{"kind":"shape","id":"sh/fad076xo","slide":8,"bbox":[0,0,1280,720]}
+{"kind":"shape","id":"sh/gb6hgby9","slide":8,"bbox":[0,0,1280,12]}
+{"kind":"textbox","id":"sh/hcfi9gfu","slide":8,"text":"Demo 完成度","textPreview":"Demo 完成度","textChars":8,"textLines":1,"bbox":[72,44,360,24]}
+{"kind":"textbox","id":"sh/76d03mxs","slide":8,"text":"当前 Demo 已具备完整展示链路","textPreview":"当前 Demo 已具备完整展示链路","textChars":17,"textLines":1,"bbox":[72,76,560,104]}
+{"kind":"shape","id":"sh/s7mhcryd","slide":8,"bbox":[78,166,170,4]}
+{"kind":"shape","id":"sh/t8vi5wfy","slide":8,"bbox":[84,232,12,12]}
+{"kind":"textbox","id":"sh/q1ozmlgb","slide":8,"text":"两天流程：intro、白天探索、夜晚推进、观皮、第二天调查、推理判定、未完待续。","textPreview":"两天流程：intro、白天探索、夜晚推进、观皮、第二天调查、推理判定、未完待续。","textChars":40,"textLines":1,"bbox":[112,224,456,62]}
+{"kind":"shape","id":"sh/b2x0fqxw","slide":8,"bbox":[84,312,12,12]}
+{"kind":"textbox","id":"sh/zetsfqdw","slide":8,"text":"UI 已接入：主菜单、教程、暂停、地图、线索背包、人物档案、阶段切换。","textPreview":"UI 已接入：主菜单、教程、暂停、地图、线索背包、人物档案、阶段切换。","textChars":35,"textLines":1,"bbox":[112,304,456,62]}
+{"kind":"shape","id":"sh/ydkbmlwb","slide":8,"bbox":[84,392,12,12]}
+{"kind":"textbox","id":"sh/lgbahgv2","slide":8,"text":"交互已接入：点击音效、提示音、BGM 循环、方向键/WASD 切换场景。","textPreview":"交互已接入：点击音效、提示音、BGM 循环、方向键/WASD 切换场景。","textChars":36,"textLines":1,"bbox":[112,384,456,62]}
+{"kind":"shape","id":"sh/0f2tobeh","slide":8,"bbox":[84,472,12,12]}
+{"kind":"textbox","id":"sh/n2tsjqds","slide":8,"text":"谜题已从文字发现升级为可拖拽机关，具备失败反馈和正确锁定。","textPreview":"谜题已从文字发现升级为可拖拽机关，具备失败反馈和正确锁定。","textChars":29,"textLines":1,"bbox":[112,464,456,62]}
+{"kind":"textbox","id":"sh/m1kbqlcn","slide":8,"text":"展示状态：可讲清、可试玩、可继续扩展。","textPreview":"展示状态：可讲清、可试玩、可继续扩展。","textChars":19,"textLines":1,"bbox":[78,592,560,42]}
+{"kind":"image","id":"im/bid07qdk","slide":8,"name":"","alt":"00_all_ui_mockups_contact_sheet.png","bbox":[620,104,584,438]}
+{"kind":"notes","id":"nt/mvq0fe","slide":8,"text":""}
+{"kind":"slide","id":"sl/x1kpiw","slide":9,"title":"腾讯云黑客松作品介绍","textShapes":9}
+{"kind":"shape","id":"sh/tkvit0ju","slide":9,"bbox":[0,0,1280,720]}
+{"kind":"textbox","id":"sh/sjmhkvi9","slide":9,"text":"腾讯云黑客松作品介绍","textPreview":"腾讯云黑客松作品介绍","textChars":10,"textLines":1,"bbox":[78,56,360,32]}
+{"kind":"textbox","id":"sh/jutgn61s","slide":9,"text":"我们想交付的不是一段怪谈，\n而是一套能被玩家亲手拆开的旧案。","textPreview":"我们想交付的不是一段怪谈， | 而是一套能被玩家亲手拆开的旧案。","textChars":30,"textLines":2,"bbox":[72,78,760,104]}
+{"kind":"shape","id":"sh/itkze107","slide":9,"bbox":[82,258,180,4]}
+{"kind":"shape","id":"sh/5wvypgji","slide":9,"bbox":[84,318,330,172]}
+{"kind":"shape","id":"sh/kvmhgbid","slide":9,"bbox":[84,318,8,172]}
+{"kind":"textbox","id":"sh/vqtgj61g","slide":9,"text":"作品价值","textPreview":"作品价值","textChars":4,"textLines":1,"bbox":[108,336,282,36]}
+{"kind":"textbox","id":"sh/apkza10v","slide":9,"text":"用中国戏曲视觉承载悬疑推理，把脸谱身份转化为调查与误导机制。","textPreview":"用中国戏曲视觉承载悬疑推理，把脸谱身份转化为调查与误导机制。","textChars":30,"textLines":1,"bbox":[108,382,282,90]}
+{"kind":"shape","id":"sh/sbmdg3a5","slide":9,"bbox":[476,318,330,172]}
+{"kind":"shape","id":"sh/tcfu98rq","slide":9,"bbox":[476,318,8,172]}
+{"kind":"textbox","id":"sh/6p4vetsz","slide":9,"text":"当前完成度","textPreview":"当前完成度","textChars":5,"textLines":1,"bbox":[500,336,282,36]}
+{"kind":"textbox","id":"sh/7adc7y9k","slide":9,"text":"Unity Demo 已形成核心链路，适合黑客松现场路演与试玩演示。","textPreview":"Unity Demo 已形成核心链路，适合黑客松现场路演与试玩演示。","textChars":34,"textLines":1,"bbox":[500,382,282,90]}
+{"kind":"shape","id":"sh/knmdcja9","slide":9,"bbox":[868,318,330,172]}
+{"kind":"shape","id":"sh/5ovu5oru","slide":9,"bbox":[868,318,8,172]}
+{"kind":"textbox","id":"sh/il4bats3","slide":9,"text":"下一步","textPreview":"下一步","textChars":3,"textLines":1,"bbox":[892,336,282,36]}
+{"kind":"textbox","id":"sh/jmdc3e9o","slide":9,"text":"补齐美术一致性、扩展角色支线、完善观皮揭示与最终推理。","textPreview":"补齐美术一致性、扩展角色支线、完善观皮揭示与最终推理。","textChars":27,"textLines":1,"bbox":[892,382,282,90]}
+{"kind":"textbox","id":"sh/4jqdonad","slide":9,"text":"白天收集线索，夜晚揭开画皮。","textPreview":"白天收集线索，夜晚揭开画皮。","textChars":14,"textLines":1,"bbox":[82,590,820,44]}
+{"kind":"image","id":"im/3m1wzet4","slide":9,"name":"","alt":"generated_cover_redesign.png","bbox":[0,0,1280,720]}
+{"kind":"notes","id":"nt/x1kpiw","slide":9,"text":""}

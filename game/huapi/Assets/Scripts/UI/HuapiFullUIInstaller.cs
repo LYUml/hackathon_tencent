@@ -177,7 +177,7 @@ namespace TXGame
         private AudioClip hintClip;
         private bool pauseOpenedFromMainMenu;
         private bool guideOpenedFromMainMenu;
-        private float musicVolume = 0.26f;
+        private float musicVolume = 0.75f;
         private float sfxVolume = 0.48f;
         private float textSpeed = 0.5f;
         private static Font runtimeFont;
@@ -199,6 +199,8 @@ namespace TXGame
         private static readonly Color Red = Hex(0x8B2020);
         private static readonly Color White = Hex(0xF1E8D8);
         private static readonly Color Muted = Hex(0xBDAF9A);
+        private static readonly Vector2 StoryPrimaryButtonPos = new Vector2(720f, -430f);
+        private static readonly Vector2 StorySecondaryButtonPos = new Vector2(500f, -430f);
         private const string UI2026 = "Assets/Art/Sprites/UI2026/";
         private const string UIHome = UI2026 + "01home/";
         private const string UIHomeIcons = UIHome + "01icons/";
@@ -699,6 +701,7 @@ namespace TXGame
         {
             currentView = View.MainMenu;
             Time.timeScale = 0f;
+            EnsureBgmPlaying();
             RectTransform root = BeginLayer(systemCanvas, "MainMenuLayer");
             FullscreenDesignImage("MainMenuDesign2026", UIHome + "01home1.jpg", new Color(0.06f, 0.035f, 0.028f, 1f), root);
 
@@ -757,12 +760,12 @@ namespace TXGame
                 Panel("PortraitBase", Clear, new Vector2(675, -345), new Vector2(260, 18), root);
             }
 
-            Button(introIndex >= introSlides.Length - 1 ? "进入调查" : "继续", new Vector2(80, -395), new Vector2(220, 58), () =>
+            Button(introIndex >= introSlides.Length - 1 ? "进入调查" : "继续", StoryPrimaryButtonPos, new Vector2(220, 58), () =>
             {
                 if (introIndex >= introSlides.Length - 1) TransitionTo(FinishIntro);
                 else TransitionTo(() => ShowIntro(introIndex + 1));
             });
-            Button("跳过", new Vector2(330, -395), new Vector2(170, 58), () => TransitionTo(FinishIntro));
+            Button("跳过", StorySecondaryButtonPos, new Vector2(220, 58), () => TransitionTo(FinishIntro));
         }
 
         private void FinishIntro()
@@ -794,12 +797,12 @@ namespace TXGame
             Text(slide.Title, 38, White, TextAlignmentOptions.Center, new Vector2(0, -112), new Vector2(980, 64), root);
             UnityEngine.UI.Text monologueBodyText = Text(slide.Body, StoryBodyFontSize, White, TextAlignmentOptions.Top, new Vector2(0, -310), new Vector2(1280, 260), root);
             ConfigureStoryBodyText(monologueBodyText);
-            Button(monologueIndex >= monologueSlides.Length - 1 ? "进入后台" : "继续", new Vector2(80, -465), new Vector2(220, 58), () =>
+            Button(monologueIndex >= monologueSlides.Length - 1 ? "进入后台" : "继续", StoryPrimaryButtonPos, new Vector2(220, 58), () =>
             {
                 if (monologueIndex >= monologueSlides.Length - 1) TransitionTo(FinishMonologue);
                 else TransitionTo(() => ShowMonologue(monologueIndex + 1));
             });
-            Button("跳过", new Vector2(330, -465), new Vector2(160, 58), () => TransitionTo(FinishMonologue));
+            Button("跳过", StorySecondaryButtonPos, new Vector2(220, 58), () => TransitionTo(FinishMonologue));
         }
 
         private void FinishMonologue()
@@ -910,8 +913,8 @@ namespace TXGame
             FullscreenPanel("CrimeSceneShade", Clear, root);
 
             Panel("TopShade", Clear, new Vector2(0, 486), new Vector2(1920, 122), root);
-            Text(PhaseTitle() + " / " + scene.Name, 24, Gold, TextAlignmentOptions.Center, new Vector2(-515, 514), new Vector2(720, 36), root);
-            Text(scene.Description, 17, White, TextAlignmentOptions.Center, new Vector2(-515, 456), new Vector2(820, 34), root);
+            Text(PhaseTitle() + " / " + scene.Name, 34, Gold, TextAlignmentOptions.Center, new Vector2(-515, 510), new Vector2(820, 48), root);
+            Text(scene.Description, 26, White, TextAlignmentOptions.Center, new Vector2(-515, 455), new Vector2(980, 44), root);
             HeartBar(root, new Vector2(520, 505));
             Button("指南 F1", new Vector2(720, 458), new Vector2(110, 38), () => TransitionTo(ShowGuide));
             Button("线索 C", new Vector2(845, 458), new Vector2(110, 38), ToggleClues);
@@ -948,7 +951,7 @@ namespace TXGame
             }
 
             Panel("SearchHint", Clear, new Vector2(-515, -474), new Vector2(520, 48), root);
-            Text(sceneHotspotCount > 0 ? SearchHintText() : scene.Name + "：此处可自由查看，关键线索会在第二天变化。", 17, White, TextAlignmentOptions.Center, new Vector2(-515, -474), new Vector2(480, 32), root);
+            Text(sceneHotspotCount > 0 ? SearchHintText() : scene.Name + "：此处可自由查看，关键线索会在第二天变化。", 26, White, TextAlignmentOptions.Center, new Vector2(-515, -474), new Vector2(760, 42), root);
             DrawInvestigationHint(root);
 
             DrawSceneNavigation(root, scene);
@@ -1006,8 +1009,8 @@ namespace TXGame
 
             if (!hotspot.Examined && !IsLockedForCurrentPhase(hotspot))
             {
-                Panel("HotspotHintDot", new Color(Gold.r, Gold.g, Gold.b, 0.82f), hotspot.Position, new Vector2(18, 18), currentLayer).raycastTarget = false;
-                Text("?", 18, PaperText, TextAlignmentOptions.Center, hotspot.Position + new Vector2(0, 1), new Vector2(28, 24), currentLayer);
+                Panel("HotspotHintDot", new Color(Gold.r, Gold.g, Gold.b, 0.92f), hotspot.Position, new Vector2(34, 34), currentLayer).raycastTarget = false;
+                Text("?", 32, PaperText, TextAlignmentOptions.Center, hotspot.Position + new Vector2(0, 1), new Vector2(44, 42), currentLayer);
             }
 
             Image hoverPanel = Panel("HotspotHover", Clear, hotspot.Position + new Vector2(0, size.y * 0.5f + 30), new Vector2(220, 46), currentLayer);
@@ -1147,11 +1150,11 @@ namespace TXGame
         private void DrawSceneNavigation(RectTransform root, SceneNode scene)
         {
             Panel("MovePad", Clear, new Vector2(640, -385), new Vector2(310, 210), root);
-            Text("方向", 18, Muted, TextAlignmentOptions.Center, new Vector2(640, -300), new Vector2(160, 30), root);
-            if (CanMove(scene.Front)) Button("↑\n前", new Vector2(640, -335), new Vector2(90, 58), () => MoveScene(scene.Front, "前"));
-            if (CanMove(scene.Left)) Button("←\n左", new Vector2(585, -400), new Vector2(90, 58), () => MoveScene(scene.Left, "左"));
-            if (CanMove(scene.Back)) Button("↓\n后", new Vector2(640, -465), new Vector2(90, 58), () => MoveScene(scene.Back, "后"));
-            if (CanMove(scene.Right)) Button("→\n右", new Vector2(695, -400), new Vector2(90, 58), () => MoveScene(scene.Right, "右"));
+            Text("方向", 26, Muted, TextAlignmentOptions.Center, new Vector2(640, -292), new Vector2(180, 40), root);
+            if (CanMove(scene.Front)) Button("↑\n前", new Vector2(640, -335), new Vector2(104, 72), () => MoveScene(scene.Front, "前"));
+            if (CanMove(scene.Left)) Button("←\n左", new Vector2(575, -408), new Vector2(104, 72), () => MoveScene(scene.Left, "左"));
+            if (CanMove(scene.Back)) Button("↓\n后", new Vector2(640, -480), new Vector2(104, 72), () => MoveScene(scene.Back, "后"));
+            if (CanMove(scene.Right)) Button("→\n右", new Vector2(705, -408), new Vector2(104, 72), () => MoveScene(scene.Right, "右"));
         }
 
         private bool CanMove(string targetId)
@@ -1181,12 +1184,31 @@ namespace TXGame
             currentView = View.SceneMap;
             RectTransform root = BeginLayer(systemCanvas, "SceneMapLayer");
             FullscreenImage("GeneratedSceneMap", "Assets/Art/Sprites/Generated/generated_overall_scene_map.png", new Color(0.05f, 0.04f, 0.035f, 1f), root);
+            AddInvisibleMapInteractions();
+#if false
             FullscreenPanel("MapShade", Clear, root);
             ImagePanel("MapFrame2026", UIWindow + "widnow.frame02.png", new Color(0, 0, 0, 0), new Vector2(0, 5), new Vector2(1321, 614), root);
             Text("场景地图 / 当前：" + CurrentScene().Name, 30, Gold, TextAlignmentOptions.Center, new Vector2(0, 320), new Vector2(820, 44), root);
             Text("再次按 M 返回游戏界面", 22, White, TextAlignmentOptions.Center, new Vector2(0, -318), new Vector2(620, 36), root);
             DrawMapMechanismHints(root);
             ImageButton("MapBack", UIWindow + "back.btn.png", new Vector2(0, -390), new Vector2(201, 65), () => TransitionTo(ShowCrimeScene));
+#endif
+        }
+
+        private void AddInvisibleMapInteractions()
+        {
+            foreach (SceneNode scene in sceneNodes.Values)
+            {
+                SceneNode targetScene = scene;
+                TransparentButton("MapScene_" + targetScene.Id, targetScene.MapPosition, new Vector2(250, 150), () =>
+                {
+                    currentSceneId = targetScene.Id;
+                    evidenceBoardVisible = false;
+                    TransitionTo(ShowCrimeScene);
+                });
+            }
+
+            TransparentButton("MapBackInvisible", new Vector2(0, -420), new Vector2(360, 110), () => TransitionTo(ShowCrimeScene));
         }
 
         private void DrawMapConnection(RectTransform root, SceneNode from, string targetId)
@@ -2273,7 +2295,7 @@ namespace TXGame
             UnityEngine.UI.Text phaseBodyText = Text(body, StoryBodyFontSize, White, TextAlignmentOptions.Center, new Vector2(0, -72), new Vector2(1040, 160), root);
             ConfigureStoryBodyText(phaseBodyText);
             Text("PHASE SHIFT", 18, Muted, TextAlignmentOptions.Center, new Vector2(0, -150), new Vector2(520, 30), root);
-            Button(buttonLabel, new Vector2(0, -224), new Vector2(290, 62), () => TransitionTo(() =>
+            Button(buttonLabel, StoryPrimaryButtonPos, new Vector2(290, 62), () => TransitionTo(() =>
             {
                 Time.timeScale = 1f;
                 next?.Invoke();
@@ -2290,8 +2312,8 @@ namespace TXGame
             FullscreenPanel("EndingShade", Clear, root);
             Text("未完待续", 76, Gold, TextAlignmentOptions.Center, new Vector2(0, 90), new Vector2(900, 110), root);
             Text("第二天夜晚，旧案重演的机关已经露出形状。\n但真正能调动戏班、旧箱、锣点和更夫的人，还没有站到台前。", 28, White, TextAlignmentOptions.Center, new Vector2(0, -45), new Vector2(980, 130), root);
-            Button("回到标题", new Vector2(-150, -220), new Vector2(240, 62), () => TransitionTo(ShowMainMenu), Dark, White);
-            Button("继续查看现场", new Vector2(150, -220), new Vector2(260, 62), () =>
+            Button("回到标题", StorySecondaryButtonPos, new Vector2(240, 62), () => TransitionTo(ShowMainMenu), Dark, White);
+            Button("继续查看现场", StoryPrimaryButtonPos, new Vector2(260, 62), () =>
             {
                 Time.timeScale = 1f;
                 TransitionTo(ShowCrimeScene);
@@ -2561,13 +2583,13 @@ namespace TXGame
             HeartBar(root, new Vector2(0, 250));
             Text("调查失败", 76, Red, TextAlignmentOptions.Center, new Vector2(0, 130), new Vector2(900, 110), root);
             Text($"最后失误：{reason}\n心力耗尽，线索链条断裂。请重新开始调查。", 28, White, TextAlignmentOptions.Center, new Vector2(0, 0), new Vector2(980, 130), root);
-            Button("重新开始", new Vector2(-150, -210), new Vector2(240, 62), () => TransitionTo(() =>
+            Button("重新开始", StorySecondaryButtonPos, new Vector2(240, 62), () => TransitionTo(() =>
             {
                 Time.timeScale = 1f;
                 ResetGameState();
                 ShowCrimeScene();
             }), Red, White);
-            Button("回到标题", new Vector2(150, -210), new Vector2(240, 62), () => TransitionTo(ShowMainMenu), Dark, White);
+            Button("回到标题", StoryPrimaryButtonPos, new Vector2(240, 62), () => TransitionTo(ShowMainMenu), Dark, White);
         }
 
         private void Toast(string message)
@@ -2612,18 +2634,46 @@ namespace TXGame
             bgmAudioSource = gameObject.AddComponent<AudioSource>();
             bgmAudioSource.playOnAwake = false;
             bgmAudioSource.loop = true;
+            bgmAudioSource.mute = false;
+            bgmAudioSource.ignoreListenerPause = true;
             bgmAudioSource.spatialBlend = 0f;
+            bgmAudioSource.volume = musicVolume;
+            EnsureBgmPlaying();
+        }
+
+        private void EnsureBgmPlaying()
+        {
+            if (bgmAudioSource == null) return;
+
+            EnsureAudioCanBeHeard();
             bgmAudioSource.volume = musicVolume;
             AudioClip bgm = Resources.Load<AudioClip>("Audio/BGM/Midnight in the Empty Theatre");
             if (bgm != null)
             {
-                bgmAudioSource.clip = bgm;
-                bgmAudioSource.Play();
+                if (bgm.loadState == AudioDataLoadState.Unloaded)
+                    bgm.LoadAudioData();
+                if (bgmAudioSource.clip != bgm)
+                    bgmAudioSource.clip = bgm;
+                if (!bgmAudioSource.isPlaying)
+                    bgmAudioSource.Play();
             }
             else
             {
                 Debug.LogWarning("未找到 BGM：Resources/Audio/BGM/Midnight in the Empty Theatre");
             }
+        }
+
+        private void EnsureAudioCanBeHeard()
+        {
+            AudioListener.pause = false;
+            AudioListener.volume = 1f;
+            if (FindObjectOfType<AudioListener>() != null) return;
+
+            Camera camera = Camera.main;
+            if (camera != null)
+                camera.gameObject.AddComponent<AudioListener>();
+            else
+                gameObject.AddComponent<AudioListener>();
         }
 
         private void PlayClickSound()
@@ -3127,6 +3177,7 @@ namespace TXGame
             if (requested >= 36) return requested;
             if (requested < 17) return requested;
             if (string.IsNullOrWhiteSpace(content)) return requested;
+            if (requested <= 24 && rectSize.x <= 160f && rectSize.y <= 110f) return requested;
 
             bool roomyTextBlock = rectSize.y >= 58f || content.Contains("\n");
             bool ordinaryTextSize = requested >= 20 && requested <= 30;

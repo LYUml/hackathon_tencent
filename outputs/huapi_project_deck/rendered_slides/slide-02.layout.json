@@ -1,0 +1,882 @@
+{
+  "schema": "openai.presentation.layout/v4",
+  "unit": "px",
+  "slide": {
+    "aid": "sl/ufspwn",
+    "id": "ufspwn",
+    "slide": 2,
+    "layoutId": "db4b8d6d-aa4c-4c8c-9687-88767fcaed91",
+    "layoutName": "Title Slide",
+    "layoutType": "title",
+    "masterLayoutId": "55258653-367f-4328-b177-5e134b12a2c1",
+    "masterLayoutName": "Master",
+    "backgroundColor": "#090607",
+    "frame": {
+      "left": 0,
+      "top": 0,
+      "width": 1280,
+      "height": 720
+    }
+  },
+  "theme": {
+    "colorSchemeName": "ChatGPT",
+    "colors": {
+      "accent1": "#156082",
+      "accent2": "#E97132",
+      "accent3": "#196B24",
+      "accent4": "#0F9ED5",
+      "accent5": "#A02B93",
+      "accent6": "#4EA72E",
+      "bg1": "#FFFFFF",
+      "bg2": "#000000",
+      "tx1": "#1F1F1F",
+      "tx2": "#FFFFFF",
+      "dk1": "#000000",
+      "lt1": "#FFFFFF",
+      "dk2": "#0E2841",
+      "lt2": "#E8E8E8",
+      "hlink": "#467886",
+      "folHlink": "#96607D"
+    },
+    "typefaces": [
+      "+mn-lt"
+    ]
+  },
+  "inheritedLayers": [
+    {
+      "scope": "layout",
+      "id": "db4b8d6d-aa4c-4c8c-9687-88767fcaed91",
+      "name": "Title Slide",
+      "type": "title",
+      "parentLayoutId": "55258653-367f-4328-b177-5e134b12a2c1",
+      "elements": []
+    },
+    {
+      "scope": "master",
+      "id": "55258653-367f-4328-b177-5e134b12a2c1",
+      "name": "Master",
+      "type": "master",
+      "elements": []
+    }
+  ],
+  "elements": [
+    {
+      "order": 1,
+      "kind": "shape",
+      "scope": "slide",
+      "aid": "sh/l8jy50nq",
+      "id": "1",
+      "bbox": [
+        0,
+        0,
+        1280,
+        720
+      ],
+      "geometry": "rect",
+      "fillColor": "#090607",
+      "lineWidth": 0
+    },
+    {
+      "order": 2,
+      "kind": "shape",
+      "scope": "slide",
+      "aid": "sh/y5sfulof",
+      "id": "2",
+      "bbox": [
+        0,
+        0,
+        1280,
+        12
+      ],
+      "geometry": "rect",
+      "fillColor": "#4C0E13",
+      "lineWidth": 0
+    },
+    {
+      "order": 3,
+      "kind": "shape",
+      "scope": "slide",
+      "aid": "sh/z61g3q50",
+      "id": "3",
+      "bbox": [
+        72,
+        44,
+        360,
+        24
+      ],
+      "geometry": "rect",
+      "text": "腾讯云黑客松作品介绍",
+      "textPreview": "腾讯云黑客松作品介绍",
+      "resolvedFontSize": 16,
+      "resolvedTextStyle": {
+        "fontSize": 16,
+        "typeface": "+mn-lt",
+        "color": "#D6B36A",
+        "bold": true,
+        "alignment": "left",
+        "insets": {
+          "top": 4.8,
+          "right": 9.6,
+          "bottom": 4.8,
+          "left": 9.6
+        }
+      },
+      "textLayout": {
+        "lineCount": 1,
+        "lines": [
+          {
+            "index": 1,
+            "text": "腾讯云黑客松作品介绍"
+          }
+        ]
+      },
+      "paragraphs": [
+        {
+          "index": 1,
+          "text": "腾讯云黑客松作品介绍",
+          "resolvedTextStyle": {
+            "fontSize": 16,
+            "color": "#D6B36A",
+            "bold": true
+          },
+          "runs": [
+            {
+              "index": 1,
+              "text": "腾讯云黑客松作品介绍",
+              "fontSize": 16,
+              "color": "#D6B36A",
+              "bold": true
+            }
+          ],
+          "marginLeft": 0
+        }
+      ],
+      "lineWidth": 0
+    },
+    {
+      "order": 4,
+      "kind": "image",
+      "scope": "slide",
+      "aid": "im/dgfyhwzq",
+      "id": "4",
+      "bbox": [
+        684,
+        0,
+        596,
+        720
+      ],
+      "alt": "戏曲道具与盔头陈列室.png",
+      "contentType": "image/png",
+      "imageFit": "cover",
+      "asset": {
+        "assetId": "622c52c8-2754-49f1-9935-1ad2ae41f2d3",
+        "contentType": "image/png",
+        "byteLength": 6814016
+      }
+    },
+    {
+      "order": 5,
+      "kind": "shape",
+      "scope": "slide",
+      "aid": "sh/x4je1gnu",
+      "id": "5",
+      "bbox": [
+        0,
+        0,
+        1280,
+        720
+      ],
+      "geometry": "rect",
+      "fillColor": "rgba(0, 0, 0, 0.35)",
+      "lineWidth": 0
+    },
+    {
+      "order": 6,
+      "kind": "shape",
+      "scope": "slide",
+      "aid": "sh/ah8fqlo3",
+      "id": "6",
+      "bbox": [
+        72,
+        84,
+        560,
+        104
+      ],
+      "geometry": "rect",
+      "text": "一句话概念",
+      "textPreview": "一句话概念",
+      "resolvedFontSize": 44,
+      "resolvedTextStyle": {
+        "fontSize": 44,
+        "typeface": "+mn-lt",
+        "color": "#F7EFE0",
+        "bold": true,
+        "alignment": "left",
+        "insets": {
+          "top": 4.8,
+          "right": 9.6,
+          "bottom": 4.8,
+          "left": 9.6
+        }
+      },
+      "textLayout": {
+        "lineCount": 1,
+        "lines": [
+          {
+            "index": 1,
+            "text": "一句话概念"
+          }
+        ]
+      },
+      "paragraphs": [
+        {
+          "index": 1,
+          "text": "一句话概念",
+          "resolvedTextStyle": {
+            "fontSize": 44,
+            "color": "#F7EFE0",
+            "bold": true
+          },
+          "runs": [
+            {
+              "index": 1,
+              "text": "一句话概念",
+              "fontSize": 44,
+              "color": "#F7EFE0",
+              "bold": true
+            }
+          ],
+          "marginLeft": 0
+        }
+      ],
+      "lineWidth": 0
+    },
+    {
+      "order": 7,
+      "kind": "shape",
+      "scope": "slide",
+      "aid": "sh/bihwz65o",
+      "id": "7",
+      "bbox": [
+        76,
+        178,
+        116,
+        4
+      ],
+      "geometry": "rect",
+      "fillColor": "#D6B36A",
+      "lineWidth": 0
+    },
+    {
+      "order": 8,
+      "kind": "shape",
+      "scope": "slide",
+      "aid": "sh/ofqxob6d",
+      "id": "8",
+      "bbox": [
+        76,
+        224,
+        566,
+        154
+      ],
+      "geometry": "rect",
+      "text": "在一个所有人都戴着脸谱生活的戏班中，玩家扮演年轻侦探，白天调查失踪旧案，夜晚通过“观皮”揭开角色面具下的真实身份。",
+      "textPreview": "在一个所有人都戴着脸谱生活的戏班中，玩家扮演年轻侦探，白天调查失踪旧案，夜晚通过“观皮”揭开角色面具下的真实身份。",
+      "resolvedFontSize": 27,
+      "resolvedTextStyle": {
+        "fontSize": 27,
+        "typeface": "+mn-lt",
+        "color": "#F7EFE0",
+        "alignment": "left",
+        "insets": {
+          "top": 4.8,
+          "right": 9.6,
+          "bottom": 4.8,
+          "left": 9.6
+        }
+      },
+      "textLayout": {
+        "lineCount": 3,
+        "lines": [
+          {
+            "index": 1,
+            "text": "在一个所有人都戴着脸谱生活的戏班中，玩家"
+          },
+          {
+            "index": 2,
+            "text": "扮演年轻侦探，白天调查失踪旧案，夜晚通过"
+          },
+          {
+            "index": 3,
+            "text": "“观皮”揭开角色面具下的真实身份。"
+          }
+        ]
+      },
+      "paragraphs": [
+        {
+          "index": 1,
+          "text": "在一个所有人都戴着脸谱生活的戏班中，玩家扮演年轻侦探，白天调查失踪旧案，夜晚通过“观皮”揭开角色面具下的真实身份。",
+          "resolvedTextStyle": {
+            "fontSize": 27,
+            "color": "#F7EFE0"
+          },
+          "runs": [
+            {
+              "index": 1,
+              "text": "在一个所有人都戴着脸谱生活的戏班中，玩家扮演年轻侦探，白天调查失踪旧案，夜晚通过“观皮”揭开角色面具下的真实身份。",
+              "fontSize": 27,
+              "color": "#F7EFE0"
+            }
+          ],
+          "marginLeft": 0
+        }
+      ],
+      "lineWidth": 0
+    },
+    {
+      "order": 9,
+      "kind": "shape",
+      "scope": "slide",
+      "aid": "sh/pgzexgny",
+      "id": "9",
+      "bbox": [
+        82,
+        424,
+        228,
+        140
+      ],
+      "geometry": "roundRect",
+      "fillColor": "#E7D5AA",
+      "lineColor": "#B89559",
+      "lineWidth": 2
+    },
+    {
+      "order": 10,
+      "kind": "shape",
+      "scope": "slide",
+      "aid": "sh/98n6t47y",
+      "id": "10",
+      "bbox": [
+        82,
+        424,
+        8,
+        140
+      ],
+      "geometry": "rect",
+      "fillColor": "#A52824",
+      "lineWidth": 0
+    },
+    {
+      "order": 11,
+      "kind": "shape",
+      "scope": "slide",
+      "aid": "sh/87epkzqd",
+      "id": "11",
+      "bbox": [
+        106,
+        442,
+        180,
+        36
+      ],
+      "geometry": "rect",
+      "text": "核心类型",
+      "textPreview": "核心类型",
+      "resolvedFontSize": 23,
+      "resolvedTextStyle": {
+        "fontSize": 23,
+        "typeface": "+mn-lt",
+        "color": "#251914",
+        "bold": true,
+        "alignment": "left",
+        "insets": {
+          "top": 4.8,
+          "right": 9.6,
+          "bottom": 4.8,
+          "left": 9.6
+        }
+      },
+      "textLayout": {
+        "lineCount": 1,
+        "lines": [
+          {
+            "index": 1,
+            "text": "核心类型"
+          }
+        ]
+      },
+      "paragraphs": [
+        {
+          "index": 1,
+          "text": "核心类型",
+          "resolvedTextStyle": {
+            "fontSize": 23,
+            "color": "#251914",
+            "bold": true
+          },
+          "runs": [
+            {
+              "index": 1,
+              "text": "核心类型",
+              "fontSize": 23,
+              "color": "#251914",
+              "bold": true
+            }
+          ],
+          "marginLeft": 0
+        }
+      ],
+      "lineWidth": 0
+    },
+    {
+      "order": 12,
+      "kind": "shape",
+      "scope": "slide",
+      "aid": "sh/n65oreps",
+      "id": "12",
+      "bbox": [
+        106,
+        488,
+        180,
+        58
+      ],
+      "geometry": "rect",
+      "text": "叙事解谜\n调查推理\n视觉小说",
+      "textPreview": "叙事解谜 | 调查推理 | 视觉小说",
+      "resolvedFontSize": 17,
+      "resolvedTextStyle": {
+        "fontSize": 17,
+        "typeface": "+mn-lt",
+        "color": "#32251D",
+        "alignment": "left",
+        "insets": {
+          "top": 4.8,
+          "right": 9.6,
+          "bottom": 4.8,
+          "left": 9.6
+        }
+      },
+      "textLayout": {
+        "lineCount": 3,
+        "lines": [
+          {
+            "index": 1,
+            "text": "叙事解谜"
+          },
+          {
+            "index": 2,
+            "text": "调查推理"
+          },
+          {
+            "index": 3,
+            "text": "视觉小说"
+          }
+        ]
+      },
+      "paragraphs": [
+        {
+          "index": 1,
+          "text": "叙事解谜",
+          "resolvedTextStyle": {
+            "fontSize": 17,
+            "color": "#32251D"
+          },
+          "runs": [
+            {
+              "index": 1,
+              "text": "叙事解谜",
+              "fontSize": 17,
+              "color": "#32251D"
+            }
+          ],
+          "marginLeft": 0
+        },
+        {
+          "index": 2,
+          "text": "调查推理",
+          "resolvedTextStyle": {
+            "fontSize": 17,
+            "color": "#32251D"
+          },
+          "runs": [
+            {
+              "index": 1,
+              "text": "调查推理",
+              "fontSize": 17,
+              "color": "#32251D"
+            }
+          ],
+          "marginLeft": 0
+        },
+        {
+          "index": 3,
+          "text": "视觉小说",
+          "resolvedTextStyle": {
+            "fontSize": 17,
+            "color": "#32251D"
+          },
+          "runs": [
+            {
+              "index": 1,
+              "text": "视觉小说",
+              "fontSize": 17,
+              "color": "#32251D"
+            }
+          ],
+          "marginLeft": 0
+        }
+      ],
+      "lineWidth": 0
+    },
+    {
+      "order": 13,
+      "kind": "shape",
+      "scope": "slide",
+      "aid": "sh/m5c7i987",
+      "id": "13",
+      "bbox": [
+        334,
+        424,
+        250,
+        140
+      ],
+      "geometry": "roundRect",
+      "fillColor": "#E7D5AA",
+      "lineColor": "#B89559",
+      "lineWidth": 2
+    },
+    {
+      "order": 14,
+      "kind": "shape",
+      "scope": "slide",
+      "aid": "sh/l436p47m",
+      "id": "14",
+      "bbox": [
+        334,
+        424,
+        8,
+        140
+      ],
+      "geometry": "rect",
+      "fillColor": "#D6B36A",
+      "lineWidth": 0
+    },
+    {
+      "order": 15,
+      "kind": "shape",
+      "scope": "slide",
+      "aid": "sh/0jupgzq1",
+      "id": "15",
+      "bbox": [
+        358,
+        442,
+        202,
+        36
+      ],
+      "geometry": "rect",
+      "text": "目标玩家",
+      "textPreview": "目标玩家",
+      "resolvedFontSize": 23,
+      "resolvedTextStyle": {
+        "fontSize": 23,
+        "typeface": "+mn-lt",
+        "color": "#251914",
+        "bold": true,
+        "alignment": "left",
+        "insets": {
+          "top": 4.8,
+          "right": 9.6,
+          "bottom": 4.8,
+          "left": 9.6
+        }
+      },
+      "textLayout": {
+        "lineCount": 1,
+        "lines": [
+          {
+            "index": 1,
+            "text": "目标玩家"
+          }
+        ]
+      },
+      "paragraphs": [
+        {
+          "index": 1,
+          "text": "目标玩家",
+          "resolvedTextStyle": {
+            "fontSize": 23,
+            "color": "#251914",
+            "bold": true
+          },
+          "runs": [
+            {
+              "index": 1,
+              "text": "目标玩家",
+              "fontSize": 23,
+              "color": "#251914",
+              "bold": true
+            }
+          ],
+          "marginLeft": 0
+        }
+      ],
+      "lineWidth": 0
+    },
+    {
+      "order": 16,
+      "kind": "shape",
+      "scope": "slide",
+      "aid": "sh/zilonupw",
+      "id": "16",
+      "bbox": [
+        358,
+        488,
+        202,
+        58
+      ],
+      "geometry": "rect",
+      "text": "民俗、悬疑、破案\n与轻恐怖题材受众",
+      "textPreview": "民俗、悬疑、破案 | 与轻恐怖题材受众",
+      "resolvedFontSize": 17,
+      "resolvedTextStyle": {
+        "fontSize": 17,
+        "typeface": "+mn-lt",
+        "color": "#32251D",
+        "alignment": "left",
+        "insets": {
+          "top": 4.8,
+          "right": 9.6,
+          "bottom": 4.8,
+          "left": 9.6
+        }
+      },
+      "textLayout": {
+        "lineCount": 2,
+        "lines": [
+          {
+            "index": 1,
+            "text": "民俗、悬疑、破案"
+          },
+          {
+            "index": 2,
+            "text": "与轻恐怖题材受众"
+          }
+        ]
+      },
+      "paragraphs": [
+        {
+          "index": 1,
+          "text": "民俗、悬疑、破案",
+          "resolvedTextStyle": {
+            "fontSize": 17,
+            "color": "#32251D"
+          },
+          "runs": [
+            {
+              "index": 1,
+              "text": "民俗、悬疑、破案",
+              "fontSize": 17,
+              "color": "#32251D"
+            }
+          ],
+          "marginLeft": 0
+        },
+        {
+          "index": 2,
+          "text": "与轻恐怖题材受众",
+          "resolvedTextStyle": {
+            "fontSize": 17,
+            "color": "#32251D"
+          },
+          "runs": [
+            {
+              "index": 1,
+              "text": "与轻恐怖题材受众",
+              "fontSize": 17,
+              "color": "#32251D"
+            }
+          ],
+          "marginLeft": 0
+        }
+      ],
+      "lineWidth": 0
+    },
+    {
+      "order": 17,
+      "kind": "shape",
+      "scope": "slide",
+      "aid": "sh/yhc7ep8b",
+      "id": "17",
+      "bbox": [
+        608,
+        424,
+        250,
+        140
+      ],
+      "geometry": "roundRect",
+      "fillColor": "#E7D5AA",
+      "lineColor": "#B89559",
+      "lineWidth": 2
+    },
+    {
+      "order": 18,
+      "kind": "shape",
+      "scope": "slide",
+      "aid": "sh/dg36lk7q",
+      "id": "18",
+      "bbox": [
+        608,
+        424,
+        8,
+        140
+      ],
+      "geometry": "rect",
+      "fillColor": "#A52824",
+      "lineWidth": 0
+    },
+    {
+      "order": 19,
+      "kind": "shape",
+      "scope": "slide",
+      "aid": "sh/cfupcfq5",
+      "id": "19",
+      "bbox": [
+        632,
+        442,
+        202,
+        36
+      ],
+      "geometry": "rect",
+      "text": "体验承诺",
+      "textPreview": "体验承诺",
+      "resolvedFontSize": 23,
+      "resolvedTextStyle": {
+        "fontSize": 23,
+        "typeface": "+mn-lt",
+        "color": "#251914",
+        "bold": true,
+        "alignment": "left",
+        "insets": {
+          "top": 4.8,
+          "right": 9.6,
+          "bottom": 4.8,
+          "left": 9.6
+        }
+      },
+      "textLayout": {
+        "lineCount": 1,
+        "lines": [
+          {
+            "index": 1,
+            "text": "体验承诺"
+          }
+        ]
+      },
+      "paragraphs": [
+        {
+          "index": 1,
+          "text": "体验承诺",
+          "resolvedTextStyle": {
+            "fontSize": 23,
+            "color": "#251914",
+            "bold": true
+          },
+          "runs": [
+            {
+              "index": 1,
+              "text": "体验承诺",
+              "fontSize": 23,
+              "color": "#251914",
+              "bold": true
+            }
+          ],
+          "marginLeft": 0
+        }
+      ],
+      "lineWidth": 0
+    },
+    {
+      "order": 20,
+      "kind": "shape",
+      "scope": "slide",
+      "aid": "sh/4jep8zy1",
+      "id": "20",
+      "bbox": [
+        632,
+        488,
+        202,
+        58
+      ],
+      "geometry": "rect",
+      "text": "不靠战斗推进\n靠观察、对话与证据判断",
+      "textPreview": "不靠战斗推进 | 靠观察、对话与证据判断",
+      "resolvedFontSize": 17,
+      "resolvedTextStyle": {
+        "fontSize": 17,
+        "typeface": "+mn-lt",
+        "color": "#32251D",
+        "alignment": "left",
+        "insets": {
+          "top": 4.8,
+          "right": 9.6,
+          "bottom": 4.8,
+          "left": 9.6
+        }
+      },
+      "textLayout": {
+        "lineCount": 3,
+        "lines": [
+          {
+            "index": 1,
+            "text": "不靠战斗推进"
+          },
+          {
+            "index": 2,
+            "text": "靠观察、对话与证据判"
+          },
+          {
+            "index": 3,
+            "text": "断"
+          }
+        ]
+      },
+      "paragraphs": [
+        {
+          "index": 1,
+          "text": "不靠战斗推进",
+          "resolvedTextStyle": {
+            "fontSize": 17,
+            "color": "#32251D"
+          },
+          "runs": [
+            {
+              "index": 1,
+              "text": "不靠战斗推进",
+              "fontSize": 17,
+              "color": "#32251D"
+            }
+          ],
+          "marginLeft": 0
+        },
+        {
+          "index": 2,
+          "text": "靠观察、对话与证据判断",
+          "resolvedTextStyle": {
+            "fontSize": 17,
+            "color": "#32251D"
+          },
+          "runs": [
+            {
+              "index": 1,
+              "text": "靠观察、对话与证据判断",
+              "fontSize": 17,
+              "color": "#32251D"
+            }
+          ],
+          "marginLeft": 0
+        }
+      ],
+      "lineWidth": 0
+    }
+  ],
+  "composeRuns": []
+}

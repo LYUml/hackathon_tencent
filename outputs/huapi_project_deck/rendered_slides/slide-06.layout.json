@@ -1,0 +1,899 @@
+{
+  "schema": "openai.presentation.layout/v4",
+  "unit": "px",
+  "slide": {
+    "aid": "sl/p7lsq3",
+    "id": "p7lsq3",
+    "slide": 6,
+    "layoutId": "db4b8d6d-aa4c-4c8c-9687-88767fcaed91",
+    "layoutName": "Title Slide",
+    "layoutType": "title",
+    "masterLayoutId": "55258653-367f-4328-b177-5e134b12a2c1",
+    "masterLayoutName": "Master",
+    "backgroundColor": "#090607",
+    "frame": {
+      "left": 0,
+      "top": 0,
+      "width": 1280,
+      "height": 720
+    }
+  },
+  "theme": {
+    "colorSchemeName": "ChatGPT",
+    "colors": {
+      "accent1": "#156082",
+      "accent2": "#E97132",
+      "accent3": "#196B24",
+      "accent4": "#0F9ED5",
+      "accent5": "#A02B93",
+      "accent6": "#4EA72E",
+      "bg1": "#FFFFFF",
+      "bg2": "#000000",
+      "tx1": "#1F1F1F",
+      "tx2": "#FFFFFF",
+      "dk1": "#000000",
+      "lt1": "#FFFFFF",
+      "dk2": "#0E2841",
+      "lt2": "#E8E8E8",
+      "hlink": "#467886",
+      "folHlink": "#96607D"
+    },
+    "typefaces": [
+      "+mn-lt"
+    ]
+  },
+  "inheritedLayers": [
+    {
+      "scope": "layout",
+      "id": "db4b8d6d-aa4c-4c8c-9687-88767fcaed91",
+      "name": "Title Slide",
+      "type": "title",
+      "parentLayoutId": "55258653-367f-4328-b177-5e134b12a2c1",
+      "elements": []
+    },
+    {
+      "scope": "master",
+      "id": "55258653-367f-4328-b177-5e134b12a2c1",
+      "name": "Master",
+      "type": "master",
+      "elements": []
+    }
+  ],
+  "elements": [
+    {
+      "order": 1,
+      "kind": "shape",
+      "scope": "slide",
+      "aid": "sh/a9w7yhwr",
+      "id": "1",
+      "bbox": [
+        0,
+        0,
+        1280,
+        720
+      ],
+      "geometry": "rect",
+      "fillColor": "#090607",
+      "lineWidth": 0
+    },
+    {
+      "order": 2,
+      "kind": "shape",
+      "scope": "slide",
+      "aid": "sh/xc769wvi",
+      "id": "2",
+      "bbox": [
+        0,
+        0,
+        1280,
+        12
+      ],
+      "geometry": "rect",
+      "fillColor": "#4C0E13",
+      "lineWidth": 0
+    },
+    {
+      "order": 3,
+      "kind": "shape",
+      "scope": "slide",
+      "aid": "sh/wbyp0rex",
+      "id": "3",
+      "bbox": [
+        72,
+        44,
+        360,
+        24
+      ],
+      "geometry": "rect",
+      "text": "角色与美术",
+      "textPreview": "角色与美术",
+      "resolvedFontSize": 16,
+      "resolvedTextStyle": {
+        "fontSize": 16,
+        "typeface": "+mn-lt",
+        "color": "#D6B36A",
+        "bold": true,
+        "alignment": "left",
+        "insets": {
+          "top": 4.8,
+          "right": 9.6,
+          "bottom": 4.8,
+          "left": 9.6
+        }
+      },
+      "textLayout": {
+        "lineCount": 1,
+        "lines": [
+          {
+            "index": 1,
+            "text": "角色与美术"
+          }
+        ]
+      },
+      "paragraphs": [
+        {
+          "index": 1,
+          "text": "角色与美术",
+          "resolvedTextStyle": {
+            "fontSize": 16,
+            "color": "#D6B36A",
+            "bold": true
+          },
+          "runs": [
+            {
+              "index": 1,
+              "text": "角色与美术",
+              "fontSize": 16,
+              "color": "#D6B36A",
+              "bold": true
+            }
+          ],
+          "marginLeft": 0
+        }
+      ],
+      "lineWidth": 0
+    },
+    {
+      "order": 4,
+      "kind": "shape",
+      "scope": "slide",
+      "aid": "sh/jepobmd8",
+      "id": "4",
+      "bbox": [
+        72,
+        76,
+        1000,
+        104
+      ],
+      "geometry": "rect",
+      "text": "角色以戏曲行当建立第一印象，再被“画皮”推翻",
+      "textPreview": "角色以戏曲行当建立第一印象，再被“画皮”推翻",
+      "resolvedFontSize": 38,
+      "resolvedTextStyle": {
+        "fontSize": 38,
+        "typeface": "+mn-lt",
+        "color": "#F7EFE0",
+        "bold": true,
+        "alignment": "left",
+        "insets": {
+          "top": 4.8,
+          "right": 9.6,
+          "bottom": 4.8,
+          "left": 9.6
+        }
+      },
+      "textLayout": {
+        "lineCount": 1,
+        "lines": [
+          {
+            "index": 1,
+            "text": "角色以戏曲行当建立第一印象，再被“画皮”推翻"
+          }
+        ]
+      },
+      "paragraphs": [
+        {
+          "index": 1,
+          "text": "角色以戏曲行当建立第一印象，再被“画皮”推翻",
+          "resolvedTextStyle": {
+            "fontSize": 38,
+            "color": "#F7EFE0",
+            "bold": true
+          },
+          "runs": [
+            {
+              "index": 1,
+              "text": "角色以戏曲行当建立第一印象，再被“画皮”推翻",
+              "fontSize": 38,
+              "color": "#F7EFE0",
+              "bold": true
+            }
+          ],
+          "marginLeft": 0
+        }
+      ],
+      "lineWidth": 0
+    },
+    {
+      "order": 5,
+      "kind": "shape",
+      "scope": "slide",
+      "aid": "sh/idg721w3",
+      "id": "5",
+      "bbox": [
+        78,
+        158,
+        190,
+        4
+      ],
+      "geometry": "rect",
+      "fillColor": "#D6B36A",
+      "lineWidth": 0
+    },
+    {
+      "order": 6,
+      "kind": "shape",
+      "scope": "slide",
+      "aid": "sh/5g7qdwve",
+      "id": "6",
+      "bbox": [
+        62,
+        205,
+        180,
+        366
+      ],
+      "geometry": "roundRect",
+      "fillColor": "#120909",
+      "lineColor": "#4C0E13",
+      "lineWidth": 2
+    },
+    {
+      "order": 7,
+      "kind": "image",
+      "scope": "slide",
+      "aid": "im/pcr2h8b2",
+      "id": "7",
+      "bbox": [
+        74,
+        222,
+        156,
+        300
+      ],
+      "alt": "旦.png",
+      "contentType": "image/png",
+      "imageFit": "contain",
+      "asset": {
+        "assetId": "7f098012-0c3e-4960-91cf-f0914d6ac4ab",
+        "contentType": "image/png",
+        "byteLength": 2604942
+      }
+    },
+    {
+      "order": 8,
+      "kind": "shape",
+      "scope": "slide",
+      "aid": "sh/7ip8f6dk",
+      "id": "8",
+      "bbox": [
+        62,
+        532,
+        180,
+        34
+      ],
+      "geometry": "rect",
+      "text": "旦",
+      "textPreview": "旦",
+      "resolvedFontSize": 22,
+      "resolvedTextStyle": {
+        "fontSize": 22,
+        "typeface": "+mn-lt",
+        "color": "#F1DDA5",
+        "bold": true,
+        "alignment": "center",
+        "insets": {
+          "top": 4.8,
+          "right": 9.6,
+          "bottom": 4.8,
+          "left": 9.6
+        }
+      },
+      "textLayout": {
+        "lineCount": 1,
+        "lines": [
+          {
+            "index": 1,
+            "text": "旦"
+          }
+        ]
+      },
+      "paragraphs": [
+        {
+          "index": 1,
+          "text": "旦",
+          "resolvedTextStyle": {
+            "fontSize": 22,
+            "color": "#F1DDA5",
+            "bold": true,
+            "alignment": "center"
+          },
+          "runs": [
+            {
+              "index": 1,
+              "text": "旦",
+              "fontSize": 22,
+              "color": "#F1DDA5",
+              "bold": true,
+              "alignment": "center"
+            }
+          ],
+          "marginLeft": 0
+        }
+      ],
+      "lineWidth": 0
+    },
+    {
+      "order": 9,
+      "kind": "shape",
+      "scope": "slide",
+      "aid": "sh/6hg761wz",
+      "id": "9",
+      "bbox": [
+        265,
+        205,
+        180,
+        366
+      ],
+      "geometry": "roundRect",
+      "fillColor": "#120909",
+      "lineColor": "#4C0E13",
+      "lineWidth": 2
+    },
+    {
+      "order": 10,
+      "kind": "image",
+      "scope": "slide",
+      "aid": "im/balsvu1k",
+      "id": "10",
+      "bbox": [
+        277,
+        222,
+        156,
+        300
+      ],
+      "alt": "净.png",
+      "contentType": "image/png",
+      "imageFit": "contain",
+      "asset": {
+        "assetId": "dcb9868d-f80d-43ad-85ef-11d5107957c4",
+        "contentType": "image/png",
+        "byteLength": 3933577
+      }
+    },
+    {
+      "order": 11,
+      "kind": "shape",
+      "scope": "slide",
+      "aid": "sh/x43ql03u",
+      "id": "11",
+      "bbox": [
+        265,
+        532,
+        180,
+        34
+      ],
+      "geometry": "rect",
+      "text": "净",
+      "textPreview": "净",
+      "resolvedFontSize": 22,
+      "resolvedTextStyle": {
+        "fontSize": 22,
+        "typeface": "+mn-lt",
+        "color": "#F1DDA5",
+        "bold": true,
+        "alignment": "center",
+        "insets": {
+          "top": 4.8,
+          "right": 9.6,
+          "bottom": 4.8,
+          "left": 9.6
+        }
+      },
+      "textLayout": {
+        "lineCount": 1,
+        "lines": [
+          {
+            "index": 1,
+            "text": "净"
+          }
+        ]
+      },
+      "paragraphs": [
+        {
+          "index": 1,
+          "text": "净",
+          "resolvedTextStyle": {
+            "fontSize": 22,
+            "color": "#F1DDA5",
+            "bold": true,
+            "alignment": "center"
+          },
+          "runs": [
+            {
+              "index": 1,
+              "text": "净",
+              "fontSize": 22,
+              "color": "#F1DDA5",
+              "bold": true,
+              "alignment": "center"
+            }
+          ],
+          "marginLeft": 0
+        }
+      ],
+      "lineWidth": 0
+    },
+    {
+      "order": 12,
+      "kind": "shape",
+      "scope": "slide",
+      "aid": "sh/a1c7q543",
+      "id": "12",
+      "bbox": [
+        468,
+        205,
+        180,
+        366
+      ],
+      "geometry": "roundRect",
+      "fillColor": "#120909",
+      "lineColor": "#4C0E13",
+      "lineWidth": 2
+    },
+    {
+      "order": 13,
+      "kind": "image",
+      "scope": "slide",
+      "aid": "im/cbut4zi5",
+      "id": "13",
+      "bbox": [
+        480,
+        222,
+        156,
+        300
+      ],
+      "alt": "丑.png",
+      "contentType": "image/png",
+      "imageFit": "contain",
+      "asset": {
+        "assetId": "553edbad-ef82-493e-ad7f-1fcd4e2990ed",
+        "contentType": "image/png",
+        "byteLength": 2213891
+      }
+    },
+    {
+      "order": 14,
+      "kind": "shape",
+      "scope": "slide",
+      "aid": "sh/k7epwf25",
+      "id": "14",
+      "bbox": [
+        468,
+        532,
+        180,
+        34
+      ],
+      "geometry": "rect",
+      "text": "丑",
+      "textPreview": "丑",
+      "resolvedFontSize": 22,
+      "resolvedTextStyle": {
+        "fontSize": 22,
+        "typeface": "+mn-lt",
+        "color": "#F1DDA5",
+        "bold": true,
+        "alignment": "center",
+        "insets": {
+          "top": 4.8,
+          "right": 9.6,
+          "bottom": 4.8,
+          "left": 9.6
+        }
+      },
+      "textLayout": {
+        "lineCount": 1,
+        "lines": [
+          {
+            "index": 1,
+            "text": "丑"
+          }
+        ]
+      },
+      "paragraphs": [
+        {
+          "index": 1,
+          "text": "丑",
+          "resolvedTextStyle": {
+            "fontSize": 22,
+            "color": "#F1DDA5",
+            "bold": true,
+            "alignment": "center"
+          },
+          "runs": [
+            {
+              "index": 1,
+              "text": "丑",
+              "fontSize": 22,
+              "color": "#F1DDA5",
+              "bold": true,
+              "alignment": "center"
+            }
+          ],
+          "marginLeft": 0
+        }
+      ],
+      "lineWidth": 0
+    },
+    {
+      "order": 15,
+      "kind": "shape",
+      "scope": "slide",
+      "aid": "sh/lsnqpk3q",
+      "id": "15",
+      "bbox": [
+        671,
+        205,
+        180,
+        366
+      ],
+      "geometry": "roundRect",
+      "fillColor": "#120909",
+      "lineColor": "#4C0E13",
+      "lineWidth": 2
+    },
+    {
+      "order": 16,
+      "kind": "image",
+      "scope": "slide",
+      "aid": "im/l0nu1oj2",
+      "id": "16",
+      "bbox": [
+        683,
+        222,
+        156,
+        300
+      ],
+      "alt": "生.png",
+      "contentType": "image/png",
+      "imageFit": "contain",
+      "asset": {
+        "assetId": "4b0d836d-ef2b-47d1-b91d-bfe4ba429545",
+        "contentType": "image/png",
+        "byteLength": 3111356
+      }
+    },
+    {
+      "order": 17,
+      "kind": "shape",
+      "scope": "slide",
+      "aid": "sh/z658nalk",
+      "id": "17",
+      "bbox": [
+        671,
+        532,
+        180,
+        34
+      ],
+      "geometry": "rect",
+      "text": "生",
+      "textPreview": "生",
+      "resolvedFontSize": 22,
+      "resolvedTextStyle": {
+        "fontSize": 22,
+        "typeface": "+mn-lt",
+        "color": "#F1DDA5",
+        "bold": true,
+        "alignment": "center",
+        "insets": {
+          "top": 4.8,
+          "right": 9.6,
+          "bottom": 4.8,
+          "left": 9.6
+        }
+      },
+      "textLayout": {
+        "lineCount": 1,
+        "lines": [
+          {
+            "index": 1,
+            "text": "生"
+          }
+        ]
+      },
+      "paragraphs": [
+        {
+          "index": 1,
+          "text": "生",
+          "resolvedTextStyle": {
+            "fontSize": 22,
+            "color": "#F1DDA5",
+            "bold": true,
+            "alignment": "center"
+          },
+          "runs": [
+            {
+              "index": 1,
+              "text": "生",
+              "fontSize": 22,
+              "color": "#F1DDA5",
+              "bold": true,
+              "alignment": "center"
+            }
+          ],
+          "marginLeft": 0
+        }
+      ],
+      "lineWidth": 0
+    },
+    {
+      "order": 18,
+      "kind": "shape",
+      "scope": "slide",
+      "aid": "sh/8vep0z2h",
+      "id": "18",
+      "bbox": [
+        874,
+        205,
+        180,
+        366
+      ],
+      "geometry": "roundRect",
+      "fillColor": "#120909",
+      "lineColor": "#4C0E13",
+      "lineWidth": 2
+    },
+    {
+      "order": 19,
+      "kind": "image",
+      "scope": "slide",
+      "aid": "im/ehsbu507",
+      "id": "19",
+      "bbox": [
+        886,
+        222,
+        156,
+        300
+      ],
+      "alt": "老板.png",
+      "contentType": "image/png",
+      "imageFit": "contain",
+      "asset": {
+        "assetId": "b0f11733-cbf3-494c-80a8-e17b72bdc06a",
+        "contentType": "image/png",
+        "byteLength": 3548593
+      }
+    },
+    {
+      "order": 20,
+      "kind": "shape",
+      "scope": "slide",
+      "aid": "sh/hs36dkv6",
+      "id": "20",
+      "bbox": [
+        874,
+        532,
+        180,
+        34
+      ],
+      "geometry": "rect",
+      "text": "班主",
+      "textPreview": "班主",
+      "resolvedFontSize": 22,
+      "resolvedTextStyle": {
+        "fontSize": 22,
+        "typeface": "+mn-lt",
+        "color": "#F1DDA5",
+        "bold": true,
+        "alignment": "center",
+        "insets": {
+          "top": 4.8,
+          "right": 9.6,
+          "bottom": 4.8,
+          "left": 9.6
+        }
+      },
+      "textLayout": {
+        "lineCount": 1,
+        "lines": [
+          {
+            "index": 1,
+            "text": "班主"
+          }
+        ]
+      },
+      "paragraphs": [
+        {
+          "index": 1,
+          "text": "班主",
+          "resolvedTextStyle": {
+            "fontSize": 22,
+            "color": "#F1DDA5",
+            "bold": true,
+            "alignment": "center"
+          },
+          "runs": [
+            {
+              "index": 1,
+              "text": "班主",
+              "fontSize": 22,
+              "color": "#F1DDA5",
+              "bold": true,
+              "alignment": "center"
+            }
+          ],
+          "marginLeft": 0
+        }
+      ],
+      "lineWidth": 0
+    },
+    {
+      "order": 21,
+      "kind": "shape",
+      "scope": "slide",
+      "aid": "sh/grup4ful",
+      "id": "21",
+      "bbox": [
+        1077,
+        205,
+        180,
+        366
+      ],
+      "geometry": "roundRect",
+      "fillColor": "#120909",
+      "lineColor": "#4C0E13",
+      "lineWidth": 2
+    },
+    {
+      "order": 22,
+      "kind": "image",
+      "scope": "slide",
+      "aid": "im/4b25kr6x",
+      "id": "22",
+      "bbox": [
+        1089,
+        222,
+        156,
+        300
+      ],
+      "alt": "木偶.png",
+      "contentType": "image/png",
+      "imageFit": "contain",
+      "asset": {
+        "assetId": "11c5aba0-9dcd-4283-99dc-4c1f571cec12",
+        "contentType": "image/png",
+        "byteLength": 2747301
+      }
+    },
+    {
+      "order": 23,
+      "kind": "shape",
+      "scope": "slide",
+      "aid": "sh/ups72pcf",
+      "id": "23",
+      "bbox": [
+        1077,
+        532,
+        180,
+        34
+      ],
+      "geometry": "rect",
+      "text": "木偶",
+      "textPreview": "木偶",
+      "resolvedFontSize": 22,
+      "resolvedTextStyle": {
+        "fontSize": 22,
+        "typeface": "+mn-lt",
+        "color": "#F1DDA5",
+        "bold": true,
+        "alignment": "center",
+        "insets": {
+          "top": 4.8,
+          "right": 9.6,
+          "bottom": 4.8,
+          "left": 9.6
+        }
+      },
+      "textLayout": {
+        "lineCount": 1,
+        "lines": [
+          {
+            "index": 1,
+            "text": "木偶"
+          }
+        ]
+      },
+      "paragraphs": [
+        {
+          "index": 1,
+          "text": "木偶",
+          "resolvedTextStyle": {
+            "fontSize": 22,
+            "color": "#F1DDA5",
+            "bold": true,
+            "alignment": "center"
+          },
+          "runs": [
+            {
+              "index": 1,
+              "text": "木偶",
+              "fontSize": 22,
+              "color": "#F1DDA5",
+              "bold": true,
+              "alignment": "center"
+            }
+          ],
+          "marginLeft": 0
+        }
+      ],
+      "lineWidth": 0
+    },
+    {
+      "order": 24,
+      "kind": "shape",
+      "scope": "slide",
+      "aid": "sh/5g3qh4v2",
+      "id": "24",
+      "bbox": [
+        88,
+        624,
+        960,
+        38
+      ],
+      "geometry": "rect",
+      "text": "暗红、黑、金与纸质证据构成统一视觉；脸谱提供身份标签，也制造叙事误导。",
+      "textPreview": "暗红、黑、金与纸质证据构成统一视觉；脸谱提供身份标签，也制造叙事误导。",
+      "resolvedFontSize": 23,
+      "resolvedTextStyle": {
+        "fontSize": 23,
+        "typeface": "+mn-lt",
+        "color": "#F7EFE0",
+        "alignment": "left",
+        "insets": {
+          "top": 4.8,
+          "right": 9.6,
+          "bottom": 4.8,
+          "left": 9.6
+        }
+      },
+      "textLayout": {
+        "lineCount": 1,
+        "lines": [
+          {
+            "index": 1,
+            "text": "暗红、黑、金与纸质证据构成统一视觉；脸谱提供身份标签，也制造叙事误导。"
+          }
+        ]
+      },
+      "paragraphs": [
+        {
+          "index": 1,
+          "text": "暗红、黑、金与纸质证据构成统一视觉；脸谱提供身份标签，也制造叙事误导。",
+          "resolvedTextStyle": {
+            "fontSize": 23,
+            "color": "#F7EFE0"
+          },
+          "runs": [
+            {
+              "index": 1,
+              "text": "暗红、黑、金与纸质证据构成统一视觉；脸谱提供身份标签，也制造叙事误导。",
+              "fontSize": 23,
+              "color": "#F7EFE0"
+            }
+          ],
+          "marginLeft": 0
+        }
+      ],
+      "lineWidth": 0
+    }
+  ],
+  "composeRuns": []
+}

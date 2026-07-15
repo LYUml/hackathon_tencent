@@ -1,0 +1,975 @@
+{
+  "schema": "openai.presentation.layout/v4",
+  "unit": "px",
+  "slide": {
+    "aid": "sl/dbuuh8",
+    "id": "dbuuh8",
+    "slide": 4,
+    "layoutId": "db4b8d6d-aa4c-4c8c-9687-88767fcaed91",
+    "layoutName": "Title Slide",
+    "layoutType": "title",
+    "masterLayoutId": "55258653-367f-4328-b177-5e134b12a2c1",
+    "masterLayoutName": "Master",
+    "backgroundColor": "#090607",
+    "frame": {
+      "left": 0,
+      "top": 0,
+      "width": 1280,
+      "height": 720
+    }
+  },
+  "theme": {
+    "colorSchemeName": "ChatGPT",
+    "colors": {
+      "accent1": "#156082",
+      "accent2": "#E97132",
+      "accent3": "#196B24",
+      "accent4": "#0F9ED5",
+      "accent5": "#A02B93",
+      "accent6": "#4EA72E",
+      "bg1": "#FFFFFF",
+      "bg2": "#000000",
+      "tx1": "#1F1F1F",
+      "tx2": "#FFFFFF",
+      "dk1": "#000000",
+      "lt1": "#FFFFFF",
+      "dk2": "#0E2841",
+      "lt2": "#E8E8E8",
+      "hlink": "#467886",
+      "folHlink": "#96607D"
+    },
+    "typefaces": [
+      "+mn-lt"
+    ]
+  },
+  "inheritedLayers": [
+    {
+      "scope": "layout",
+      "id": "db4b8d6d-aa4c-4c8c-9687-88767fcaed91",
+      "name": "Title Slide",
+      "type": "title",
+      "parentLayoutId": "55258653-367f-4328-b177-5e134b12a2c1",
+      "elements": []
+    },
+    {
+      "scope": "master",
+      "id": "55258653-367f-4328-b177-5e134b12a2c1",
+      "name": "Master",
+      "type": "master",
+      "elements": []
+    }
+  ],
+  "elements": [
+    {
+      "order": 1,
+      "kind": "shape",
+      "scope": "slide",
+      "aid": "sh/ehov65gn",
+      "id": "1",
+      "bbox": [
+        0,
+        0,
+        1280,
+        720
+      ],
+      "geometry": "rect",
+      "fillColor": "#090607",
+      "lineWidth": 0
+    },
+    {
+      "order": 2,
+      "kind": "shape",
+      "scope": "slide",
+      "aid": "sh/1kzeh0fe",
+      "id": "2",
+      "bbox": [
+        0,
+        0,
+        1280,
+        12
+      ],
+      "geometry": "rect",
+      "fillColor": "#4C0E13",
+      "lineWidth": 0
+    },
+    {
+      "order": 3,
+      "kind": "shape",
+      "scope": "slide",
+      "aid": "sh/0jqd8vyt",
+      "id": "3",
+      "bbox": [
+        72,
+        44,
+        360,
+        24
+      ],
+      "geometry": "rect",
+      "text": "核心玩法",
+      "textPreview": "核心玩法",
+      "resolvedFontSize": 16,
+      "resolvedTextStyle": {
+        "fontSize": 16,
+        "typeface": "+mn-lt",
+        "color": "#D6B36A",
+        "bold": true,
+        "alignment": "left",
+        "insets": {
+          "top": 4.8,
+          "right": 9.6,
+          "bottom": 4.8,
+          "left": 9.6
+        }
+      },
+      "textLayout": {
+        "lineCount": 1,
+        "lines": [
+          {
+            "index": 1,
+            "text": "核心玩法"
+          }
+        ]
+      },
+      "paragraphs": [
+        {
+          "index": 1,
+          "text": "核心玩法",
+          "resolvedTextStyle": {
+            "fontSize": 16,
+            "color": "#D6B36A",
+            "bold": true
+          },
+          "runs": [
+            {
+              "index": 1,
+              "text": "核心玩法",
+              "fontSize": 16,
+              "color": "#D6B36A",
+              "bold": true
+            }
+          ],
+          "marginLeft": 0
+        }
+      ],
+      "lineWidth": 0
+    },
+    {
+      "order": 4,
+      "kind": "image",
+      "scope": "slide",
+      "aid": "im/mxszipsj",
+      "id": "4",
+      "bbox": [
+        0,
+        0,
+        1280,
+        720
+      ],
+      "alt": "舞台与幕后.png",
+      "contentType": "image/png",
+      "imageFit": "cover",
+      "asset": {
+        "assetId": "307fe585-0f9d-4e93-a79c-20925bf86429",
+        "contentType": "image/png",
+        "byteLength": 7689604
+      }
+    },
+    {
+      "order": 5,
+      "kind": "shape",
+      "scope": "slide",
+      "aid": "sh/2l8va5wz",
+      "id": "5",
+      "bbox": [
+        0,
+        0,
+        1280,
+        720
+      ],
+      "geometry": "rect",
+      "fillColor": "rgba(0, 0, 0, 0.67)",
+      "lineWidth": 0
+    },
+    {
+      "order": 6,
+      "kind": "shape",
+      "scope": "slide",
+      "aid": "sh/p8zelkfa",
+      "id": "6",
+      "bbox": [
+        72,
+        76,
+        780,
+        104
+      ],
+      "geometry": "rect",
+      "text": "昼夜双循环让线索与真相互相推进",
+      "textPreview": "昼夜双循环让线索与真相互相推进",
+      "resolvedFontSize": 41,
+      "resolvedTextStyle": {
+        "fontSize": 41,
+        "typeface": "+mn-lt",
+        "color": "#F7EFE0",
+        "bold": true,
+        "alignment": "left",
+        "insets": {
+          "top": 4.8,
+          "right": 9.6,
+          "bottom": 4.8,
+          "left": 9.6
+        }
+      },
+      "textLayout": {
+        "lineCount": 1,
+        "lines": [
+          {
+            "index": 1,
+            "text": "昼夜双循环让线索与真相互相推进"
+          }
+        ]
+      },
+      "paragraphs": [
+        {
+          "index": 1,
+          "text": "昼夜双循环让线索与真相互相推进",
+          "resolvedTextStyle": {
+            "fontSize": 41,
+            "color": "#F7EFE0",
+            "bold": true
+          },
+          "runs": [
+            {
+              "index": 1,
+              "text": "昼夜双循环让线索与真相互相推进",
+              "fontSize": 41,
+              "color": "#F7EFE0",
+              "bold": true
+            }
+          ],
+          "marginLeft": 0
+        }
+      ],
+      "lineWidth": 0
+    },
+    {
+      "order": 7,
+      "kind": "shape",
+      "scope": "slide",
+      "aid": "sh/o7qdcfep",
+      "id": "7",
+      "bbox": [
+        78,
+        168,
+        170,
+        4
+      ],
+      "geometry": "rect",
+      "fillColor": "#D6B36A",
+      "lineWidth": 0
+    },
+    {
+      "order": 8,
+      "kind": "shape",
+      "scope": "slide",
+      "aid": "sh/3qdc7qx0",
+      "id": "8",
+      "bbox": [
+        88,
+        248,
+        280,
+        250
+      ],
+      "geometry": "roundRect",
+      "fillColor": "#E7D5AA",
+      "lineColor": "#B89559",
+      "lineWidth": 2
+    },
+    {
+      "order": 9,
+      "kind": "shape",
+      "scope": "slide",
+      "aid": "sh/ip4vylgf",
+      "id": "9",
+      "bbox": [
+        88,
+        248,
+        8,
+        250
+      ],
+      "geometry": "rect",
+      "fillColor": "#D6B36A",
+      "lineWidth": 0
+    },
+    {
+      "order": 10,
+      "kind": "shape",
+      "scope": "slide",
+      "aid": "sh/kzutwzml",
+      "id": "10",
+      "bbox": [
+        112,
+        266,
+        232,
+        36
+      ],
+      "geometry": "rect",
+      "text": "白天：调查",
+      "textPreview": "白天：调查",
+      "resolvedFontSize": 23,
+      "resolvedTextStyle": {
+        "fontSize": 23,
+        "typeface": "+mn-lt",
+        "color": "#251914",
+        "bold": true,
+        "alignment": "left",
+        "insets": {
+          "top": 4.8,
+          "right": 9.6,
+          "bottom": 4.8,
+          "left": 9.6
+        }
+      },
+      "textLayout": {
+        "lineCount": 1,
+        "lines": [
+          {
+            "index": 1,
+            "text": "白天：调查"
+          }
+        ]
+      },
+      "paragraphs": [
+        {
+          "index": 1,
+          "text": "白天：调查",
+          "resolvedTextStyle": {
+            "fontSize": 23,
+            "color": "#251914",
+            "bold": true
+          },
+          "runs": [
+            {
+              "index": 1,
+              "text": "白天：调查",
+              "fontSize": 23,
+              "color": "#251914",
+              "bold": true
+            }
+          ],
+          "marginLeft": 0
+        }
+      ],
+      "lineWidth": 0
+    },
+    {
+      "order": 11,
+      "kind": "shape",
+      "scope": "slide",
+      "aid": "sh/503u54n6",
+      "id": "11",
+      "bbox": [
+        112,
+        312,
+        232,
+        168
+      ],
+      "geometry": "rect",
+      "text": "探索场景\n点击人物与器物\n对话盘问\n收集证据",
+      "textPreview": "探索场景 | 点击人物与器物 | 对话盘问 | 收集证据",
+      "resolvedFontSize": 17,
+      "resolvedTextStyle": {
+        "fontSize": 17,
+        "typeface": "+mn-lt",
+        "color": "#32251D",
+        "alignment": "left",
+        "insets": {
+          "top": 4.8,
+          "right": 9.6,
+          "bottom": 4.8,
+          "left": 9.6
+        }
+      },
+      "textLayout": {
+        "lineCount": 4,
+        "lines": [
+          {
+            "index": 1,
+            "text": "探索场景"
+          },
+          {
+            "index": 2,
+            "text": "点击人物与器物"
+          },
+          {
+            "index": 3,
+            "text": "对话盘问"
+          },
+          {
+            "index": 4,
+            "text": "收集证据"
+          }
+        ]
+      },
+      "paragraphs": [
+        {
+          "index": 1,
+          "text": "探索场景",
+          "resolvedTextStyle": {
+            "fontSize": 17,
+            "color": "#32251D"
+          },
+          "runs": [
+            {
+              "index": 1,
+              "text": "探索场景",
+              "fontSize": 17,
+              "color": "#32251D"
+            }
+          ],
+          "marginLeft": 0
+        },
+        {
+          "index": 2,
+          "text": "点击人物与器物",
+          "resolvedTextStyle": {
+            "fontSize": 17,
+            "color": "#32251D"
+          },
+          "runs": [
+            {
+              "index": 1,
+              "text": "点击人物与器物",
+              "fontSize": 17,
+              "color": "#32251D"
+            }
+          ],
+          "marginLeft": 0
+        },
+        {
+          "index": 3,
+          "text": "对话盘问",
+          "resolvedTextStyle": {
+            "fontSize": 17,
+            "color": "#32251D"
+          },
+          "runs": [
+            {
+              "index": 1,
+              "text": "对话盘问",
+              "fontSize": 17,
+              "color": "#32251D"
+            }
+          ],
+          "marginLeft": 0
+        },
+        {
+          "index": 4,
+          "text": "收集证据",
+          "resolvedTextStyle": {
+            "fontSize": 17,
+            "color": "#32251D"
+          },
+          "runs": [
+            {
+              "index": 1,
+              "text": "收集证据",
+              "fontSize": 17,
+              "color": "#32251D"
+            }
+          ],
+          "marginLeft": 0
+        }
+      ],
+      "lineWidth": 0
+    },
+    {
+      "order": 12,
+      "kind": "shape",
+      "scope": "slide",
+      "aid": "sh/ixsbup4f",
+      "id": "12",
+      "bbox": [
+        500,
+        248,
+        280,
+        250
+      ],
+      "geometry": "roundRect",
+      "fillColor": "#E7D5AA",
+      "lineColor": "#B89559",
+      "lineWidth": 2
+    },
+    {
+      "order": 13,
+      "kind": "shape",
+      "scope": "slide",
+      "aid": "sh/jylc3u50",
+      "id": "13",
+      "bbox": [
+        500,
+        248,
+        8,
+        250
+      ],
+      "geometry": "rect",
+      "fillColor": "#A52824",
+      "lineWidth": 0
+    },
+    {
+      "order": 14,
+      "kind": "shape",
+      "scope": "slide",
+      "aid": "sh/s3ud0jmx",
+      "id": "14",
+      "bbox": [
+        524,
+        266,
+        232,
+        36
+      ],
+      "geometry": "rect",
+      "text": "夜晚：观皮",
+      "textPreview": "夜晚：观皮",
+      "resolvedFontSize": 23,
+      "resolvedTextStyle": {
+        "fontSize": 23,
+        "typeface": "+mn-lt",
+        "color": "#251914",
+        "bold": true,
+        "alignment": "left",
+        "insets": {
+          "top": 4.8,
+          "right": 9.6,
+          "bottom": 4.8,
+          "left": 9.6
+        }
+      },
+      "textLayout": {
+        "lineCount": 1,
+        "lines": [
+          {
+            "index": 1,
+            "text": "夜晚：观皮"
+          }
+        ]
+      },
+      "paragraphs": [
+        {
+          "index": 1,
+          "text": "夜晚：观皮",
+          "resolvedTextStyle": {
+            "fontSize": 23,
+            "color": "#251914",
+            "bold": true
+          },
+          "runs": [
+            {
+              "index": 1,
+              "text": "夜晚：观皮",
+              "fontSize": 23,
+              "color": "#251914",
+              "bold": true
+            }
+          ],
+          "marginLeft": 0
+        }
+      ],
+      "lineWidth": 0
+    },
+    {
+      "order": 15,
+      "kind": "shape",
+      "scope": "slide",
+      "aid": "sh/t43u9on2",
+      "id": "15",
+      "bbox": [
+        524,
+        312,
+        232,
+        168
+      ],
+      "geometry": "rect",
+      "text": "整理线索\n擦开黑雾\n补全角色档案\n逼近真实身份",
+      "textPreview": "整理线索 | 擦开黑雾 | 补全角色档案 | 逼近真实身份",
+      "resolvedFontSize": 17,
+      "resolvedTextStyle": {
+        "fontSize": 17,
+        "typeface": "+mn-lt",
+        "color": "#32251D",
+        "alignment": "left",
+        "insets": {
+          "top": 4.8,
+          "right": 9.6,
+          "bottom": 4.8,
+          "left": 9.6
+        }
+      },
+      "textLayout": {
+        "lineCount": 4,
+        "lines": [
+          {
+            "index": 1,
+            "text": "整理线索"
+          },
+          {
+            "index": 2,
+            "text": "擦开黑雾"
+          },
+          {
+            "index": 3,
+            "text": "补全角色档案"
+          },
+          {
+            "index": 4,
+            "text": "逼近真实身份"
+          }
+        ]
+      },
+      "paragraphs": [
+        {
+          "index": 1,
+          "text": "整理线索",
+          "resolvedTextStyle": {
+            "fontSize": 17,
+            "color": "#32251D"
+          },
+          "runs": [
+            {
+              "index": 1,
+              "text": "整理线索",
+              "fontSize": 17,
+              "color": "#32251D"
+            }
+          ],
+          "marginLeft": 0
+        },
+        {
+          "index": 2,
+          "text": "擦开黑雾",
+          "resolvedTextStyle": {
+            "fontSize": 17,
+            "color": "#32251D"
+          },
+          "runs": [
+            {
+              "index": 1,
+              "text": "擦开黑雾",
+              "fontSize": 17,
+              "color": "#32251D"
+            }
+          ],
+          "marginLeft": 0
+        },
+        {
+          "index": 3,
+          "text": "补全角色档案",
+          "resolvedTextStyle": {
+            "fontSize": 17,
+            "color": "#32251D"
+          },
+          "runs": [
+            {
+              "index": 1,
+              "text": "补全角色档案",
+              "fontSize": 17,
+              "color": "#32251D"
+            }
+          ],
+          "marginLeft": 0
+        },
+        {
+          "index": 4,
+          "text": "逼近真实身份",
+          "resolvedTextStyle": {
+            "fontSize": 17,
+            "color": "#32251D"
+          },
+          "runs": [
+            {
+              "index": 1,
+              "text": "逼近真实身份",
+              "fontSize": 17,
+              "color": "#32251D"
+            }
+          ],
+          "marginLeft": 0
+        }
+      ],
+      "lineWidth": 0
+    },
+    {
+      "order": 16,
+      "kind": "shape",
+      "scope": "slide",
+      "aid": "sh/61cvy94r",
+      "id": "16",
+      "bbox": [
+        912,
+        248,
+        280,
+        250
+      ],
+      "geometry": "roundRect",
+      "fillColor": "#E7D5AA",
+      "lineColor": "#B89559",
+      "lineWidth": 2
+    },
+    {
+      "order": 17,
+      "kind": "shape",
+      "scope": "slide",
+      "aid": "sh/72lc7e5c",
+      "id": "17",
+      "bbox": [
+        912,
+        248,
+        8,
+        250
+      ],
+      "geometry": "rect",
+      "fillColor": "#D6B36A",
+      "lineWidth": 0
+    },
+    {
+      "order": 18,
+      "kind": "shape",
+      "scope": "slide",
+      "aid": "sh/87atofmd",
+      "id": "18",
+      "bbox": [
+        936,
+        266,
+        232,
+        36
+      ],
+      "geometry": "rect",
+      "text": "判定：推理",
+      "textPreview": "判定：推理",
+      "resolvedFontSize": 23,
+      "resolvedTextStyle": {
+        "fontSize": 23,
+        "typeface": "+mn-lt",
+        "color": "#251914",
+        "bold": true,
+        "alignment": "left",
+        "insets": {
+          "top": 4.8,
+          "right": 9.6,
+          "bottom": 4.8,
+          "left": 9.6
+        }
+      },
+      "textLayout": {
+        "lineCount": 1,
+        "lines": [
+          {
+            "index": 1,
+            "text": "判定：推理"
+          }
+        ]
+      },
+      "paragraphs": [
+        {
+          "index": 1,
+          "text": "判定：推理",
+          "resolvedTextStyle": {
+            "fontSize": 23,
+            "color": "#251914",
+            "bold": true
+          },
+          "runs": [
+            {
+              "index": 1,
+              "text": "判定：推理",
+              "fontSize": 23,
+              "color": "#251914",
+              "bold": true
+            }
+          ],
+          "marginLeft": 0
+        }
+      ],
+      "lineWidth": 0
+    },
+    {
+      "order": 19,
+      "kind": "shape",
+      "scope": "slide",
+      "aid": "sh/98juxkny",
+      "id": "19",
+      "bbox": [
+        936,
+        312,
+        232,
+        168
+      ],
+      "geometry": "rect",
+      "text": "组合证据\n排除伪线索\n证明旧案不是诅咒\n而是人为复刻",
+      "textPreview": "组合证据 | 排除伪线索 | 证明旧案不是诅咒 | 而是人为复刻",
+      "resolvedFontSize": 17,
+      "resolvedTextStyle": {
+        "fontSize": 17,
+        "typeface": "+mn-lt",
+        "color": "#32251D",
+        "alignment": "left",
+        "insets": {
+          "top": 4.8,
+          "right": 9.6,
+          "bottom": 4.8,
+          "left": 9.6
+        }
+      },
+      "textLayout": {
+        "lineCount": 4,
+        "lines": [
+          {
+            "index": 1,
+            "text": "组合证据"
+          },
+          {
+            "index": 2,
+            "text": "排除伪线索"
+          },
+          {
+            "index": 3,
+            "text": "证明旧案不是诅咒"
+          },
+          {
+            "index": 4,
+            "text": "而是人为复刻"
+          }
+        ]
+      },
+      "paragraphs": [
+        {
+          "index": 1,
+          "text": "组合证据",
+          "resolvedTextStyle": {
+            "fontSize": 17,
+            "color": "#32251D"
+          },
+          "runs": [
+            {
+              "index": 1,
+              "text": "组合证据",
+              "fontSize": 17,
+              "color": "#32251D"
+            }
+          ],
+          "marginLeft": 0
+        },
+        {
+          "index": 2,
+          "text": "排除伪线索",
+          "resolvedTextStyle": {
+            "fontSize": 17,
+            "color": "#32251D"
+          },
+          "runs": [
+            {
+              "index": 1,
+              "text": "排除伪线索",
+              "fontSize": 17,
+              "color": "#32251D"
+            }
+          ],
+          "marginLeft": 0
+        },
+        {
+          "index": 3,
+          "text": "证明旧案不是诅咒",
+          "resolvedTextStyle": {
+            "fontSize": 17,
+            "color": "#32251D"
+          },
+          "runs": [
+            {
+              "index": 1,
+              "text": "证明旧案不是诅咒",
+              "fontSize": 17,
+              "color": "#32251D"
+            }
+          ],
+          "marginLeft": 0
+        },
+        {
+          "index": 4,
+          "text": "而是人为复刻",
+          "resolvedTextStyle": {
+            "fontSize": 17,
+            "color": "#32251D"
+          },
+          "runs": [
+            {
+              "index": 1,
+              "text": "而是人为复刻",
+              "fontSize": 17,
+              "color": "#32251D"
+            }
+          ],
+          "marginLeft": 0
+        }
+      ],
+      "lineWidth": 0
+    },
+    {
+      "order": 20,
+      "kind": "shape",
+      "scope": "slide",
+      "aid": "sh/p4ba1gfm",
+      "id": "20",
+      "bbox": [
+        298,
+        580,
+        720,
+        44
+      ],
+      "geometry": "rect",
+      "text": "探索 → 证据 → 观皮 → 新方向 → 再探索",
+      "textPreview": "探索 → 证据 → 观皮 → 新方向 → 再探索",
+      "resolvedFontSize": 30,
+      "resolvedTextStyle": {
+        "fontSize": 30,
+        "typeface": "+mn-lt",
+        "color": "#F7EFE0",
+        "alignment": "left",
+        "insets": {
+          "top": 4.8,
+          "right": 9.6,
+          "bottom": 4.8,
+          "left": 9.6
+        }
+      },
+      "textLayout": {
+        "lineCount": 1,
+        "lines": [
+          {
+            "index": 1,
+            "text": "探索 → 证据 → 观皮 → 新方向 → 再探索"
+          }
+        ]
+      },
+      "paragraphs": [
+        {
+          "index": 1,
+          "text": "探索 → 证据 → 观皮 → 新方向 → 再探索",
+          "resolvedTextStyle": {
+            "fontSize": 30,
+            "color": "#F7EFE0"
+          },
+          "runs": [
+            {
+              "index": 1,
+              "text": "探索 → 证据 → 观皮 → 新方向 → 再探索",
+              "fontSize": 30,
+              "color": "#F7EFE0"
+            }
+          ],
+          "marginLeft": 0
+        }
+      ],
+      "lineWidth": 0
+    }
+  ],
+  "composeRuns": []
+}

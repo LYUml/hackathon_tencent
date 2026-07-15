@@ -1,0 +1,392 @@
+{
+  "schema": "openai.presentation.layout/v4",
+  "unit": "px",
+  "slide": {
+    "aid": "sl/uj6yaf",
+    "id": "uj6yaf",
+    "slide": 1,
+    "layoutId": "db4b8d6d-aa4c-4c8c-9687-88767fcaed91",
+    "layoutName": "Title Slide",
+    "layoutType": "title",
+    "masterLayoutId": "55258653-367f-4328-b177-5e134b12a2c1",
+    "masterLayoutName": "Master",
+    "frame": {
+      "left": 0,
+      "top": 0,
+      "width": 1280,
+      "height": 720
+    }
+  },
+  "theme": {
+    "colorSchemeName": "ChatGPT",
+    "colors": {
+      "accent1": "#156082",
+      "accent2": "#E97132",
+      "accent3": "#196B24",
+      "accent4": "#0F9ED5",
+      "accent5": "#A02B93",
+      "accent6": "#4EA72E",
+      "bg1": "#FFFFFF",
+      "bg2": "#000000",
+      "tx1": "#1F1F1F",
+      "tx2": "#FFFFFF",
+      "dk1": "#000000",
+      "lt1": "#FFFFFF",
+      "dk2": "#0E2841",
+      "lt2": "#E8E8E8",
+      "hlink": "#467886",
+      "folHlink": "#96607D"
+    },
+    "typefaces": [
+      "+mn-lt"
+    ]
+  },
+  "inheritedLayers": [
+    {
+      "scope": "layout",
+      "id": "db4b8d6d-aa4c-4c8c-9687-88767fcaed91",
+      "name": "Title Slide",
+      "type": "title",
+      "parentLayoutId": "55258653-367f-4328-b177-5e134b12a2c1",
+      "elements": []
+    },
+    {
+      "scope": "master",
+      "id": "55258653-367f-4328-b177-5e134b12a2c1",
+      "name": "Master",
+      "type": "master",
+      "elements": []
+    }
+  ],
+  "elements": [
+    {
+      "order": 1,
+      "kind": "image",
+      "scope": "slide",
+      "aid": "im/kj6p8v29",
+      "id": "1",
+      "bbox": [
+        0,
+        0,
+        1280,
+        720
+      ],
+      "alt": "generated_cover_redesign.png",
+      "contentType": "image/png",
+      "imageFit": "cover",
+      "asset": {
+        "assetId": "39bb2104-c840-4436-abd1-c60795999b70",
+        "contentType": "image/png",
+        "byteLength": 2816422
+      }
+    },
+    {
+      "order": 2,
+      "kind": "shape",
+      "scope": "slide",
+      "aid": "sh/q14ji9o3",
+      "id": "2",
+      "bbox": [
+        0,
+        0,
+        1280,
+        720
+      ],
+      "geometry": "rect",
+      "fillColor": "rgba(0, 0, 0, 0.2)",
+      "lineWidth": 0
+    },
+    {
+      "order": 3,
+      "kind": "shape",
+      "scope": "slide",
+      "aid": "sh/r2d0bepo",
+      "id": "3",
+      "bbox": [
+        0,
+        0,
+        515,
+        720
+      ],
+      "geometry": "rect",
+      "fillColor": "rgba(0, 0, 0, 0.62)",
+      "lineWidth": 0
+    },
+    {
+      "order": 4,
+      "kind": "shape",
+      "scope": "slide",
+      "aid": "sh/4zm1gz6d",
+      "id": "4",
+      "bbox": [
+        72,
+        66,
+        360,
+        34
+      ],
+      "geometry": "rect",
+      "text": "腾讯云黑客松 Project Deck",
+      "textPreview": "腾讯云黑客松 Project Deck",
+      "resolvedFontSize": 18,
+      "resolvedTextStyle": {
+        "fontSize": 18,
+        "typeface": "+mn-lt",
+        "color": "#D6B36A",
+        "bold": true,
+        "alignment": "left",
+        "insets": {
+          "top": 4.8,
+          "right": 9.6,
+          "bottom": 4.8,
+          "left": 9.6
+        }
+      },
+      "textLayout": {
+        "lineCount": 1,
+        "lines": [
+          {
+            "index": 1,
+            "text": "腾讯云黑客松 Project Deck"
+          }
+        ]
+      },
+      "paragraphs": [
+        {
+          "index": 1,
+          "text": "腾讯云黑客松 Project Deck",
+          "resolvedTextStyle": {
+            "fontSize": 18,
+            "color": "#D6B36A",
+            "bold": true
+          },
+          "runs": [
+            {
+              "index": 1,
+              "text": "腾讯云黑客松 Project Deck",
+              "fontSize": 18,
+              "color": "#D6B36A",
+              "bold": true
+            }
+          ],
+          "marginLeft": 0
+        }
+      ],
+      "lineWidth": 0
+    },
+    {
+      "order": 5,
+      "kind": "shape",
+      "scope": "slide",
+      "aid": "sh/p0vi947i",
+      "id": "5",
+      "bbox": [
+        72,
+        168,
+        360,
+        104
+      ],
+      "geometry": "rect",
+      "text": "画皮",
+      "textPreview": "画皮",
+      "resolvedFontSize": 76,
+      "resolvedTextStyle": {
+        "fontSize": 76,
+        "typeface": "+mn-lt",
+        "color": "#F7EFE0",
+        "bold": true,
+        "alignment": "left",
+        "insets": {
+          "top": 4.8,
+          "right": 9.6,
+          "bottom": 4.8,
+          "left": 9.6
+        }
+      },
+      "textLayout": {
+        "lineCount": 1,
+        "lines": [
+          {
+            "index": 1,
+            "text": "画皮"
+          }
+        ]
+      },
+      "paragraphs": [
+        {
+          "index": 1,
+          "text": "画皮",
+          "resolvedTextStyle": {
+            "fontSize": 76,
+            "color": "#F7EFE0",
+            "bold": true
+          },
+          "runs": [
+            {
+              "index": 1,
+              "text": "画皮",
+              "fontSize": 76,
+              "color": "#F7EFE0",
+              "bold": true
+            }
+          ],
+          "marginLeft": 0
+        }
+      ],
+      "lineWidth": 0
+    },
+    {
+      "order": 6,
+      "kind": "shape",
+      "scope": "slide",
+      "aid": "sh/2x4jepo7",
+      "id": "6",
+      "bbox": [
+        78,
+        270,
+        390,
+        42
+      ],
+      "geometry": "rect",
+      "text": "现实是历史的重演",
+      "textPreview": "现实是历史的重演",
+      "resolvedFontSize": 28,
+      "resolvedTextStyle": {
+        "fontSize": 28,
+        "typeface": "+mn-lt",
+        "color": "#F1DDA5",
+        "alignment": "left",
+        "insets": {
+          "top": 4.8,
+          "right": 9.6,
+          "bottom": 4.8,
+          "left": 9.6
+        }
+      },
+      "textLayout": {
+        "lineCount": 1,
+        "lines": [
+          {
+            "index": 1,
+            "text": "现实是历史的重演"
+          }
+        ]
+      },
+      "paragraphs": [
+        {
+          "index": 1,
+          "text": "现实是历史的重演",
+          "resolvedTextStyle": {
+            "fontSize": 28,
+            "color": "#F1DDA5"
+          },
+          "runs": [
+            {
+              "index": 1,
+              "text": "现实是历史的重演",
+              "fontSize": 28,
+              "color": "#F1DDA5"
+            }
+          ],
+          "marginLeft": 0
+        }
+      ],
+      "lineWidth": 0
+    },
+    {
+      "order": 7,
+      "kind": "shape",
+      "scope": "slide",
+      "aid": "sh/3yd07ups",
+      "id": "7",
+      "bbox": [
+        78,
+        330,
+        160,
+        4
+      ],
+      "geometry": "rect",
+      "fillColor": "#D6B36A",
+      "lineWidth": 0
+    },
+    {
+      "order": 8,
+      "kind": "shape",
+      "scope": "slide",
+      "aid": "sh/ovq1sj6h",
+      "id": "8",
+      "bbox": [
+        78,
+        368,
+        360,
+        110
+      ],
+      "geometry": "rect",
+      "text": "中国戏曲 × 民俗悬疑 × 叙事解谜\n白天收集线索，夜晚揭开画皮",
+      "textPreview": "中国戏曲 × 民俗悬疑 × 叙事解谜 | 白天收集线索，夜晚揭开画皮",
+      "resolvedFontSize": 24,
+      "resolvedTextStyle": {
+        "fontSize": 24,
+        "typeface": "+mn-lt",
+        "color": "#F7EFE0",
+        "alignment": "left",
+        "insets": {
+          "top": 4.8,
+          "right": 9.6,
+          "bottom": 4.8,
+          "left": 9.6
+        }
+      },
+      "textLayout": {
+        "lineCount": 2,
+        "lines": [
+          {
+            "index": 1,
+            "text": "中国戏曲 × 民俗悬疑 × 叙事解谜"
+          },
+          {
+            "index": 2,
+            "text": "白天收集线索，夜晚揭开画皮"
+          }
+        ]
+      },
+      "paragraphs": [
+        {
+          "index": 1,
+          "text": "中国戏曲 × 民俗悬疑 × 叙事解谜",
+          "resolvedTextStyle": {
+            "fontSize": 24,
+            "color": "#F7EFE0"
+          },
+          "runs": [
+            {
+              "index": 1,
+              "text": "中国戏曲 × 民俗悬疑 × 叙事解谜",
+              "fontSize": 24,
+              "color": "#F7EFE0"
+            }
+          ],
+          "marginLeft": 0
+        },
+        {
+          "index": 2,
+          "text": "白天收集线索，夜晚揭开画皮",
+          "resolvedTextStyle": {
+            "fontSize": 24,
+            "color": "#F7EFE0"
+          },
+          "runs": [
+            {
+              "index": 1,
+              "text": "白天收集线索，夜晚揭开画皮",
+              "fontSize": 24,
+              "color": "#F7EFE0"
+            }
+          ],
+          "marginLeft": 0
+        }
+      ],
+      "lineWidth": 0
+    }
+  ],
+  "composeRuns": []
+}

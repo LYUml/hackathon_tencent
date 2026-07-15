@@ -1,0 +1,774 @@
+{
+  "schema": "openai.presentation.layout/v4",
+  "unit": "px",
+  "slide": {
+    "aid": "sl/xcdl46",
+    "id": "xcdl46",
+    "slide": 7,
+    "layoutId": "db4b8d6d-aa4c-4c8c-9687-88767fcaed91",
+    "layoutName": "Title Slide",
+    "layoutType": "title",
+    "masterLayoutId": "55258653-367f-4328-b177-5e134b12a2c1",
+    "masterLayoutName": "Master",
+    "backgroundColor": "#090607",
+    "frame": {
+      "left": 0,
+      "top": 0,
+      "width": 1280,
+      "height": 720
+    }
+  },
+  "theme": {
+    "colorSchemeName": "ChatGPT",
+    "colors": {
+      "accent1": "#156082",
+      "accent2": "#E97132",
+      "accent3": "#196B24",
+      "accent4": "#0F9ED5",
+      "accent5": "#A02B93",
+      "accent6": "#4EA72E",
+      "bg1": "#FFFFFF",
+      "bg2": "#000000",
+      "tx1": "#1F1F1F",
+      "tx2": "#FFFFFF",
+      "dk1": "#000000",
+      "lt1": "#FFFFFF",
+      "dk2": "#0E2841",
+      "lt2": "#E8E8E8",
+      "hlink": "#467886",
+      "folHlink": "#96607D"
+    },
+    "typefaces": [
+      "+mn-lt"
+    ]
+  },
+  "inheritedLayers": [
+    {
+      "scope": "layout",
+      "id": "db4b8d6d-aa4c-4c8c-9687-88767fcaed91",
+      "name": "Title Slide",
+      "type": "title",
+      "parentLayoutId": "55258653-367f-4328-b177-5e134b12a2c1",
+      "elements": []
+    },
+    {
+      "scope": "master",
+      "id": "55258653-367f-4328-b177-5e134b12a2c1",
+      "name": "Master",
+      "type": "master",
+      "elements": []
+    }
+  ],
+  "elements": [
+    {
+      "order": 1,
+      "kind": "shape",
+      "scope": "slide",
+      "aid": "sh/b6l0baxk",
+      "id": "1",
+      "bbox": [
+        0,
+        0,
+        1280,
+        720
+      ],
+      "geometry": "rect",
+      "fillColor": "#090607",
+      "lineWidth": 0
+    },
+    {
+      "order": 2,
+      "kind": "shape",
+      "scope": "slide",
+      "aid": "sh/c7u1kfyp",
+      "id": "2",
+      "bbox": [
+        0,
+        0,
+        1280,
+        12
+      ],
+      "geometry": "rect",
+      "fillColor": "#4C0E13",
+      "lineWidth": 0
+    },
+    {
+      "order": 3,
+      "kind": "shape",
+      "scope": "slide",
+      "aid": "sh/d832dkfa",
+      "id": "3",
+      "bbox": [
+        72,
+        44,
+        360,
+        24
+      ],
+      "geometry": "rect",
+      "text": "场景与谜题",
+      "textPreview": "场景与谜题",
+      "resolvedFontSize": 16,
+      "resolvedTextStyle": {
+        "fontSize": 16,
+        "typeface": "+mn-lt",
+        "color": "#D6B36A",
+        "bold": true,
+        "alignment": "left",
+        "insets": {
+          "top": 4.8,
+          "right": 9.6,
+          "bottom": 4.8,
+          "left": 9.6
+        }
+      },
+      "textLayout": {
+        "lineCount": 1,
+        "lines": [
+          {
+            "index": 1,
+            "text": "场景与谜题"
+          }
+        ]
+      },
+      "paragraphs": [
+        {
+          "index": 1,
+          "text": "场景与谜题",
+          "resolvedTextStyle": {
+            "fontSize": 16,
+            "color": "#D6B36A",
+            "bold": true
+          },
+          "runs": [
+            {
+              "index": 1,
+              "text": "场景与谜题",
+              "fontSize": 16,
+              "color": "#D6B36A",
+              "bold": true
+            }
+          ],
+          "marginLeft": 0
+        }
+      ],
+      "lineWidth": 0
+    },
+    {
+      "order": 4,
+      "kind": "shape",
+      "scope": "slide",
+      "aid": "sh/2hsjelgn",
+      "id": "4",
+      "bbox": [
+        72,
+        76,
+        960,
+        104
+      ],
+      "geometry": "rect",
+      "text": "可探索空间围绕“案发现场 - 舞台 - 后台”展开",
+      "textPreview": "可探索空间围绕“案发现场 - 舞台 - 后台”展开",
+      "resolvedFontSize": 38,
+      "resolvedTextStyle": {
+        "fontSize": 38,
+        "typeface": "+mn-lt",
+        "color": "#F7EFE0",
+        "bold": true,
+        "alignment": "left",
+        "insets": {
+          "top": 4.8,
+          "right": 9.6,
+          "bottom": 4.8,
+          "left": 9.6
+        }
+      },
+      "textLayout": {
+        "lineCount": 1,
+        "lines": [
+          {
+            "index": 1,
+            "text": "可探索空间围绕“案发现场 - 舞台 - 后台”展开"
+          }
+        ]
+      },
+      "paragraphs": [
+        {
+          "index": 1,
+          "text": "可探索空间围绕“案发现场 - 舞台 - 后台”展开",
+          "resolvedTextStyle": {
+            "fontSize": 38,
+            "color": "#F7EFE0",
+            "bold": true
+          },
+          "runs": [
+            {
+              "index": 1,
+              "text": "可探索空间围绕“案发现场 - 舞台 - 后台”展开",
+              "fontSize": 38,
+              "color": "#F7EFE0",
+              "bold": true
+            }
+          ],
+          "marginLeft": 0
+        }
+      ],
+      "lineWidth": 0
+    },
+    {
+      "order": 5,
+      "kind": "shape",
+      "scope": "slide",
+      "aid": "sh/3i107qx8",
+      "id": "5",
+      "bbox": [
+        78,
+        158,
+        200,
+        4
+      ],
+      "geometry": "rect",
+      "fillColor": "#D6B36A",
+      "lineWidth": 0
+    },
+    {
+      "order": 6,
+      "kind": "image",
+      "scope": "slide",
+      "aid": "im/d4ri1ofy",
+      "id": "6",
+      "bbox": [
+        70,
+        215,
+        350,
+        198
+      ],
+      "alt": "戏曲道具与盔头陈列室.png",
+      "contentType": "image/png",
+      "imageFit": "cover",
+      "asset": {
+        "assetId": "ec9d9648-c036-43cd-804b-ca1df8eec9cd",
+        "contentType": "image/png",
+        "byteLength": 6814016
+      }
+    },
+    {
+      "order": 7,
+      "kind": "shape",
+      "scope": "slide",
+      "aid": "sh/pk3i90fe",
+      "id": "7",
+      "bbox": [
+        70,
+        215,
+        350,
+        198
+      ],
+      "geometry": "rect",
+      "fillColor": "rgba(0, 0, 0, 0.16)",
+      "lineColor": "#D6B36A",
+      "lineWidth": 2
+    },
+    {
+      "order": 8,
+      "kind": "shape",
+      "scope": "slide",
+      "aid": "sh/edsjalgr",
+      "id": "8",
+      "bbox": [
+        70,
+        440,
+        350,
+        32
+      ],
+      "geometry": "rect",
+      "text": "道具与盔头陈列室",
+      "textPreview": "道具与盔头陈列室",
+      "resolvedFontSize": 22,
+      "resolvedTextStyle": {
+        "fontSize": 22,
+        "typeface": "+mn-lt",
+        "color": "#F1DDA5",
+        "bold": true,
+        "alignment": "center",
+        "insets": {
+          "top": 4.8,
+          "right": 9.6,
+          "bottom": 4.8,
+          "left": 9.6
+        }
+      },
+      "textLayout": {
+        "lineCount": 1,
+        "lines": [
+          {
+            "index": 1,
+            "text": "道具与盔头陈列室"
+          }
+        ]
+      },
+      "paragraphs": [
+        {
+          "index": 1,
+          "text": "道具与盔头陈列室",
+          "resolvedTextStyle": {
+            "fontSize": 22,
+            "color": "#F1DDA5",
+            "bold": true,
+            "alignment": "center"
+          },
+          "runs": [
+            {
+              "index": 1,
+              "text": "道具与盔头陈列室",
+              "fontSize": 22,
+              "color": "#F1DDA5",
+              "bold": true,
+              "alignment": "center"
+            }
+          ],
+          "marginLeft": 0
+        }
+      ],
+      "lineWidth": 0
+    },
+    {
+      "order": 9,
+      "kind": "shape",
+      "scope": "slide",
+      "aid": "sh/fe103qxc",
+      "id": "9",
+      "bbox": [
+        88,
+        486,
+        314,
+        78
+      ],
+      "geometry": "rect",
+      "text": "案发现场调查、脸谱盒、药瓶与证据发现",
+      "textPreview": "案发现场调查、脸谱盒、药瓶与证据发现",
+      "resolvedFontSize": 18,
+      "resolvedTextStyle": {
+        "fontSize": 18,
+        "typeface": "+mn-lt",
+        "color": "#F7EFE0",
+        "alignment": "left",
+        "insets": {
+          "top": 4.8,
+          "right": 9.6,
+          "bottom": 4.8,
+          "left": 9.6
+        }
+      },
+      "textLayout": {
+        "lineCount": 2,
+        "lines": [
+          {
+            "index": 1,
+            "text": "案发现场调查、脸谱盒、药瓶与证据"
+          },
+          {
+            "index": 2,
+            "text": "发现"
+          }
+        ]
+      },
+      "paragraphs": [
+        {
+          "index": 1,
+          "text": "案发现场调查、脸谱盒、药瓶与证据发现",
+          "resolvedTextStyle": {
+            "fontSize": 18,
+            "color": "#F7EFE0"
+          },
+          "runs": [
+            {
+              "index": 1,
+              "text": "案发现场调查、脸谱盒、药瓶与证据发现",
+              "fontSize": 18,
+              "color": "#F7EFE0"
+            }
+          ],
+          "marginLeft": 0
+        }
+      ],
+      "lineWidth": 0
+    },
+    {
+      "order": 10,
+      "kind": "image",
+      "scope": "slide",
+      "aid": "im/0zmhc76d",
+      "id": "10",
+      "bbox": [
+        500,
+        215,
+        350,
+        198
+      ],
+      "alt": "戏曲舞台.png",
+      "contentType": "image/png",
+      "imageFit": "cover",
+      "asset": {
+        "assetId": "b2f2e9fd-f591-40d6-b460-150bda1f5ae2",
+        "contentType": "image/png",
+        "byteLength": 6163149
+      }
+    },
+    {
+      "order": 11,
+      "kind": "shape",
+      "scope": "slide",
+      "aid": "sh/2pc7i14z",
+      "id": "11",
+      "bbox": [
+        500,
+        215,
+        350,
+        198
+      ],
+      "geometry": "rect",
+      "fillColor": "rgba(0, 0, 0, 0.16)",
+      "lineColor": "#D6B36A",
+      "lineWidth": 2
+    },
+    {
+      "order": 12,
+      "kind": "shape",
+      "scope": "slide",
+      "aid": "sh/ps3qdw3q",
+      "id": "12",
+      "bbox": [
+        500,
+        440,
+        350,
+        32
+      ],
+      "geometry": "rect",
+      "text": "戏曲舞台",
+      "textPreview": "戏曲舞台",
+      "resolvedFontSize": 22,
+      "resolvedTextStyle": {
+        "fontSize": 22,
+        "typeface": "+mn-lt",
+        "color": "#F1DDA5",
+        "bold": true,
+        "alignment": "center",
+        "insets": {
+          "top": 4.8,
+          "right": 9.6,
+          "bottom": 4.8,
+          "left": 9.6
+        }
+      },
+      "textLayout": {
+        "lineCount": 1,
+        "lines": [
+          {
+            "index": 1,
+            "text": "戏曲舞台"
+          }
+        ]
+      },
+      "paragraphs": [
+        {
+          "index": 1,
+          "text": "戏曲舞台",
+          "resolvedTextStyle": {
+            "fontSize": 22,
+            "color": "#F1DDA5",
+            "bold": true,
+            "alignment": "center"
+          },
+          "runs": [
+            {
+              "index": 1,
+              "text": "戏曲舞台",
+              "fontSize": 22,
+              "color": "#F1DDA5",
+              "bold": true,
+              "alignment": "center"
+            }
+          ],
+          "marginLeft": 0
+        }
+      ],
+      "lineWidth": 0
+    },
+    {
+      "order": 13,
+      "kind": "shape",
+      "scope": "slide",
+      "aid": "sh/orupkrm5",
+      "id": "13",
+      "bbox": [
+        518,
+        486,
+        314,
+        78
+      ],
+      "geometry": "rect",
+      "text": "锣鼓节奏、帷幕视觉与旧戏重演线索",
+      "textPreview": "锣鼓节奏、帷幕视觉与旧戏重演线索",
+      "resolvedFontSize": 18,
+      "resolvedTextStyle": {
+        "fontSize": 18,
+        "typeface": "+mn-lt",
+        "color": "#F7EFE0",
+        "alignment": "left",
+        "insets": {
+          "top": 4.8,
+          "right": 9.6,
+          "bottom": 4.8,
+          "left": 9.6
+        }
+      },
+      "textLayout": {
+        "lineCount": 1,
+        "lines": [
+          {
+            "index": 1,
+            "text": "锣鼓节奏、帷幕视觉与旧戏重演线索"
+          }
+        ]
+      },
+      "paragraphs": [
+        {
+          "index": 1,
+          "text": "锣鼓节奏、帷幕视觉与旧戏重演线索",
+          "resolvedTextStyle": {
+            "fontSize": 18,
+            "color": "#F7EFE0"
+          },
+          "runs": [
+            {
+              "index": 1,
+              "text": "锣鼓节奏、帷幕视觉与旧戏重演线索",
+              "fontSize": 18,
+              "color": "#F7EFE0"
+            }
+          ],
+          "marginLeft": 0
+        }
+      ],
+      "lineWidth": 0
+    },
+    {
+      "order": 14,
+      "kind": "image",
+      "scope": "slide",
+      "aid": "im/sv2x8n61",
+      "id": "14",
+      "bbox": [
+        930,
+        215,
+        350,
+        198
+      ],
+      "alt": "排练室.png",
+      "contentType": "image/png",
+      "imageFit": "cover",
+      "asset": {
+        "assetId": "03c4ba6c-9dae-4fb1-8ff9-7790b6f19c59",
+        "contentType": "image/png",
+        "byteLength": 6121392
+      }
+    },
+    {
+      "order": 15,
+      "kind": "shape",
+      "scope": "slide",
+      "aid": "sh/qtc7m14v",
+      "id": "15",
+      "bbox": [
+        930,
+        215,
+        350,
+        198
+      ],
+      "geometry": "rect",
+      "fillColor": "rgba(0, 0, 0, 0.16)",
+      "lineColor": "#D6B36A",
+      "lineWidth": 2
+    },
+    {
+      "order": 16,
+      "kind": "shape",
+      "scope": "slide",
+      "aid": "sh/dwnqhg3m",
+      "id": "16",
+      "bbox": [
+        930,
+        440,
+        350,
+        32
+      ],
+      "geometry": "rect",
+      "text": "排练室",
+      "textPreview": "排练室",
+      "resolvedFontSize": 22,
+      "resolvedTextStyle": {
+        "fontSize": 22,
+        "typeface": "+mn-lt",
+        "color": "#F1DDA5",
+        "bold": true,
+        "alignment": "center",
+        "insets": {
+          "top": 4.8,
+          "right": 9.6,
+          "bottom": 4.8,
+          "left": 9.6
+        }
+      },
+      "textLayout": {
+        "lineCount": 1,
+        "lines": [
+          {
+            "index": 1,
+            "text": "排练室"
+          }
+        ]
+      },
+      "paragraphs": [
+        {
+          "index": 1,
+          "text": "排练室",
+          "resolvedTextStyle": {
+            "fontSize": 22,
+            "color": "#F1DDA5",
+            "bold": true,
+            "alignment": "center"
+          },
+          "runs": [
+            {
+              "index": 1,
+              "text": "排练室",
+              "fontSize": 22,
+              "color": "#F1DDA5",
+              "bold": true,
+              "alignment": "center"
+            }
+          ],
+          "marginLeft": 0
+        }
+      ],
+      "lineWidth": 0
+    },
+    {
+      "order": 17,
+      "kind": "shape",
+      "scope": "slide",
+      "aid": "sh/cvupobm1",
+      "id": "17",
+      "bbox": [
+        948,
+        486,
+        314,
+        78
+      ],
+      "geometry": "rect",
+      "text": "人物盘问、座位表、茶杯与时间线",
+      "textPreview": "人物盘问、座位表、茶杯与时间线",
+      "resolvedFontSize": 18,
+      "resolvedTextStyle": {
+        "fontSize": 18,
+        "typeface": "+mn-lt",
+        "color": "#F7EFE0",
+        "alignment": "left",
+        "insets": {
+          "top": 4.8,
+          "right": 9.6,
+          "bottom": 4.8,
+          "left": 9.6
+        }
+      },
+      "textLayout": {
+        "lineCount": 1,
+        "lines": [
+          {
+            "index": 1,
+            "text": "人物盘问、座位表、茶杯与时间线"
+          }
+        ]
+      },
+      "paragraphs": [
+        {
+          "index": 1,
+          "text": "人物盘问、座位表、茶杯与时间线",
+          "resolvedTextStyle": {
+            "fontSize": 18,
+            "color": "#F7EFE0"
+          },
+          "runs": [
+            {
+              "index": 1,
+              "text": "人物盘问、座位表、茶杯与时间线",
+              "fontSize": 18,
+              "color": "#F7EFE0"
+            }
+          ],
+          "marginLeft": 0
+        }
+      ],
+      "lineWidth": 0
+    },
+    {
+      "order": 18,
+      "kind": "shape",
+      "scope": "slide",
+      "aid": "sh/ry1o32lc",
+      "id": "18",
+      "bbox": [
+        100,
+        620,
+        1060,
+        36
+      ],
+      "geometry": "rect",
+      "text": "谜题原型：门闩反扣、锣点复原、滑轨牵线、木偶箱封印。错误拖放扣心，正确拖放锁定部件。",
+      "textPreview": "谜题原型：门闩反扣、锣点复原、滑轨牵线、木偶箱封印。错误拖放扣心，正确拖放锁定部件。",
+      "resolvedFontSize": 21,
+      "resolvedTextStyle": {
+        "fontSize": 21,
+        "typeface": "+mn-lt",
+        "color": "#E7D5AA",
+        "alignment": "left",
+        "insets": {
+          "top": 4.8,
+          "right": 9.6,
+          "bottom": 4.8,
+          "left": 9.6
+        }
+      },
+      "textLayout": {
+        "lineCount": 1,
+        "lines": [
+          {
+            "index": 1,
+            "text": "谜题原型：门闩反扣、锣点复原、滑轨牵线、木偶箱封印。错误拖放扣心，正确拖放锁定部件。"
+          }
+        ]
+      },
+      "paragraphs": [
+        {
+          "index": 1,
+          "text": "谜题原型：门闩反扣、锣点复原、滑轨牵线、木偶箱封印。错误拖放扣心，正确拖放锁定部件。",
+          "resolvedTextStyle": {
+            "fontSize": 21,
+            "color": "#E7D5AA"
+          },
+          "runs": [
+            {
+              "index": 1,
+              "text": "谜题原型：门闩反扣、锣点复原、滑轨牵线、木偶箱封印。错误拖放扣心，正确拖放锁定部件。",
+              "fontSize": 21,
+              "color": "#E7D5AA"
+            }
+          ],
+          "marginLeft": 0
+        }
+      ],
+      "lineWidth": 0
+    }
+  ],
+  "composeRuns": []
+}

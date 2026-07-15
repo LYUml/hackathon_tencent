@@ -1,0 +1,810 @@
+{
+  "schema": "openai.presentation.layout/v4",
+  "unit": "px",
+  "slide": {
+    "aid": "sl/3icb6f",
+    "id": "3icb6f",
+    "slide": 3,
+    "layoutId": "db4b8d6d-aa4c-4c8c-9687-88767fcaed91",
+    "layoutName": "Title Slide",
+    "layoutType": "title",
+    "masterLayoutId": "55258653-367f-4328-b177-5e134b12a2c1",
+    "masterLayoutName": "Master",
+    "backgroundColor": "#090607",
+    "frame": {
+      "left": 0,
+      "top": 0,
+      "width": 1280,
+      "height": 720
+    }
+  },
+  "theme": {
+    "colorSchemeName": "ChatGPT",
+    "colors": {
+      "accent1": "#156082",
+      "accent2": "#E97132",
+      "accent3": "#196B24",
+      "accent4": "#0F9ED5",
+      "accent5": "#A02B93",
+      "accent6": "#4EA72E",
+      "bg1": "#FFFFFF",
+      "bg2": "#000000",
+      "tx1": "#1F1F1F",
+      "tx2": "#FFFFFF",
+      "dk1": "#000000",
+      "lt1": "#FFFFFF",
+      "dk2": "#0E2841",
+      "lt2": "#E8E8E8",
+      "hlink": "#467886",
+      "folHlink": "#96607D"
+    },
+    "typefaces": [
+      "+mn-lt"
+    ]
+  },
+  "inheritedLayers": [
+    {
+      "scope": "layout",
+      "id": "db4b8d6d-aa4c-4c8c-9687-88767fcaed91",
+      "name": "Title Slide",
+      "type": "title",
+      "parentLayoutId": "55258653-367f-4328-b177-5e134b12a2c1",
+      "elements": []
+    },
+    {
+      "scope": "master",
+      "id": "55258653-367f-4328-b177-5e134b12a2c1",
+      "name": "Master",
+      "type": "master",
+      "elements": []
+    }
+  ],
+  "elements": [
+    {
+      "order": 1,
+      "kind": "shape",
+      "scope": "slide",
+      "aid": "sh/lkjid87i",
+      "id": "1",
+      "bbox": [
+        0,
+        0,
+        1280,
+        720
+      ],
+      "geometry": "rect",
+      "fillColor": "#090607",
+      "lineWidth": 0
+    },
+    {
+      "order": 2,
+      "kind": "shape",
+      "scope": "slide",
+      "aid": "sh/yhszit87",
+      "id": "2",
+      "bbox": [
+        0,
+        0,
+        1280,
+        12
+      ],
+      "geometry": "rect",
+      "fillColor": "#4C0E13",
+      "lineWidth": 0
+    },
+    {
+      "order": 3,
+      "kind": "shape",
+      "scope": "slide",
+      "aid": "sh/zi10byps",
+      "id": "3",
+      "bbox": [
+        72,
+        44,
+        360,
+        24
+      ],
+      "geometry": "rect",
+      "text": "故事背景",
+      "textPreview": "故事背景",
+      "resolvedFontSize": 16,
+      "resolvedTextStyle": {
+        "fontSize": 16,
+        "typeface": "+mn-lt",
+        "color": "#D6B36A",
+        "bold": true,
+        "alignment": "left",
+        "insets": {
+          "top": 4.8,
+          "right": 9.6,
+          "bottom": 4.8,
+          "left": 9.6
+        }
+      },
+      "textLayout": {
+        "lineCount": 1,
+        "lines": [
+          {
+            "index": 1,
+            "text": "故事背景"
+          }
+        ]
+      },
+      "paragraphs": [
+        {
+          "index": 1,
+          "text": "故事背景",
+          "resolvedTextStyle": {
+            "fontSize": 16,
+            "color": "#D6B36A",
+            "bold": true
+          },
+          "runs": [
+            {
+              "index": 1,
+              "text": "故事背景",
+              "fontSize": 16,
+              "color": "#D6B36A",
+              "bold": true
+            }
+          ],
+          "marginLeft": 0
+        }
+      ],
+      "lineWidth": 0
+    },
+    {
+      "order": 4,
+      "kind": "image",
+      "scope": "slide",
+      "aid": "im/pwja1s72",
+      "id": "4",
+      "bbox": [
+        0,
+        0,
+        1280,
+        720
+      ],
+      "alt": "generated_theater_exterior.png",
+      "contentType": "image/png",
+      "imageFit": "cover",
+      "asset": {
+        "assetId": "4625dba5-2940-4844-8464-292d0a8e8230",
+        "contentType": "image/png",
+        "byteLength": 2148158
+      }
+    },
+    {
+      "order": 5,
+      "kind": "shape",
+      "scope": "slide",
+      "aid": "sh/dgzy9o7m",
+      "id": "5",
+      "bbox": [
+        0,
+        0,
+        1280,
+        720
+      ],
+      "geometry": "rect",
+      "fillColor": "rgba(0, 0, 0, 0.64)",
+      "lineWidth": 0
+    },
+    {
+      "order": 6,
+      "kind": "shape",
+      "scope": "slide",
+      "aid": "sh/qt8ze98v",
+      "id": "6",
+      "bbox": [
+        72,
+        74,
+        820,
+        104
+      ],
+      "geometry": "rect",
+      "text": "旧戏重演，把民国旧案搬回舞台",
+      "textPreview": "旧戏重演，把民国旧案搬回舞台",
+      "resolvedFontSize": 42,
+      "resolvedTextStyle": {
+        "fontSize": 42,
+        "typeface": "+mn-lt",
+        "color": "#F7EFE0",
+        "bold": true,
+        "alignment": "left",
+        "insets": {
+          "top": 4.8,
+          "right": 9.6,
+          "bottom": 4.8,
+          "left": 9.6
+        }
+      },
+      "textLayout": {
+        "lineCount": 1,
+        "lines": [
+          {
+            "index": 1,
+            "text": "旧戏重演，把民国旧案搬回舞台"
+          }
+        ]
+      },
+      "paragraphs": [
+        {
+          "index": 1,
+          "text": "旧戏重演，把民国旧案搬回舞台",
+          "resolvedTextStyle": {
+            "fontSize": 42,
+            "color": "#F7EFE0",
+            "bold": true
+          },
+          "runs": [
+            {
+              "index": 1,
+              "text": "旧戏重演，把民国旧案搬回舞台",
+              "fontSize": 42,
+              "color": "#F7EFE0",
+              "bold": true
+            }
+          ],
+          "marginLeft": 0
+        }
+      ],
+      "lineWidth": 0
+    },
+    {
+      "order": 7,
+      "kind": "shape",
+      "scope": "slide",
+      "aid": "sh/behg7epg",
+      "id": "7",
+      "bbox": [
+        76,
+        168,
+        190,
+        4
+      ],
+      "geometry": "rect",
+      "fillColor": "#D6B36A",
+      "lineWidth": 0
+    },
+    {
+      "order": 8,
+      "kind": "shape",
+      "scope": "slide",
+      "aid": "sh/orqhcjq5",
+      "id": "8",
+      "bbox": [
+        76,
+        230,
+        338,
+        240
+      ],
+      "geometry": "roundRect",
+      "fillColor": "#E7D5AA",
+      "lineColor": "#B89559",
+      "lineWidth": 2
+    },
+    {
+      "order": 9,
+      "kind": "shape",
+      "scope": "slide",
+      "aid": "sh/pszy547q",
+      "id": "9",
+      "bbox": [
+        76,
+        230,
+        8,
+        240
+      ],
+      "geometry": "rect",
+      "fillColor": "#A52824",
+      "lineWidth": 0
+    },
+    {
+      "order": 10,
+      "kind": "shape",
+      "scope": "slide",
+      "aid": "sh/dsrmd4jm",
+      "id": "10",
+      "bbox": [
+        100,
+        248,
+        290,
+        36
+      ],
+      "geometry": "rect",
+      "text": "民国火灾旧案",
+      "textPreview": "民国火灾旧案",
+      "resolvedFontSize": 23,
+      "resolvedTextStyle": {
+        "fontSize": 23,
+        "typeface": "+mn-lt",
+        "color": "#251914",
+        "bold": true,
+        "alignment": "left",
+        "insets": {
+          "top": 4.8,
+          "right": 9.6,
+          "bottom": 4.8,
+          "left": 9.6
+        }
+      },
+      "textLayout": {
+        "lineCount": 1,
+        "lines": [
+          {
+            "index": 1,
+            "text": "民国火灾旧案"
+          }
+        ]
+      },
+      "paragraphs": [
+        {
+          "index": 1,
+          "text": "民国火灾旧案",
+          "resolvedTextStyle": {
+            "fontSize": 23,
+            "color": "#251914",
+            "bold": true
+          },
+          "runs": [
+            {
+              "index": 1,
+              "text": "民国火灾旧案",
+              "fontSize": 23,
+              "color": "#251914",
+              "bold": true
+            }
+          ],
+          "marginLeft": 0
+        }
+      ],
+      "lineWidth": 0
+    },
+    {
+      "order": 11,
+      "kind": "shape",
+      "scope": "slide",
+      "aid": "sh/srilkz21",
+      "id": "11",
+      "bbox": [
+        100,
+        294,
+        290,
+        158
+      ],
+      "geometry": "rect",
+      "text": "古镇戏班曾发生离奇大火，多人身亡，两人下落不明。案件被埋进戏班传闻，只留下残缺证据。",
+      "textPreview": "古镇戏班曾发生离奇大火，多人身亡，两人下落不明。案件被埋进戏班传闻，只留下残缺证据。",
+      "resolvedFontSize": 17,
+      "resolvedTextStyle": {
+        "fontSize": 17,
+        "typeface": "+mn-lt",
+        "color": "#32251D",
+        "alignment": "left",
+        "insets": {
+          "top": 4.8,
+          "right": 9.6,
+          "bottom": 4.8,
+          "left": 9.6
+        }
+      },
+      "textLayout": {
+        "lineCount": 3,
+        "lines": [
+          {
+            "index": 1,
+            "text": "古镇戏班曾发生离奇大火，多人身"
+          },
+          {
+            "index": 2,
+            "text": "亡，两人下落不明。案件被埋进戏"
+          },
+          {
+            "index": 3,
+            "text": "班传闻，只留下残缺证据。"
+          }
+        ]
+      },
+      "paragraphs": [
+        {
+          "index": 1,
+          "text": "古镇戏班曾发生离奇大火，多人身亡，两人下落不明。案件被埋进戏班传闻，只留下残缺证据。",
+          "resolvedTextStyle": {
+            "fontSize": 17,
+            "color": "#32251D"
+          },
+          "runs": [
+            {
+              "index": 1,
+              "text": "古镇戏班曾发生离奇大火，多人身亡，两人下落不明。案件被埋进戏班传闻，只留下残缺证据。",
+              "fontSize": 17,
+              "color": "#32251D"
+            }
+          ],
+          "marginLeft": 0
+        }
+      ],
+      "lineWidth": 0
+    },
+    {
+      "order": 12,
+      "kind": "shape",
+      "scope": "slide",
+      "aid": "sh/rq94bu1w",
+      "id": "12",
+      "bbox": [
+        470,
+        230,
+        338,
+        240
+      ],
+      "geometry": "roundRect",
+      "fillColor": "#E7D5AA",
+      "lineColor": "#B89559",
+      "lineWidth": 2
+    },
+    {
+      "order": 13,
+      "kind": "shape",
+      "scope": "slide",
+      "aid": "sh/qp03ipkb",
+      "id": "13",
+      "bbox": [
+        470,
+        230,
+        8,
+        240
+      ],
+      "geometry": "rect",
+      "fillColor": "#D6B36A",
+      "lineWidth": 0
+    },
+    {
+      "order": 14,
+      "kind": "shape",
+      "scope": "slide",
+      "aid": "sh/5orm9kjq",
+      "id": "14",
+      "bbox": [
+        494,
+        248,
+        290,
+        36
+      ],
+      "geometry": "rect",
+      "text": "匿名委托",
+      "textPreview": "匿名委托",
+      "resolvedFontSize": 23,
+      "resolvedTextStyle": {
+        "fontSize": 23,
+        "typeface": "+mn-lt",
+        "color": "#251914",
+        "bold": true,
+        "alignment": "left",
+        "insets": {
+          "top": 4.8,
+          "right": 9.6,
+          "bottom": 4.8,
+          "left": 9.6
+        }
+      },
+      "textLayout": {
+        "lineCount": 1,
+        "lines": [
+          {
+            "index": 1,
+            "text": "匿名委托"
+          }
+        ]
+      },
+      "paragraphs": [
+        {
+          "index": 1,
+          "text": "匿名委托",
+          "resolvedTextStyle": {
+            "fontSize": 23,
+            "color": "#251914",
+            "bold": true
+          },
+          "runs": [
+            {
+              "index": 1,
+              "text": "匿名委托",
+              "fontSize": 23,
+              "color": "#251914",
+              "bold": true
+            }
+          ],
+          "marginLeft": 0
+        }
+      ],
+      "lineWidth": 0
+    },
+    {
+      "order": 15,
+      "kind": "shape",
+      "scope": "slide",
+      "aid": "sh/4nylgf25",
+      "id": "15",
+      "bbox": [
+        494,
+        294,
+        290,
+        158
+      ],
+      "geometry": "rect",
+      "text": "玩家作为私人侦探收到邮件与高额赏金，伪装成戏班学徒进入内部调查。",
+      "textPreview": "玩家作为私人侦探收到邮件与高额赏金，伪装成戏班学徒进入内部调查。",
+      "resolvedFontSize": 17,
+      "resolvedTextStyle": {
+        "fontSize": 17,
+        "typeface": "+mn-lt",
+        "color": "#32251D",
+        "alignment": "left",
+        "insets": {
+          "top": 4.8,
+          "right": 9.6,
+          "bottom": 4.8,
+          "left": 9.6
+        }
+      },
+      "textLayout": {
+        "lineCount": 3,
+        "lines": [
+          {
+            "index": 1,
+            "text": "玩家作为私人侦探收到邮件与高额"
+          },
+          {
+            "index": 2,
+            "text": "赏金，伪装成戏班学徒进入内部调"
+          },
+          {
+            "index": 3,
+            "text": "查。"
+          }
+        ]
+      },
+      "paragraphs": [
+        {
+          "index": 1,
+          "text": "玩家作为私人侦探收到邮件与高额赏金，伪装成戏班学徒进入内部调查。",
+          "resolvedTextStyle": {
+            "fontSize": 17,
+            "color": "#32251D"
+          },
+          "runs": [
+            {
+              "index": 1,
+              "text": "玩家作为私人侦探收到邮件与高额赏金，伪装成戏班学徒进入内部调查。",
+              "fontSize": 17,
+              "color": "#32251D"
+            }
+          ],
+          "marginLeft": 0
+        }
+      ],
+      "lineWidth": 0
+    },
+    {
+      "order": 16,
+      "kind": "shape",
+      "scope": "slide",
+      "aid": "sh/3mpk7u1k",
+      "id": "16",
+      "bbox": [
+        864,
+        230,
+        338,
+        240
+      ],
+      "geometry": "roundRect",
+      "fillColor": "#E7D5AA",
+      "lineColor": "#B89559",
+      "lineWidth": 2
+    },
+    {
+      "order": 17,
+      "kind": "shape",
+      "scope": "slide",
+      "aid": "sh/i1g3epkz",
+      "id": "17",
+      "bbox": [
+        864,
+        230,
+        8,
+        240
+      ],
+      "geometry": "rect",
+      "fillColor": "#A52824",
+      "lineWidth": 0
+    },
+    {
+      "order": 18,
+      "kind": "shape",
+      "scope": "slide",
+      "aid": "sh/h0725kje",
+      "id": "18",
+      "bbox": [
+        888,
+        248,
+        290,
+        36
+      ],
+      "geometry": "rect",
+      "text": "现实复刻历史",
+      "textPreview": "现实复刻历史",
+      "resolvedFontSize": 23,
+      "resolvedTextStyle": {
+        "fontSize": 23,
+        "typeface": "+mn-lt",
+        "color": "#251914",
+        "bold": true,
+        "alignment": "left",
+        "insets": {
+          "top": 4.8,
+          "right": 9.6,
+          "bottom": 4.8,
+          "left": 9.6
+        }
+      },
+      "textLayout": {
+        "lineCount": 1,
+        "lines": [
+          {
+            "index": 1,
+            "text": "现实复刻历史"
+          }
+        ]
+      },
+      "paragraphs": [
+        {
+          "index": 1,
+          "text": "现实复刻历史",
+          "resolvedTextStyle": {
+            "fontSize": 23,
+            "color": "#251914",
+            "bold": true
+          },
+          "runs": [
+            {
+              "index": 1,
+              "text": "现实复刻历史",
+              "fontSize": 23,
+              "color": "#251914",
+              "bold": true
+            }
+          ],
+          "marginLeft": 0
+        }
+      ],
+      "lineWidth": 0
+    },
+    {
+      "order": 19,
+      "kind": "shape",
+      "scope": "slide",
+      "aid": "sh/gzylcf29",
+      "id": "19",
+      "bbox": [
+        888,
+        294,
+        290,
+        158
+      ],
+      "geometry": "rect",
+      "text": "多年后同一剧院、同一出戏再次排练。案发现场像旧案重演，但细节指向人为安排。",
+      "textPreview": "多年后同一剧院、同一出戏再次排练。案发现场像旧案重演，但细节指向人为安排。",
+      "resolvedFontSize": 17,
+      "resolvedTextStyle": {
+        "fontSize": 17,
+        "typeface": "+mn-lt",
+        "color": "#32251D",
+        "alignment": "left",
+        "insets": {
+          "top": 4.8,
+          "right": 9.6,
+          "bottom": 4.8,
+          "left": 9.6
+        }
+      },
+      "textLayout": {
+        "lineCount": 3,
+        "lines": [
+          {
+            "index": 1,
+            "text": "多年后同一剧院、同一出戏再次排"
+          },
+          {
+            "index": 2,
+            "text": "练。案发现场像旧案重演，但细节"
+          },
+          {
+            "index": 3,
+            "text": "指向人为安排。"
+          }
+        ]
+      },
+      "paragraphs": [
+        {
+          "index": 1,
+          "text": "多年后同一剧院、同一出戏再次排练。案发现场像旧案重演，但细节指向人为安排。",
+          "resolvedTextStyle": {
+            "fontSize": 17,
+            "color": "#32251D"
+          },
+          "runs": [
+            {
+              "index": 1,
+              "text": "多年后同一剧院、同一出戏再次排练。案发现场像旧案重演，但细节指向人为安排。",
+              "fontSize": 17,
+              "color": "#32251D"
+            }
+          ],
+          "marginLeft": 0
+        }
+      ],
+      "lineWidth": 0
+    },
+    {
+      "order": 20,
+      "kind": "shape",
+      "scope": "slide",
+      "aid": "sh/832lsfap",
+      "id": "20",
+      "bbox": [
+        92,
+        586,
+        1040,
+        38
+      ],
+      "geometry": "rect",
+      "text": "Deck 的叙事重点：评委看到的不只是题材包装，而是一套能支撑玩法的悬疑结构。",
+      "textPreview": "Deck 的叙事重点：评委看到的不只是题材包装，而是一套能支撑玩法的悬疑结构。",
+      "resolvedFontSize": 22,
+      "resolvedTextStyle": {
+        "fontSize": 22,
+        "typeface": "+mn-lt",
+        "color": "#F1DDA5",
+        "alignment": "left",
+        "insets": {
+          "top": 4.8,
+          "right": 9.6,
+          "bottom": 4.8,
+          "left": 9.6
+        }
+      },
+      "textLayout": {
+        "lineCount": 1,
+        "lines": [
+          {
+            "index": 1,
+            "text": "Deck 的叙事重点：评委看到的不只是题材包装，而是一套能支撑玩法的悬疑结构。"
+          }
+        ]
+      },
+      "paragraphs": [
+        {
+          "index": 1,
+          "text": "Deck 的叙事重点：评委看到的不只是题材包装，而是一套能支撑玩法的悬疑结构。",
+          "resolvedTextStyle": {
+            "fontSize": 22,
+            "color": "#F1DDA5"
+          },
+          "runs": [
+            {
+              "index": 1,
+              "text": "Deck 的叙事重点：评委看到的不只是题材包装，而是一套能支撑玩法的悬疑结构。",
+              "fontSize": 22,
+              "color": "#F1DDA5"
+            }
+          ],
+          "marginLeft": 0
+        }
+      ],
+      "lineWidth": 0
+    }
+  ],
+  "composeRuns": []
+}

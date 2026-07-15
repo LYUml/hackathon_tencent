@@ -1,0 +1,789 @@
+{
+  "schema": "openai.presentation.layout/v4",
+  "unit": "px",
+  "slide": {
+    "aid": "sl/x1kpiw",
+    "id": "x1kpiw",
+    "slide": 9,
+    "layoutId": "db4b8d6d-aa4c-4c8c-9687-88767fcaed91",
+    "layoutName": "Title Slide",
+    "layoutType": "title",
+    "masterLayoutId": "55258653-367f-4328-b177-5e134b12a2c1",
+    "masterLayoutName": "Master",
+    "frame": {
+      "left": 0,
+      "top": 0,
+      "width": 1280,
+      "height": 720
+    }
+  },
+  "theme": {
+    "colorSchemeName": "ChatGPT",
+    "colors": {
+      "accent1": "#156082",
+      "accent2": "#E97132",
+      "accent3": "#196B24",
+      "accent4": "#0F9ED5",
+      "accent5": "#A02B93",
+      "accent6": "#4EA72E",
+      "bg1": "#FFFFFF",
+      "bg2": "#000000",
+      "tx1": "#1F1F1F",
+      "tx2": "#FFFFFF",
+      "dk1": "#000000",
+      "lt1": "#FFFFFF",
+      "dk2": "#0E2841",
+      "lt2": "#E8E8E8",
+      "hlink": "#467886",
+      "folHlink": "#96607D"
+    },
+    "typefaces": [
+      "+mn-lt"
+    ]
+  },
+  "inheritedLayers": [
+    {
+      "scope": "layout",
+      "id": "db4b8d6d-aa4c-4c8c-9687-88767fcaed91",
+      "name": "Title Slide",
+      "type": "title",
+      "parentLayoutId": "55258653-367f-4328-b177-5e134b12a2c1",
+      "elements": []
+    },
+    {
+      "scope": "master",
+      "id": "55258653-367f-4328-b177-5e134b12a2c1",
+      "name": "Master",
+      "type": "master",
+      "elements": []
+    }
+  ],
+  "elements": [
+    {
+      "order": 1,
+      "kind": "image",
+      "scope": "slide",
+      "aid": "im/3m1wzet4",
+      "id": "1",
+      "bbox": [
+        0,
+        0,
+        1280,
+        720
+      ],
+      "alt": "generated_cover_redesign.png",
+      "contentType": "image/png",
+      "imageFit": "cover",
+      "asset": {
+        "assetId": "9c202055-88c4-436d-b54a-b59c4ecc6492",
+        "contentType": "image/png",
+        "byteLength": 2816422
+      }
+    },
+    {
+      "order": 2,
+      "kind": "shape",
+      "scope": "slide",
+      "aid": "sh/tkvit0ju",
+      "id": "2",
+      "bbox": [
+        0,
+        0,
+        1280,
+        720
+      ],
+      "geometry": "rect",
+      "fillColor": "rgba(0, 0, 0, 0.55)",
+      "lineWidth": 0
+    },
+    {
+      "order": 3,
+      "kind": "shape",
+      "scope": "slide",
+      "aid": "sh/sjmhkvi9",
+      "id": "3",
+      "bbox": [
+        78,
+        56,
+        360,
+        32
+      ],
+      "geometry": "rect",
+      "text": "腾讯云黑客松作品介绍",
+      "textPreview": "腾讯云黑客松作品介绍",
+      "resolvedFontSize": 18,
+      "resolvedTextStyle": {
+        "fontSize": 18,
+        "typeface": "+mn-lt",
+        "color": "#D6B36A",
+        "alignment": "left",
+        "insets": {
+          "top": 4.8,
+          "right": 9.6,
+          "bottom": 4.8,
+          "left": 9.6
+        }
+      },
+      "textLayout": {
+        "lineCount": 1,
+        "lines": [
+          {
+            "index": 1,
+            "text": "腾讯云黑客松作品介绍"
+          }
+        ]
+      },
+      "paragraphs": [
+        {
+          "index": 1,
+          "text": "腾讯云黑客松作品介绍",
+          "resolvedTextStyle": {
+            "fontSize": 18,
+            "color": "#D6B36A"
+          },
+          "runs": [
+            {
+              "index": 1,
+              "text": "腾讯云黑客松作品介绍",
+              "fontSize": 18,
+              "color": "#D6B36A"
+            }
+          ],
+          "marginLeft": 0
+        }
+      ],
+      "lineWidth": 0
+    },
+    {
+      "order": 4,
+      "kind": "shape",
+      "scope": "slide",
+      "aid": "sh/jutgn61s",
+      "id": "4",
+      "bbox": [
+        72,
+        78,
+        760,
+        104
+      ],
+      "geometry": "rect",
+      "text": "我们想交付的不是一段怪谈，\n而是一套能被玩家亲手拆开的旧案。",
+      "textPreview": "我们想交付的不是一段怪谈， | 而是一套能被玩家亲手拆开的旧案。",
+      "resolvedFontSize": 44,
+      "resolvedTextStyle": {
+        "fontSize": 44,
+        "typeface": "+mn-lt",
+        "color": "#F7EFE0",
+        "bold": true,
+        "alignment": "left",
+        "insets": {
+          "top": 4.8,
+          "right": 9.6,
+          "bottom": 4.8,
+          "left": 9.6
+        }
+      },
+      "textLayout": {
+        "lineCount": 2,
+        "lines": [
+          {
+            "index": 1,
+            "text": "我们想交付的不是一段怪谈，"
+          },
+          {
+            "index": 2,
+            "text": "而是一套能被玩家亲手拆开的旧案。"
+          }
+        ]
+      },
+      "paragraphs": [
+        {
+          "index": 1,
+          "text": "我们想交付的不是一段怪谈，",
+          "resolvedTextStyle": {
+            "fontSize": 44,
+            "color": "#F7EFE0",
+            "bold": true
+          },
+          "runs": [
+            {
+              "index": 1,
+              "text": "我们想交付的不是一段怪谈，",
+              "fontSize": 44,
+              "color": "#F7EFE0",
+              "bold": true
+            }
+          ],
+          "marginLeft": 0
+        },
+        {
+          "index": 2,
+          "text": "而是一套能被玩家亲手拆开的旧案。",
+          "resolvedTextStyle": {
+            "fontSize": 44,
+            "color": "#F7EFE0",
+            "bold": true
+          },
+          "runs": [
+            {
+              "index": 1,
+              "text": "而是一套能被玩家亲手拆开的旧案。",
+              "fontSize": 44,
+              "color": "#F7EFE0",
+              "bold": true
+            }
+          ],
+          "marginLeft": 0
+        }
+      ],
+      "lineWidth": 0
+    },
+    {
+      "order": 5,
+      "kind": "shape",
+      "scope": "slide",
+      "aid": "sh/itkze107",
+      "id": "5",
+      "bbox": [
+        82,
+        258,
+        180,
+        4
+      ],
+      "geometry": "rect",
+      "fillColor": "#D6B36A",
+      "lineWidth": 0
+    },
+    {
+      "order": 6,
+      "kind": "shape",
+      "scope": "slide",
+      "aid": "sh/5wvypgji",
+      "id": "6",
+      "bbox": [
+        84,
+        318,
+        330,
+        172
+      ],
+      "geometry": "roundRect",
+      "fillColor": "#E7D5AA",
+      "lineColor": "#B89559",
+      "lineWidth": 2
+    },
+    {
+      "order": 7,
+      "kind": "shape",
+      "scope": "slide",
+      "aid": "sh/kvmhgbid",
+      "id": "7",
+      "bbox": [
+        84,
+        318,
+        8,
+        172
+      ],
+      "geometry": "rect",
+      "fillColor": "#A52824",
+      "lineWidth": 0
+    },
+    {
+      "order": 8,
+      "kind": "shape",
+      "scope": "slide",
+      "aid": "sh/vqtgj61g",
+      "id": "8",
+      "bbox": [
+        108,
+        336,
+        282,
+        36
+      ],
+      "geometry": "rect",
+      "text": "作品价值",
+      "textPreview": "作品价值",
+      "resolvedFontSize": 23,
+      "resolvedTextStyle": {
+        "fontSize": 23,
+        "typeface": "+mn-lt",
+        "color": "#251914",
+        "bold": true,
+        "alignment": "left",
+        "insets": {
+          "top": 4.8,
+          "right": 9.6,
+          "bottom": 4.8,
+          "left": 9.6
+        }
+      },
+      "textLayout": {
+        "lineCount": 1,
+        "lines": [
+          {
+            "index": 1,
+            "text": "作品价值"
+          }
+        ]
+      },
+      "paragraphs": [
+        {
+          "index": 1,
+          "text": "作品价值",
+          "resolvedTextStyle": {
+            "fontSize": 23,
+            "color": "#251914",
+            "bold": true
+          },
+          "runs": [
+            {
+              "index": 1,
+              "text": "作品价值",
+              "fontSize": 23,
+              "color": "#251914",
+              "bold": true
+            }
+          ],
+          "marginLeft": 0
+        }
+      ],
+      "lineWidth": 0
+    },
+    {
+      "order": 9,
+      "kind": "shape",
+      "scope": "slide",
+      "aid": "sh/apkza10v",
+      "id": "9",
+      "bbox": [
+        108,
+        382,
+        282,
+        90
+      ],
+      "geometry": "rect",
+      "text": "用中国戏曲视觉承载悬疑推理，把脸谱身份转化为调查与误导机制。",
+      "textPreview": "用中国戏曲视觉承载悬疑推理，把脸谱身份转化为调查与误导机制。",
+      "resolvedFontSize": 17,
+      "resolvedTextStyle": {
+        "fontSize": 17,
+        "typeface": "+mn-lt",
+        "color": "#32251D",
+        "alignment": "left",
+        "insets": {
+          "top": 4.8,
+          "right": 9.6,
+          "bottom": 4.8,
+          "left": 9.6
+        }
+      },
+      "textLayout": {
+        "lineCount": 2,
+        "lines": [
+          {
+            "index": 1,
+            "text": "用中国戏曲视觉承载悬疑推理，把"
+          },
+          {
+            "index": 2,
+            "text": "脸谱身份转化为调查与误导机制。"
+          }
+        ]
+      },
+      "paragraphs": [
+        {
+          "index": 1,
+          "text": "用中国戏曲视觉承载悬疑推理，把脸谱身份转化为调查与误导机制。",
+          "resolvedTextStyle": {
+            "fontSize": 17,
+            "color": "#32251D"
+          },
+          "runs": [
+            {
+              "index": 1,
+              "text": "用中国戏曲视觉承载悬疑推理，把脸谱身份转化为调查与误导机制。",
+              "fontSize": 17,
+              "color": "#32251D"
+            }
+          ],
+          "marginLeft": 0
+        }
+      ],
+      "lineWidth": 0
+    },
+    {
+      "order": 10,
+      "kind": "shape",
+      "scope": "slide",
+      "aid": "sh/sbmdg3a5",
+      "id": "10",
+      "bbox": [
+        476,
+        318,
+        330,
+        172
+      ],
+      "geometry": "roundRect",
+      "fillColor": "#E7D5AA",
+      "lineColor": "#B89559",
+      "lineWidth": 2
+    },
+    {
+      "order": 11,
+      "kind": "shape",
+      "scope": "slide",
+      "aid": "sh/tcfu98rq",
+      "id": "11",
+      "bbox": [
+        476,
+        318,
+        8,
+        172
+      ],
+      "geometry": "rect",
+      "fillColor": "#D6B36A",
+      "lineWidth": 0
+    },
+    {
+      "order": 12,
+      "kind": "shape",
+      "scope": "slide",
+      "aid": "sh/6p4vetsz",
+      "id": "12",
+      "bbox": [
+        500,
+        336,
+        282,
+        36
+      ],
+      "geometry": "rect",
+      "text": "当前完成度",
+      "textPreview": "当前完成度",
+      "resolvedFontSize": 23,
+      "resolvedTextStyle": {
+        "fontSize": 23,
+        "typeface": "+mn-lt",
+        "color": "#251914",
+        "bold": true,
+        "alignment": "left",
+        "insets": {
+          "top": 4.8,
+          "right": 9.6,
+          "bottom": 4.8,
+          "left": 9.6
+        }
+      },
+      "textLayout": {
+        "lineCount": 1,
+        "lines": [
+          {
+            "index": 1,
+            "text": "当前完成度"
+          }
+        ]
+      },
+      "paragraphs": [
+        {
+          "index": 1,
+          "text": "当前完成度",
+          "resolvedTextStyle": {
+            "fontSize": 23,
+            "color": "#251914",
+            "bold": true
+          },
+          "runs": [
+            {
+              "index": 1,
+              "text": "当前完成度",
+              "fontSize": 23,
+              "color": "#251914",
+              "bold": true
+            }
+          ],
+          "marginLeft": 0
+        }
+      ],
+      "lineWidth": 0
+    },
+    {
+      "order": 13,
+      "kind": "shape",
+      "scope": "slide",
+      "aid": "sh/7adc7y9k",
+      "id": "13",
+      "bbox": [
+        500,
+        382,
+        282,
+        90
+      ],
+      "geometry": "rect",
+      "text": "Unity Demo 已形成核心链路，适合黑客松现场路演与试玩演示。",
+      "textPreview": "Unity Demo 已形成核心链路，适合黑客松现场路演与试玩演示。",
+      "resolvedFontSize": 17,
+      "resolvedTextStyle": {
+        "fontSize": 17,
+        "typeface": "+mn-lt",
+        "color": "#32251D",
+        "alignment": "left",
+        "insets": {
+          "top": 4.8,
+          "right": 9.6,
+          "bottom": 4.8,
+          "left": 9.6
+        }
+      },
+      "textLayout": {
+        "lineCount": 3,
+        "lines": [
+          {
+            "index": 1,
+            "text": "Unity Demo"
+          },
+          {
+            "index": 2,
+            "text": "已形成核心链路，适合黑客松现场"
+          },
+          {
+            "index": 3,
+            "text": "路演与试玩演示。"
+          }
+        ]
+      },
+      "paragraphs": [
+        {
+          "index": 1,
+          "text": "Unity Demo 已形成核心链路，适合黑客松现场路演与试玩演示。",
+          "resolvedTextStyle": {
+            "fontSize": 17,
+            "color": "#32251D"
+          },
+          "runs": [
+            {
+              "index": 1,
+              "text": "Unity Demo 已形成核心链路，适合黑客松现场路演与试玩演示。",
+              "fontSize": 17,
+              "color": "#32251D"
+            }
+          ],
+          "marginLeft": 0
+        }
+      ],
+      "lineWidth": 0
+    },
+    {
+      "order": 14,
+      "kind": "shape",
+      "scope": "slide",
+      "aid": "sh/knmdcja9",
+      "id": "14",
+      "bbox": [
+        868,
+        318,
+        330,
+        172
+      ],
+      "geometry": "roundRect",
+      "fillColor": "#E7D5AA",
+      "lineColor": "#B89559",
+      "lineWidth": 2
+    },
+    {
+      "order": 15,
+      "kind": "shape",
+      "scope": "slide",
+      "aid": "sh/5ovu5oru",
+      "id": "15",
+      "bbox": [
+        868,
+        318,
+        8,
+        172
+      ],
+      "geometry": "rect",
+      "fillColor": "#A52824",
+      "lineWidth": 0
+    },
+    {
+      "order": 16,
+      "kind": "shape",
+      "scope": "slide",
+      "aid": "sh/il4bats3",
+      "id": "16",
+      "bbox": [
+        892,
+        336,
+        282,
+        36
+      ],
+      "geometry": "rect",
+      "text": "下一步",
+      "textPreview": "下一步",
+      "resolvedFontSize": 23,
+      "resolvedTextStyle": {
+        "fontSize": 23,
+        "typeface": "+mn-lt",
+        "color": "#251914",
+        "bold": true,
+        "alignment": "left",
+        "insets": {
+          "top": 4.8,
+          "right": 9.6,
+          "bottom": 4.8,
+          "left": 9.6
+        }
+      },
+      "textLayout": {
+        "lineCount": 1,
+        "lines": [
+          {
+            "index": 1,
+            "text": "下一步"
+          }
+        ]
+      },
+      "paragraphs": [
+        {
+          "index": 1,
+          "text": "下一步",
+          "resolvedTextStyle": {
+            "fontSize": 23,
+            "color": "#251914",
+            "bold": true
+          },
+          "runs": [
+            {
+              "index": 1,
+              "text": "下一步",
+              "fontSize": 23,
+              "color": "#251914",
+              "bold": true
+            }
+          ],
+          "marginLeft": 0
+        }
+      ],
+      "lineWidth": 0
+    },
+    {
+      "order": 17,
+      "kind": "shape",
+      "scope": "slide",
+      "aid": "sh/jmdc3e9o",
+      "id": "17",
+      "bbox": [
+        892,
+        382,
+        282,
+        90
+      ],
+      "geometry": "rect",
+      "text": "补齐美术一致性、扩展角色支线、完善观皮揭示与最终推理。",
+      "textPreview": "补齐美术一致性、扩展角色支线、完善观皮揭示与最终推理。",
+      "resolvedFontSize": 17,
+      "resolvedTextStyle": {
+        "fontSize": 17,
+        "typeface": "+mn-lt",
+        "color": "#32251D",
+        "alignment": "left",
+        "insets": {
+          "top": 4.8,
+          "right": 9.6,
+          "bottom": 4.8,
+          "left": 9.6
+        }
+      },
+      "textLayout": {
+        "lineCount": 2,
+        "lines": [
+          {
+            "index": 1,
+            "text": "补齐美术一致性、扩展角色支线、"
+          },
+          {
+            "index": 2,
+            "text": "完善观皮揭示与最终推理。"
+          }
+        ]
+      },
+      "paragraphs": [
+        {
+          "index": 1,
+          "text": "补齐美术一致性、扩展角色支线、完善观皮揭示与最终推理。",
+          "resolvedTextStyle": {
+            "fontSize": 17,
+            "color": "#32251D"
+          },
+          "runs": [
+            {
+              "index": 1,
+              "text": "补齐美术一致性、扩展角色支线、完善观皮揭示与最终推理。",
+              "fontSize": 17,
+              "color": "#32251D"
+            }
+          ],
+          "marginLeft": 0
+        }
+      ],
+      "lineWidth": 0
+    },
+    {
+      "order": 18,
+      "kind": "shape",
+      "scope": "slide",
+      "aid": "sh/4jqdonad",
+      "id": "18",
+      "bbox": [
+        82,
+        590,
+        820,
+        44
+      ],
+      "geometry": "rect",
+      "text": "白天收集线索，夜晚揭开画皮。",
+      "textPreview": "白天收集线索，夜晚揭开画皮。",
+      "resolvedFontSize": 33,
+      "resolvedTextStyle": {
+        "fontSize": 33,
+        "typeface": "+mn-lt",
+        "color": "#F1DDA5",
+        "alignment": "left",
+        "insets": {
+          "top": 4.8,
+          "right": 9.6,
+          "bottom": 4.8,
+          "left": 9.6
+        }
+      },
+      "textLayout": {
+        "lineCount": 1,
+        "lines": [
+          {
+            "index": 1,
+            "text": "白天收集线索，夜晚揭开画皮。"
+          }
+        ]
+      },
+      "paragraphs": [
+        {
+          "index": 1,
+          "text": "白天收集线索，夜晚揭开画皮。",
+          "resolvedTextStyle": {
+            "fontSize": 33,
+            "color": "#F1DDA5"
+          },
+          "runs": [
+            {
+              "index": 1,
+              "text": "白天收集线索，夜晚揭开画皮。",
+              "fontSize": 33,
+              "color": "#F1DDA5"
+            }
+          ],
+          "marginLeft": 0
+        }
+      ],
+      "lineWidth": 0
+    }
+  ],
+  "composeRuns": []
+}
