@@ -64,7 +64,7 @@ jobs:
         run: |
           INDEX="build/WebGL/WebGL/index.html"
           test -f "$INDEX"
-          chmod u+w "$INDEX"
+          sudo chown -R "$USER:$USER" build/WebGL/WebGL
           node <<'NODE'
           const fs = require('fs');
           const index = 'build/WebGL/WebGL/index.html';
